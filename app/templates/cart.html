@@ -1,0 +1,97 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <main>
+        <section class="cart">
+            <h2>Cart</h2>
+            <div>
+                <ul>
+                    <li class="order-summary-list-list-item first-item">
+                        <img src="{{ url_for('static', filename='img/sunglasses.png') }}"
+                             class="order-summary-list-list-item-image"/>
+                        <p class="order-summary-list-list-item-title">Sunglasses</p>
+                        <p id="item_1_cost" class="order-summary-list-list-item-price">€20.00</p>
+                    </li>
+                    <li class="order-summary-list-list-item">
+                        <img src="{{ url_for('static', filename='img/headphones.png') }}"
+                             class="order-summary-list-list-item-image"/>
+                        <p class="order-summary-list-list-item-title">Headphones</p>
+                        <p id="item_2_cost" class="order-summary-list-list-item-price">€20.00</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="cart-footer"><span class="cart-footer-label">Total:</span><span id="total_cost" class="cart-footer-amount">€40.00</span>
+                <a id="checkout_button" href="{{ url_for('checkout', integration=method) }}">
+                    <p class="button">Continue to checkout</p>
+                </a>
+            </div>
+        </section>
+        <footer class="footer">
+            <div class="country-selector">
+                <div class="country-selector__flag" aria-hidden="true">
+                    <img id="flag_img" src="https://ca-test.adyen.com/ca/adl/img/flags/nl.svg" alt="Flag icon">
+                </div>
+                <select onchange="changeSelect(this)" id="country_select" class="country-selector__select" aria-label="country" autocomplete="off">
+                    <option value="NL">Netherlands</option>
+                    <option value="GB">United Kingdom</option>
+                    <option value="US">United States</option>
+                </select>
+                <div class="dropdown-icon" aria-hidden="true">
+                    <img src="{{ url_for('static', filename='img/dropdown.svg') }}" alt="Dropdown caret">
+                </div>
+            </div>
+        </footer>
+    </main>
+    <script>
+        const pay_button = document.getElementById('checkout_button');
+        const old_href = pay_button.href;
+        //const country = "NL";
+        //let new_href = `${old_href}?country=${country}`;
+        updateUrl()
+
+        
+        const flagUrlMap = {
+            "NL" : {
+                "src": "https://ca-test.adyen.com/ca/adl/img/flags/nl.svg",
+                "item1": "€20.00",
+                "item2": "€20.00",
+                "total": "€40.00",
+                "currency": "EUR",
+                "href": "{{ url_for('checkout', integration=method, country=NL) }}"
+            },
+            "GB" : {
+                "src": "https://ca-test.adyen.com/ca/adl/img/flags/gb.svg",
+                "item1": "£20.00",
+                "item2": "£20.00",
+                "total": "£40.00",
+                "currency": "GBP",
+                "href": "{{ url_for('checkout', integration=method, country=GB) }}"
+            },
+            "US" : {
+                "src": "https://ca-test.adyen.com/ca/adl/img/flags/us.svg",
+                "item1": "$20.00",
+                "item2": "$20.00",
+                "total": "$40.00",
+                "href": "{{ url_for('checkout', integration=method, country=US) }}"
+            }
+        };
+
+        pay_button.href = new_href;
+
+        function changeSelect(el) {
+            document.getElementById('flag_img').src = flagUrlMap[el.value].src;
+            document.getElementById("item_1_cost").innerHTML = flagUrlMap[el.value].item1;
+            document.getElementById("item_2_cost").innerHTML = flagUrlMap[el.value].item2;
+            document.getElementById("total_cost").innerHTML = flagUrlMap[el.value].total;
+            const country = el.value;
+            updateUrl(country)
+        }
+        function updateUrl(country = "NL") {
+            const new_href = `${old_href}?country=${country}`;
+            pay_button.href = new_href
+        }
+    </script>
+
+
+{% endblock %}

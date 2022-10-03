@@ -1,0 +1,4 @@
+flask
+Adyen == 6.0.0
+python-dotenv===0.19.2
+requests == 2.27.1

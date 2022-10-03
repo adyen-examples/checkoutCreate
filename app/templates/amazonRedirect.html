@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block content %}
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+	<!-- Adyen CSS from TEST environment (change to live for production)-->
+	<link rel="stylesheet"
+     	href="https://checkoutshopper-live.adyen.com/checkoutshopper/sdk/4.9.0/adyen.css"
+     	integrity="sha384-0IvbHDeulbhdg1tMDeFeGlmjiYoVT6YsbfAMKFU2lFd6YKUVk0Hgivcmva3j6mkK"
+    	 crossorigin="anonymous">
+
+	<div id="payment-page">
+		<div class="container">
+                <div id="amazonpay_payment-container"></div>
+		</div>
+    </div>
+
+
+	<!-- Adyen JS from TEST environment (change to live for production)-->
+	<script src="https://checkoutshopper-live.adyen.com/checkoutshopper/sdk/4.9.0/adyen.js"
+		integrity="sha384-aEL1fltFqDd33ItS8N+aAdd44ida67AQctv9h57pBGjNJ8E2xxbX/CVALJqO8/aM"
+		crossorigin="anonymous"></script>
+
+	<script id="client-key" type="application/json">{{ client_key|tojson }}</script>
+	<script id="integration-type" type="application/json">{{ method|tojson }}</script>
+	<script id="country-code" type="application/json">{{ countryCode|default("GB")|tojson }}</script>
+
+	<script src="{{ url_for('static', filename='js/amazonRedirect.js') }}"></script>
+{% endblock %}

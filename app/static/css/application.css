@@ -1,0 +1,467 @@
+/* General page body */
+
+html,
+body {
+	width: 100%;
+	margin: 0;
+	font-family: "Fakt", "Segoe UI", sans-serif, Helvetica, Arial;
+	/*background-color: #E4D8B4; - All things retro */
+}
+
+*,
+:after,
+:before {
+	box-sizing: border-box;
+}
+
+a,
+u {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+.hidden {
+	display: none;
+}
+
+#header {
+	/*background: #C2B28F; - all things retro */
+	background: #fff;
+	border-bottom: 1px solid #e6e9eb;
+	height: 90px;
+	/* height: 44px; - original */
+	left: 0;
+	margin-bottom: 24px;
+	padding: 14px 26px;
+	position: fixed;
+	text-align: center;
+	top: 0;
+	width: 100%;
+	z-index: 2;
+	box-sizing: border-box;
+}
+
+/* Buttons */
+
+.button {
+	/*background: #272324; - All things retro*/
+	background: #00112c;
+	border: 0;
+	border-radius: 6px;
+	color: #fff;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 1em;
+	font-weight: 500;
+	margin: 0;
+	padding: 15px;
+	text-align: center;
+	transition: background 0.3s ease-out, box-shadow 0.3s ease-out;
+	width: 100%;
+}
+
+.button:hover {
+	background: #1c3045;
+	box-shadow: 0 3px 4px rgba(0, 15, 45, 0.2);
+}
+
+.logo-box {
+	/*float:left;
+	text-align: center;
+	width: 50%;
+	margin-bottom: 20px; - All things retro */
+	align-items: center;
+}
+
+.logo-image {
+	height: 64px;
+	margin-top: auto;
+	margin-bottom: auto;
+	margin-right: 16px;
+	/*width: 64px;*/
+}
+
+.logo-title {
+	font-family: 'Oleo Script', cursive;
+	font-size: 30px;
+}
+
+/* end General page body */
+
+
+/* Index page */
+
+.main-container {
+	margin: auto;
+	max-width: 1048px;
+	padding: 0 16px;
+	display: flex;
+	flex-direction: column;
+}
+
+.integration-list {
+	display: flex;
+	max-width: 1048px;
+	flex-wrap: wrap;
+	justify-content: center;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+@media (min-width: 768px) {
+	.integration-list {
+		margin-left: -8px;
+		margin-bottom: -8px;
+		margin-right: -8px;
+	}
+}
+
+@media (min-width: 1024px) {
+	.integration-list {
+		margin-left: -16px;
+		margin-bottom: -16px;
+		margin-right: -16px;
+	}
+}
+
+.integration-list-item {
+	background: #f7f8f9;
+	border-radius: 6px;
+	flex: 1 1 0;
+	margin: 4px;
+	min-width: 40%;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 1px solid #f7f8f9;
+}
+
+.integration-list-item:hover {
+	box-shadow: 0 16px 24px 0 #e5eaef;
+	text-decoration: none;
+	border: 1px solid #06f;
+}
+
+@media (min-width: 768px) {
+	.integration-list-item {
+		margin: 16px;
+		min-width: 25%;
+	}
+}
+
+.integration-list-item-link {
+	padding: 20px;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+@media (min-width: 768px) {
+	.integration-list-item-link {
+		padding: 28px;
+	}
+}
+
+.integration-list-item-title {
+	text-align: center;
+	color: #00112c;
+	font-size: 1em;
+	font-weight: 700;
+	margin: 10px 0 0;
+}
+
+@media (min-width: 768px) {
+	.integration-list-item-title {
+		font-size: 24px;
+		margin-left: 0;
+		margin-bottom: 6px;
+		margin-right: 0;
+	}
+}
+
+.integration-list-item-subtitle {
+	color: #00112c;
+	font-size: 0.67em;
+	font-weight: 700;
+	margin: 10px 0 0;
+}
+
+@media (min-width: 768px) {
+	.integration-list-item-subtitle {
+		font-size: 16px;
+		margin-left: 0;
+		margin-bottom: 6px;
+		margin-right: 0;
+	}
+}
+
+.title-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.h3 {
+	padding-top: 24px;
+}
+
+.info {
+	margin-top: 120px;
+	color: #00112c;
+	text-align: center;
+}
+
+/* end Index page */
+
+/* Cart preview page */
+
+.shopping-cart {
+	float: right;
+}
+
+@media (min-width: 768px) {
+	.shopping-cart {
+		padding: 3px 0 0;
+	}
+}
+
+.shopping-cart-link {
+	display: inline-block;
+	position: relative;
+}
+
+.order-summary-list-list-item.first-item {
+	border-top: 1px solid #e6e9eb;
+}
+
+.order-summary-list-list-item {
+	border-bottom: 1px solid #e6e9eb;
+	display: flex;
+	height: 117px;
+}
+
+.order-summary-list-list-item-image {
+	height: 64px;
+	margin-top: auto;
+	margin-bottom: auto;
+	margin-right: 16px;
+	width: auto;
+}
+
+.order-summary-list-list-item-title {
+	font-weight: 700;
+	margin: auto auto auto 0;
+}
+
+.order-summary-list-list-item-price {
+	color: #687282;
+	margin: auto 16px;
+	text-align: right;
+	width: 80px;
+}
+
+@media (min-width: 768px) {
+	.order-summary-list-list-item-price {
+		margin: auto 24px;
+	}
+}
+
+.cart {
+	text-align: center;
+	margin-top: 80px;
+	padding-top: 24px;
+}
+
+.cart-footer {
+	font-weight: 700;
+	margin-top: 17px;
+	text-align: right;
+	margin-bottom: 17px;
+}
+
+@media (min-width: 768px) {
+	.cart-footer {
+		margin-top: 24px;
+	}
+}
+
+.cart-footer .button {
+	margin-top: 30px;
+	width: 100%;
+}
+
+@media (min-width: 768px) {
+	.cart-footer .button {
+		margin-top: 0;
+		width: 288px;
+	}
+}
+
+.cart-footer-amount {
+	margin-left: 16px;
+	margin-right: 24px;
+}
+
+.country-selector{
+	align-items:center;
+	background:#e5eaef;
+	border:1px solid #b9c4c9;
+	border-radius:6px;
+	display:flex;
+	height:40px;
+	margin:auto 0 auto auto;
+	outline:none;
+	padding:0 0 0 12px;
+	position:relative;
+	width:100%
+}
+@media (min-width:768px){
+	.country-selector{
+		width:200px
+	}
+}
+.country-selector__flag{
+	display:inline-flex;
+	margin-right:10px;
+	width:20px
+}
+.country-selector__select{
+	-webkit-appearance:none;
+	-moz-appearance:none;
+	appearance:none;
+	background:transparent;
+	border:0;
+	cursor:pointer;
+	flex:1;
+	font-size:1em;
+	height:100%;
+	margin:0 -12px 0 -42px;
+	outline:none;
+	padding-left:42px;
+	width:180px
+}
+.country-selector:focus{
+	box-shadow:none
+}
+.country-selector:hover{
+	border-color:#99a3ad
+}
+.country-selector .dropdown-icon{
+	margin-right:12px;
+	margin-top:3px
+}
+
+/* end of Cart preview page */
+
+/* Payment page */
+
+#payment-page .container {
+	margin-top: 100px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+
+	justify-content: space-between;
+	width: 100%;
+	max-width: 1110px;
+}
+
+#payment-page .checkout {
+	margin-top: 100px;
+}
+#payment-page .settings {
+	margin-top: 100px;
+}
+
+@media screen and (max-width: 1076px) {
+	#payment-page .container {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.payment {
+		align-self: center;
+	}
+}
+
+.checkout-component-container {
+	border: none;
+	padding: 0;
+	margin: 8px 0;
+	width: 100%;
+	height: 100%;
+}
+
+/* Adyen Components */
+.payment {
+	width: 100%;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+}
+
+
+/* end Payments page */
+
+/* PBL page */
+.qrcontainer {
+	padding: 10px;
+}
+
+.pbl-conatiner {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 1110px;
+}
+
+/* end PBL page */
+
+/* Status page */
+
+.status-container {
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.status {
+	margin: 100px 0 126px;
+	text-align: center;
+}
+
+.status .status-image {
+	display: block;
+	height: 100px;
+	margin: 16px auto 0;
+}
+
+.status .status-image-thank-you {
+	height: 66px;
+}
+
+.status .status-message {
+	margin: 8px 0 24px;
+}
+
+.status .button {
+	max-width: 236px;
+}
+
+@media (min-width: 768px) {
+	.status .button {
+		max-width: 200px;
+	}
+}
+
+/* end Status page */

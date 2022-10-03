@@ -1,0 +1,137 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class='main-container'>
+        <div class="info">
+            <h1>Ana's test demo</h1>
+        </div>
+        <div>
+            <h3 class="h3 title-container">Implementation via Sessions</h3>
+        </div>
+        <ul class="integration-list">
+            <li class="integration-list-item">
+                <a class="integration-list-item-link" href="{{ url_for('cart', integration="dropin") }}">
+                    <div class="title-container">
+                        <p class="integration-list-item-title">Drop-in</p>
+                    </div>
+                </a>
+            </li>
+            <li class="integration-list-item">
+                <a class="integration-list-item-link" href="{{ url_for('cart', integration="card") }}">
+                    <div class="title-container">
+                        <p class="integration-list-item-title">Card</p>
+                    </div>
+                </a>
+            </li>
+            <li class="integration-list-item">
+                <a class="integration-list-item-link" href="{{ url_for('cart', integration="ideal") }}">
+                    <div class="title-container">
+                        <p class="integration-list-item-title">iDEAL</p>
+                    </div>
+                </a>
+            </li>
+            <li class="integration-list-item">
+                <a class="integration-list-item-link" href="{{ url_for('cart', integration="klarna") }}">
+                    <div class="title-container">
+                        <p class="integration-list-item-title">Klarna</p>
+                    </div>
+                </a>
+            </li>
+            <li class="integration-list-item">
+                <a class="integration-list-item-link" href="{{ url_for('cart', integration="directEbanking") }}">
+                    <div class="title-container">
+                        <p class="integration-list-item-title">Sofort</p>
+                    </div>
+                </a>
+            </li>
+            <li class="integration-list-item">
+                <a class="integration-list-item-link" href="{{ url_for('cart', integration="alipay") }}">
+                    <div class="title-container">
+                        <p class="integration-list-item-title">Alipay</p>
+                    </div>
+                </a>
+            </li>
+            <li class="integration-list-item">
+                <a class="integration-list-item-link" href="{{ url_for('cart', integration="googlepay") }}">
+                    <div class="title-container">
+                        <p class="integration-list-item-title">GooglePay</p>
+                    </div>
+                </a>
+            </li>
+            <li class="integration-list-item">
+                <a class="integration-list-item-link" href="{{ url_for('cart', integration="sepadirectdebit") }}">
+                    <div class="title-container">
+                        <p class="integration-list-item-title">SEPA Direct Debit</p>
+                    </div>
+                </a>
+            </li>
+            <li class="integration-list-item">
+                <a class="integration-list-item-link" href="{{ url_for('cart', integration="clearpay") }}">
+                    <div class="title-container">
+                        <p class="integration-list-item-title">ClearPay</p>
+                    </div>
+                </a>
+            </li>
+            <li class="integration-list-item">
+                <a class="integration-list-item-link" href="{{ url_for('cart', integration="giropay") }}">
+                    <div class="title-container">
+                        <p class="integration-list-item-title">Giropay</p>
+                    </div>
+                </a>
+            </li>
+            <li class="integration-list-item">
+                <a class="integration-list-item-link" href="{{ url_for('cart', integration="ach") }}">
+                    <div class="title-container">
+                        <p class="integration-list-item-title">ACH</p>
+                    </div>
+                </a>
+            </li>
+            <li class="integration-list-item">
+                <a class="integration-list-item-link" href="{{ url_for('cart', integration="paypal") }}">
+                    <div class="title-container">
+                        <p class="integration-list-item-title">PayPal</p>
+                    </div>
+                </a>
+            </li>
+        </ul>
+        <div>
+            <h3 class="h3 title-container">Advanced Checkout - Non Sessions</h3>
+        </div>
+        <ul class="integration-list">
+            <li class="integration-list-item">
+                <a class="integration-list-item-link" href="{{ url_for('cart', integration="nonsessions") }}">
+                    <div class="title-container">
+                        <p class="integration-list-item-title">Drop-in</p>
+                    </div>
+                </a>
+            </li>
+            <li class="integration-list-item">
+                <a class="integration-list-item-link" href="{{ url_for('cart', integration="nonsessionCard") }}">
+                    <div class="title-container">
+                        <p class="integration-list-item-title">Card</p>
+                    </div>
+                </a>
+            </li>
+            <li class="integration-list-item">
+                <a class="integration-list-item-link" href="{{ url_for('cart', integration="nonsessionIdeal") }}">
+                    <div class="title-container">
+                        <p class="integration-list-item-title">iDEAL</p>
+                    </div>
+                </a>
+            </li>
+            <li class="integration-list-item">
+                <a class="integration-list-item-link" href="{{ url_for('cart', integration="paybylink") }}">
+                    <div class="title-container">
+                        <p class="integration-list-item-title">Pay By Link</p>
+                    </div>
+                </a>
+            </li>
+            <li class="integration-list-item">
+                <a class="integration-list-item-link" href="{{ url_for('cart', integration="amazonpay") }}">
+                    <div class="title-container">
+                        <p class="integration-list-item-title">Amazon Pay</p>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+{% endblock %}

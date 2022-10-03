@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block content %}
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+	<!-- Adyen CSS from TEST environment (change to live for production)-->
+	<link rel="stylesheet" href="https://checkoutshopper-test.adyen.com/checkoutshopper/sdk/5.4.0/adyen.css"
+		  integrity="sha384-47lm6XSs4AdvQN9BdRTZykpp82IALHlxMtM5p378Nsg3O3nGoBB86N0d7GXgjrA3"
+		  crossorigin="anonymous" />
+
+	<div id="payment-page">
+		<div class="container">
+			<div class="checkout-component-container">
+
+				<div id="component" class="payment">
+					<!-- Component will be rendered here -->
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<!-- Adyen JS from TEST environment (change to live for production)-->
+	<script src="https://checkoutshopper-test.adyen.com/checkoutshopper/sdk/5.4.0/adyen.js"
+			integrity="sha384-TrjObe7+xENaI4cONDkap2qTzoJIfTaC79+mJuANZ5Y1IxLMvqpPKcmgl3IrqCk3"
+			crossorigin="anonymous"></script>
+
+	<script id="client-key" type="application/json">{{ client_key|tojson }}</script>
+	<script id="integration-type" type="application/json">{{ method|tojson }}</script>
+	<!--script type="application/javascript">
+		const queryString = window.location.search;
+		console.log(queryString);
+		const urlCountry = new URLSearchParams(queryString);
+		const country = urlCountry.get('country')
+		console.log(country);
+	</script-->
+	<script id="country-code" type="application/json">{{ countryCode|default("GB")|tojson }}</script>
+
+	<script src="{{ url_for('static', filename='js/adyen-implementation.js') }}"></script>
+{% endblock %}
