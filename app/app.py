@@ -3,7 +3,6 @@ import logging
 from Adyen.util import is_valid_hmac_notification
 from flask import Flask, render_template, send_from_directory, request, redirect, url_for, abort
 
-from main.sessions import adyen_sessions
 from main.paymentMethods import adyen_payment_methods
 from main.payments import adyen_payments
 from main.redirect import handle_shopper_redirect
@@ -23,16 +22,9 @@ def create_app():
 
     # Routes:
     @app.route('/')
-    def home():
-        return render_template('home.html')
-
-    @app.route('/cart/<integration>')
-    def cart(integration):
-        return render_template('cart.html', method=integration)
-
-    @app.route('/checkout')
     def checkout():
         return render_template('component.html', client_key=get_adyen_client_key())
+
 
     @app.route('/api/getPaymentMethods', methods=['GET', 'POST'])
     def get_payment_methods():
@@ -78,15 +70,6 @@ def create_app():
             return redirect(url_for('checkout_pending'))
         else:
             return redirect(url_for('checkout_failure'))
-
-    @app.route('/api/sessions', methods=['POST'])
-    def sessions():
-        host_url = request.host_url 
-        request_data = request.get_json()
-        print (request_data)
-        locale_data = request_data
-
-        return adyen_sessions(host_url, locale_data)
 
 
     @app.route('/result/success', methods=['GET'])
