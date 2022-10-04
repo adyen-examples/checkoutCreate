@@ -1,12 +1,14 @@
 const clientKey = JSON.parse(document.getElementById('client-key').innerHTML);
 const storedCountry = document.getElementById('country-code');
 // let country = "GB";
-let countrySettings;
+let countrySettings = "GB";
 
 // Used to retrieve country value from url
 const urlCountryParams = new URLSearchParams(window.location.search);
 const countryURL = urlCountryParams.get('country');
 console.log(countryURL)
+
+let checkout
 
 const flagUrlMap = {
 	"NL" : {
@@ -29,11 +31,17 @@ const flagUrlMap = {
 	}
 }
 
+
 function changeSelect(el) {
 	document.getElementById('flag_img').src = flagUrlMap[el.value].src;
-	document.getElementById("total_cost").innerHTML = flagUrlMap[el.value].total;
+	// document.getElementById("total_cost").innerHTML = flagUrlMap[el.value].total;
 	const country = el.value;
-	// countrySettings = getCountryData(country)
+	countrySettings = getCountryData(country)
+	console.log(countrySettings)
+	if (document.getElementById("dropin-container")) {
+		document.getElementById("dropin-container").remove()
+	}
+	// initCheckout()
 }
 
 
@@ -67,9 +75,6 @@ function getCountryData(countrySettings) {
     return countryVariables.find((locality) => locality.countryCode === countrySettings)
 }
 
-// function getCountryData(countrySettings) {
-//     return countryVariables.find((locality) => locality.countryCode === countrySettings)
-// }
 
 async function initCheckout() {
     try {
@@ -91,7 +96,7 @@ async function initCheckout() {
 				card: {
 					hasHolderName: true,
 					holderNameRequired: true,
-					brands: ['mc','visa','amex', 'cup', 'cartebancaire', 'diners', 'discover', 'jcb'],
+					// brands: ['mc','visa','amex'],
 					name: "Credit or debit card",
                     enableStoreDetails: true,
 					amount: {
@@ -136,6 +141,7 @@ async function initCheckout() {
             }
         })
         .mount("#dropin-container");
+		
         } catch (error) {
             console.error(error);
             alert("Error occurred. Look at console for details");
