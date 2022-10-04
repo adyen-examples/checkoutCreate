@@ -1,9 +1,33 @@
-{% extends "layout.html" %}
-{% block content %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/application.css') }}" />
+
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Oleo+Script:wght@700&display=swap');
+    </style>
+
+    <title>Checkout Create</title>
+  </head>
+  <body>
+    <header id="header">
+      <div class="logo-box">
+      <a href="{{ url_for('checkout') }}">
+        <img
+          class="logo-image"
+          src="{{ url_for('static', filename='img/mystore-logo.svg') }}"
+          alt="BARB logo"
+        />
+      </a>
+      <!--<a class="logo-title">All Things Retro</a>-->
+    </div>
+    </header>
 
 	<!-- Adyen CSS from TEST environment (change to live for production)-->
 	<link rel="stylesheet"
@@ -39,17 +63,14 @@
 			</div>
         </div>
     </div>
-
-
-
 	<!-- Adyen JS from TEST environment (change to live for production)-->
 	<script src="https://checkoutshopper-live.adyen.com/checkoutshopper/sdk/5.15.0/adyen.js"
-     integrity="sha384-vMZOl6V83EY2UXaXsPUxH5Pt5VpyLeHpSFnANBVjcH5l7yZmJO0QBl3s6XbKwjiN"
-     crossorigin="anonymous"></script>
+	integrity="sha384-vMZOl6V83EY2UXaXsPUxH5Pt5VpyLeHpSFnANBVjcH5l7yZmJO0QBl3s6XbKwjiN"
+	crossorigin="anonymous"></script>
 
 	<!-- bootstrap-colorpicker JS -->
 	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/3.4.0/js/bootstrap-colorpicker.min.js"
-    integrity="sha512-94dgCw8xWrVcgkmOc2fwKjO4dqy/X3q7IjFru6MHJKeaAzCvhkVtOS6S+co+RbcZvvPBngLzuVMApmxkuWZGwQ=="
+	integrity="sha512-94dgCw8xWrVcgkmOc2fwKjO4dqy/X3q7IjFru6MHJKeaAzCvhkVtOS6S+co+RbcZvvPBngLzuVMApmxkuWZGwQ=="
 	crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
 
 
@@ -59,6 +80,6 @@
 
 	<!-- local JS -->
 	<script src="{{ url_for('static', filename='js/adyen-implementation.js') }}"></script>
+  </body>
+</html>
 
-
-{% endblock %}
