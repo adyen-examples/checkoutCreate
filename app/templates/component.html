@@ -48,19 +48,36 @@
 				</div>
 		</div>
         <div class="settings col">
-			<div class="country-selector">
-				<div class="country-selector__flag" aria-hidden="true">
-					<img id="flag_img" src="https://ca-test.adyen.com/ca/adl/img/flags/nl.svg" alt="Flag icon">
-				</div>
-				<select onchange="changeSelect(this)" id="country_select" class="country-selector__select" aria-label="country" autocomplete="off">
-					<option value="NL">Netherlands</option>
-					<option value="GB">United Kingdom</option>
-					<option value="US">United States</option>
-				</select>
-				<div class="dropdown-icon" aria-hidden="true">
-					<img src="{{ url_for('static', filename='img/dropdown.svg') }}" alt="Dropdown caret">
-				</div>
-			</div>
+          <h4>Change country: </h4>
+          <div class="country-selector">
+            <div class="country-selector__flag" aria-hidden="true">
+              <img id="flag_img" src="https://ca-test.adyen.com/ca/adl/img/flags/nl.svg" alt="Flag icon">
+            </div>
+            <select onchange="changeSelect(this)" id="country_select" class="country-selector__select" aria-label="country" autocomplete="off">
+              <option value="NL">Netherlands</option>
+              <option value="GB">United Kingdom</option>
+              <option value="US">United States</option>
+            </select>
+            <div class="dropdown-icon" aria-hidden="true">
+              <img src="{{ url_for('static', filename='img/dropdown.svg') }}" alt="Dropdown caret">
+            </div>
+          </div>
+          <!-- <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="firstPayBox">
+            <label class="form-check-label" for="firstPayBox">Open First Payment</label>
+          </div> -->
+          <div class="custom-control custom-switch">
+            <input type="checkbox" class="custom-control-input" id="firstPayBox" data-toggle="toggle" checked>
+            <label class="custom-control-label" for="firstPayBox">Toggle this switch element</label>
+          </div>
+          <div class="custom-control custom-switch">
+            <input type="checkbox" class="custom-control-input" id="billAdd" data-toggle="toggle">
+            <label class="custom-control-label" for="billAdd">Add billing Address</label>
+          </div>
+          <div class="custom-control custom-switch">
+            <input type="checkbox" class="custom-control-input" id="onlyStored" data-toggle="toggle">
+            <label class="custom-control-label" for="onlyStored">Hide stored payment methods</label>
+          </div>
         </div>
     </div>
 	<!-- Adyen JS from TEST environment (change to live for production)-->
