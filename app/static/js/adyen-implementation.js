@@ -73,6 +73,12 @@ function changeSelect(el) {
 		oldDiv.replaceWith(newDiv)
 		newDiv.setAttribute("id", "dropin-container");
 		initCheckout()
+	} else if (document.getElementById("dropin-container")) {
+		const oldDiv = document.getElementById("dropin-container");
+		const newDiv =  document.createElement('div');
+		oldDiv.replaceWith(newDiv)
+		newDiv.setAttribute("id", "dropin-container");
+		initCheckout()
 	}
 }
 
