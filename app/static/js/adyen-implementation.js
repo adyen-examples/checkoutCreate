@@ -39,8 +39,19 @@ function changeSelect(el) {
 	countrySettings = getCountryData(country)
 	console.log(countrySettings)
 	if (document.getElementById("dropin-container")) {
-		document.getElementById("dropin-container").remove()
+		const oldDiv = document.getElementById("dropin-container");
+		const newDiv =  document.createElement('div');
+		// oldDiv.parentNode.replaceChild(newDiv, oldDiv);
+		oldDiv.replaceWith(newDiv)
+		newDiv.setAttribute("id", "dropin-container");
+		initCheckout()
+		// document.getElementById("dropin-container").remove()
 	}
+	// else {
+	// 	newDiv = document.createElement('div');
+	// 	newDiv.setAttribute("id", "#dropin-container");
+	// 	initCheckout()
+	// }
 	// initCheckout()
 }
 
