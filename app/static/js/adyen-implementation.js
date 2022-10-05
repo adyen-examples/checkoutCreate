@@ -210,7 +210,8 @@ async function initCheckout() {
 					//commit: false,
 					environment: "test", // Change this to "live" when you're ready to accept live PayPal payments
 					countryCode: countrySettings.countryCode || "GB", // Only needed for test. This will be automatically retrieved when you are in production.
-					showPayButton: true
+					showPayButton: true,
+					merchantId: "AD74FQNVXQY5E"
 					//subtype: "redirect"
 				}
 			},
