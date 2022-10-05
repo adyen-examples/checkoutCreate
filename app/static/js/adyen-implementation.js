@@ -8,7 +8,20 @@ const urlCountryParams = new URLSearchParams(window.location.search);
 const countryURL = urlCountryParams.get('country');
 console.log(countryURL)
 
-let checkout
+// global configuration variables
+let openFirst = true
+let billAdd = false
+let onlyStored = true
+
+const toggleData = [
+	{
+
+	}
+]
+
+// identify checkout div and create new empty div to replace with
+const oldDiv = document.getElementById("dropin-container");
+const newDiv =  document.createElement('div');
 
 const flagUrlMap = {
 	"NL" : {
@@ -31,30 +44,103 @@ const flagUrlMap = {
 	}
 }
 
-
+// Country dropdown changes the flag image and reloads the dropin with new country values
 function changeSelect(el) {
 	document.getElementById('flag_img').src = flagUrlMap[el.value].src;
-	// document.getElementById("total_cost").innerHTML = flagUrlMap[el.value].total;
 	const country = el.value;
 	countrySettings = getCountryData(country)
 	console.log(countrySettings)
 	if (document.getElementById("dropin-container")) {
 		const oldDiv = document.getElementById("dropin-container");
 		const newDiv =  document.createElement('div');
-		// oldDiv.parentNode.replaceChild(newDiv, oldDiv);
 		oldDiv.replaceWith(newDiv)
 		newDiv.setAttribute("id", "dropin-container");
 		initCheckout()
-		// document.getElementById("dropin-container").remove()
 	}
-	// else {
-	// 	newDiv = document.createElement('div');
-	// 	newDiv.setAttribute("id", "#dropin-container");
-	// 	initCheckout()
-	// }
-	// initCheckout()
 }
 
+// function openFirstPayment() {
+// 	var firstPayBox = document.getElementById("firstPayBox")
+// 	if (firstPayBox == true){
+// 		openFirst = true
+// 		oldDiv.replaceWith(newDiv)
+// 		newDiv.setAttribute("id", "dropin-container")
+// 		initCheckout()
+// 	}
+// 	else {
+// 		openFirst = false
+// 		oldDiv.replaceWith(newDiv)
+// 		newDiv.setAttribute("id", "dropin-container")
+// 		initCheckout()
+// 	}
+// }
+
+// Funtion to toggle first payment method open
+document.getElementById('firstPayBox').parentNode.addEventListener('click', function(event){
+    // the value of `this` here is the element the event was fired on. 
+    // In this situation, it's the element with the ID of 'approval'.
+    if  (this.querySelector('input').checked) {
+		const oldDiv = document.getElementById("dropin-container");
+		const newDiv =  document.createElement('div');
+		openFirst = true
+		oldDiv.replaceWith(newDiv)
+		newDiv.setAttribute("id", "dropin-container")
+		initCheckout()
+	}
+	else {
+		const oldDiv = document.getElementById("dropin-container");
+		const newDiv =  document.createElement('div');
+		openFirst = false
+		oldDiv.replaceWith(newDiv)
+		newDiv.setAttribute("id", "dropin-container")
+		initCheckout()
+	}
+  })
+
+// Function to add billing address
+document.getElementById('billAdd').parentNode.addEventListener('click', function(event){
+    // the value of `this` here is the element the event was fired on. 
+    // In this situation, it's the element with the ID of 'approval'.
+    if  (this.querySelector('input').checked) {
+		const oldDiv = document.getElementById("dropin-container");
+		const newDiv =  document.createElement('div');
+		billAdd = true
+		oldDiv.replaceWith(newDiv)
+		newDiv.setAttribute("id", "dropin-container")
+		initCheckout()
+	}
+	else {
+		const oldDiv = document.getElementById("dropin-container");
+		const newDiv =  document.createElement('div');
+		billAdd = false
+		oldDiv.replaceWith(newDiv)
+		newDiv.setAttribute("id", "dropin-container")
+		initCheckout()
+	}
+  })
+
+
+// Function to show only saved payment methods
+document.getElementById('onlyStored').parentNode.addEventListener('click', function(event){
+    // the value of `this` here is the element the event was fired on. 
+    // In this situation, it's the element with the ID of 'approval'.
+    if  (this.querySelector('input').checked) {
+		const oldDiv = document.getElementById("dropin-container");
+		const newDiv =  document.createElement('div');
+		onlyStored = false
+		oldDiv.replaceWith(newDiv)
+		newDiv.setAttribute("id", "dropin-container")
+		initCheckout()
+	}
+	else {
+		const oldDiv = document.getElementById("dropin-container");
+		const newDiv =  document.createElement('div');
+		onlyStored = true
+		oldDiv.replaceWith(newDiv)
+		newDiv.setAttribute("id", "dropin-container")
+		initCheckout()
+	}
+  })
 
 const countryVariables = [
     {
@@ -86,14 +172,14 @@ function getCountryData(countrySettings) {
     return countryVariables.find((locality) => locality.countryCode === countrySettings)
 }
 
-
 async function initCheckout() {
     try {
 		const paymentMethodsResponse = await callServer("/api/getPaymentMethods", countrySettings);
 		console.log(countrySettings)
 		let prettyResponse = JSON.stringify(paymentMethodsResponse, null, 2)
 		console.log(prettyResponse)
-		const configuration = {
+		console.log(openFirst);
+		let configuration = {
 			paymentMethodsResponse: paymentMethodsResponse,
 			clientKey,
 			locale: countrySettings.locale || "en_GB",
@@ -110,6 +196,7 @@ async function initCheckout() {
 					// brands: ['mc','visa','amex'],
 					name: "Credit or debit card",
                     enableStoreDetails: true,
+					billingAddressRequired: billAdd,
 					amount: {
 						value: 4000,
 						currency: countrySettings.currency || "GBP"
@@ -141,10 +228,15 @@ async function initCheckout() {
             }
 
 		};
+		console.log(configuration)
+
+		console.log(openFirst)
 
 		const checkout = await AdyenCheckout(configuration);
 		checkout.create('dropin', {
             showRemovePaymentMethodButton: true,
+			openFirstPaymentMethod: openFirst,
+			showStoredPaymentMethods: onlyStored,
 			onDisableStoredPaymentMethod: (storedPaymentMethodId, resolve, reject) => {
                 callServer("/api/disable", {"storedPaymentMethodId":storedPaymentMethodId});
                 resolve()
