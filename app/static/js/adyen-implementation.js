@@ -12,6 +12,10 @@ console.log(countryURL)
 let openFirst = true
 let billAdd = false
 let onlyStored = true
+let holderName = false
+let showPayMethod = true
+let hideCVC = false
+let placeholderData = false
 
 const toggleData = [
 	{
@@ -50,7 +54,20 @@ function changeSelect(el) {
 	const country = el.value;
 	countrySettings = getCountryData(country)
 	console.log(countrySettings)
-	if (document.getElementById("dropin-container")) {
+	if (document.getElementById("dropin-container") && document.getElementById("placeholderData").checked == true) {
+		placeholderData = {
+			holderName: "Jane Doe",
+			billingAddress: {
+				street: countrySettings.street,
+				postalCode: countrySettings.postalCode,
+				city: countrySettings.city,
+				country: countrySettings.countryCode,
+				stateOrProvince:countrySettings.stateOrProvince,
+				houseNumberOrName:countrySettings.houseNumberOrName
+			}
+		}
+		// document.getElementById("placeholderData").checked = false
+		// placeholderData = false
 		const oldDiv = document.getElementById("dropin-container");
 		const newDiv =  document.createElement('div');
 		oldDiv.replaceWith(newDiv)
@@ -142,21 +159,134 @@ document.getElementById('onlyStored').parentNode.addEventListener('click', funct
 	}
   })
 
+// function to show holder name field
+document.getElementById('holderName').parentNode.addEventListener('click', function(event){
+    // the value of `this` here is the element the event was fired on. 
+    // In this situation, it's the element with the ID of 'approval'.
+    if  (this.querySelector('input').checked) {
+		const oldDiv = document.getElementById("dropin-container");
+		const newDiv =  document.createElement('div');
+		holderName = true
+		oldDiv.replaceWith(newDiv)
+		newDiv.setAttribute("id", "dropin-container")
+		initCheckout()
+	}
+	else {
+		const oldDiv = document.getElementById("dropin-container");
+		const newDiv =  document.createElement('div');
+		holderName = false
+		oldDiv.replaceWith(newDiv)
+		newDiv.setAttribute("id", "dropin-container")
+		initCheckout()
+	}
+  })
+
+
+// Funtion to show all payment methods 
+document.getElementById('showPayMethod').parentNode.addEventListener('click', function(event){
+    // the value of `this` here is the element the event was fired on. 
+    // In this situation, it's the element with the ID of 'approval'.
+    if  (this.querySelector('input').checked) {
+		const oldDiv = document.getElementById("dropin-container");
+		const newDiv =  document.createElement('div');
+		showPayMethod = false
+		oldDiv.replaceWith(newDiv)
+		newDiv.setAttribute("id", "dropin-container")
+		initCheckout()
+	}
+	else {
+		const oldDiv = document.getElementById("dropin-container");
+		const newDiv =  document.createElement('div');
+		showPayMethod = true
+		oldDiv.replaceWith(newDiv)
+		newDiv.setAttribute("id", "dropin-container")
+		initCheckout()
+	}
+  })
+
+  // Funtion to hide or show cvc
+document.getElementById('hideCVC').parentNode.addEventListener('click', function(event){
+    // the value of `this` here is the element the event was fired on. 
+    // In this situation, it's the element with the ID of 'approval'.
+    if  (this.querySelector('input').checked) {
+		const oldDiv = document.getElementById("dropin-container");
+		const newDiv =  document.createElement('div');
+		hideCVC = true
+		oldDiv.replaceWith(newDiv)
+		newDiv.setAttribute("id", "dropin-container")
+		initCheckout()
+	}
+	else {
+		const oldDiv = document.getElementById("dropin-container");
+		const newDiv =  document.createElement('div');
+		hideCVC = false
+		oldDiv.replaceWith(newDiv)
+		newDiv.setAttribute("id", "dropin-container")
+		initCheckout()
+	}
+  })
+
+  // Funtion for including placeholder data
+document.getElementById('placeholderData').parentNode.addEventListener('click', function(event){
+    // the value of `this` here is the element the event was fired on. 
+    // In this situation, it's the element with the ID of 'approval'.
+    if  (this.querySelector('input').checked) {
+		const oldDiv = document.getElementById("dropin-container");
+		const newDiv =  document.createElement('div');
+		placeholderData = {
+			holderName: "Jane Doe",
+			billingAddress: {
+				street: countrySettings.street,
+				postalCode: countrySettings.postalCode,
+				city: countrySettings.city,
+				country: countrySettings.countryCode,
+				stateOrProvince:countrySettings.stateOrProvince,
+				houseNumberOrName:countrySettings.houseNumberOrName
+			}
+		}
+		console.log (countrySettings)
+		oldDiv.replaceWith(newDiv)
+		newDiv.setAttribute("id", "dropin-container")
+		initCheckout()
+	}
+	else {
+		const oldDiv = document.getElementById("dropin-container");
+		const newDiv =  document.createElement('div');
+		placeholderData = false
+		oldDiv.replaceWith(newDiv)
+		newDiv.setAttribute("id", "dropin-container")
+		initCheckout()
+	}
+  })
+
 const countryVariables = [
     {
         countryCode: "NL",
         currency: "EUR",
-        locale: "en_NL"
+        locale: "en_NL",
+		city: "Amsterdam",
+		postalCode: "1011DJ",
+		street: "Simon Carmiggeltstraat",
+		houseNumberOrName: "6 - 50"
     },
     {
         countryCode: "GB",
         currency: "GBP",
-        locale: "en_GB"
+        locale: "en_GB",
+		city:"London",
+		postalCode: "W1T3HE",
+		street: "Wells Mews",
+		houseNumberOrName: "12 13"
     },
     {
         countryCode: "US",
         currency: "USD",
-        locale: "en_US"
+        locale: "en_US",
+		city:"New York City",
+		postalCode: "10003",
+		street: "71 5th Avenue",
+		stateOrProvince:"NY",
+		houseNumberOrName: "Floor 11"
     }
 ]
 if (storedCountry) {
@@ -191,16 +321,24 @@ async function initCheckout() {
 					showImage: true
 				},
 				card: {
-					hasHolderName: true,
+					hasHolderName: holderName,
 					holderNameRequired: true,
+					hideCVC: hideCVC,
 					// brands: ['mc','visa','amex'],
 					name: "Credit or debit card",
+					data: {
+						holderName: placeholderData.holderName,
+						billingAddress: placeholderData.billingAddress
+					},
                     enableStoreDetails: true,
 					billingAddressRequired: billAdd,
 					amount: {
 						value: 4000,
 						currency: countrySettings.currency || "GBP"
 					}
+				},
+				storedCard: {
+					hideCVC: hideCVC
 				},
 				paypal: {
 					amount: {
@@ -238,6 +376,7 @@ async function initCheckout() {
             showRemovePaymentMethodButton: true,
 			openFirstPaymentMethod: openFirst,
 			showStoredPaymentMethods: onlyStored,
+			showPaymentMethods: showPayMethod,
 			onDisableStoredPaymentMethod: (storedPaymentMethodId, resolve, reject) => {
                 callServer("/api/disable", {"storedPaymentMethodId":storedPaymentMethodId});
                 resolve()
