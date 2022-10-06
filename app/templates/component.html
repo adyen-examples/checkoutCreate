@@ -100,8 +100,12 @@
             <label class="custom-control-label" for="placeholderData">Include placeholder data</label>
           </div>
           <div class="form-group">
-            <label for="formControlRange">Change edges</label>
-            <input type="range" class="form-control-range" id="buttonEdges" onchange="buttonEdges(this.value);" min="0" max="25" value="10">
+            <label for="formControlRange">Change button edges</label>
+            <input type="range" class="form-control-range" id="buttonEdges" onchange="buttonEdges(this.value);" min="0" max="25" value="5">
+          </div>
+          <div class="form-group">
+            <label for="formControlRange">Change body edges</label>
+            <input type="range" class="form-control-range" id="bodyEdges" onchange="bodyEdges(this.value);" min="0" max="25" value="5">
           </div>
           <button type="button" onclick="setDynamicCSS()">change</button>
           <input type="color" name="" id="" onchange="setDynamicCSS()">
