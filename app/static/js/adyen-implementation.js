@@ -72,12 +72,14 @@ function changeSelect(el) {
 		const newDiv =  document.createElement('div');
 		oldDiv.replaceWith(newDiv)
 		newDiv.setAttribute("id", "dropin-container");
+		newDiv.setAttribute("class", "payment p-5")
 		initCheckout()
 	} else if (document.getElementById("dropin-container")) {
 		const oldDiv = document.getElementById("dropin-container");
 		const newDiv =  document.createElement('div');
 		oldDiv.replaceWith(newDiv)
 		newDiv.setAttribute("id", "dropin-container");
+		newDiv.setAttribute("class", "payment p-5")
 		initCheckout()
 	}
 }
@@ -108,6 +110,7 @@ document.getElementById('firstPayBox').parentNode.addEventListener('click', func
 		openFirst = true
 		oldDiv.replaceWith(newDiv)
 		newDiv.setAttribute("id", "dropin-container")
+		newDiv.setAttribute("class", "payment p-5")
 		initCheckout()
 	}
 	else {
@@ -116,6 +119,7 @@ document.getElementById('firstPayBox').parentNode.addEventListener('click', func
 		openFirst = false
 		oldDiv.replaceWith(newDiv)
 		newDiv.setAttribute("id", "dropin-container")
+		newDiv.setAttribute("class", "payment p-5")
 		initCheckout()
 	}
   })
@@ -130,6 +134,7 @@ document.getElementById('billAdd').parentNode.addEventListener('click', function
 		billAdd = true
 		oldDiv.replaceWith(newDiv)
 		newDiv.setAttribute("id", "dropin-container")
+		newDiv.setAttribute("class", "payment p-5")
 		initCheckout()
 	}
 	else {
@@ -138,6 +143,7 @@ document.getElementById('billAdd').parentNode.addEventListener('click', function
 		billAdd = false
 		oldDiv.replaceWith(newDiv)
 		newDiv.setAttribute("id", "dropin-container")
+		newDiv.setAttribute("class", "payment p-5")
 		initCheckout()
 	}
   })
@@ -153,6 +159,7 @@ document.getElementById('onlyStored').parentNode.addEventListener('click', funct
 		onlyStored = false
 		oldDiv.replaceWith(newDiv)
 		newDiv.setAttribute("id", "dropin-container")
+		newDiv.setAttribute("class", "payment p-5")
 		initCheckout()
 	}
 	else {
@@ -161,6 +168,7 @@ document.getElementById('onlyStored').parentNode.addEventListener('click', funct
 		onlyStored = true
 		oldDiv.replaceWith(newDiv)
 		newDiv.setAttribute("id", "dropin-container")
+		newDiv.setAttribute("class", "payment p-5")
 		initCheckout()
 	}
   })
@@ -175,6 +183,7 @@ document.getElementById('holderName').parentNode.addEventListener('click', funct
 		holderName = true
 		oldDiv.replaceWith(newDiv)
 		newDiv.setAttribute("id", "dropin-container")
+		newDiv.setAttribute("class", "payment p-5")
 		initCheckout()
 	}
 	else {
@@ -183,6 +192,7 @@ document.getElementById('holderName').parentNode.addEventListener('click', funct
 		holderName = false
 		oldDiv.replaceWith(newDiv)
 		newDiv.setAttribute("id", "dropin-container")
+		newDiv.setAttribute("class", "payment p-5")
 		initCheckout()
 	}
   })
@@ -198,6 +208,7 @@ document.getElementById('showPayMethod').parentNode.addEventListener('click', fu
 		showPayMethod = false
 		oldDiv.replaceWith(newDiv)
 		newDiv.setAttribute("id", "dropin-container")
+		newDiv.setAttribute("class", "payment p-5")
 		initCheckout()
 	}
 	else {
@@ -206,6 +217,7 @@ document.getElementById('showPayMethod').parentNode.addEventListener('click', fu
 		showPayMethod = true
 		oldDiv.replaceWith(newDiv)
 		newDiv.setAttribute("id", "dropin-container")
+		newDiv.setAttribute("class", "payment p-5")
 		initCheckout()
 	}
   })
@@ -220,6 +232,7 @@ document.getElementById('hideCVC').parentNode.addEventListener('click', function
 		hideCVC = true
 		oldDiv.replaceWith(newDiv)
 		newDiv.setAttribute("id", "dropin-container")
+		newDiv.setAttribute("class", "payment p-5")
 		initCheckout()
 	}
 	else {
@@ -228,6 +241,7 @@ document.getElementById('hideCVC').parentNode.addEventListener('click', function
 		hideCVC = false
 		oldDiv.replaceWith(newDiv)
 		newDiv.setAttribute("id", "dropin-container")
+		newDiv.setAttribute("class", "payment p-5")
 		initCheckout()
 	}
   })
@@ -253,6 +267,7 @@ document.getElementById('placeholderData').parentNode.addEventListener('click', 
 		console.log (countrySettings)
 		oldDiv.replaceWith(newDiv)
 		newDiv.setAttribute("id", "dropin-container")
+		newDiv.setAttribute("class", "payment p-5")
 		initCheckout()
 	}
 	else {
@@ -261,6 +276,7 @@ document.getElementById('placeholderData').parentNode.addEventListener('click', 
 		placeholderData = false
 		oldDiv.replaceWith(newDiv)
 		newDiv.setAttribute("id", "dropin-container")
+		newDiv.setAttribute("class", "payment p-5")
 		initCheckout()
 	}
   })
@@ -487,4 +503,28 @@ function handleServerResponse(res, dropin) {
 	}
 }
 
+// Test cards JS
+function copyToClipboard() {
+	// Get the text field
+	let copyPAN = document.getElementById('cardNumber').textContent;
+	console.log(copyPAN)
+  
+	// Select the text field
+	// copyPAN.select();
+	// copyPAN.setSelectionRange(0, 99999); // For mobile devices
+  
+	 // Copy the text inside the text field
+	navigator.clipboard.write(copyPAN);
+  
+	// Alert the copied text
+	alert("Copied the text: " + copyPAN);
+  }
+let r = document.querySelector(':root');
+
+function setDynamicCSS () {
+	r.style.setProperty('--background-color', 'green');
+}
+function resetDynamicCSS () {
+	r.style.setProperty('--background-color', null);
+}
 initCheckout();

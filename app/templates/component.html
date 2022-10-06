@@ -44,7 +44,7 @@
 
 	<div id="payment-page" class="row">
 		<div class="checkout col">
-				<div id="dropin-container" class="payment">
+				<div id="dropin-container" class="payment p-5">
 					<!-- Component will be rendered here -->
 				</div>
 		</div>
@@ -97,10 +97,39 @@
           </div>
           <div class="custom-control custom-switch">
             <input type="checkbox" class="custom-control-input" id="placeholderData" data-toggle="toggle">
-            <label class="custom-control-label" for="placeholderData">Include placeholder data</label>
+            <label class="custom-control-label test" for="placeholderData">Include placeholder data</label>
           </div>
+          <button type="button" onclick="setDynamicCSS()">change</button>
+          <input type="color" name="" id="" onchange="setDynamicCSS()">
+          <button type="button" onclick="resetDynamicCSS()">reset</button>
         </div>
     </div>
+    <div class="card">
+      <div class="card__front card__part">
+        <img class="card__front-square card__square" src="{{ url_for('static', filename='img/chip.png') }}">
+        <img class="card__front-logo card__logo" src="{{ url_for('static', filename='img/LogoAdyen.png') }}">
+        <p class="card_numer" id="cardNumber">4111 1111 1111 1111</p>
+        <div class="card__space-75">
+          <span class="card__label">Card holder</span>
+          <p class="card__info">John Doe</p>
+        </div>
+        <div class="card__space-25">
+          <span class="card__label">Expires</span>
+                <p class="card__info">03/30</p>
+        </div>
+      </div>
+      <div class="card__back card__part">
+        <div class="card__black-line"></div>
+        <div class="card__back-content">
+          <div class="card__secret">
+            <p class="card__secret--last">737</p>
+          </div>
+          <img class="card__back-square card__square" src="{{ url_for('static', filename='img/chip.png') }}">
+          <img class="card__back-logo card__logo" src="{{ url_for('static', filename='img/LogoAdyen.png') }}">
+        </div>
+      </div>
+    </div>
+    <button type="button" class="btn btn-info btn-clipboard" toggle="tooltip" data-clipboard-action="copy" data-clipboard-target="#cardNumber" onclick="copyToClipboard('cardNumber')" title="Copy to clipboard">Copy</button>
 	<!-- Adyen JS from TEST environment (change to live for production)-->
 	<script src="https://checkoutshopper-live.adyen.com/checkoutshopper/sdk/5.15.0/adyen.js"
 	integrity="sha384-vMZOl6V83EY2UXaXsPUxH5Pt5VpyLeHpSFnANBVjcH5l7yZmJO0QBl3s6XbKwjiN"
