@@ -632,15 +632,13 @@ a:hover {
 
 	:root {
 		--background-color: purple;
-	}
-
-	.test {
-		background: var(--background-color);
+		--button-edges: 25px;
 	}
 
 
 	.adyen-checkout__button {
 		background: var(--background-color) !important;
+		border-radius: var(--button-edges) !important;
 	}
 	/* Copy button */
 	
