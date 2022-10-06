@@ -357,6 +357,53 @@ a:hover {
 	margin-top:3px
 }
 
+/* font selector styling */
+.font-selector{
+	align-items:center;
+	background:#e5eaef;
+	border:1px solid #b9c4c9;
+	border-radius:6px;
+	display:flex;
+	height:40px;
+	margin:auto 0 auto auto;
+	outline:none;
+	padding:0 0 0 12px;
+	position:relative;
+	width:100%
+}
+@media (min-width:768px){
+	.font-selector{
+		width:200px
+	}
+}
+
+.font-selector__select{
+	-webkit-appearance:none;
+	-moz-appearance:none;
+	appearance:none;
+	background:transparent;
+	border:0;
+	cursor:pointer;
+	flex:1;
+	font-size:1em;
+	height:100%;
+	margin:0 -12px 0 -42px;
+	outline:none;
+	padding-left:42px;
+	width:180px
+}
+.font-selector:focus{
+	box-shadow:none
+}
+.font-selector:hover{
+	border-color:#99a3ad
+}
+.font-selector .dropdown-icon{
+	margin-right:12px;
+	margin-top:3px
+}
+/* font styling end */
+
 /* end of Cart preview page */
 
 /* Payment page */
@@ -623,6 +670,13 @@ a:hover {
 		-moz-transform: rotateY(0deg);
 	}
 
+	/* sliders css */
+
+	.form-group {
+		width: 250px; /* Full-width */
+        height: 35px; /* Specified height */
+	}
+
 	/* :root {
 		--back-rotate : rotateY(0deg);
 		--back-tran: rotateY(0deg);
@@ -632,6 +686,9 @@ a:hover {
 
 	:root {
 		--background-color: purple;
+		--dropin-width: 500px;
+		--dropin-font: 17px;
+=======
 		--button-edges: 10px;
 		--body-edges: 10px;
 		--border-off: 1px solid #e6e9eb;
@@ -654,3 +711,11 @@ a:hover {
 	}
 	/* Copy button */
 	
+	.adyen-checkout__payment-method {
+		width: var(--dropin-width) !important;
+		font-size: var(--dropin-font) !important;
+	 }
+
+	
+	 
+	 
