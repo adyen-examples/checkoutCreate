@@ -521,8 +521,10 @@ function handleServerResponse(res, dropin) {
 // }
 let r = document.querySelector(':root');
 
+// Colour picker changes button color
 function setDynamicCSS() {
-	r.style.setProperty('--background-color', 'green');
+	colorVal = document.getElementById("buttonColorPick").value
+	r.style.setProperty('--background-color', colorVal);
 }
 
 function buttonEdges () {
@@ -537,18 +539,8 @@ function bodyEdges () {
 	r.style.setProperty('--body-edges', bodyPixelVal);
 }
 
-// function noBorder () {
-// 	let borderValue = document.getElementById('noBorder').value
-// 	if (borderValue == 'checked') {
-// 		r.style.setProperty('--border-off', "0")
-// 		console.log(borderValue)
-// 	}
-// 	else {
-// 		r.style.setProperty('--border-off', null)
-// 	}
-// }
 
-// Funtion to show all payment methods
+// Funtion to remove borders
 document.getElementById('noBorder').parentNode.addEventListener('click', function (event) {
 	if (this.querySelector('input').checked) {
 		r.style.setProperty('--border-off', "0")

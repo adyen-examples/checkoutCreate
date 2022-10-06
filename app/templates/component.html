@@ -111,9 +111,11 @@
             <label for="formControlRange">Change body edges</label>
             <input type="range" class="form-control-range" id="bodyEdges" onchange="bodyEdges(this.value);" min="0" max="25" value="5">
           </div>
-          <button type="button" onclick="setDynamicCSS()">change</button>
-          <input type="color" name="" id="" onchange="setDynamicCSS()">
+          <span>Button colour: </span>
+          <input type="color" name="" id="buttonColorPick" onchange="setDynamicCSS()">
+          <div>
           <button type="button" onclick="resetDynamicCSS()">reset</button>
+        </div>
         </div>
     </div>
     <div class="card">
