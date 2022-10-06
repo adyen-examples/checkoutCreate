@@ -504,21 +504,21 @@ function handleServerResponse(res, dropin) {
 }
 
 // Test cards JS
-function copyToClipboard() {
-	// Get the text field
-	let copyPAN = document.getElementById('cardNumber').textContent;
-	console.log(copyPAN)
+// function copyToClipboard() {
+// 	// Get the text field
+// 	let copyPAN = document.getElementById('cardNumber').textContent;
+// 	console.log(copyPAN)
 
-	// Select the text field
-	// copyPAN.select();
-	// copyPAN.setSelectionRange(0, 99999); // For mobile devices
+// 	// Select the text field
+// 	// copyPAN.select();
+// 	// copyPAN.setSelectionRange(0, 99999); // For mobile devices
 
-	// Copy the text inside the text field
-	navigator.clipboard.write(copyPAN);
+// 	// Copy the text inside the text field
+// 	navigator.clipboard.write(copyPAN);
 
-	// Alert the copied text
-	alert("Copied the text: " + copyPAN);
-}
+// 	// Alert the copied text
+// 	alert("Copied the text: " + copyPAN);
+// }
 let r = document.querySelector(':root');
 
 function setDynamicCSS() {
@@ -531,15 +531,16 @@ function buttonEdges () {
 	r.style.setProperty('--button-edges', pixelVal);
 }
 
+function bodyEdges () {
+	let bodyEdgeValue = document.getElementById('bodyEdges').value
+	let bodyPixelVal = bodyEdgeValue + 'px'
+	r.style.setProperty('--body-edges', bodyPixelVal);
+}
+
 function resetDynamicCSS () {
 	r.style.setProperty('--background-color', null);
 }
 
-
-
-
-
-initCheckout();
 
 
 // Copy to clipboard function
@@ -547,3 +548,8 @@ function copyToClipboard(e) {
 	const cb = navigator.clipboard;
 	cb.writeText(e.target.innerText)
 }
+
+initCheckout();
+
+
+
