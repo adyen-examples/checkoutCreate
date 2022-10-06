@@ -37,6 +37,7 @@ def adyen_payments(frontend_request, locale_data):
 
     if 'klarna' in txvariant:
         payments_request['shopperEmail'] = "myEmail@adyen.com"
+        payments_request['shopperName'] = {"firstName": "Test", "lastName": "Shopper"}
         payments_request['lineItems'] = [
             {
                 'quantity': "1",
