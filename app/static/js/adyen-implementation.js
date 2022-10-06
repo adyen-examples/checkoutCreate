@@ -537,6 +537,28 @@ function bodyEdges () {
 	r.style.setProperty('--body-edges', bodyPixelVal);
 }
 
+// function noBorder () {
+// 	let borderValue = document.getElementById('noBorder').value
+// 	if (borderValue == 'checked') {
+// 		r.style.setProperty('--border-off', "0")
+// 		console.log(borderValue)
+// 	}
+// 	else {
+// 		r.style.setProperty('--border-off', null)
+// 	}
+// }
+
+// Funtion to show all payment methods
+document.getElementById('noBorder').parentNode.addEventListener('click', function (event) {
+	if (this.querySelector('input').checked) {
+		r.style.setProperty('--border-off', "0")
+		console.log(borderValue)
+	}
+	else {
+		r.style.setProperty('--border-off', null)
+	}
+})
+
 function resetDynamicCSS () {
 	r.style.setProperty('--background-color', null);
 }

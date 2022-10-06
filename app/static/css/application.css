@@ -634,6 +634,7 @@ a:hover {
 		--background-color: purple;
 		--button-edges: 10px;
 		--body-edges: 10px;
+		--border-off: 1px solid #e6e9eb;
 	}
 
 
@@ -644,6 +645,12 @@ a:hover {
 
 	.adyen-checkout__payment-method {
 		border-radius: var(--body-edges) !important;
+		border: var(--border-off) !important;
+	}
+
+	.adyen-checkout__payment-method__radio {
+		/* Radio button in payment method header */
+
 	}
 	/* Copy button */
 	
