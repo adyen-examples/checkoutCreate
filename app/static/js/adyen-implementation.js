@@ -1,7 +1,7 @@
 const clientKey = JSON.parse(document.getElementById('client-key').innerHTML);
 const storedCountry = document.getElementById('country-code');
 // let country = "GB";
-let countrySettings = "GB";
+let countrySettings = "NL";
 
 // Used to retrieve country value from url
 const urlCountryParams = new URLSearchParams(window.location.search);
@@ -102,7 +102,7 @@ function changeSelect(el) {
 
 // Funtion to toggle first payment method open
 document.getElementById('firstPayBox').parentNode.addEventListener('click', function (event) {
-	// the value of `this` here is the element the event was fired on. 
+	// the value of `this` here is the element the event was fired on.
 	// In this situation, it's the element with the ID of 'approval'.
 	if (this.querySelector('input').checked) {
 		const oldDiv = document.getElementById("dropin-container");
@@ -126,7 +126,7 @@ document.getElementById('firstPayBox').parentNode.addEventListener('click', func
 
 // Function to add billing address
 document.getElementById('billAdd').parentNode.addEventListener('click', function (event) {
-	// the value of `this` here is the element the event was fired on. 
+	// the value of `this` here is the element the event was fired on.
 	// In this situation, it's the element with the ID of 'approval'.
 	if (this.querySelector('input').checked) {
 		const oldDiv = document.getElementById("dropin-container");
@@ -151,7 +151,7 @@ document.getElementById('billAdd').parentNode.addEventListener('click', function
 
 // Function to show only saved payment methods
 document.getElementById('onlyStored').parentNode.addEventListener('click', function (event) {
-	// the value of `this` here is the element the event was fired on. 
+	// the value of `this` here is the element the event was fired on.
 	// In this situation, it's the element with the ID of 'approval'.
 	if (this.querySelector('input').checked) {
 		const oldDiv = document.getElementById("dropin-container");
@@ -175,7 +175,7 @@ document.getElementById('onlyStored').parentNode.addEventListener('click', funct
 
 // function to show holder name field
 document.getElementById('holderName').parentNode.addEventListener('click', function (event) {
-	// the value of `this` here is the element the event was fired on. 
+	// the value of `this` here is the element the event was fired on.
 	// In this situation, it's the element with the ID of 'approval'.
 	if (this.querySelector('input').checked) {
 		const oldDiv = document.getElementById("dropin-container");
@@ -198,9 +198,9 @@ document.getElementById('holderName').parentNode.addEventListener('click', funct
 })
 
 
-// Funtion to show all payment methods 
+// Funtion to show all payment methods
 document.getElementById('showPayMethod').parentNode.addEventListener('click', function (event) {
-	// the value of `this` here is the element the event was fired on. 
+	// the value of `this` here is the element the event was fired on.
 	// In this situation, it's the element with the ID of 'approval'.
 	if (this.querySelector('input').checked) {
 		const oldDiv = document.getElementById("dropin-container");
@@ -224,7 +224,7 @@ document.getElementById('showPayMethod').parentNode.addEventListener('click', fu
 
 // Funtion to hide or show cvc
 document.getElementById('hideCVC').parentNode.addEventListener('click', function (event) {
-	// the value of `this` here is the element the event was fired on. 
+	// the value of `this` here is the element the event was fired on.
 	// In this situation, it's the element with the ID of 'approval'.
 	if (this.querySelector('input').checked) {
 		const oldDiv = document.getElementById("dropin-container");
@@ -248,7 +248,7 @@ document.getElementById('hideCVC').parentNode.addEventListener('click', function
 
 // Funtion for including placeholder data
 document.getElementById('placeholderData').parentNode.addEventListener('click', function (event) {
-	// the value of `this` here is the element the event was fired on. 
+	// the value of `this` here is the element the event was fired on.
 	// In this situation, it's the element with the ID of 'approval'.
 	if (this.querySelector('input').checked) {
 		const oldDiv = document.getElementById("dropin-container");
@@ -348,8 +348,8 @@ async function initCheckout() {
 		let configuration = {
 			paymentMethodsResponse: paymentMethodsResponse,
 			clientKey,
-			locale: countrySettings.locale || "en_GB",
-			countryCode: countrySettings.countryCode || "GB",
+			locale: countrySettings.locale || "en_NL",
+        	countryCode: countrySettings.countryCode || "NL",
 			environment: "test",
 			showPayButton: true,
 			paymentMethodsConfiguration: {
@@ -370,7 +370,7 @@ async function initCheckout() {
 					billingAddressRequired: billAdd,
 					amount: {
 						value: 4000,
-						currency: countrySettings.currency || "GBP"
+						currency: countrySettings.currency || "EUR"
 					}
 				},
 				storedCard: {
@@ -378,12 +378,12 @@ async function initCheckout() {
 				},
 				paypal: {
 					amount: {
-						currency: countrySettings.currency || "GBP",
+						currency: countrySettings.currency || "EUR",
 						value: 4000
 					},
 					//commit: false,
 					environment: "test", // Change this to "live" when you're ready to accept live PayPal payments
-					countryCode: countrySettings.countryCode || "GB", // Only needed for test. This will be automatically retrieved when you are in production.
+					countryCode: countrySettings.countryCode || "NL", // Only needed for test. This will be automatically retrieved when you are in production.
 					showPayButton: true,
 					merchantId: "AD74FQNVXQY5E"
 					//subtype: "redirect"
@@ -524,9 +524,21 @@ let r = document.querySelector(':root');
 function setDynamicCSS() {
 	r.style.setProperty('--background-color', 'green');
 }
-function resetDynamicCSS() {
+
+function buttonEdges () {
+	let edgeValue = document.getElementById('buttonEdges').value
+	let pixelVal = edgeValue + 'px'
+	r.style.setProperty('--button-edges', pixelVal);
+}
+
+function resetDynamicCSS () {
 	r.style.setProperty('--background-color', null);
 }
+
+
+
+
+
 initCheckout();
 
 
@@ -535,4 +547,3 @@ function copyToClipboard(e) {
 	const cb = navigator.clipboard;
 	cb.writeText(e.target.innerText)
 }
-
