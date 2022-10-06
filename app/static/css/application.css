@@ -623,5 +623,24 @@ a:hover {
 		-moz-transform: rotateY(0deg);
 	}
 
+	/* :root {
+		--back-rotate : rotateY(0deg);
+		--back-tran: rotateY(0deg);
+		--front-rotate: rotateY(180deg);
+		--front-tran: rotateY(180deg);
+	} */
+
+	:root {
+		--background-color: purple;
+	}
+
+	.test {
+		background: var(--background-color);
+	}
+
+
+	.adyen-checkout__button {
+		background: var(--background-color) !important;
+	}
 	/* Copy button */
 	
