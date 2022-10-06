@@ -1,7 +1,7 @@
 const clientKey = JSON.parse(document.getElementById('client-key').innerHTML);
 const storedCountry = document.getElementById('country-code');
 // let country = "GB";
-let countrySettings = "GB";
+let countrySettings = "NL";
 
 // Used to retrieve country value from url
 const urlCountryParams = new URLSearchParams(window.location.search);
@@ -348,8 +348,8 @@ async function initCheckout() {
 		let configuration = {
 			paymentMethodsResponse: paymentMethodsResponse,
 			clientKey,
-			locale: countrySettings.locale || "en_GB",
-        	countryCode: countrySettings.countryCode || "GB",
+			locale: countrySettings.locale || "en_NL",
+        	countryCode: countrySettings.countryCode || "NL",
 			environment: "test",
 			showPayButton: true,
 			paymentMethodsConfiguration: {
@@ -370,7 +370,7 @@ async function initCheckout() {
 					billingAddressRequired: billAdd,
 					amount: {
 						value: 4000,
-						currency: countrySettings.currency || "GBP"
+						currency: countrySettings.currency || "EUR"
 					}
 				},
 				storedCard: {
@@ -378,12 +378,12 @@ async function initCheckout() {
 				},
 				paypal: {
 					amount: {
-						currency: countrySettings.currency || "GBP",
+						currency: countrySettings.currency || "EUR",
 						value: 4000
 					},
 					//commit: false,
 					environment: "test", // Change this to "live" when you're ready to accept live PayPal payments
-					countryCode: countrySettings.countryCode || "GB", // Only needed for test. This will be automatically retrieved when you are in production.
+					countryCode: countrySettings.countryCode || "NL", // Only needed for test. This will be automatically retrieved when you are in production.
 					showPayButton: true,
 					merchantId: "AD74FQNVXQY5E"
 					//subtype: "redirect"
@@ -524,7 +524,19 @@ let r = document.querySelector(':root');
 function setDynamicCSS () {
 	r.style.setProperty('--background-color', 'green');
 }
+
+function buttonEdges () {
+	let edgeValue = document.getElementById('buttonEdges').value
+	let pixelVal = edgeValue + 'px'
+	r.style.setProperty('--button-edges', pixelVal);
+}
+
 function resetDynamicCSS () {
 	r.style.setProperty('--background-color', null);
 }
+
+
+
+
+
 initCheckout();
