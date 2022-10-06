@@ -25,22 +25,22 @@ const toggleData = [
 
 // identify checkout div and create new empty div to replace with
 const oldDiv = document.getElementById("dropin-container");
-const newDiv =  document.createElement('div');
+const newDiv = document.createElement('div');
 
 const flagUrlMap = {
-	"NL" : {
+	"NL": {
 		"src": "https://ca-test.adyen.com/ca/adl/img/flags/nl.svg",
 		"total": "€40.00",
 		"currency": "EUR",
 		"href": "{{ url_for('checkout', integration=method, country=NL) }}"
 	},
-	"GB" : {
+	"GB": {
 		"src": "https://ca-test.adyen.com/ca/adl/img/flags/gb.svg",
 		"total": "£40.00",
 		"currency": "GBP",
 		"href": "{{ url_for('checkout', integration=method, country=GB) }}"
 	},
-	"US" : {
+	"US": {
 		"src": "https://ca-test.adyen.com/ca/adl/img/flags/us.svg",
 		"total": "$40.00",
 		"currency": "USD",
@@ -62,21 +62,21 @@ function changeSelect(el) {
 				postalCode: countrySettings.postalCode,
 				city: countrySettings.city,
 				country: countrySettings.countryCode,
-				stateOrProvince:countrySettings.stateOrProvince,
-				houseNumberOrName:countrySettings.houseNumberOrName
+				stateOrProvince: countrySettings.stateOrProvince,
+				houseNumberOrName: countrySettings.houseNumberOrName
 			}
 		}
 		// document.getElementById("placeholderData").checked = false
 		// placeholderData = false
 		const oldDiv = document.getElementById("dropin-container");
-		const newDiv =  document.createElement('div');
+		const newDiv = document.createElement('div');
 		oldDiv.replaceWith(newDiv)
 		newDiv.setAttribute("id", "dropin-container");
 		newDiv.setAttribute("class", "payment p-5")
 		initCheckout()
 	} else if (document.getElementById("dropin-container")) {
 		const oldDiv = document.getElementById("dropin-container");
-		const newDiv =  document.createElement('div');
+		const newDiv = document.createElement('div');
 		oldDiv.replaceWith(newDiv)
 		newDiv.setAttribute("id", "dropin-container");
 		newDiv.setAttribute("class", "payment p-5")
@@ -101,12 +101,12 @@ function changeSelect(el) {
 // }
 
 // Funtion to toggle first payment method open
-document.getElementById('firstPayBox').parentNode.addEventListener('click', function(event){
-    // the value of `this` here is the element the event was fired on. 
-    // In this situation, it's the element with the ID of 'approval'.
-    if  (this.querySelector('input').checked) {
+document.getElementById('firstPayBox').parentNode.addEventListener('click', function (event) {
+	// the value of `this` here is the element the event was fired on. 
+	// In this situation, it's the element with the ID of 'approval'.
+	if (this.querySelector('input').checked) {
 		const oldDiv = document.getElementById("dropin-container");
-		const newDiv =  document.createElement('div');
+		const newDiv = document.createElement('div');
 		openFirst = true
 		oldDiv.replaceWith(newDiv)
 		newDiv.setAttribute("id", "dropin-container")
@@ -115,22 +115,22 @@ document.getElementById('firstPayBox').parentNode.addEventListener('click', func
 	}
 	else {
 		const oldDiv = document.getElementById("dropin-container");
-		const newDiv =  document.createElement('div');
+		const newDiv = document.createElement('div');
 		openFirst = false
 		oldDiv.replaceWith(newDiv)
 		newDiv.setAttribute("id", "dropin-container")
 		newDiv.setAttribute("class", "payment p-5")
 		initCheckout()
 	}
-  })
+})
 
 // Function to add billing address
-document.getElementById('billAdd').parentNode.addEventListener('click', function(event){
-    // the value of `this` here is the element the event was fired on. 
-    // In this situation, it's the element with the ID of 'approval'.
-    if  (this.querySelector('input').checked) {
+document.getElementById('billAdd').parentNode.addEventListener('click', function (event) {
+	// the value of `this` here is the element the event was fired on. 
+	// In this situation, it's the element with the ID of 'approval'.
+	if (this.querySelector('input').checked) {
 		const oldDiv = document.getElementById("dropin-container");
-		const newDiv =  document.createElement('div');
+		const newDiv = document.createElement('div');
 		billAdd = true
 		oldDiv.replaceWith(newDiv)
 		newDiv.setAttribute("id", "dropin-container")
@@ -139,23 +139,23 @@ document.getElementById('billAdd').parentNode.addEventListener('click', function
 	}
 	else {
 		const oldDiv = document.getElementById("dropin-container");
-		const newDiv =  document.createElement('div');
+		const newDiv = document.createElement('div');
 		billAdd = false
 		oldDiv.replaceWith(newDiv)
 		newDiv.setAttribute("id", "dropin-container")
 		newDiv.setAttribute("class", "payment p-5")
 		initCheckout()
 	}
-  })
+})
 
 
 // Function to show only saved payment methods
-document.getElementById('onlyStored').parentNode.addEventListener('click', function(event){
-    // the value of `this` here is the element the event was fired on. 
-    // In this situation, it's the element with the ID of 'approval'.
-    if  (this.querySelector('input').checked) {
+document.getElementById('onlyStored').parentNode.addEventListener('click', function (event) {
+	// the value of `this` here is the element the event was fired on. 
+	// In this situation, it's the element with the ID of 'approval'.
+	if (this.querySelector('input').checked) {
 		const oldDiv = document.getElementById("dropin-container");
-		const newDiv =  document.createElement('div');
+		const newDiv = document.createElement('div');
 		onlyStored = false
 		oldDiv.replaceWith(newDiv)
 		newDiv.setAttribute("id", "dropin-container")
@@ -164,22 +164,22 @@ document.getElementById('onlyStored').parentNode.addEventListener('click', funct
 	}
 	else {
 		const oldDiv = document.getElementById("dropin-container");
-		const newDiv =  document.createElement('div');
+		const newDiv = document.createElement('div');
 		onlyStored = true
 		oldDiv.replaceWith(newDiv)
 		newDiv.setAttribute("id", "dropin-container")
 		newDiv.setAttribute("class", "payment p-5")
 		initCheckout()
 	}
-  })
+})
 
 // function to show holder name field
-document.getElementById('holderName').parentNode.addEventListener('click', function(event){
-    // the value of `this` here is the element the event was fired on. 
-    // In this situation, it's the element with the ID of 'approval'.
-    if  (this.querySelector('input').checked) {
+document.getElementById('holderName').parentNode.addEventListener('click', function (event) {
+	// the value of `this` here is the element the event was fired on. 
+	// In this situation, it's the element with the ID of 'approval'.
+	if (this.querySelector('input').checked) {
 		const oldDiv = document.getElementById("dropin-container");
-		const newDiv =  document.createElement('div');
+		const newDiv = document.createElement('div');
 		holderName = true
 		oldDiv.replaceWith(newDiv)
 		newDiv.setAttribute("id", "dropin-container")
@@ -188,23 +188,23 @@ document.getElementById('holderName').parentNode.addEventListener('click', funct
 	}
 	else {
 		const oldDiv = document.getElementById("dropin-container");
-		const newDiv =  document.createElement('div');
+		const newDiv = document.createElement('div');
 		holderName = false
 		oldDiv.replaceWith(newDiv)
 		newDiv.setAttribute("id", "dropin-container")
 		newDiv.setAttribute("class", "payment p-5")
 		initCheckout()
 	}
-  })
+})
 
 
 // Funtion to show all payment methods 
-document.getElementById('showPayMethod').parentNode.addEventListener('click', function(event){
-    // the value of `this` here is the element the event was fired on. 
-    // In this situation, it's the element with the ID of 'approval'.
-    if  (this.querySelector('input').checked) {
+document.getElementById('showPayMethod').parentNode.addEventListener('click', function (event) {
+	// the value of `this` here is the element the event was fired on. 
+	// In this situation, it's the element with the ID of 'approval'.
+	if (this.querySelector('input').checked) {
 		const oldDiv = document.getElementById("dropin-container");
-		const newDiv =  document.createElement('div');
+		const newDiv = document.createElement('div');
 		showPayMethod = false
 		oldDiv.replaceWith(newDiv)
 		newDiv.setAttribute("id", "dropin-container")
@@ -213,22 +213,22 @@ document.getElementById('showPayMethod').parentNode.addEventListener('click', fu
 	}
 	else {
 		const oldDiv = document.getElementById("dropin-container");
-		const newDiv =  document.createElement('div');
+		const newDiv = document.createElement('div');
 		showPayMethod = true
 		oldDiv.replaceWith(newDiv)
 		newDiv.setAttribute("id", "dropin-container")
 		newDiv.setAttribute("class", "payment p-5")
 		initCheckout()
 	}
-  })
+})
 
-  // Funtion to hide or show cvc
-document.getElementById('hideCVC').parentNode.addEventListener('click', function(event){
-    // the value of `this` here is the element the event was fired on. 
-    // In this situation, it's the element with the ID of 'approval'.
-    if  (this.querySelector('input').checked) {
+// Funtion to hide or show cvc
+document.getElementById('hideCVC').parentNode.addEventListener('click', function (event) {
+	// the value of `this` here is the element the event was fired on. 
+	// In this situation, it's the element with the ID of 'approval'.
+	if (this.querySelector('input').checked) {
 		const oldDiv = document.getElementById("dropin-container");
-		const newDiv =  document.createElement('div');
+		const newDiv = document.createElement('div');
 		hideCVC = true
 		oldDiv.replaceWith(newDiv)
 		newDiv.setAttribute("id", "dropin-container")
@@ -237,22 +237,22 @@ document.getElementById('hideCVC').parentNode.addEventListener('click', function
 	}
 	else {
 		const oldDiv = document.getElementById("dropin-container");
-		const newDiv =  document.createElement('div');
+		const newDiv = document.createElement('div');
 		hideCVC = false
 		oldDiv.replaceWith(newDiv)
 		newDiv.setAttribute("id", "dropin-container")
 		newDiv.setAttribute("class", "payment p-5")
 		initCheckout()
 	}
-  })
+})
 
-  // Funtion for including placeholder data
-document.getElementById('placeholderData').parentNode.addEventListener('click', function(event){
-    // the value of `this` here is the element the event was fired on. 
-    // In this situation, it's the element with the ID of 'approval'.
-    if  (this.querySelector('input').checked) {
+// Funtion for including placeholder data
+document.getElementById('placeholderData').parentNode.addEventListener('click', function (event) {
+	// the value of `this` here is the element the event was fired on. 
+	// In this situation, it's the element with the ID of 'approval'.
+	if (this.querySelector('input').checked) {
 		const oldDiv = document.getElementById("dropin-container");
-		const newDiv =  document.createElement('div');
+		const newDiv = document.createElement('div');
 		placeholderData = {
 			holderName: "Jane Doe",
 			billingAddress: {
@@ -260,11 +260,11 @@ document.getElementById('placeholderData').parentNode.addEventListener('click', 
 				postalCode: countrySettings.postalCode,
 				city: countrySettings.city,
 				country: countrySettings.countryCode,
-				stateOrProvince:countrySettings.stateOrProvince,
-				houseNumberOrName:countrySettings.houseNumberOrName
+				stateOrProvince: countrySettings.stateOrProvince,
+				houseNumberOrName: countrySettings.houseNumberOrName
 			}
 		}
-		console.log (countrySettings)
+		console.log(countrySettings)
 		oldDiv.replaceWith(newDiv)
 		newDiv.setAttribute("id", "dropin-container")
 		newDiv.setAttribute("class", "payment p-5")
@@ -272,62 +272,62 @@ document.getElementById('placeholderData').parentNode.addEventListener('click', 
 	}
 	else {
 		const oldDiv = document.getElementById("dropin-container");
-		const newDiv =  document.createElement('div');
+		const newDiv = document.createElement('div');
 		placeholderData = false
 		oldDiv.replaceWith(newDiv)
 		newDiv.setAttribute("id", "dropin-container")
 		newDiv.setAttribute("class", "payment p-5")
 		initCheckout()
 	}
-  })
+})
 
 //change width of drop in form
 // let widthSlider = document.querySelector('[type=range]')
 let widthDiv = document.querySelector('.payment')
-  
-document.querySelector('[type=range]').parentNode.addEventListener('input', function(event){
-  
-  if  (this.querySelector('input')) {
-	this.addEventListener('input', e => {
-		widthDiv.style.width = e.target.value + 'px'
-	  })
-}
+
+document.querySelector('[type=range]').parentNode.addEventListener('input', function (event) {
+
+	if (this.querySelector('input')) {
+		this.addEventListener('input', e => {
+			widthDiv.style.width = e.target.value + 'px'
+		})
+	}
 })
 
-  
+
 const countryVariables = [
-    {
-        countryCode: "NL",
-        currency: "EUR",
-        locale: "en_NL",
+	{
+		countryCode: "NL",
+		currency: "EUR",
+		locale: "en_NL",
 		city: "Amsterdam",
 		postalCode: "1011DJ",
 		street: "Simon Carmiggeltstraat",
 		houseNumberOrName: "6 - 50"
-    },
-    {
-        countryCode: "GB",
-        currency: "GBP",
-        locale: "en_GB",
-		city:"London",
+	},
+	{
+		countryCode: "GB",
+		currency: "GBP",
+		locale: "en_GB",
+		city: "London",
 		postalCode: "W1T3HE",
 		street: "Wells Mews",
 		houseNumberOrName: "12 13"
-    },
-    {
-        countryCode: "US",
-        currency: "USD",
-        locale: "en_US",
-		city:"New York City",
+	},
+	{
+		countryCode: "US",
+		currency: "USD",
+		locale: "en_US",
+		city: "New York City",
 		postalCode: "10003",
 		street: "71 5th Avenue",
-		stateOrProvince:"NY",
+		stateOrProvince: "NY",
 		houseNumberOrName: "Floor 11"
-    }
+	}
 ]
 if (storedCountry) {
-    const selectedCountry = JSON.parse(storedCountry.innerHTML);
-    countrySettings = getCountryData(selectedCountry)
+	const selectedCountry = JSON.parse(storedCountry.innerHTML);
+	countrySettings = getCountryData(selectedCountry)
 }
 if (countryURL) {
 	const selectedCountry = countryURL
@@ -335,11 +335,11 @@ if (countryURL) {
 }
 
 function getCountryData(countrySettings) {
-    return countryVariables.find((locality) => locality.countryCode === countrySettings)
+	return countryVariables.find((locality) => locality.countryCode === countrySettings)
 }
 
 async function initCheckout() {
-    try {
+	try {
 		const paymentMethodsResponse = await callServer("/api/getPaymentMethods", countrySettings);
 		console.log(countrySettings)
 		let prettyResponse = JSON.stringify(paymentMethodsResponse, null, 2)
@@ -349,7 +349,7 @@ async function initCheckout() {
 			paymentMethodsResponse: paymentMethodsResponse,
 			clientKey,
 			locale: countrySettings.locale || "en_GB",
-        	countryCode: countrySettings.countryCode || "GB",
+			countryCode: countrySettings.countryCode || "GB",
 			environment: "test",
 			showPayButton: true,
 			paymentMethodsConfiguration: {
@@ -366,7 +366,7 @@ async function initCheckout() {
 						holderName: placeholderData.holderName,
 						billingAddress: placeholderData.billingAddress
 					},
-                    enableStoreDetails: true,
+					enableStoreDetails: true,
 					billingAddressRequired: billAdd,
 					amount: {
 						value: 4000,
@@ -398,9 +398,9 @@ async function initCheckout() {
 			onAdditionalDetails: (state, dropin) => {
 				handleSubmission(state, dropin, "/api/submitAdditionalDetails");
 			},
-            onDisableStoredPaymentMethod: (storedPaymentMethodId, resolve, reject) => {
+			onDisableStoredPaymentMethod: (storedPaymentMethodId, resolve, reject) => {
 				// handleSubmission(state, dropin, "/api/disable");
-            }
+			}
 
 		};
 		console.log(configuration)
@@ -409,63 +409,63 @@ async function initCheckout() {
 
 		const checkout = await AdyenCheckout(configuration);
 		checkout.create('dropin', {
-            showRemovePaymentMethodButton: true,
+			showRemovePaymentMethodButton: true,
 			openFirstPaymentMethod: openFirst,
 			showStoredPaymentMethods: onlyStored,
 			showPaymentMethods: showPayMethod,
 			onDisableStoredPaymentMethod: (storedPaymentMethodId, resolve, reject) => {
-                callServer("/api/disable", {"storedPaymentMethodId":storedPaymentMethodId});
-                resolve()
-                reject()
-            }
-        })
-        .mount("#dropin-container");
-		
-        } catch (error) {
-            console.error(error);
-            alert("Error occurred. Look at console for details");
-        }
-    }
+				callServer("/api/disable", { "storedPaymentMethodId": storedPaymentMethodId });
+				resolve()
+				reject()
+			}
+		})
+			.mount("#dropin-container");
+
+	} catch (error) {
+		console.error(error);
+		alert("Error occurred. Look at console for details");
+	}
+}
 
 /*function filterUnimplemented(pm) {
-    pm.paymentMethods = pm.paymentMethods.filter((it) =>
-        [
-            "scheme",
-            "ideal",
-            "dotpay",
-            "giropay",
-            "sepadirectdebit",
-            "directEbanking",
-            "ach",
-            "alipay",
-            "klarna_paynow",
-            "klarna",
-            "klarna_account",
-            "paypal",
-            "boletobancario_santander"
-        ].includes(it.type)
-    );
-    return pm;
+	pm.paymentMethods = pm.paymentMethods.filter((it) =>
+		[
+			"scheme",
+			"ideal",
+			"dotpay",
+			"giropay",
+			"sepadirectdebit",
+			"directEbanking",
+			"ach",
+			"alipay",
+			"klarna_paynow",
+			"klarna",
+			"klarna_account",
+			"paypal",
+			"boletobancario_santander"
+		].includes(it.type)
+	);
+	return pm;
 }*/
 
 
 // Event handlers called when the shopper selects the pay button,
 // or when additional information is required to complete the payment
 async function handleSubmission(state, dropin, url, countrySettings) {
-    try {
+	try {
 		//keeping the country data for the /payments call
 		const mergedData = {
 			...state.data,
 			...countrySettings
 		}
-        const res = await callServer(url, mergedData);
+		const res = await callServer(url, mergedData);
 		let prettyResponse = JSON.stringify(res, null, 2)
 		console.log(prettyResponse)
-        handleServerResponse(res, dropin);
-    } catch (error) {
-        console.error(error);
-        alert("Error occurred. Look at console for details");
-    }
+		handleServerResponse(res, dropin);
+	} catch (error) {
+		console.error(error);
+		alert("Error occurred. Look at console for details");
+	}
 }
 
 // Calls your server endpoints
@@ -508,23 +508,31 @@ function copyToClipboard() {
 	// Get the text field
 	let copyPAN = document.getElementById('cardNumber').textContent;
 	console.log(copyPAN)
-  
+
 	// Select the text field
 	// copyPAN.select();
 	// copyPAN.setSelectionRange(0, 99999); // For mobile devices
-  
-	 // Copy the text inside the text field
+
+	// Copy the text inside the text field
 	navigator.clipboard.write(copyPAN);
-  
+
 	// Alert the copied text
 	alert("Copied the text: " + copyPAN);
-  }
+}
 let r = document.querySelector(':root');
 
-function setDynamicCSS () {
+function setDynamicCSS() {
 	r.style.setProperty('--background-color', 'green');
 }
-function resetDynamicCSS () {
+function resetDynamicCSS() {
 	r.style.setProperty('--background-color', null);
 }
 initCheckout();
+
+
+// Copy to clipboard function
+function copyToClipboard(e) {
+	const cb = navigator.clipboard;
+	cb.writeText(e.target.innerText)
+}
+
