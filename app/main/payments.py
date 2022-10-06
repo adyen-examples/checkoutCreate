@@ -137,6 +137,10 @@ def currency_locale(country):
 def sanatizeRequest(payments_request):
     del payments_request['locale']
     del payments_request['currency']
+    del payments_request['city']
+    del payments_request['houseNumberOrName']
+    del payments_request['street']
+    del payments_request['postalCode']
 
     # loaded = json.loads(payments_request)
     # for item in loaded:

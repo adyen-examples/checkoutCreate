@@ -283,16 +283,19 @@ document.getElementById('placeholderData').parentNode.addEventListener('click', 
 
 //change width of drop in form
 // let widthSlider = document.querySelector('[type=range]')
-let widthDiv = document.querySelector('.payment')
+//let widthDiv = document.querySelector('-dropin-width')
+
+// function resetDynamicCSS () {
+// 	widthDiv.style.setProperty('-dropin-width', null);
+// } 
+// document.querySelector('[type=range]').parentNode.addEventListener('input', function(event){
   
-document.querySelector('[type=range]').parentNode.addEventListener('input', function(event){
-  
-  if  (this.querySelector('input')) {
-	this.addEventListener('input', e => {
-		widthDiv.style.width = e.target.value + 'px'
-	  })
-}
-})
+//   if  (this.querySelector('input')) {
+// 	this.addEventListener('input', e => {
+// 		widthDiv.style.width = e.target.value + 'px'
+// 	  })
+// }
+// })
 
   
 const countryVariables = [
@@ -364,7 +367,7 @@ async function initCheckout() {
 					name: "Credit or debit card",
 					data: {
 						holderName: placeholderData.holderName,
-						billingAddress: placeholderData.billingAddress
+						billingAddress: placeholderData.billingAddress 
 					},
                     enableStoreDetails: true,
 					billingAddressRequired: billAdd,
@@ -526,5 +529,18 @@ function setDynamicCSS () {
 }
 function resetDynamicCSS () {
 	r.style.setProperty('--background-color', null);
+}
+
+function dropinWidth () {
+	let widthValue = document.getElementById("changeWidth").value
+	let widthpx = widthValue + 'px'
+	r.style.setProperty('--dropin-width', widthpx);
+	console.log(widthpx)
+}
+
+function fontWidth () {
+	let fontValue = document.getElementById("fontSize").value
+	let fontpx = fontValue + 'px'
+	r.style.setProperty('--dropin-font', fontpx);
 }
 initCheckout();
