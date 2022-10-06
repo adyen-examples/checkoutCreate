@@ -265,6 +265,20 @@ document.getElementById('placeholderData').parentNode.addEventListener('click', 
 	}
   })
 
+//change width of drop in form
+// let widthSlider = document.querySelector('[type=range]')
+let widthDiv = document.querySelector('.payment')
+  
+document.querySelector('[type=range]').parentNode.addEventListener('input', function(event){
+  
+  if  (this.querySelector('input')) {
+	this.addEventListener('input', e => {
+		widthDiv.style.width = e.target.value + 'px'
+	  })
+}
+})
+
+  
 const countryVariables = [
     {
         countryCode: "NL",

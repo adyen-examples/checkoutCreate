@@ -8,10 +8,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/application.css') }}" />
-
-    <style>
+   
+   <style>
       @import url('https://fonts.googleapis.com/css2?family=Oleo+Script:wght@700&display=swap');
     </style>
+
 
     <title>Checkout Create</title>
   </head>
@@ -66,6 +67,10 @@
             <input type="checkbox" class="form-check-input" id="firstPayBox">
             <label class="form-check-label" for="firstPayBox">Open First Payment</label>
           </div> -->
+          <div class="form-group">
+            <label for="formControlRange">Example Range input</label>
+            <input type="range" class="form-control-range" id="changeWidth" min="100" max="1000" value="1">
+          </div>
           <div class="custom-control custom-switch">
             <input type="checkbox" class="custom-control-input" id="firstPayBox" data-toggle="toggle" checked>
             <label class="custom-control-label" for="firstPayBox">Open first payment method</label>
@@ -113,6 +118,7 @@
 
 	<!-- local JS -->
 	<script src="{{ url_for('static', filename='js/adyen-implementation.js') }}"></script>
+  
   </body>
 </html>
 
