@@ -685,10 +685,9 @@ a:hover {
 	} */
 
 	:root {
-		--background-color: purple;
+		--background-color: #00112c;
 		--dropin-width: 500px;
 		--dropin-font: 17px;
-=======
 		--button-edges: 10px;
 		--body-edges: 10px;
 		--border-off: 1px solid #e6e9eb;
