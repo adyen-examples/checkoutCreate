@@ -688,15 +688,26 @@ a:hover {
 		--background-color: purple;
 		--dropin-width: 500px;
 		--dropin-font: 17px;
-	}
-
-	.test {
-		background: var(--background-color);
+=======
+		--button-edges: 10px;
+		--body-edges: 10px;
+		--border-off: 1px solid #e6e9eb;
 	}
 
 
 	.adyen-checkout__button {
 		background: var(--background-color) !important;
+		border-radius: var(--button-edges) !important;
+	}
+
+	.adyen-checkout__payment-method {
+		border-radius: var(--body-edges) !important;
+		border: var(--border-off) !important;
+	}
+
+	.adyen-checkout__payment-method__radio {
+		/* Radio button in payment method header */
+
 	}
 	/* Copy button */
 	

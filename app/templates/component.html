@@ -112,7 +112,19 @@
           </div>
           <div class="custom-control custom-switch">
             <input type="checkbox" class="custom-control-input" id="placeholderData" data-toggle="toggle">
-            <label class="custom-control-label test" for="placeholderData">Include placeholder data</label>
+            <label class="custom-control-label" for="placeholderData">Include placeholder data</label>
+          </div>
+          <div class="custom-control custom-switch">
+            <input type="checkbox" class="custom-control-input" id="noBorder" data-toggle="toggle">
+            <label class="custom-control-label" for="noBorder">Include placeholder data</label>
+          </div>
+          <div class="form-group">
+            <label for="formControlRange">Change button edges</label>
+            <input type="range" class="form-control-range" id="buttonEdges" onchange="buttonEdges(this.value);" min="0" max="25" value="5">
+          </div>
+          <div class="form-group">
+            <label for="formControlRange">Change body edges</label>
+            <input type="range" class="form-control-range" id="bodyEdges" onchange="bodyEdges(this.value);" min="0" max="25" value="5">
           </div>
           <button type="button" onclick="setDynamicCSS()">change</button>
           <input type="color" name="" id="" onchange="setDynamicCSS()">
@@ -158,7 +170,7 @@
 
 	<!-- data from front-end -->
 	<script id="client-key" type="application/json">{{ client_key|tojson }}</script>
-	<script id="country-code" type="application/json">{{ countryCode|default("GB")|tojson }}</script>
+	<script id="country-code" type="application/json">{{ countryCode|default("NL")|tojson }}</script>
 
 	<!-- local JS -->
 	<script src="{{ url_for('static', filename='js/adyen-implementation.js') }}"></script>
