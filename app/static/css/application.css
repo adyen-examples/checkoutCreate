@@ -766,12 +766,14 @@ a:hover {
 	-webkit-transform: rotateY(180deg);
 	-moz-transform: rotateY(180deg);
 }
+
 	/* :root {
 		--back-rotate : rotateY(0deg);
 		--back-tran: rotateY(0deg);
 		--front-rotate: rotateY(180deg);
 		--front-tran: rotateY(180deg);
 	} */
+
 
 	:root {
 		--background-color: #00112c;
@@ -785,9 +787,11 @@ a:hover {
 	  --active-background: #f7f8f9;
 	  --bg-color: white;
 	  --dropin-color: #f7f8f9;
+    --dropin-tab-color: white;
 	  --text-align: left;
 	  --text-bold: normal;
 	}
+
 
 .card-visited .card__back {
 	-webkit-transform: rotateY(0deg);
@@ -820,7 +824,6 @@ a:hover {
 	height: 35px; /* Specified height */
 }
 
-  
   .adyen-checkout__payment-method {
 		width: var(--dropin-width) !important;
 		font-size: var(--dropin-font) !important;
@@ -835,6 +838,10 @@ a:hover {
 	 .adyen-checkout__dropin  {
 		text-align: var(--text-align) !important;
 	 }
+
+.adyen-checkout__payment-method--selected {
+	background: var(--dropin-color) !important;
+}
 
 .adyen-checkout__payment-method__radio {
 	/* Radio button in payment method header */
