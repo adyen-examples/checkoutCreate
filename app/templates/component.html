@@ -324,36 +324,6 @@
                         </div>
                       </div>
                     </div>
-                    <div class="row container">
-                      <!-- text -->
-                      <div class="col-6"></div>
-                      <!-- title -->
-                      <div class="col-4">
-                        <p class="textFonts text-left ml-3">Remove Borders</p>
-                      </div>
-                      <!-- toggle -->
-                      <div class="col-2 text-right">
-                        <div class="custom-control custom-switch">
-                          <input type="checkbox" class="custom-control-input" id="noBorder" data-toggle="toggle">
-                          <label class="custom-control-label" for="noBorder"></label>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row container">
-                      <!-- text -->
-                      <div class="col-6"></div>
-                      <!-- title -->
-                      <div class="col-4">
-                        <p class="textFonts text-left ml-3">Remove Borders</p>
-                      </div>
-                      <!-- toggle -->
-                      <div class="col-2 text-right">
-                        <div class="custom-control custom-switch">
-                          <input type="checkbox" class="custom-control-input" id="noBorder" data-toggle="toggle">
-                          <label class="custom-control-label" for="noBorder"></label>
-                        </div>
-                      </div>
-                    </div>
                   </div>
                 </div>
 
@@ -442,24 +412,106 @@
                           </div>
                         </div>
                       </div>
-                      <div class="row container">
-                        <!-- text -->
-                        <div class="col-6"></div>
-                        <!-- title -->
-                        <div class="col-4">
-                          <p class="textFonts text-left ml-3">Pay button</p>
-                        </div>
-                        <!-- toggle -->
-                        <div class="col-2 text-right">
-                          <input type="color" name="" id="buttonColorPick" onchange="setDynamicCSS()">
-                        </div>
-                      </div>
                     <div class="row container">
                       <!-- text -->
                       <div class="col-6"></div>
                       <!-- title -->
                       <div class="col-4">
-                        <p class="textFonts text-left ml-3">Change payment form width</p>
+                        <p class="textFonts text-left ml-3">Active checkout background</p>
+                      </div>
+                      <!-- toggle -->
+                      <div class="col-2 text-right">
+                        <div>
+                          <input type="color" name="" id="dropinColorPick" onchange="dropinColor()">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row container">
+                      <!-- text -->
+                      <div class="col-6"></div>
+                      <!-- title -->
+                      <div class="col-4">
+                        <p class="textFonts text-left ml-3">Collapsed payment methods background</p>
+                      </div>
+                      <!-- toggle -->
+                      <div class="col-2 text-right">
+                        <div>
+                          <input type="color" name="" id="dropinTabColorPick" onchange="dropinTabColor()">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row container">
+                      <!-- text -->
+                      <div class="col-6"></div>
+                      <!-- title -->
+                      <div class="col-4">
+                        <p class="textFonts text-left ml-3">Pay button</p>
+                      </div>
+                      <!-- toggle -->
+                      <div class="col-2 text-right">
+                        <input type="color" name="" id="buttonColorPick" onchange="setDynamicCSS()">
+                      </div>
+                    </div>
+                    <div class="row container">
+                      <!-- text -->
+                      <div class="col-6"></div>
+                      <!-- title -->
+                      <div class="col-4">
+                        <p class="textFonts text-left ml-3">Change button edges</p>
+                      </div>
+                      <!-- toggle -->
+                      <div class="col-2 text-right">
+                        <div class="form-group">
+                          <input type="range" class="form-control-range" id="buttonEdges" onchange="buttonEdges(this.value);" min="0" max="25" value="5">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row container">
+                      <!-- text -->
+                      <div class="col-6"></div>
+                      <!-- title -->
+                      <div class="col-4">
+                        <p class="textFonts text-left ml-3">Change checkout edges</p>
+                      </div>
+                      <!-- toggle -->
+                      <div class="col-2 text-right">
+                        <div class="form-group">
+                          <input type="range" class="form-control-range" id="bodyEdges" onchange="bodyEdges(this.value);" min="0" max="25" value="5">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row container">
+                      <!-- text -->
+                      <div class="col-6"></div>
+                      <!-- title -->
+                      <div class="col-4">
+                        <p class="textFonts text-left ml-3">Remove Borders</p>
+                      </div>
+                      <!-- toggle -->
+                      <div class="col-2 text-right">
+                        <div class="custom-control custom-switch">
+                          <input type="checkbox" class="custom-control-input" id="noBorder" data-toggle="toggle">
+                          <label class="custom-control-label" for="noBorder"></label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <hr class="mt-4 mb-4" />
+                  <!-- Dimensions -->
+                  <div class="row mt-3">
+                    <div class="col flex-fill section-title">
+                      <p class="mb-1 titleFonts">Dimensions</p>
+                    </div>
+                    <div class="row container">
+                      <!-- text -->
+                      <div class="col-6">
+                        <p class="textFonts">
+                          Define the size of your checkout
+                        </p>
+                      </div>
+                      <!-- title -->
+                      <div class="col-4">
+                        <p class="textFonts text-left ml-3">Checkout width</p>
                       </div>
                       <!-- toggle -->
                       <div class="col-2 text-right">
@@ -468,10 +520,26 @@
                         </div>
                       </div>
                     </div>
+                    <div class="row container">
+                      <!-- text -->
+                      <div class="col-6"></div>
+                      <!-- title -->
+                      <div class="col-4">
+                        <p class="textFonts text-left ml-3">Pay button width</p>
+                      </div>
+                      <!-- toggle -->
+                      <div class="col-2 text-right">
+                        <div class="form-group">
+                          <input type="range" class="form-control-range" id="changeWidth" min="300" max="700" value="500" onchange="dropinWidth(this.value)">
+                        </div>
+                        </div>
+                    </div>
                   </div>
                   <hr class="mt-4 mb-4" />
-                </div>
-              </div>
+
+                    <div>
+                      <button type="button" onclick="resetDynamicCSS()">Reset Style</button>
+                    </div>
 
                 <!-- Save your creation content -->
                 <div
@@ -542,28 +610,9 @@
 
 
 
-          <div class="form-group">
-            <label for="formControlRange">Change button edges</label>
-            <input type="range" class="form-control-range" id="buttonEdges" onchange="buttonEdges(this.value);" min="0" max="25" value="5">
-          </div>
-          <div class="form-group">
-            <label for="formControlRange">Change body edges</label>
-            <input type="range" class="form-control-range" id="bodyEdges" onchange="bodyEdges(this.value);" min="0" max="25" value="5">
-          </div>
-          <span>Button colour: </span>
-          <input type="color" name="" id="buttonColorPick" onchange="setDynamicCSS()">
 
-          <div>
-            <span>Dropin background colour: </span>
-            <input type="color" name="" id="dropinColorPick" onchange="dropinColor()">
-          </div>
-          <div>
-            <span>Dropin Tabs colour: </span>
-            <input type="color" name="" id="dropinTabColorPick" onchange="dropinTabColor()">
-          </div>
-          <div>
-          <button type="button" onclick="resetDynamicCSS()">reset</button>
-        </div>
+        
+
         </div>
         <div class="custom-control custom-switch">
           <input type="checkbox" class="custom-control-input" id="idealPM" data-toggle="toggle">
