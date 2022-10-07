@@ -606,6 +606,21 @@ function changeTestCard(brandValue) {
 	document.getElementById('cvc').innerText = testCardBrandsMap[brandValue.value].cvc
 }
 
+// document.getElementById('showPayMethod').parentNode.addEventListener('click', function (event); 
+//drop down selector for the different font styles 
+//document.getElementById("font_select").parentNode.addEventListener('change', function() {
+ function changeFont(font) {
+    r.style.setProperty('--font-options', null);
+	let fontValue = document.getElementById("font_select").value
+
+
+		r.style.setProperty('--font-options', fontValue);	
+
+console.log(fontValue)
+}
+
+
+
 initCheckout();
 
 
