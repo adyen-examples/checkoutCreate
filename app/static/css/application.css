@@ -784,11 +784,6 @@ a:hover {
 }
 /* Copy button */
 
-.adyen-checkout__payment-method {
-	width: var(--dropin-width) !important;
-	font-size: var(--dropin-font) !important;
-}
-
 .checkout .col {
 	background: var(--bg-color) !important;
 }
