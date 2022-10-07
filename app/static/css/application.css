@@ -735,6 +735,7 @@ a:hover {
 	--active-background: #f7f8f9;
 	--bg-color: white;
 	--dropin-color: #f7f8f9;
+	--dropin-tab-color: white;
 }
 
 .card-visited .card__back {
@@ -775,6 +776,10 @@ a:hover {
 	font-family: var(--font-options) !important;
 	border-radius: var(--body-edges) !important;
 	border: var(--border-off) !important;
+	background: var(--dropin-tab-color) !important;
+}
+
+.adyen-checkout__payment-method--selected {
 	background: var(--dropin-color) !important;
 }
 
@@ -783,11 +788,6 @@ a:hover {
 
 }
 /* Copy button */
-
-.adyen-checkout__payment-method {
-	width: var(--dropin-width) !important;
-	font-size: var(--dropin-font) !important;
-}
 
 .checkout .col {
 	background: var(--bg-color) !important;
