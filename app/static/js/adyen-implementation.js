@@ -17,15 +17,10 @@ let showPayMethod = true
 let hideCVC = false
 let placeholderData = false
 
-const toggleData = [
-	{
-
-	}
-]
-
 // identify checkout div and create new empty div to replace with
 const oldDiv = document.getElementById("dropin-container");
 const newDiv = document.createElement('div');
+
 
 const flagUrlMap = {
 	"NL": {
@@ -47,6 +42,28 @@ const flagUrlMap = {
 		"href": "{{ url_for('checkout', integration=method, country=US) }}"
 	}
 }
+
+const testCardBrandsMap = {
+	"visa": {
+		"src": "https://checkoutshopper-live.adyen.com/checkoutshopper/images/logos/visa.svg",
+		"cardNumber": "4111 1111 1111 1111",
+		"expiry": "03/30",
+		"cvc": "737"
+	},
+	"mc": {
+		"src": "https://checkoutshopper-live.adyen.com/checkoutshopper/images/logos/mc.svg",
+		"cardNumber": "2222 4107 4036 0010",
+		"expiry": "03/30",
+		"cvc": "737"
+	},
+	"amex": {
+		"src": "https://checkoutshopper-live.adyen.com/checkoutshopper/images/logos/amex.svg",
+		"cardNumber": "3700 0000 0000 002",
+		"expiry": "03/30",
+		"cvc": "7373"
+	}
+}
+
 
 // Country dropdown changes the flag image and reloads the dropin with new country values
 function changeSelect(el) {
@@ -507,8 +524,20 @@ function handleServerResponse(res, dropin) {
 // }
 let r = document.querySelector(':root');
 
+// Colour picker changes button color
 function setDynamicCSS() {
-	r.style.setProperty('--background-color', 'green');
+	colorVal = document.getElementById("buttonColorPick").value;
+	r.style.setProperty('--background-color', colorVal);
+}
+
+function backgroundColor() {
+	let bgVal = document.getElementById("bgColorPick").value;
+	r.style.setProperty('--bg-color', bgVal);
+}
+
+function dropinColor() {
+	let dropinColor = document.getElementById("dropinColorPick").value;
+	r.style.setProperty('--dropin-color', dropinColor);
 }
 
 function buttonEdges () {
@@ -523,18 +552,8 @@ function bodyEdges () {
 	r.style.setProperty('--body-edges', bodyPixelVal);
 }
 
-// function noBorder () {
-// 	let borderValue = document.getElementById('noBorder').value
-// 	if (borderValue == 'checked') {
-// 		r.style.setProperty('--border-off', "0")
-// 		console.log(borderValue)
-// 	}
-// 	else {
-// 		r.style.setProperty('--border-off', null)
-// 	}
-// }
 
-// Funtion to show all payment methods
+// Funtion to remove borders
 document.getElementById('noBorder').parentNode.addEventListener('click', function (event) {
 	if (this.querySelector('input').checked) {
 		r.style.setProperty('--border-off', "0")
@@ -547,6 +566,9 @@ document.getElementById('noBorder').parentNode.addEventListener('click', functio
 
 function resetDynamicCSS () {
 	r.style.setProperty('--background-color', null);
+	r.style.setProperty('--dropin-width', null);
+	r.style.setProperty('--body-edges', null);
+	r.style.setProperty('--button-edges', null);
 }
 
 function dropinWidth () {
@@ -563,9 +585,25 @@ function fontWidth () {
 }
 
 // Copy to clipboard function
-function copyToClipboard(e) {
-	const cb = navigator.clipboard;
-	cb.writeText(e.target.innerText)
+// function copyToClipboard(e) {
+// 	const cb = navigator.clipboard;
+// 	cb.writeText(e.target.innerText)
+// }
+
+function turnCard() {
+	document.getElementById("card").classList.add('card-visited');
+	// cardDiv.setAttribute("class", "card-visited")
+}
+ function resetCard() {
+	if (document.getElementById("card").classList.contains('card-visited')) {
+		document.getElementById("card").classList.remove('card-visited');
+	}
+ }
+
+function changeTestCard(brandValue) {
+	document.getElementById('brand_img').src = testCardBrandsMap[brandValue.value].src;
+	document.getElementById('cardNumber').innerText = testCardBrandsMap[brandValue.value].cardNumber;
+	document.getElementById('cvc').innerText = testCardBrandsMap[brandValue.value].cvc
 }
 
 // document.getElementById('showPayMethod').parentNode.addEventListener('click', function (event); 
