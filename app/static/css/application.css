@@ -714,6 +714,7 @@ a:hover {
 .card-visited .card__front {
 	-webkit-transform: rotateY(180deg);
 	-moz-transform: rotateY(180deg);
+}
 
 	/* :root {
 		--back-rotate : rotateY(0deg);
@@ -722,19 +723,19 @@ a:hover {
 		--front-tran: rotateY(180deg);
 	} */
 
-	:root {
-		--background-color: #00112c;
-		--font-options: "Segoe UI", sans-serif, Helvetica, Arial;
-    --background-color: #00112c;
-	  --dropin-width: 500px;
-	  --dropin-font: 17px;
-	  --button-edges: 10px;
-	  --body-edges: 10px;
-	  --border-off: 1px solid #e6e9eb;
-	  --active-background: #f7f8f9;
-	  --bg-color: white;
-	  --dropin-color: #f7f8f9;
-	}
+:root {
+	--background-color: #00112c;
+	--font-options: "Segoe UI", sans-serif, Helvetica, Arial;
+	--background-color: #00112c;
+	--dropin-width: 500px;
+	--dropin-font: 17px;
+	--button-edges: 10px;
+	--body-edges: 10px;
+	--border-off: 1px solid #e6e9eb;
+	--active-background: #f7f8f9;
+	--bg-color: white;
+	--dropin-color: #f7f8f9;
+}
 
 .card-visited .card__back {
 	-webkit-transform: rotateY(0deg);
@@ -768,14 +769,14 @@ a:hover {
 }
 
   
-  .adyen-checkout__payment-method {
-		width: var(--dropin-width) !important;
-		font-size: var(--dropin-font) !important;
-		font-family: var(--font-options) !important;
-    border-radius: var(--body-edges) !important;
+.adyen-checkout__payment-method {
+	width: var(--dropin-width) !important;
+	font-size: var(--dropin-font) !important;
+	font-family: var(--font-options) !important;
+	border-radius: var(--body-edges) !important;
 	border: var(--border-off) !important;
 	background: var(--dropin-color) !important;
-	 }
+}
 
 .adyen-checkout__payment-method__radio {
 	/* Radio button in payment method header */
