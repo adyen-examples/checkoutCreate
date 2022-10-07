@@ -49,7 +49,7 @@
 				</div>
 		</div>
         <div class="settings col">
-          <h4>Change country: </h4>
+          <span>Change country: </span>
           <div class="country-selector">
             <div class="country-selector__flag" aria-hidden="true">
               <img id="flag_img" src="https://ca-test.adyen.com/ca/adl/img/flags/nl.svg" alt="Flag icon">
@@ -66,6 +66,7 @@
           <br>
           <div class="font-selector">
             <select onchange="changeFont(this)" id="font_select" class="font-selector__select" aria-label="font" autocomplete="off">
+
               <option value="Segoe UI, sans-serif, Helvetica, Arial" style="font-family:'Segoe UI', sans-serif, Helvetica, Arial">Segoe UI</option>
               <option value="Roboto Condensed, sans-serif" style="font-family:'Roboto Condensed', sans-serif">Roboto Condensed</option>
               <option value="Engagement, cursive" style="font-family:'Engagement', cursive">Engagement</option>
@@ -73,6 +74,7 @@
               <option value="Times New Roman, Times, serif" style="font-family:'Times New Roman', Times, serif">Times New Roman</option>
               <option value="Arial, Helvetica, sans-serif" style="font-family:'Arial', Helvetica, sans-serif">Arial</option>
               <option value="Lucida Console, 'Courier New', monospace" style="font-family:'Lucida Console', 'Courier New', monospace">Lucida</option>
+
             </select>
             <div class="dropdown-icon" aria-hidden="true">
               <img src="{{ url_for('static', filename='img/dropdown.svg') }}" alt="Dropdown caret">
@@ -131,7 +133,7 @@
           </div>
           <div class="custom-control custom-switch">
             <input type="checkbox" class="custom-control-input" id="noBorder" data-toggle="toggle">
-            <label class="custom-control-label" for="noBorder">Include placeholder data</label>
+            <label class="custom-control-label" for="noBorder">Remove Borders</label>
           </div>
           <div class="form-group">
             <label for="formControlRange">Change button edges</label>
@@ -144,36 +146,62 @@
           <span>Button colour: </span>
           <input type="color" name="" id="buttonColorPick" onchange="setDynamicCSS()">
           <div>
+            <span>Background colour: </span>
+            <input type="color" name="" id="bgColorPick" onchange="backgroundColor()">
+          </div>
+          <div>
+            <span>Dropin background colour: </span>
+            <input type="color" name="" id="dropinColorPick" onchange="dropinColor()">
+          </div>
+          <div>
           <button type="button" onclick="resetDynamicCSS()">reset</button>
         </div>
         </div>
     </div>
-    <div class="card">
-      <div class="card__front card__part">
-        <img class="card__front-square card__square" src="{{ url_for('static', filename='img/chip.png') }}">
-        <img class="card__front-logo card__logo" src="{{ url_for('static', filename='img/LogoAdyen.png') }}">
-        <p class="card_numer" id="cardNumber">4111 1111 1111 1111</p>
-        <div class="card__space-75">
-          <span class="card__label">Card holder</span>
-          <p class="card__info">John Doe</p>
+
+      <div class="card-selector">
+        <div class="card-selector__brand" aria-hidden="true">
+          <img id="brand_img" src="https://checkoutshopper-live.adyen.com/checkoutshopper/images/logos/visa.svg" alt="Card brand icon">
         </div>
-        <div class="card__space-25">
-          <span class="card__label">Expires</span>
-                <p class="card__info">03/30</p>
+        <select onchange="changeTestCard(this)" id="card_select" class="card-selector__select" aria-label="Test Card" autocomplete="off">
+          <option value="visa">Visa</option>
+          <option value="mc">Mastercard</option>
+          <option value="amex">AMEX</option>
+        </select>
+        <div class="dropdown-icon" aria-hidden="true">
+          <img src="{{ url_for('static', filename='img/dropdown.svg') }}" alt="Dropdown caret">
         </div>
       </div>
-      <div class="card__back card__part">
-        <div class="card__black-line"></div>
-        <div class="card__back-content">
-          <div class="card__secret">
-            <p class="card__secret--last">737</p>
+      <div id="card" class="card">
+        <div class="card__front card__part">
+          <img class="card__front-square card__square" src="{{ url_for('static', filename='img/chip.png') }}">
+          <img class="card__front-logo card__logo" src="{{ url_for('static', filename='img/LogoAdyen.png') }}">
+          <p class="card_numer" id="cardNumber">4111 1111 1111 1111</p>
+          <div class="card__space-75">
+            <span class="card__label">Card holder</span>
+            <p class="card__info">John Doe</p>
           </div>
-          <img class="card__back-square card__square" src="{{ url_for('static', filename='img/chip.png') }}">
-          <img class="card__back-logo card__logo" src="{{ url_for('static', filename='img/LogoAdyen.png') }}">
+          <div class="card__space-25">
+            <span class="card__label">Expires</span>
+                  <p class="card__info" id="expiry">03/30</p>
+          </div>
+        </div>
+        <div class="card__back card__part">
+          <div class="card__black-line"></div>
+          <div class="card__back-content">
+            <div class="card__secret">
+              <p class="card__secret--last" id="cvc">737</p>
+            </div>
+            <!--<img class="card__back-square card__square" src="{{ url_for('static', filename='img/chip.png') }}">-->
+            <img class="card__back-logo card__logo" src="{{ url_for('static', filename='img/LogoAdyen.png') }}">
+          </div>
         </div>
       </div>
-    </div>
-    <button type="button" class="btn btn-info btn-clipboard" toggle="tooltip" data-clipboard-action="copy" data-clipboard-target="#cardNumber" onclick="copyToClipboard('cardNumber')" title="Copy to clipboard">Copy</button>
+
+    <button type="button" id="btn" class="btn" toggle="tooltip" data-clipboard-action="copy" data-placement="top" data-clipboard-target="p#cardNumber" onclick="resetCard()" title="Copy to clipboard">Copy PAN</button>
+    <button type="button" id="btn" class="btn" toggle="tooltip" data-clipboard-action="copy" data-clipboard-target="p#expiry" title="Copy to clipboard" onclick="resetCard()">Copy Expiry date</button>
+    <button type="button" id="btn" class="btn" toggle="tooltip" data-clipboard-action="copy" data-clipboard-target="p#cvc" title="Copy to clipboard" onclick="turnCard()">Copy CVC</button>
+
 	<!-- Adyen JS from TEST environment (change to live for production)-->
 	<script src="https://checkoutshopper-live.adyen.com/checkoutshopper/sdk/5.15.0/adyen.js"
 	integrity="sha384-vMZOl6V83EY2UXaXsPUxH5Pt5VpyLeHpSFnANBVjcH5l7yZmJO0QBl3s6XbKwjiN"
@@ -191,6 +219,41 @@
 
 	<!-- local JS -->
 	<script src="{{ url_for('static', filename='js/adyen-implementation.js') }}"></script>
+
+  <!-- Clipboard.js script -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.10/clipboard.min.js"></script>
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+
+  <script>
+    // $('button').tooltip({
+    //   trigger: 'click',
+    //   placement: 'bottom'
+    // });
+
+    // function setTooltip(btn, message) {
+    //   $(btn).tooltip('hide')
+    //     .attr('data-original-title', message)
+    //     .tooltip('show');
+    // }
+
+    // function hideTooltip(btn) {
+    //   setTimeout(function() {
+    //     $(btn).tooltip('hide');
+    //   }, 1000);
+    // }
+
+    var clipboard = new Clipboard('.btn');
+    clipboard.on('success', function (e) {
+      console.log(e);
+      // setTooltip(e.trigger, 'Copied!');
+      // hideTooltip(e.trigger);
+    });
+    clipboard.on('error', function (e) {
+      console.log(e);
+      // setTooltip(e.trigger, 'Failed!');
+      // hideTooltip(e.trigger);
+    });
+  </script>
   
   </body>
 </html>
