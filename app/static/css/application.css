@@ -955,6 +955,7 @@ a:hover {
 
 .panel-body {
 	background: white;
+}
 
 .adyen-checkout__payment-method__name {
 	font-weight: var(--text-bold) !important;
