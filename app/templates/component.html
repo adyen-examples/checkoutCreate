@@ -64,7 +64,6 @@
             </div>
           </div>
           <br>
-          <h2 id="letstest">this thing</h2>
           <div class="font-selector">
             <select onchange="changeFont(this)" id="font_select" class="font-selector__select" aria-label="font" autocomplete="off">
               <option value="Segoe UI, sans-serif, Helvetica, Arial" style="font-family:'Segoe UI', sans-serif, Helvetica, Arial">Segoe UI</option>
@@ -79,6 +78,17 @@
               <img src="{{ url_for('static', filename='img/dropdown.svg') }}" alt="Dropdown caret">
             </div>
           </div>
+        <div class="text-alignment">
+        <select onchange="positionText(this)" id="positionText"  class="textalign-selector__select" autocomplete="off">
+        <option disabled selected>Align Text</option> 
+        <option value="center" type="button" style="text-align: center">center</option>
+        <option value="left" type="button" style="text-align: left">left</option>
+        <option value="right"  type="button" style="text-align: right">right</option>
+        </select>
+        <div class="dropdown-icon" aria-hidden="true">
+          <img src="{{ url_for('static', filename='img/dropdown.svg') }}" alt="Dropdown caret">
+        </div>
+      </div>
           <!-- <div class="form-check">
             <input type="checkbox" class="form-check-input" id="firstPayBox">
             <label class="form-check-label" for="firstPayBox">Open First Payment</label>
@@ -131,9 +141,11 @@
             <label for="formControlRange">Change body edges</label>
             <input type="range" class="form-control-range" id="bodyEdges" onchange="bodyEdges(this.value);" min="0" max="25" value="5">
           </div>
-          <button type="button" onclick="setDynamicCSS()">change</button>
-          <input type="color" name="" id="" onchange="setDynamicCSS()">
+          <span>Button colour: </span>
+          <input type="color" name="" id="buttonColorPick" onchange="setDynamicCSS()">
+          <div>
           <button type="button" onclick="resetDynamicCSS()">reset</button>
+        </div>
         </div>
     </div>
     <div class="card">

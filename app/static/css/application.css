@@ -404,6 +404,52 @@ a:hover {
 }
 /* font styling end */
 
+/* text align selector styling */
+.text-alignment{
+	align-items:center;
+	background:#e5eaef;
+	border:1px solid #b9c4c9;
+	border-radius:6px;
+	display:flex;
+	height:40px;
+	margin:auto 0 auto auto;
+	outline:none;
+	padding:0 0 0 12px;
+	position:relative;
+	width:100%
+}
+@media (min-width:768px){
+	.text-alignment{
+		width:200px
+	}
+}
+
+.textalign-selector__select{
+	-webkit-appearance:none;
+	-moz-appearance:none;
+	appearance:none;
+	background:transparent;
+	border:0;
+	cursor:pointer;
+	flex:1;
+	font-size:1em;
+	height:100%;
+	margin:0 -12px 0 -42px;
+	outline:none;
+	padding-left:42px;
+	width:180px
+}
+.text-alignment:focus{
+	box-shadow:none
+}
+.text-alignment:hover{
+	border-color:#99a3ad
+}
+.text-alignment .dropdown-icon{
+	margin-right:12px;
+	margin-top:3px
+}
+
 /* end of Cart preview page */
 
 /* Payment page */
@@ -688,11 +734,11 @@ a:hover {
 		--background-color: purple;
 		--dropin-width: 500px;
 		--dropin-font: 17px;
-=======
 		--button-edges: 10px;
 		--body-edges: 10px;
 		--border-off: 1px solid #e6e9eb;
 		--font-options: "Segoe UI", sans-serif, Helvetica, Arial;
+		--text-align: left;
 	}
 
 
@@ -716,6 +762,11 @@ a:hover {
 		width: var(--dropin-width) !important;
 		font-size: var(--dropin-font) !important;
 		font-family: var(--font-options) !important;
+		text-align: var(--text-align) !important;
+	 }
+
+	 .adyen-checkout__dropin  {
+		text-align: var(--text-align) !important;
 	 }
 
 	

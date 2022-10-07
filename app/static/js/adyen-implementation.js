@@ -508,7 +508,9 @@ function handleServerResponse(res, dropin) {
 let r = document.querySelector(':root');
 
 function setDynamicCSS() {
-	r.style.setProperty('--background-color', 'green');
+	let colorVal = document.getElementById('buttonColorPick').value
+	r.style.setProperty('--background-color', colorVal);
+	console.log(colorVal)
 }
 
 function buttonEdges () {
@@ -568,10 +570,15 @@ function copyToClipboard(e) {
 	cb.writeText(e.target.innerText)
 }
 
+function positionText() {
+	let positionValue = document.getElementById("positionText").value
+	r.style.setProperty('--text-align', positionValue);
+	console.log(positionValue)
+}
 // document.getElementById('showPayMethod').parentNode.addEventListener('click', function (event); 
 //drop down selector for the different font styles 
 //document.getElementById("font_select").parentNode.addEventListener('change', function() {
- function changeFont(font) {
+ function changeFont() {
     r.style.setProperty('--font-options', null);
 	let fontValue = document.getElementById("font_select").value
 
