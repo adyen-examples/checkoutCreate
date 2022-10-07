@@ -459,6 +459,54 @@ a:hover {
 
 /* font styling end */
 
+/* text align selector styling */
+.text-alignment{
+	align-items:center;
+	background:#e5eaef;
+	border:1px solid #b9c4c9;
+	border-radius:6px;
+	display:flex;
+	height:40px;
+	margin:auto 0 auto auto;
+	outline:none;
+	padding:0 0 0 12px;
+	position:relative;
+	width:100%
+}
+
+@media (min-width:768px){
+	.text-alignment{
+		width:200px
+	}
+}
+
+.textalign-selector__select{
+	-webkit-appearance:none;
+	-moz-appearance:none;
+	appearance:none;
+	background:transparent;
+	border:0;
+	cursor:pointer;
+	flex:1;
+	font-size:1em;
+	height:100%;
+	margin:0 -12px 0 -42px;
+	outline:none;
+	padding-left:42px;
+	width:180px
+}
+
+.text-alignment:focus{
+	box-shadow:none
+}
+.text-alignment:hover{
+	border-color:#99a3ad
+}
+.text-alignment .dropdown-icon{
+	margin-right:12px;
+	margin-top:3px
+}
+
 /* Test card selector*/
 .card-selector {
 	align-items: center;
@@ -812,6 +860,7 @@ a:hover {
 		--front-tran: rotateY(180deg);
 	} */
 
+
 :root {
 	--background-color: #00112c;
 	--font-options: "Segoe UI", sans-serif, Helvetica, Arial;
@@ -830,7 +879,11 @@ a:hover {
 	--main-text: #00112c;
 	--secondary-text: #ffffff;
 	--main-font: "Roboto", sans-serif;
+  --text-align: left;
+	--text-bold: normal;
+  --text-italic: normal;
 }
+
 
 .card-visited .card__back {
 	-webkit-transform: rotateY(0deg);
@@ -866,14 +919,21 @@ a:hover {
 }
 
 
-.adyen-checkout__payment-method {
-	width: var(--dropin-width) !important;
-	font-size: var(--dropin-font) !important;
-	font-family: var(--font-options) !important;
-	border-radius: var(--body-edges) !important;
-	border: var(--border-off) !important;
-	background: var(--dropin-tab-color) !important;
-}
+  .adyen-checkout__payment-method {
+		width: var(--dropin-width) !important;
+		font-size: var(--dropin-font) !important;
+		font-family: var(--font-options) !important;
+		text-align: var(--text-align) !important;
+		border-radius: var(--body-edges) !important;
+	    border: var(--border-off) !important;
+	    background: var(--dropin-color) !important;
+		font-weight: var(--text-bold) !important;
+	 }
+
+	 .adyen-checkout__dropin  {
+		text-align: var(--text-align) !important;
+	 }
+
 
 .adyen-checkout__payment-method--selected {
 	background: var(--dropin-color) !important;
@@ -884,11 +944,10 @@ a:hover {
 
 }
 
-/* Copy button */
-
 .checkout .col {
 	background: var(--bg-color) !important;
 }
+
 
 .panel-footer {
 	margin-left: 40px;
@@ -896,4 +955,19 @@ a:hover {
 
 .panel-body {
 	background: white;
+
+.adyen-checkout__payment-method__name {
+	font-weight: var(--text-bold) !important;
+	font-style: var(--text-italic) !important;
+}
+
+.adyen-checkout__label__text {
+	font-weight: var(--text-bold) !important;
+	font-style: var(--text-italic) !important;
+}
+
+.adyen-checkout__checkbox__label {
+	font-weight: var(--text-bold) !important;
+	font-style: var(--text-italic) !important;
+
 }
