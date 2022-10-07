@@ -692,6 +692,7 @@ a:hover {
 		--button-edges: 10px;
 		--body-edges: 10px;
 		--border-off: 1px solid #e6e9eb;
+		--font-options: "Segoe UI", sans-serif, Helvetica, Arial;
 	}
 
 
@@ -714,6 +715,7 @@ a:hover {
 	.adyen-checkout__payment-method {
 		width: var(--dropin-width) !important;
 		font-size: var(--dropin-font) !important;
+		font-family: var(--font-options) !important;
 	 }
 
 	

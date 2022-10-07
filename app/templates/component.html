@@ -11,9 +11,9 @@
    
    <style>
       @import url('https://fonts.googleapis.com/css2?family=Oleo+Script:wght@700&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Engagement&family=Lato:ital@1&family=Roboto+Condensed:wght@300&display=swap');
     </style>
-
-
+    
     <title>Checkout Create</title>
   </head>
   <body>
@@ -64,11 +64,16 @@
             </div>
           </div>
           <br>
+          <h2 id="letstest">this thing</h2>
           <div class="font-selector">
-            <select onchange="changeSelect(this)" id="font_select" class="font-selector__select" aria-label="font" autocomplete="off">
-              <option value="Roboto_Condensed">Roboto Condensed</option>
-              <option value="Gemunu_Libre">Gemunu Libre</option>
-              <option value="Lato">Lato</option>
+            <select onchange="changeFont(this)" id="font_select" class="font-selector__select" aria-label="font" autocomplete="off">
+              <option value="Segoe UI, sans-serif, Helvetica, Arial" style="font-family:'Segoe UI', sans-serif, Helvetica, Arial">Segoe UI</option>
+              <option value="Roboto Condensed, sans-serif" style="font-family:'Roboto Condensed', sans-serif">Roboto Condensed</option>
+              <option value="Engagement, cursive" style="font-family:'Engagement', cursive">Engagement</option>
+              <option value="Lato, sans-serif" style="font-family:'Lato', sans-serif">Lato</option>
+              <option value="Times New Roman, Times, serif" style="font-family:'Times New Roman', Times, serif">Times New Roman</option>
+              <option value="Arial, Helvetica, sans-serif" style="font-family:'Arial', Helvetica, sans-serif">Arial</option>
+              <option value="Lucida Console, 'Courier New', monospace" style="font-family:'Lucida Console', 'Courier New', monospace">Lucida</option>
             </select>
             <div class="dropdown-icon" aria-hidden="true">
               <img src="{{ url_for('static', filename='img/dropdown.svg') }}" alt="Dropdown caret">
