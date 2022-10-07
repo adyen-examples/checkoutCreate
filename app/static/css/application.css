@@ -507,6 +507,40 @@ a:hover {
 	margin-top:3px
 }
 
+.italicImage img {
+	width: 20px;
+	height: 20px;
+  }
+
+  .italicImage .btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    padding: 0.4cm 0.6cm;
+    border: none;
+    cursor: pointer;
+    border-radius: 0px;
+}
+
+.boldImage img {
+	width: 20px;
+	height: 20px;
+  }
+
+  .boldImage .btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    padding: 0.4cm 0.6cm;
+    border: none;
+    cursor: pointer;
+    border-radius: 0px;
+}
+
 /* Test card selector*/
 .card-selector {
 	align-items: center;

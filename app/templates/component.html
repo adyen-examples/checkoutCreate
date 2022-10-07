@@ -359,6 +359,57 @@
                     </div>
                   </div>
                 </div>
+                <div class="row container">
+                  <!-- text -->
+                  <div class="col-6"></div>
+                  <!-- title -->
+                  <div class="col-4">
+                    <p class="textFonts text-left ml-3">Alignment</p>
+                  </div>
+                  <!-- toggle -->
+                  <div class="col-2 text-right">
+                    <div class="text-alignment">
+                      <select onchange="positionText(this)" id="positionText"  class="textalign-selector__select" autocomplete="off">
+                      <option selected value="left" style="text-align: left">Left</option>  
+                      <option value="center" style="text-align: center">Center</option>
+                      <option value="right" style="text-align: right">Right</option>
+                      </select>
+                      <div class="dropdown-icon" aria-hidden="true">
+                        <img src="{{ url_for('static', filename='img/dropdown.svg') }}" alt="Dropdown caret">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row container">
+                  <!-- text -->
+                  <div class="col-6"></div>
+                  <!-- title -->
+                  <div class="col-4">
+                    <p class="textFonts text-left ml-3">Bold</p>
+                  </div>
+                  <!-- toggle -->
+                  <div class="col-2 text-right">
+                  <div class="boldImage">
+                  <img src="static/img/bold.png"> 
+                  <button type="button" id="makeBold" class="btn" onclick="makeBold()"></button>
+                  </div>
+                  </div>
+                </div>
+                 <div class="row container">
+                  <!-- text -->
+                  <div class="col-6"></div>
+                  <!-- title -->
+                  <div class="col-4">
+                    <p class="textFonts text-left ml-3">Italic</p>
+                  </div>
+                  <!-- toggle -->
+                  <div class="col-2 text-right">
+                  <div class="italicImage">
+                  <img src="static/img/italic.png">  
+                  <button type="button" id="makeItalic" class="btn" onclick="makeItalic()"></button>
+                  </div>
+                  </div>
+                </div>
                 </div>
                 <hr class="mt-4 mb-4" />
 
