@@ -306,48 +306,61 @@
                 id="themes"
                 role="tabpanel"
                 aria-labelledby="profile-tab">
-                <!-- Fonts -->
-                  <div class="row mt-3">
-                    <div class="col flex-fill section-title">
-                      <p class="mb-1 titleFonts">Colour & Style</p>
-                    </div>
-                    <div class="row container">
-                      <!-- text -->
-                      <div class="col-6">
-                        <p class="textFonts">
-                          Select the colour of your checkout
-                        </p>
-                      </div>
-                      <!-- title -->
-                      <div class="col-4">
-                        <p class="textFonts text-left ml-3">Website background</p>
-                      </div>
-                      <!-- toggle -->
-                      <div class="col-2 text-right">
-                        <div>
-                          <input type="color" name="" id="bgColorPick" onchange="backgroundColor()">
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row container">
-                      <!-- text -->
-                      <div class="col-6"></div>
-                      <!-- title -->
-                      <div class="col-4">
-                        <p class="textFonts text-left ml-3">Pay button</p>
-                      </div>
-                      <!-- toggle -->
-                      <div class="col-2 text-right">
-                        <div class="form-group">
-                          <div class="custom-control custom-switch">
-                            <input type="range" class="form-control-range" id="fontSize" min="13" max="17" value="17" onchange="fontWidth(this.value)">
-
-                          </div>
-                        </div>
+               <!-- Fonts -->
+               <div class="row mt-3">
+                <div class="col flex-fill section-title">
+                  <p class="mb-1 titleFonts">Fonts</p>
+                </div>
+                <div class="row container">
+                  <!-- text -->
+                  <div class="col-6">
+                    <p class="textFonts">
+                      Choose your font styles and size
+                    </p>
+                  </div>
+                  <!-- title -->
+                  <div class="col-4">
+                    <p class="textFonts text-left ml-3">Font</p>
+                  </div>
+                  <!-- toggle -->
+                  <div class="col-2 text-right">
+                    <div class="font-selector">
+                      <select onchange="changeFont(this)" id="font_select" class="font-selector__select" aria-label="font" autocomplete="off">
+          
+                        <option value="Segoe UI, sans-serif, Helvetica, Arial" style="font-family:'Segoe UI', sans-serif, Helvetica, Arial">Segoe UI</option>
+                        <option value="Roboto Condensed, sans-serif" style="font-family:'Roboto Condensed', sans-serif">Roboto Condensed</option>
+                        <option value="Engagement, cursive" style="font-family:'Engagement', cursive">Engagement</option>
+                        <option value="Lato, sans-serif" style="font-family:'Lato', sans-serif">Lato</option>
+                        <option value="Times New Roman, Times, serif" style="font-family:'Times New Roman', Times, serif">Times New Roman</option>
+                        <option value="Arial, Helvetica, sans-serif" style="font-family:'Arial', Helvetica, sans-serif">Arial</option>
+                        <option value="Lucida Console, 'Courier New', monospace" style="font-family:'Lucida Console', 'Courier New', monospace">Lucida</option>
+          
+                      </select>
+                      <div class="dropdown-icon" aria-hidden="true">
+                        <img src="{{ url_for('static', filename='img/dropdown.svg') }}" alt="Dropdown caret">
                       </div>
                     </div>
+                  </div>
+                </div>
+                <div class="row container">
+                  <!-- text -->
+                  <div class="col-6"></div>
+                  <!-- title -->
+                  <div class="col-4">
+                    <p class="textFonts text-left ml-3">Size</p>
+                  </div>
+                  <!-- toggle -->
+                  <div class="col-2 text-right">
+                    <div class="form-group">
+                      <div class="custom-control custom-switch">
+                        <input type="range" class="form-control-range" id="fontSize" min="13" max="17" value="17" onchange="fontWidth(this.value)">
+                    
+                      </div>
                     </div>
-                    <hr class="mt-4 mb-4" />
+                  </div>
+                </div>
+                </div>
+                <hr class="mt-4 mb-4" />
 
                     <!-- Colours and styles -->
                     <div class="row mt-3">
