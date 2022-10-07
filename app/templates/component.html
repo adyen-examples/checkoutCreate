@@ -111,7 +111,7 @@
                       href="#collapse1"
                       class="collapseText">
                       <p class="textFont testCardBtn">
-                        test cards <i class="ml-2 bi bi-credit-card-fill"></i>
+                        Test cards <i class="ml-2 bi bi-credit-card-fill"></i>
                         <i class="ml-4 bi bi-caret-up"></i>
                       </p>
                     </h4>
@@ -204,25 +204,80 @@
                         </div>
                       </div>
                     </div>
+                    <hr class="mt-4 mb-4" />
+
+                  </div>
+                  <hr class="mt-4 mb-4" />
+                  <!-- Payment Method Behaviour -->
+                  <div class="row mt-3">
+                    <div class="col flex-fill section-title">
+                      <p class="mb-1 titleFonts">Payment Method Behaviour</p>
+                    </div>
                     <div class="row container">
                       <!-- text -->
-                      <div class="col-6"></div>
+                      <div class="col-6">
+                        <p class="textFonts">
+                          Select how you'd like your payment methods to behave at checkout
+                        </p>
+                      </div>
                       <!-- title -->
                       <div class="col-4">
                         <p class="textFonts text-left ml-3">Open first payment method</p>
                       </div>
                       <!-- toggle -->
-                      <input type="checkbox" class="custom-control-input" id="firstPayBox" data-toggle="toggle" checked>
-                      <div class="col-2 text-right">three</div>
+                      <div class="col-2 text-right">
+                        <div class="custom-control custom-switch">
+                          <input type="checkbox" class="custom-control-input" id="firstPayBox" data-toggle="toggle" checked>
+                          <label class="custom-control-label" for="firstPayBox"></label>
+                        </div>
+                      </div>
                     </div>
-                    <div>
-                      <button type="button" id="btn" class="btn" toggle="tooltip" data-clipboard-action="copy" data-placement="top" data-clipboard-target="p#cardNumber" onclick="resetCard()" title="Copy to clipboard">Copy PAN</button>
-                      <button type="button" id="btn" class="btn" toggle="tooltip" data-clipboard-action="copy" data-clipboard-target="p#expiry" title="Copy to clipboard" onclick="resetCard()">Copy Expiry date</button>
-                      <button type="button" id="btn" class="btn" toggle="tooltip" data-clipboard-action="copy" data-clipboard-target="p#cvc" title="Copy to clipboard" onclick="turnCard()">Copy CVC</button>                  
+                    <div class="row container">
+                      <!-- text -->
+                      <div class="col-6"></div>
+                      <!-- title -->
+                      <div class="col-4">
+                        <p class="textFonts text-left ml-3">Hide stored payment methods</p>
+                      </div>
+                      <!-- toggle -->
+                      <div class="col-2 text-right">
+                        <div class="custom-control custom-switch">
+                          <input type="checkbox" class="custom-control-input" id="onlyStored" data-toggle="toggle">
+                          <label class="custom-control-label" for="onlyStored"></label>
+                        </div>
+                      </div>
                     </div>
-
+                    <div class="row container">
+                      <!-- text -->
+                      <div class="col-6"></div>
+                      <!-- title -->
+                      <div class="col-4">
+                        <p class="textFonts text-left ml-3">Add billing address</p>
+                      </div>
+                      <!-- toggle -->
+                      <div class="col-2 text-right">
+                      <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="billAdd" data-toggle="toggle">
+                        <label class="custom-control-label" for="billAdd"></label>
+                      </div>
+                      </div>
+                    </div>
+                    <div class="row container">
+                      <!-- text -->
+                      <div class="col-6"></div>
+                      <!-- title -->
+                      <div class="col-4">
+                        <p class="textFonts text-left ml-3">Include card holder name</p>
+                      </div>
+                      <!-- toggle -->
+                      <div class="col-2 text-right">
+                      <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="holderName" data-toggle="toggle">
+                        <label class="custom-control-label" for="holderName"></label>
+                      </div>
+                      </div>
+                    </div>
                   </div>
-                  <hr class="mt-4 mb-4" />
                 </div>
 
                 <!-- Theme & Styles content -->
@@ -277,11 +332,15 @@
                       <!-- toggle -->
                       <div class="col-2 text-right">
                         <div class="form-group">
-                          <input type="range" class="form-control-range" id="fontSize" min="13" max="17" value="17" onchange="fontWidth(this.value)">
+                          <div class="custom-control custom-switch">
+                            <input type="range" class="form-control-range" id="fontSize" min="13" max="17" value="17" onchange="fontWidth(this.value)">
+                        
+                          </div>
                         </div>
                       </div>
                     </div>
                     <hr class="mt-4 mb-4" />
+
                     <!-- Colours and styles -->
                     <div class="row mt-3">
                       <div class="col flex-fill section-title">
@@ -334,6 +393,7 @@
                   </div>
                   <hr class="mt-4 mb-4" />
                 </div>
+              </div>
 
                 <!-- Save your creation content -->
                 <div
@@ -348,6 +408,11 @@
           </div>
         </div>
       </div>
+    </div>
+    <div>
+      <button type="button" id="btn" class="btn" toggle="tooltip" data-clipboard-action="copy" data-placement="top" data-clipboard-target="p#cardNumber" onclick="resetCard()" title="Copy to clipboard">Copy PAN</button>
+      <button type="button" id="btn" class="btn" toggle="tooltip" data-clipboard-action="copy" data-clipboard-target="p#expiry" title="Copy to clipboard" onclick="resetCard()">Copy Expiry date</button>
+      <button type="button" id="btn" class="btn" toggle="tooltip" data-clipboard-action="copy" data-clipboard-target="p#cvc" title="Copy to clipboard" onclick="turnCard()">Copy CVC</button>                  
     </div>
     <!-- Adyen JS from TEST environment (change to live for production)-->
     <script src="https://checkoutshopper-live.adyen.com/checkoutshopper/sdk/5.15.0/adyen.js"
@@ -398,18 +463,7 @@
 
 
 
-          <div class="custom-control custom-switch">
-            <input type="checkbox" class="custom-control-input" id="firstPayBox" data-toggle="toggle" checked>
-            <label class="custom-control-label" for="firstPayBox">Open first payment method</label>
-          </div>
-          <div class="custom-control custom-switch">
-            <input type="checkbox" class="custom-control-input" id="billAdd" data-toggle="toggle">
-            <label class="custom-control-label" for="billAdd">Add billing Address</label>
-          </div>
-          <div class="custom-control custom-switch">
-            <input type="checkbox" class="custom-control-input" id="onlyStored" data-toggle="toggle">
-            <label class="custom-control-label" for="onlyStored">Hide stored payment methods</label>
-          </div>
+
           <div class="custom-control custom-switch">
             <input type="checkbox" class="custom-control-input" id="holderName" data-toggle="toggle">
             <label class="custom-control-label" for="holderName">Include card holder name</label>
