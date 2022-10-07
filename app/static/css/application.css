@@ -658,14 +658,31 @@ a:hover {
 		bottom: 15px;
 		left: 15px;
 	}
-	
-	.card:focus .card__front {
+	.card-visited .card__front {
 		-webkit-transform: rotateY(180deg);
 		-moz-transform: rotateY(180deg);
 	
 	}
 	
-	.card:focus .card__back {
+	.card-visited .card__back {
+		-webkit-transform: rotateY(0deg);
+		-moz-transform: rotateY(0deg);
+	}
+	
+	.card:active .card__front {
+		
+		-webkit-transform: rotateY(180deg);
+		-moz-transform: rotateY(180deg);
+	
+	}
+	
+	.card:active .card__back {
+		width: 320px;
+		height: 190px;
+		-webkit-perspective: 600px;
+		-moz-perspective: 600px;
+		perspective:600px;
+		
 		-webkit-transform: rotateY(0deg);
 		-moz-transform: rotateY(0deg);
 	}
@@ -691,6 +708,7 @@ a:hover {
 		--button-edges: 10px;
 		--body-edges: 10px;
 		--border-off: 1px solid #e6e9eb;
+		--active-background: #f7f8f9;
 	}
 
 
