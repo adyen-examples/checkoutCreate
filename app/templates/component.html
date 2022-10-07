@@ -49,7 +49,7 @@
 				</div>
 		</div>
         <div class="settings col">
-          <h4>Change country: </h4>
+          <span>Change country: </span>
           <div class="country-selector">
             <div class="country-selector__flag" aria-hidden="true">
               <img id="flag_img" src="https://ca-test.adyen.com/ca/adl/img/flags/nl.svg" alt="Flag icon">
@@ -65,7 +65,7 @@
           </div>
           <br>
           <div class="font-selector">
-            <select onchange="changeSelect(this)" id="font_select" class="font-selector__select" aria-label="font" autocomplete="off">
+            <select onchange="changeFont(this)" id="font_select" class="font-selector__select" aria-label="font" autocomplete="off">
               <option value="Roboto_Condensed">Roboto Condensed</option>
               <option value="Gemunu_Libre">Gemunu Libre</option>
               <option value="Lato">Lato</option>
@@ -116,7 +116,7 @@
           </div>
           <div class="custom-control custom-switch">
             <input type="checkbox" class="custom-control-input" id="noBorder" data-toggle="toggle">
-            <label class="custom-control-label" for="noBorder">Include placeholder data</label>
+            <label class="custom-control-label" for="noBorder">Remove Borders</label>
           </div>
           <div class="form-group">
             <label for="formControlRange">Change button edges</label>
@@ -133,7 +133,7 @@
         </div>
         </div>
     </div>
-    <div class="card">
+    <div id="card" class="card">
       <div class="card__front card__part">
         <img class="card__front-square card__square" src="{{ url_for('static', filename='img/chip.png') }}">
         <img class="card__front-logo card__logo" src="{{ url_for('static', filename='img/LogoAdyen.png') }}">
@@ -144,21 +144,24 @@
         </div>
         <div class="card__space-25">
           <span class="card__label">Expires</span>
-                <p class="card__info">03/30</p>
+                <p class="card__info" id="expiry">03/30</p>
         </div>
       </div>
       <div class="card__back card__part">
         <div class="card__black-line"></div>
         <div class="card__back-content">
           <div class="card__secret">
-            <p class="card__secret--last">737</p>
+            <p class="card__secret--last" id="cvc">737</p>
           </div>
           <img class="card__back-square card__square" src="{{ url_for('static', filename='img/chip.png') }}">
           <img class="card__back-logo card__logo" src="{{ url_for('static', filename='img/LogoAdyen.png') }}">
         </div>
       </div>
     </div>
-    <button type="button" class="btn btn-info btn-clipboard" toggle="tooltip" data-clipboard-action="copy" data-clipboard-target="#cardNumber" onclick="copyToClipboard('cardNumber')" title="Copy to clipboard">Copy</button>
+    <button type="button" id="btn" class="btn" toggle="tooltip" data-clipboard-action="copy" data-placement="top" data-clipboard-target="p#cardNumber" onclick="resetCard()" title="Copy to clipboard">Copy PAN</button>
+    <button type="button" id="btn" class="btn" toggle="tooltip" data-clipboard-action="copy" data-clipboard-target="p#expiry" title="Copy to clipboard" onclick="resetCard()">Copy Expiry date</button>
+    <button type="button" id="btn" class="btn" toggle="tooltip" data-clipboard-action="copy" data-clipboard-target="p#cvc" title="Copy to clipboard" onclick="turnCard()">Copy CVC</button>
+
 	<!-- Adyen JS from TEST environment (change to live for production)-->
 	<script src="https://checkoutshopper-live.adyen.com/checkoutshopper/sdk/5.15.0/adyen.js"
 	integrity="sha384-vMZOl6V83EY2UXaXsPUxH5Pt5VpyLeHpSFnANBVjcH5l7yZmJO0QBl3s6XbKwjiN"
@@ -176,6 +179,41 @@
 
 	<!-- local JS -->
 	<script src="{{ url_for('static', filename='js/adyen-implementation.js') }}"></script>
+
+  <!-- Clipboard.js script -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.10/clipboard.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+  <script>
+    // $('button').tooltip({
+    //   trigger: 'click',
+    //   placement: 'bottom'
+    // });
+
+    // function setTooltip(btn, message) {
+    //   $(btn).tooltip('hide')
+    //     .attr('data-original-title', message)
+    //     .tooltip('show');
+    // }
+
+    // function hideTooltip(btn) {
+    //   setTimeout(function() {
+    //     $(btn).tooltip('hide');
+    //   }, 1000);
+    // }
+
+    var clipboard = new Clipboard('.btn');
+    clipboard.on('success', function (e) {
+      console.log(e);
+      // setTooltip(e.trigger, 'Copied!');
+      // hideTooltip(e.trigger);
+    });
+    clipboard.on('error', function (e) {
+      console.log(e);
+      // setTooltip(e.trigger, 'Failed!');
+      // hideTooltip(e.trigger);
+    });
+  </script>
   
   </body>
 </html>

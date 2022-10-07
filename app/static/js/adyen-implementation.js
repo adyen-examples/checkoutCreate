@@ -17,15 +17,10 @@ let showPayMethod = true
 let hideCVC = false
 let placeholderData = false
 
-const toggleData = [
-	{
-
-	}
-]
-
 // identify checkout div and create new empty div to replace with
 const oldDiv = document.getElementById("dropin-container");
 const newDiv = document.createElement('div');
+
 
 const flagUrlMap = {
 	"NL": {
@@ -47,6 +42,7 @@ const flagUrlMap = {
 		"href": "{{ url_for('checkout', integration=method, country=US) }}"
 	}
 }
+
 
 // Country dropdown changes the flag image and reloads the dropin with new country values
 function changeSelect(el) {
@@ -539,6 +535,9 @@ document.getElementById('noBorder').parentNode.addEventListener('click', functio
 
 function resetDynamicCSS () {
 	r.style.setProperty('--background-color', null);
+	r.style.setProperty('--dropin-width', null);
+	r.style.setProperty('--body-edges', null);
+	r.style.setProperty('--button-edges', null);
 }
 
 function dropinWidth () {
@@ -555,10 +554,20 @@ function fontWidth () {
 }
 
 // Copy to clipboard function
-function copyToClipboard(e) {
-	const cb = navigator.clipboard;
-	cb.writeText(e.target.innerText)
+// function copyToClipboard(e) {
+// 	const cb = navigator.clipboard;
+// 	cb.writeText(e.target.innerText)
+// }
+
+function turnCard() {
+	document.getElementById("card").classList.add('card-visited');
+	// cardDiv.setAttribute("class", "card-visited")
 }
+ function resetCard() {
+	if (document.getElementById("card").classList.contains('card-visited')) {
+		document.getElementById("card").classList.remove('card-visited');
+	}
+ }
 
 initCheckout();
 
