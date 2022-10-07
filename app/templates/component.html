@@ -64,10 +64,8 @@
             </div>
           </div>
           <br>
-          <h2 id="letstest">this thing</h2>
           <div class="font-selector">
             <select onchange="changeFont(this)" id="font_select" class="font-selector__select" aria-label="font" autocomplete="off">
-
               <option value="Segoe UI, sans-serif, Helvetica, Arial" style="font-family:'Segoe UI', sans-serif, Helvetica, Arial">Segoe UI</option>
               <option value="Roboto Condensed, sans-serif" style="font-family:'Roboto Condensed', sans-serif">Roboto Condensed</option>
               <option value="Engagement, cursive" style="font-family:'Engagement', cursive">Engagement</option>
@@ -75,12 +73,27 @@
               <option value="Times New Roman, Times, serif" style="font-family:'Times New Roman', Times, serif">Times New Roman</option>
               <option value="Arial, Helvetica, sans-serif" style="font-family:'Arial', Helvetica, sans-serif">Arial</option>
               <option value="Lucida Console, 'Courier New', monospace" style="font-family:'Lucida Console', 'Courier New', monospace">Lucida</option>
-
             </select>
             <div class="dropdown-icon" aria-hidden="true">
               <img src="{{ url_for('static', filename='img/dropdown.svg') }}" alt="Dropdown caret">
             </div>
           </div>
+          <br>
+        <!--text alignment start -->
+        <div class="text-alignment">
+        <select onchange="positionText(this)" id="positionText"  class="textalign-selector__select" autocomplete="off">
+        <option disabled selected>Align Text</option> 
+        <option value="center" style="text-align: center">center</option>
+        <option value="left" style="text-align: left">left</option>
+        <option value="right" style="text-align: right">right</option>
+        </select>
+        <div class="dropdown-icon" aria-hidden="true">
+          <img src="{{ url_for('static', filename='img/dropdown.svg') }}" alt="Dropdown caret">
+        </div>
+      </div>
+      <!-- text alignment end -->
+      <button type="button" id="makeBold" class="btn" onclick="makeBold()">B</button>
+      <button type="button" id="makeItalic" class="btn" onclick="makeItalic()">I</button>
           <!-- <div class="form-check">
             <input type="checkbox" class="form-check-input" id="firstPayBox">
             <label class="form-check-label" for="firstPayBox">Open First Payment</label>

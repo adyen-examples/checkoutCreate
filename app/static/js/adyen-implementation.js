@@ -615,10 +615,44 @@ function changeTestCard(brandValue) {
 	document.getElementById('cvc').innerText = testCardBrandsMap[brandValue.value].cvc
 }
 
+function positionText() {
+	let positionValue = document.getElementById("positionText").value
+	r.style.setProperty('--text-align', positionValue);
+	console.log(positionValue)
+}
+
+function makeBold() {
+
+	if (document.getElementById("makeBold").classList.contains("bold-active")) {
+		document.getElementById("makeBold").classList.remove("bold-active")
+		r.style.setProperty('--text-bold', null)
+		console.log("i'm checked")
+	}
+	else {
+		document.getElementById("makeBold").classList.add("bold-active")
+		r.style.setProperty('--text-bold', "bold")
+		console.log("not checked")
+	}
+}
+
+//makie text italic 
+function makeItalic() {
+
+	if (document.getElementById("makeItalic").classList.contains("italic-active")) {
+		document.getElementById("makeItalic").classList.remove("italic-active")
+		r.style.setProperty('--text-italic', null)
+		console.log("i'm checked")
+	}
+	else {
+		document.getElementById("makeItalic").classList.add("italic-active")
+		r.style.setProperty('--text-italic', "italic")
+		console.log("not checked")
+	}
+}
 // document.getElementById('showPayMethod').parentNode.addEventListener('click', function (event); 
 //drop down selector for the different font styles 
 //document.getElementById("font_select").parentNode.addEventListener('change', function() {
- function changeFont(font) {
+ function changeFont() {
     r.style.setProperty('--font-options', null);
 	let fontValue = document.getElementById("font_select").value
 
