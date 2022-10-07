@@ -404,6 +404,56 @@ a:hover {
 }
 /* font styling end */
 
+/* Test card selector*/
+.card-selector{
+	align-items:center;
+	background:#e5eaef;
+	border:1px solid #b9c4c9;
+	border-radius:6px;
+	display:flex;
+	height:40px;
+	margin:auto 0 auto auto;
+	outline:none;
+	padding:0 0 0 12px;
+	position:relative;
+	width:100%
+}
+@media (min-width:768px){
+	.card-selector{
+		width:200px
+	}
+}
+.card-selector__brand{
+	display:inline-flex;
+	margin-right:10px;
+	width:20px
+}
+.card-selector__select{
+	-webkit-appearance:none;
+	-moz-appearance:none;
+	appearance:none;
+	background:transparent;
+	border:0;
+	cursor:pointer;
+	flex:1;
+	font-size:1em;
+	height:100%;
+	/*margin:0 -12px 0 -42px;*/
+	outline:none;
+	padding-left:42px;
+	width:180px
+}
+.card-selector:focus{
+	box-shadow:none
+}
+.card-selector:hover{
+	border-color:#99a3ad
+}
+.card-selector .dropdown-icon{
+	margin-right:12px;
+	margin-top:3px
+}
+
 /* end of Cart preview page */
 
 /* Payment page */
@@ -421,6 +471,7 @@ a:hover {
 
 #payment-page .checkout {
 	margin-top: 100px;
+	background: var(--bg-color) !important;
 }
 #payment-page .settings {
 	margin-top: 100px;
@@ -515,224 +566,229 @@ a:hover {
 
 /* Virtual Card CSS */
 .card{
-	width: 320px;
-	height: 190px;
-	  -webkit-perspective: 600px;
-	  -moz-perspective: 600px;
-	  perspective:600px;
+	width: 290px;
+	height: 172px;
+	-webkit-perspective: 600px;
+	-moz-perspective: 600px;
+	perspective:600px;
 	  
-	}
-	
-	.card__part{
-	  box-shadow: 1px 1px #aaa3a3;
-		top: 0;
-	  position: absolute;
+}
+
+.card__part{
+	box-shadow: 1px 1px #aaa3a3;
+	top: 0;
+	position: absolute;
 	z-index: 1000;
-	  left: 0;
-	  display: inline-block;
-		width: 320px;
-		height: 190px;
-		background-image: url('https://image.ibb.co/bVnMrc/g3095.png'), linear-gradient(to right bottom, #0abf53, #009a78, #007183, #00496f, #00112c); /*linear-gradient(to right bottom, #fd8369, #fc7870, #f96e78, #f56581, #ee5d8a)*/
-		background-repeat: no-repeat;
-		background-position: center;
-		background-size: cover;
-		border-radius: 8px;
-	   
-		-webkit-transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-		-moz-transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-		-ms-transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-		-o-transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-		transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-		-webkit-transform-style: preserve-3d;
-		-moz-transform-style: preserve-3d;
-		-webkit-backface-visibility: hidden;
-		-moz-backface-visibility: hidden;
-	}
+	left: 0;
+	display: inline-block;
+	width: 290px;
+	height: 172px;
+	background-image: url('https://image.ibb.co/bVnMrc/g3095.png'), linear-gradient(to right bottom, #0abf53, #009a78, #007183, #00496f, #00112c); /*linear-gradient(to right bottom, #fd8369, #fc7870, #f96e78, #f56581, #ee5d8a)*/
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	border-radius: 8px;
 	
-	.card__front{
-	  padding: 18px;
-		-webkit-transform: rotateY(0);
-		-moz-transform: rotateY(0);
-	}
-	
-	.card__back {
-	  padding: 18px 0;
+	-webkit-transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	-moz-transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	-ms-transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	-o-transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+}
+
+.card__front{
+	padding: 18px;
+	-webkit-transform: rotateY(0);
+	-moz-transform: rotateY(0);
+}
+
+.card__back {
+	padding: 18px 0;
 	-webkit-transform: rotateY(-180deg);
 	-moz-transform: rotateY(-180deg);
-	}
-	
-	.card__black-line {
-		margin-top: 5px;
-		height: 38px;
-		background-color: #303030;
-	}
-	
-	.card__logo {
-		height: 40px;
-	}
-	
-	.card__front-logo{
-		position: absolute;
-		top: 18px;
-		right: 18px;
-	}
-	.card__square {
-		border-radius: 5px;
-		height: 40px;
-	}
-	
-	.card_numer {
-		display: block;
-		width: 100%;
-		word-spacing: 4px;
-		font-size: 20px;
-		letter-spacing: 2px;
-		color: #fff;
-		text-align: center;
-		margin-bottom: 20px;
-		margin-top: 20px;
-	}
-	
-	.card__space-75 {
-		width: 75%;
-		float: left;
-	}
-	
-	.card__space-25 {
-		width: 25%;
-		float: left;
-	}
-	
-	.card__label {
-		font-size: 10px;
-		text-transform: uppercase;
-		color: rgba(255,255,255,0.8);
-		letter-spacing: 1px;
-	}
-	
-	.card__info {
-		margin-bottom: 0;
-		margin-top: 5px;
-		font-size: 16px;
-		line-height: 18px;
-		color: #fff;
-	  letter-spacing: 1px;
-	  text-transform: uppercase;
-	}
-	
-	.card__back-content {
-		padding: 15px 15px 0;
-	}
-	.card__secret--last {
-		color: #303030;
-		text-align: right;
-		margin: 0;
-		font-size: 14px;
-	}
-	
-	.card__secret {
-		padding: 5px 12px;
-		background-color: #fff;
-		position:relative;
-	}
-	
-	.card__secret:before{
-	  content:'';
-	  position: absolute;
+}
+
+.card__black-line {
+	margin-top: 5px;
+	height: 38px;
+	background-color: #303030;
+}
+
+.card__logo {
+	height: 40px;
+}
+
+.card__front-logo{
+	position: absolute;
+	top: 18px;
+	right: 18px;
+}
+.card__square {
+	border-radius: 5px;
+	height: 40px;
+}
+
+.card_numer {
+	display: block;
+	width: 100%;
+	word-spacing: 4px;
+	font-size: 17px;
+	letter-spacing: 2px;
+	color: #fff;
+	text-align: center;
+	margin-top: 15px;
+	margin-bottom: 9px;
+}
+
+.card__space-75 {
+	width: 75%;
+	float: left;
+	padding-left: 10px;
+}
+
+.card__space-25 {
+	width: 25%;
+	float: left;
+}
+
+.card__label {
+	font-size: 10px;
+	text-transform: uppercase;
+	color: rgba(255,255,255,0.8);
+	letter-spacing: 1px;
+}
+
+
+.card__info {
+	margin-bottom: 0;
+	margin-top: 5px;
+	font-size: 13px;
+	line-height: 18px;
+	color: #fff;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+}
+
+.card__back-content {
+	padding: 15px 15px 0;
+}
+.card__secret--last {
+	color: #303030;
+	text-align: right;
+	margin: 0;
+	font-size: 14px;
+}
+
+.card__secret {
+	padding: 5px 12px;
+	background-color: #fff;
+	position:relative;
+}
+
+.card__secret:before{
+	content:'';
+	position: absolute;
 	top: -3px;
 	left: -3px;
-	height: calc(100% + 6px);
+	height: calc(100% + 4px);
 	width: calc(100% - 42px);
 	border-radius: 4px;
-	  background: repeating-linear-gradient(45deg, #ededed, #ededed 5px, #f9f9f9 5px, #f9f9f9 10px);
-	}
+	background: repeating-linear-gradient(45deg, #ededed, #ededed 5px, #f9f9f9 5px, #f9f9f9 10px);
+}
+
+.card__back-logo {
+	position: absolute;
+	bottom: 15px;
+	right: 15px;
+}
+
+.card__back-square {
+	position: absolute;
+	bottom: 15px;
+	left: 15px;
+}
+.card-visited .card__front {
+	-webkit-transform: rotateY(180deg);
+	-moz-transform: rotateY(180deg);
+
+}
+
+.card-visited .card__back {
+	-webkit-transform: rotateY(0deg);
+	-moz-transform: rotateY(0deg);
+}
+
+.card:active .card__front {
+	-webkit-transform: rotateY(180deg);
+	-moz-transform: rotateY(180deg);
+
+}
+
+.card:active .card__back {
+	width: 320px;
+	height: 190px;
+	-webkit-perspective: 600px;
+	-moz-perspective: 600px;
+	perspective:600px;	
+	-webkit-transform: rotateY(0deg);
+	-moz-transform: rotateY(0deg);
+}
+
+/* sliders css */
+
+.form-group {
+	width: 250px; /* Full-width */
+	height: 35px; /* Specified height */
+}
+
+/* :root {
+	--back-rotate : rotateY(0deg);
+	--back-tran: rotateY(0deg);
+	--front-rotate: rotateY(180deg);
+	--front-tran: rotateY(180deg);
+} */
+
+:root {
+	--background-color: #00112c;
+	--dropin-width: 500px;
+	--dropin-font: 17px;
+	--button-edges: 10px;
+	--body-edges: 10px;
+	--border-off: 1px solid #e6e9eb;
+	--active-background: #f7f8f9;
+	--bg-color: white;
+	--dropin-color: #f7f8f9;
+}
+
+
+.adyen-checkout__button {
+	background: var(--background-color) !important;
+	border-radius: var(--button-edges) !important;
+}
+
+.adyen-checkout__payment-method {
+	border-radius: var(--body-edges) !important;
+	border: var(--border-off) !important;
+	background: var(--dropin-color) !important;
+}
+
+.adyen-checkout__payment-method__radio {
+	/* Radio button in payment method header */
+
+}
+/* Copy button */
+
+.adyen-checkout__payment-method {
+	width: var(--dropin-width) !important;
+	font-size: var(--dropin-font) !important;
+}
+
+.checkout .col {
+	background: var(--bg-color) !important;
+}
 	
-	.card__back-logo {
-		position: absolute;
-		bottom: 15px;
-		right: 15px;
-	}
-	
-	.card__back-square {
-		position: absolute;
-		bottom: 15px;
-		left: 15px;
-	}
-	.card-visited .card__front {
-		-webkit-transform: rotateY(180deg);
-		-moz-transform: rotateY(180deg);
-	
-	}
-	
-	.card-visited .card__back {
-		-webkit-transform: rotateY(0deg);
-		-moz-transform: rotateY(0deg);
-	}
-	
-	.card:active .card__front {
-		
-		-webkit-transform: rotateY(180deg);
-		-moz-transform: rotateY(180deg);
-	
-	}
-	
-	.card:active .card__back {
-		width: 320px;
-		height: 190px;
-		-webkit-perspective: 600px;
-		-moz-perspective: 600px;
-		perspective:600px;
-		
-		-webkit-transform: rotateY(0deg);
-		-moz-transform: rotateY(0deg);
-	}
-
-	/* sliders css */
-
-	.form-group {
-		width: 250px; /* Full-width */
-        height: 35px; /* Specified height */
-	}
-
-	/* :root {
-		--back-rotate : rotateY(0deg);
-		--back-tran: rotateY(0deg);
-		--front-rotate: rotateY(180deg);
-		--front-tran: rotateY(180deg);
-	} */
-
-	:root {
-		--background-color: #00112c;
-		--dropin-width: 500px;
-		--dropin-font: 17px;
-		--button-edges: 10px;
-		--body-edges: 10px;
-		--border-off: 1px solid #e6e9eb;
-		--active-background: #f7f8f9;
-	}
-
-
-	.adyen-checkout__button {
-		background: var(--background-color) !important;
-		border-radius: var(--button-edges) !important;
-	}
-
-	.adyen-checkout__payment-method {
-		border-radius: var(--body-edges) !important;
-		border: var(--border-off) !important;
-	}
-
-	.adyen-checkout__payment-method__radio {
-		/* Radio button in payment method header */
-
-	}
-	/* Copy button */
-	
-	.adyen-checkout__payment-method {
-		width: var(--dropin-width) !important;
-		font-size: var(--dropin-font) !important;
-	 }
-
-	
-	 
 	 
