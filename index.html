@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./main.css" />
+
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    <div class="cotainer-fluid h-100">
+      <!-- Dropin UI -->
+      <div class="row flex-fill">
+        <div class="col-7 dropIn-UI justify-content-center text-center m-0 p-0">
+          <div class="dropin-container">drop-in</div>
+
+          <div class="test-cards-container fixed-bottom text-left">
+            <button id="test-cards-btn" class="btn btnprimary test-cards-btn">
+              <!-- <p class="m-0">^</p> -->
+              <div class="panel-group textFonts">
+                <div class="panel panel-default">
+                  <div id="collapse1" class="panel-collapse collapse">
+                    <div class="panel-body">Panel Body</div>
+                    <div class="panel-footer">Panel Footer</div>
+                  </div>
+
+                  <div class="panel-heading">
+                    <h4
+                      class="panel-title text-left ml-3"
+                      data-toggle="collapse"
+                      href="#collapse1"
+                      class="collapseText"
+                    >
+                      <p class="textFont testCardBtn">
+                        test cards <i class="ml-2 bi bi-credit-card-fill"></i>
+                        <i class="ml-4 bi bi-caret-up"></i>
+                      </p>
+                    </h4>
+                  </div>
+                </div>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <!-- config UI -->
+        <div class="col-5 config-UI p-0">
+          <div class="container p-5">
+            <h4 class="config-Title">Design Your Own Checkout</h4>
+            <!-- tabs -->
+            <div class="container mt-2 p-0">
+              <!-- tabs -->
+              <ul class="nav nav-tabs tab-options" id="myTab" role="">
+                <li class="nav-item">
+                  <a
+                    class="nav-link active"
+                    id="config-tab"
+                    data-toggle="tab"
+                    href="#configuration"
+                    role="tab"
+                    aria-controls="config"
+                    aria-selected="true"
+                    >Configuration</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    id="themes-tab"
+                    data-toggle="tab"
+                    href="#themes"
+                    role="tab"
+                    aria-controls="theme"
+                    aria-selected="false"
+                    >Theme & Styles</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    id="save-tab"
+                    data-toggle="tab"
+                    href="#save"
+                    role="tab"
+                    aria-controls="save"
+                    aria-selected="false"
+                    >Save your creation</a
+                  >
+                </li>
+              </ul>
+              <div class="tab-content" id="myTabContent">
+                <!-- Configuration content -->
+                <div
+                  class="tab-pane fade in show active config-content-panel"
+                  id="configuration"
+                  role="tabpanel"
+                  aria-labelledby="home-tab"
+                >
+                  <!-- Location -->
+                  <div class="row mt-3">
+                    <div class="col flex-fill section-title">
+                      <p class="mb-1 titleFonts">Location</p>
+                    </div>
+                    <div class="row container">
+                      <!-- text -->
+                      <div class="col-6">
+                        <p class="textFonts">
+                          Choose your shopper location and language
+                        </p>
+                      </div>
+                      <!-- title -->
+                      <div class="col-4">
+                        <p class="textFonts text-left ml-3">Shopper Location</p>
+                      </div>
+                      <!-- toggle -->
+                      <div class="col-2 text-right">three</div>
+                    </div>
+                    <div class="row container">
+                      <!-- text -->
+                      <div class="col-6"></div>
+                      <!-- title -->
+                      <div class="col-4">
+                        <p class="textFonts text-left ml-3">Language</p>
+                      </div>
+                      <!-- toggle -->
+                      <div class="col-2 text-right">three</div>
+                    </div>
+                  </div>
+                  <hr class="mt-4 mb-4" />
+
+                  <!-- Payment Methods -->
+                  <div class="row mt-3">
+                    <div class="col flex-fill section-title">
+                      <p class="mb-1 titleFonts">Location</p>
+                    </div>
+                    <div class="row container">
+                      <!-- text -->
+                      <div class="col-6">
+                        <p class="textFonts">
+                          Choose your shopper location and language
+                        </p>
+                      </div>
+                      <!-- title -->
+                      <div class="col-4">
+                        <p class="textFonts text-left ml-3">Shopper Location</p>
+                      </div>
+                      <!-- toggle -->
+                      <div class="col-2 text-right">three</div>
+                    </div>
+                    <div class="row container">
+                      <!-- text -->
+                      <div class="col-6"></div>
+                      <!-- title -->
+                      <div class="col-4">
+                        <p class="textFonts text-left ml-3">Language</p>
+                      </div>
+                      <!-- toggle -->
+                      <div class="col-2 text-right">three</div>
+                    </div>
+                  </div>
+                  <hr class="mt-4 mb-4" />
+
+                  <!-- Payment Method Behaviour -->
+                  <div class="row mt-3">
+                    <div class="col flex-fill section-title">
+                      <p class="mb-1 titleFonts">Location</p>
+                    </div>
+                    <div class="row container">
+                      <!-- text -->
+                      <div class="col-6">
+                        <p class="textFonts">
+                          Choose your shopper location and language
+                        </p>
+                      </div>
+                      <!-- title -->
+                      <div class="col-4">
+                        <p class="textFonts text-left ml-3">Shopper Location</p>
+                      </div>
+                      <!-- toggle -->
+                      <div class="col-2 text-right">three</div>
+                    </div>
+                    <div class="row container">
+                      <!-- text -->
+                      <div class="col-6"></div>
+                      <!-- title -->
+                      <div class="col-4">
+                        <p class="textFonts text-left ml-3">Language</p>
+                      </div>
+                      <!-- toggle -->
+                      <div class="col-2 text-right">three</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Theme & Styles content -->
+                <div
+                  class="tab-pane fade config-content-panel"
+                  id="themes"
+                  role="tabpanel"
+                  aria-labelledby="profile-tab"
+                >
+                  <!-- Location -->
+                  <div class="row mt-3">
+                    <div class="col flex-fill section-title">
+                      <p class="mb-1 titleFonts">Location2</p>
+                    </div>
+                    <div class="row container">
+                      <!-- text -->
+                      <div class="col-6">
+                        <p class="textFonts">
+                          Choose your shopper location and language
+                        </p>
+                      </div>
+                      <!-- title -->
+                      <div class="col-4">
+                        <p class="textFonts text-left ml-3">Shopper Location</p>
+                      </div>
+                      <!-- toggle -->
+                      <div class="col-2 text-right">three</div>
+                    </div>
+                    <div class="row container">
+                      <!-- text -->
+                      <div class="col-6"></div>
+                      <!-- title -->
+                      <div class="col-4">
+                        <p class="textFonts text-left ml-3">Language</p>
+                      </div>
+                      <!-- toggle -->
+                      <div class="col-2 text-right">three</div>
+                    </div>
+                  </div>
+                  <hr class="mt-4 mb-4" />
+
+                  <!-- Payment Methods -->
+                  <div class="row mt-3">
+                    <div class="col flex-fill section-title">
+                      <p class="mb-1 titleFonts">Location</p>
+                    </div>
+                    <div class="row container">
+                      <!-- text -->
+                      <div class="col-6">
+                        <p class="textFonts">
+                          Choose your shopper location and language
+                        </p>
+                      </div>
+                      <!-- title -->
+                      <div class="col-4">
+                        <p class="textFonts text-left ml-3">Shopper Location</p>
+                      </div>
+                      <!-- toggle -->
+                      <div class="col-2 text-right">three</div>
+                    </div>
+                    <div class="row container">
+                      <!-- text -->
+                      <div class="col-6"></div>
+                      <!-- title -->
+                      <div class="col-4">
+                        <p class="textFonts text-left ml-3">Language</p>
+                      </div>
+                      <!-- toggle -->
+                      <div class="col-2 text-right">three</div>
+                    </div>
+                  </div>
+                  <hr class="mt-4 mb-4" />
+
+                  <!-- Payment Method Behaviour -->
+                  <div class="row mt-3">
+                    <div class="col flex-fill section-title">
+                      <p class="mb-1 titleFonts">Location</p>
+                    </div>
+                    <div class="row container">
+                      <!-- text -->
+                      <div class="col-6">
+                        <p class="textFonts">
+                          Choose your shopper location and language
+                        </p>
+                      </div>
+                      <!-- title -->
+                      <div class="col-4">
+                        <p class="textFonts text-left ml-3">Shopper Location</p>
+                      </div>
+                      <!-- toggle -->
+                      <div class="col-2 text-right">three</div>
+                    </div>
+                    <div class="row container">
+                      <!-- text -->
+                      <div class="col-6"></div>
+                      <!-- title -->
+                      <div class="col-4">
+                        <p class="textFonts text-left ml-3">Language</p>
+                      </div>
+                      <!-- toggle -->
+                      <div class="col-2 text-right">three</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Save your creation content -->
+                <div
+                  class="tab-pane fade config-content-panel"
+                  id="save"
+                  role="tabpanel"
+                  aria-labelledby="save-tab"
+                >
+                  bye
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
