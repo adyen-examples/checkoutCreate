@@ -2,10 +2,11 @@
 
 html,
 body {
+	height: 100%;
 	width: 100%;
 	margin: 0;
+	padding: 0;
 	font-family: "Fakt", "Segoe UI", sans-serif, Helvetica, Arial;
-	/*background-color: #E4D8B4; - All things retro */
 }
 
 *,
@@ -44,6 +45,48 @@ a:hover {
 	box-sizing: border-box;
 }
 
+.row {
+	height: 100%;
+}
+
+.dropIn-UI {
+	background-color: var(--secondary-text);
+}
+
+.config-UI {
+	background-color: var(--main-grey);
+	/* border-top-left-radius: 20px;
+	border-bottom-left-radius: 20px; */
+	box-shadow: 1px 1px 5px 1px rgb(207, 207, 207);
+}
+
+.config-Title {
+font-family: "Roboto", sans-serif;
+font-weight: 400;
+font-weight: bold;
+}
+
+.tab-options {
+color: var(--main-text);
+font-size: 10px;
+margin-top: 1.5rem;
+}
+
+.config-content-panel {
+padding: 1rem;
+}
+
+.titleFonts {
+font-family: var(--main-font);
+font-weight: 600;
+font-size: 20px;
+}
+
+.textFonts {
+font-family: var(--main-font);
+font-size: 12px;
+}
+  
 /* Buttons */
 
 .button {
@@ -507,22 +550,6 @@ a:hover {
 
 /* end Payments page */
 
-/* PBL page */
-.qrcontainer {
-	padding: 10px;
-}
-
-.pbl-conatiner {
-    margin-top: 100px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    max-width: 1110px;
-}
-
-/* end PBL page */
 
 /* Status page */
 
@@ -563,6 +590,44 @@ a:hover {
 }
 
 /* end Status page */
+
+/* Test card container */
+
+#test-cards-btn {
+	width: 15%;
+	margin-left: 2%;
+	padding: 0;
+	height: 0%;
+	background-color: rgb(6, 6, 46);
+	color: var(--main-grey);
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+
+.test-cards-display {
+height: 10%;
+width: 30%;
+background-color: rgb(6, 6, 46);
+}
+
+.collapseText {
+color: var(--main-grey);
+font-family: var(--main-font);
+font-size: 1rem;
+font-weight: 400;
+}
+
+.testCardBtn {
+font-size: 1rem;
+font-weight: 300;
+margin-left: 5px;
+margin-bottom: 0;
+padding-bottom: 0;
+margin-top: 10px;
+}
+
+/* End of card container */
+
 
 /* Virtual Card CSS */
 .card{
@@ -715,6 +780,7 @@ a:hover {
 	-webkit-transform: rotateY(180deg);
 	-moz-transform: rotateY(180deg);
 }
+/* end of virtual card css */
 
 	/* :root {
 		--back-rotate : rotateY(0deg);
@@ -736,6 +802,11 @@ a:hover {
 	--bg-color: white;
 	--dropin-color: #f7f8f9;
 	--dropin-tab-color: white;
+	--main-green: #0abf53;
+	--main-grey: #f3f5f9;
+	--main-text: #00112c;
+	--secondary-text: #ffffff;
+	--main-font: "Roboto", sans-serif;
 }
 
 .card-visited .card__back {

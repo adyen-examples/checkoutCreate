@@ -2,22 +2,41 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/application.css') }}" />
-   
-   <style>
-      @import url('https://fonts.googleapis.com/css2?family=Oleo+Script:wght@700&display=swap');
-      @import url('https://fonts.googleapis.com/css2?family=Engagement&family=Lato:ital@1&family=Roboto+Condensed:wght@300&display=swap');
-    </style>
+    <!-- Bootstrap CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"/>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"/>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"/>
+      <style>
+        @import url('https://fonts.googleapis.com/css2?family=Oleo+Script:wght@700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Engagement&family=Lato:ital@1&family=Roboto+Condensed:wght@300&display=swap');
+      </style>
+
+      <!-- local CSS -->
+      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/application.css') }}" />
+
+      <!-- Adyen CSS from TEST environment (change to live for production)-->
+      <link rel="stylesheet"
+      href="https://checkoutshopper-live.adyen.com/checkoutshopper/sdk/5.15.0/adyen.css"
+      integrity="sha384-Dm1w8jaVOWA8rxpzkxA41DIyw5VlBjpoMTPfAijlfepYGgLKF+hke3NKeU/KTX7t"
+      crossorigin="anonymous">
     
     <title>Checkout Create</title>
   </head>
   <body>
-    <header id="header">
+    <!-- <header id="header">
       <div class="logo-box">
       <a href="{{ url_for('checkout') }}">
         <img
@@ -26,73 +45,359 @@
           alt="BARB logo"
         />
       </a>
-      <!--<a class="logo-title">All Things Retro</a>-->
     </div>
-    </header>
+    </header> -->
 
-	<!-- Adyen CSS from TEST environment (change to live for production)-->
-	<link rel="stylesheet"
-     href="https://checkoutshopper-live.adyen.com/checkoutshopper/sdk/5.15.0/adyen.css"
-     integrity="sha384-Dm1w8jaVOWA8rxpzkxA41DIyw5VlBjpoMTPfAijlfepYGgLKF+hke3NKeU/KTX7t"
-     crossorigin="anonymous">
+    <div class="cotainer-fluid h-100">
+      <div class="row flex-fill">
+        <!-- Dropin UI -->
+        <div class="checkout col-7 dropIn-UI justify-content-center text-center m-0 p-0">
+          <div id="dropin-container" class="payment p-5">
+            <!-- Component will be rendered here -->
+          </div>
 
-	<!-- Bootstrap-colorpicker CSS -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/3.4.0/css/bootstrap-colorpicker.min.css"
-    integrity="sha512-m/uSzCYYP5f55d4nUi9mnY9m49I8T+GUEe4OQd3fYTpFU9CIaPazUG/f8yUkY0EWlXBJnpsA7IToT2ljMgB87Q==" crossorigin="anonymous"
-    referrerpolicy="no-referrer" /> -->
+          <!-- Test cards container -->
+          <div class="test-cards-container fixed-bottom text-left">
+            <button id="test-cards-btn" class="btn btnprimary test-cards-btn">
+              <div class="panel-group textFonts">
+                <div class="panel panel-default">
+                  <div id="collapse1" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <div class="card-selector">
+                        <div class="card-selector__brand" aria-hidden="true">
+                          <img id="brand_img" src="https://checkoutshopper-live.adyen.com/checkoutshopper/images/logos/visa.svg" alt="Card brand icon">
+                        </div>
+                        <select onchange="changeTestCard(this)" id="card_select" class="card-selector__select" aria-label="Test Card" autocomplete="off">
+                          <option value="visa">Visa</option>
+                          <option value="mc">Mastercard</option>
+                          <option value="amex">AMEX</option>
+                        </select>
+                        <div class="dropdown-icon" aria-hidden="true">
+                          <img src="{{ url_for('static', filename='img/dropdown.svg') }}" alt="Dropdown caret">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="panel-footer">
+                      <div id="card" class="card">
+                        <div class="card__front card__part">
+                          <img class="card__front-square card__square" src="{{ url_for('static', filename='img/chip.png') }}">
+                          <img class="card__front-logo card__logo" src="{{ url_for('static', filename='img/LogoAdyen.png') }}">
+                          <p class="card_numer" id="cardNumber">4111 1111 1111 1111</p>
+                          <div class="card__space-75">
+                            <span class="card__label">Card holder</span>
+                            <p class="card__info">John Doe</p>
+                          </div>
+                          <div class="card__space-25">
+                            <span class="card__label">Expires</span>
+                                  <p class="card__info" id="expiry">03/30</p>
+                          </div>
+                        </div>
+                        <div class="card__back card__part">
+                          <div class="card__black-line"></div>
+                          <div class="card__back-content">
+                            <div class="card__secret">
+                              <p class="card__secret--last" id="cvc">737</p>
+                            </div>
+                            <img class="card__back-logo card__logo" src="{{ url_for('static', filename='img/LogoAdyen.png') }}">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="panel-heading">
+                    <h4
+                      class="panel-title text-left ml-3"
+                      data-toggle="collapse"
+                      href="#collapse1"
+                      class="collapseText">
+                      <p class="textFont testCardBtn">
+                        test cards <i class="ml-2 bi bi-credit-card-fill"></i>
+                        <i class="ml-4 bi bi-caret-up"></i>
+                      </p>
+                    </h4>
+                  </div>
+                </div>
+              </div>
+            </button>
+          </div>
+        </div>
+        <!-- config UI -->
+        <div class="col-5 config-UI p-0">
+          <div class="container p-5">
+            <h4 class="config-Title">Design Your Own Checkout</h4>
+            <!-- tabs -->
+            <div class="container mt-2 p-0">
+              <!-- tabs -->
+              <ul class="nav nav-tabs tab-options" id="myTab" role="">
+                <li class="nav-item">
+                  <a
+                    class="nav-link active"
+                    id="config-tab"
+                    data-toggle="tab"
+                    href="#configuration"
+                    role="tab"
+                    aria-controls="config"
+                    aria-selected="true"
+                    >Configuration</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    id="themes-tab"
+                    data-toggle="tab"
+                    href="#themes"
+                    role="tab"
+                    aria-controls="theme"
+                    aria-selected="false"
+                    >Theme & Styles</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    id="save-tab"
+                    data-toggle="tab"
+                    href="#save"
+                    role="tab"
+                    aria-controls="save"
+                    aria-selected="false"
+                    >Save your creation</a
+                  >
+                </li>
+              </ul>
+              <div class="tab-content" id="myTabContent">
+                <!-- Configuration content -->
+                <div
+                  class="tab-pane fade in show active config-content-panel"
+                  id="configuration"
+                  role="tabpanel"
+                  aria-labelledby="home-tab">
+                  <!-- Location -->
+                  <div class="row mt-3">
+                    <div class="col flex-fill section-title">
+                      <p class="mb-1 titleFonts">Location</p>
+                    </div>
+                    <div class="row container">
+                      <!-- text -->
+                      <div class="col-6">
+                        <p class="textFonts">
+                          Choose your shopper location and language
+                        </p>
+                      </div>
+                      <!-- title -->
+                      <div class="col-4">
+                        <p class="textFonts text-left ml-3">Shopper Location</p>
+                      </div>
+                      <!-- toggle -->
+                      <div class="country-selector">
+                        <div class="country-selector__flag" aria-hidden="true">
+                          <img id="flag_img" src="https://ca-test.adyen.com/ca/adl/img/flags/nl.svg" alt="Flag icon">
+                        </div>
+                        <select onchange="changeSelect(this)" id="country_select" class="country-selector__select" aria-label="country" autocomplete="off">
+                          <option value="NL">Netherlands</option>
+                          <option value="GB">United Kingdom</option>
+                          <option value="US">United States</option>
+                        </select>
+                        <div class="dropdown-icon" aria-hidden="true">
+                          <img src="{{ url_for('static', filename='img/dropdown.svg') }}" alt="Dropdown caret">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row container">
+                      <!-- text -->
+                      <div class="col-6"></div>
+                      <!-- title -->
+                      <div class="col-4">
+                        <p class="textFonts text-left ml-3">Open first payment method</p>
+                      </div>
+                      <!-- toggle -->
+                      <input type="checkbox" class="custom-control-input" id="firstPayBox" data-toggle="toggle" checked>
+                      <div class="col-2 text-right">three</div>
+                    </div>
+                    <div>
+                      <button type="button" id="btn" class="btn" toggle="tooltip" data-clipboard-action="copy" data-placement="top" data-clipboard-target="p#cardNumber" onclick="resetCard()" title="Copy to clipboard">Copy PAN</button>
+                      <button type="button" id="btn" class="btn" toggle="tooltip" data-clipboard-action="copy" data-clipboard-target="p#expiry" title="Copy to clipboard" onclick="resetCard()">Copy Expiry date</button>
+                      <button type="button" id="btn" class="btn" toggle="tooltip" data-clipboard-action="copy" data-clipboard-target="p#cvc" title="Copy to clipboard" onclick="turnCard()">Copy CVC</button>                  
+                    </div>
 
+                  </div>
+                  <hr class="mt-4 mb-4" />
+                </div>
 
-	<div id="payment-page" class="row">
-		<div class="checkout col">
-				<div id="dropin-container" class="payment p-5">
-					<!-- Component will be rendered here -->
-				</div>
-		</div>
-        <div class="settings col">
-          <span>Change country: </span>
-          <div class="country-selector">
-            <div class="country-selector__flag" aria-hidden="true">
-              <img id="flag_img" src="https://ca-test.adyen.com/ca/adl/img/flags/nl.svg" alt="Flag icon">
+                <!-- Theme & Styles content -->
+                <div
+                class="tab-pane fade config-content-panel"
+                id="themes"
+                role="tabpanel"
+                aria-labelledby="profile-tab">
+                <!-- Location -->
+                  <div class="row mt-3">
+                    <div class="col flex-fill section-title">
+                      <p class="mb-1 titleFonts">Fonts</p>
+                    </div>
+                    <div class="row container">
+                      <!-- text -->
+                      <div class="col-6">
+                        <p class="textFonts">
+                          Choose your font styles and size
+                        </p>
+                      </div>
+                      <!-- title -->
+                      <div class="col-4">
+                        <p class="textFonts text-left ml-3">Font</p>
+                      </div>
+                      <!-- toggle -->
+                      <div class="col-2 text-right">
+                        <div class="font-selector">
+                          <select onchange="changeFont(this)" id="font_select" class="font-selector__select" aria-label="font" autocomplete="off">
+              
+                            <option value="Segoe UI, sans-serif, Helvetica, Arial" style="font-family:'Segoe UI', sans-serif, Helvetica, Arial">Segoe UI</option>
+                            <option value="Roboto Condensed, sans-serif" style="font-family:'Roboto Condensed', sans-serif">Roboto Condensed</option>
+                            <option value="Engagement, cursive" style="font-family:'Engagement', cursive">Engagement</option>
+                            <option value="Lato, sans-serif" style="font-family:'Lato', sans-serif">Lato</option>
+                            <option value="Times New Roman, Times, serif" style="font-family:'Times New Roman', Times, serif">Times New Roman</option>
+                            <option value="Arial, Helvetica, sans-serif" style="font-family:'Arial', Helvetica, sans-serif">Arial</option>
+                            <option value="Lucida Console, 'Courier New', monospace" style="font-family:'Lucida Console', 'Courier New', monospace">Lucida</option>
+              
+                          </select>
+                          <div class="dropdown-icon" aria-hidden="true">
+                            <img src="{{ url_for('static', filename='img/dropdown.svg') }}" alt="Dropdown caret">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row container">
+                      <!-- text -->
+                      <div class="col-6"></div>
+                      <!-- title -->
+                      <div class="col-4">
+                        <p class="textFonts text-left ml-3">Size</p>
+                      </div>
+                      <!-- toggle -->
+                      <div class="col-2 text-right">
+                        <div class="form-group">
+                          <input type="range" class="form-control-range" id="fontSize" min="13" max="17" value="17" onchange="fontWidth(this.value)">
+                        </div>
+                      </div>
+                    </div>
+                    <hr class="mt-4 mb-4" />
+                    <!-- Colours and styles -->
+                    <div class="row mt-3">
+                      <div class="col flex-fill section-title">
+                        <p class="mb-1 titleFonts">Colour & Style</p>
+                      </div>
+                      <div class="row container">
+                        <!-- text -->
+                        <div class="col-6">
+                          <p class="textFonts">
+                            Select the colour of your checkout
+                          </p>
+                        </div>
+                        <!-- title -->
+                        <div class="col-4">
+                          <p class="textFonts text-left ml-3">Website background</p>
+                        </div>
+                        <!-- toggle -->
+                        <div class="col-2 text-right">
+                          <div>
+                            <input type="color" name="" id="bgColorPick" onchange="backgroundColor()">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row container">
+                        <!-- text -->
+                        <div class="col-6"></div>
+                        <!-- title -->
+                        <div class="col-4">
+                          <p class="textFonts text-left ml-3">Pay button</p>
+                        </div>
+                        <!-- toggle -->
+                        <div class="col-2 text-right">
+                          <input type="color" name="" id="buttonColorPick" onchange="setDynamicCSS()">
+                        </div>
+                      </div>
+                    <div class="row container">
+                      <!-- text -->
+                      <div class="col-6"></div>
+                      <!-- title -->
+                      <div class="col-4">
+                        <p class="textFonts text-left ml-3">Change payment form width</p>
+                      </div>
+                      <!-- toggle -->
+                      <div class="col-2 text-right">
+                        <div class="form-group">
+                          <input type="range" class="form-control-range" id="changeWidth" min="300" max="700" value="500" onchange="dropinWidth(this.value)">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <hr class="mt-4 mb-4" />
+                </div>
+
+                <!-- Save your creation content -->
+                <div
+                class="tab-pane fade config-content-panel"
+                id="save"
+                role="tabpanel"
+                aria-labelledby="save-tab">
+                bye
+                </div>
+              </div>
             </div>
-            <select onchange="changeSelect(this)" id="country_select" class="country-selector__select" aria-label="country" autocomplete="off">
-              <option value="NL">Netherlands</option>
-              <option value="GB">United Kingdom</option>
-              <option value="US">United States</option>
-            </select>
-            <div class="dropdown-icon" aria-hidden="true">
-              <img src="{{ url_for('static', filename='img/dropdown.svg') }}" alt="Dropdown caret">
-            </div>
           </div>
-          <br>
-          <h2 id="letstest">this thing</h2>
-          <div class="font-selector">
-            <select onchange="changeFont(this)" id="font_select" class="font-selector__select" aria-label="font" autocomplete="off">
+        </div>
+      </div>
+    </div>
+    <!-- Adyen JS from TEST environment (change to live for production)-->
+    <script src="https://checkoutshopper-live.adyen.com/checkoutshopper/sdk/5.15.0/adyen.js"
+    integrity="sha384-vMZOl6V83EY2UXaXsPUxH5Pt5VpyLeHpSFnANBVjcH5l7yZmJO0QBl3s6XbKwjiN"
+    crossorigin="anonymous"></script>
 
-              <option value="Segoe UI, sans-serif, Helvetica, Arial" style="font-family:'Segoe UI', sans-serif, Helvetica, Arial">Segoe UI</option>
-              <option value="Roboto Condensed, sans-serif" style="font-family:'Roboto Condensed', sans-serif">Roboto Condensed</option>
-              <option value="Engagement, cursive" style="font-family:'Engagement', cursive">Engagement</option>
-              <option value="Lato, sans-serif" style="font-family:'Lato', sans-serif">Lato</option>
-              <option value="Times New Roman, Times, serif" style="font-family:'Times New Roman', Times, serif">Times New Roman</option>
-              <option value="Arial, Helvetica, sans-serif" style="font-family:'Arial', Helvetica, sans-serif">Arial</option>
-              <option value="Lucida Console, 'Courier New', monospace" style="font-family:'Lucida Console', 'Courier New', monospace">Lucida</option>
+    <!-- data from front-end -->
+    <script id="client-key" type="application/json">{{ client_key|tojson }}</script>
+    <script id="country-code" type="application/json">{{ countryCode|default("NL")|tojson }}</script>
 
-            </select>
-            <div class="dropdown-icon" aria-hidden="true">
-              <img src="{{ url_for('static', filename='img/dropdown.svg') }}" alt="Dropdown caret">
-            </div>
-          </div>
-          <!-- <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="firstPayBox">
-            <label class="form-check-label" for="firstPayBox">Open First Payment</label>
-          </div> -->
-          <div class="form-group">
-            <label for="formControlRange">Change payment form width</label>
-            <input type="range" class="form-control-range" id="changeWidth" min="300" max="700" value="500" onchange="dropinWidth(this.value)">
-          </div>
-          <div class="form-group">
-            <label for="formControlRange">Change font size</label>
-            <input type="range" class="form-control-range" id="fontSize" min="13" max="17" value="17" onchange="fontWidth(this.value)">
-          </div>
+    <!-- local JS -->
+    <script src="{{ url_for('static', filename='js/adyen-implementation.js') }}"></script>
+
+    <!-- Clipboard.js script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+    <!-- Clipboard JS -->
+    <script>
+      var clipboard = new Clipboard('.btn');
+      clipboard.on('success', function (e) {
+        console.log(e);
+        // setTooltip(e.trigger, 'Copied!');
+        // hideTooltip(e.trigger);
+      });
+      clipboard.on('error', function (e) {
+        console.log(e);
+        // setTooltip(e.trigger, 'Failed!');
+        // hideTooltip(e.trigger);
+      });
+    </script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"></script>
+  </body>
+
+
+<!-- 
+
+
+
           <div class="custom-control custom-switch">
             <input type="checkbox" class="custom-control-input" id="firstPayBox" data-toggle="toggle" checked>
             <label class="custom-control-label" for="firstPayBox">Open first payment method</label>
@@ -135,10 +440,7 @@
           </div>
           <span>Button colour: </span>
           <input type="color" name="" id="buttonColorPick" onchange="setDynamicCSS()">
-          <div>
-            <span>Background colour: </span>
-            <input type="color" name="" id="bgColorPick" onchange="backgroundColor()">
-          </div>
+
           <div>
             <span>Dropin background colour: </span>
             <input type="color" name="" id="dropinColorPick" onchange="dropinColor()">
@@ -157,102 +459,8 @@
         </div>
     </div>
 
-      <div class="card-selector">
-        <div class="card-selector__brand" aria-hidden="true">
-          <img id="brand_img" src="https://checkoutshopper-live.adyen.com/checkoutshopper/images/logos/visa.svg" alt="Card brand icon">
-        </div>
-        <select onchange="changeTestCard(this)" id="card_select" class="card-selector__select" aria-label="Test Card" autocomplete="off">
-          <option value="visa">Visa</option>
-          <option value="mc">Mastercard</option>
-          <option value="amex">AMEX</option>
-        </select>
-        <div class="dropdown-icon" aria-hidden="true">
-          <img src="{{ url_for('static', filename='img/dropdown.svg') }}" alt="Dropdown caret">
-        </div>
-      </div>
-      <div id="card" class="card">
-        <div class="card__front card__part">
-          <img class="card__front-square card__square" src="{{ url_for('static', filename='img/chip.png') }}">
-          <img class="card__front-logo card__logo" src="{{ url_for('static', filename='img/LogoAdyen.png') }}">
-          <p class="card_numer" id="cardNumber">4111 1111 1111 1111</p>
-          <div class="card__space-75">
-            <span class="card__label">Card holder</span>
-            <p class="card__info">John Doe</p>
-          </div>
-          <div class="card__space-25">
-            <span class="card__label">Expires</span>
-                  <p class="card__info" id="expiry">03/30</p>
-          </div>
-        </div>
-        <div class="card__back card__part">
-          <div class="card__black-line"></div>
-          <div class="card__back-content">
-            <div class="card__secret">
-              <p class="card__secret--last" id="cvc">737</p>
-            </div>
-            <!--<img class="card__back-square card__square" src="{{ url_for('static', filename='img/chip.png') }}">-->
-            <img class="card__back-logo card__logo" src="{{ url_for('static', filename='img/LogoAdyen.png') }}">
-          </div>
-        </div>
-      </div>
 
-    <button type="button" id="btn" class="btn" toggle="tooltip" data-clipboard-action="copy" data-placement="top" data-clipboard-target="p#cardNumber" onclick="resetCard()" title="Copy to clipboard">Copy PAN</button>
-    <button type="button" id="btn" class="btn" toggle="tooltip" data-clipboard-action="copy" data-clipboard-target="p#expiry" title="Copy to clipboard" onclick="resetCard()">Copy Expiry date</button>
-    <button type="button" id="btn" class="btn" toggle="tooltip" data-clipboard-action="copy" data-clipboard-target="p#cvc" title="Copy to clipboard" onclick="turnCard()">Copy CVC</button>
-
-	<!-- Adyen JS from TEST environment (change to live for production)-->
-	<script src="https://checkoutshopper-live.adyen.com/checkoutshopper/sdk/5.15.0/adyen.js"
-	integrity="sha384-vMZOl6V83EY2UXaXsPUxH5Pt5VpyLeHpSFnANBVjcH5l7yZmJO0QBl3s6XbKwjiN"
-	crossorigin="anonymous"></script>
-
-	<!-- bootstrap-colorpicker JS -->
-	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/3.4.0/js/bootstrap-colorpicker.min.js"
-	integrity="sha512-94dgCw8xWrVcgkmOc2fwKjO4dqy/X3q7IjFru6MHJKeaAzCvhkVtOS6S+co+RbcZvvPBngLzuVMApmxkuWZGwQ=="
-	crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
-
-
-	<!-- data from front-end -->
-	<script id="client-key" type="application/json">{{ client_key|tojson }}</script>
-	<script id="country-code" type="application/json">{{ countryCode|default("NL")|tojson }}</script>
-
-	<!-- local JS -->
-	<script src="{{ url_for('static', filename='js/adyen-implementation.js') }}"></script>
-
-  <!-- Clipboard.js script -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.10/clipboard.min.js"></script>
-  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
-
-  <script>
-    // $('button').tooltip({
-    //   trigger: 'click',
-    //   placement: 'bottom'
-    // });
-
-    // function setTooltip(btn, message) {
-    //   $(btn).tooltip('hide')
-    //     .attr('data-original-title', message)
-    //     .tooltip('show');
-    // }
-
-    // function hideTooltip(btn) {
-    //   setTimeout(function() {
-    //     $(btn).tooltip('hide');
-    //   }, 1000);
-    // }
-
-    var clipboard = new Clipboard('.btn');
-    clipboard.on('success', function (e) {
-      console.log(e);
-      // setTooltip(e.trigger, 'Copied!');
-      // hideTooltip(e.trigger);
-    });
-    clipboard.on('error', function (e) {
-      console.log(e);
-      // setTooltip(e.trigger, 'Failed!');
-      // hideTooltip(e.trigger);
-    });
-  </script>
   
-  </body>
+  </body> -->
 </html>
 
