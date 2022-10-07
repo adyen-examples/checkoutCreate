@@ -190,6 +190,7 @@
                         <p class="textFonts text-left ml-3">Shopper Location</p>
                       </div>
                       <!-- toggle -->
+                      <div class="col-2">
                       <div class="country-selector">
                         <div class="country-selector__flag" aria-hidden="true">
                           <img id="flag_img" src="https://ca-test.adyen.com/ca/adl/img/flags/nl.svg" alt="Flag icon">
@@ -203,6 +204,7 @@
                           <img src="{{ url_for('static', filename='img/dropdown.svg') }}" alt="Dropdown caret">
                         </div>
                       </div>
+                    </div>
                     </div>
                     <hr class="mt-4 mb-4" />
 
@@ -277,6 +279,81 @@
                       </div>
                       </div>
                     </div>
+                    <div class="row container">
+                      <!-- text -->
+                      <div class="col-6"></div>
+                      <!-- title -->
+                      <div class="col-4">
+                        <p class="textFonts text-left ml-3">Show only saved Payment Methods</p>
+                      </div>
+                      <!-- toggle -->
+                      <div class="col-2 text-right">
+                        <div class="custom-control custom-switch">
+                          <input type="checkbox" class="custom-control-input" id="showPayMethod" data-toggle="toggle">
+                          <label class="custom-control-label" for="showPayMethod"></label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row container">
+                      <!-- text -->
+                      <div class="col-6"></div>
+                      <!-- title -->
+                      <div class="col-4">
+                        <p class="textFonts text-left ml-3">Hide CVC field</p>
+                      </div>
+                      <!-- toggle -->
+                      <div class="col-2 text-right">
+                        <div class="custom-control custom-switch">
+                          <input type="checkbox" class="custom-control-input" id="hideCVC" data-toggle="toggle">
+                          <label class="custom-control-label" for="hideCVC"></label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row container">
+                      <!-- text -->
+                      <div class="col-6"></div>
+                      <!-- title -->
+                      <div class="col-4">
+                        <p class="textFonts text-left ml-3">Include placeholder data</p>
+                      </div>
+                      <!-- toggle -->
+                      <div class="col-2 text-right">
+                        <div class="custom-control custom-switch">
+                          <input type="checkbox" class="custom-control-input" id="placeholderData" data-toggle="toggle">
+                          <label class="custom-control-label" for="placeholderData"></label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row container">
+                      <!-- text -->
+                      <div class="col-6"></div>
+                      <!-- title -->
+                      <div class="col-4">
+                        <p class="textFonts text-left ml-3">Remove Borders</p>
+                      </div>
+                      <!-- toggle -->
+                      <div class="col-2 text-right">
+                        <div class="custom-control custom-switch">
+                          <input type="checkbox" class="custom-control-input" id="noBorder" data-toggle="toggle">
+                          <label class="custom-control-label" for="noBorder"></label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row container">
+                      <!-- text -->
+                      <div class="col-6"></div>
+                      <!-- title -->
+                      <div class="col-4">
+                        <p class="textFonts text-left ml-3">Remove Borders</p>
+                      </div>
+                      <!-- toggle -->
+                      <div class="col-2 text-right">
+                        <div class="custom-control custom-switch">
+                          <input type="checkbox" class="custom-control-input" id="noBorder" data-toggle="toggle">
+                          <label class="custom-control-label" for="noBorder"></label>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
@@ -286,7 +363,7 @@
                 id="themes"
                 role="tabpanel"
                 aria-labelledby="profile-tab">
-                <!-- Location -->
+                <!-- Fonts -->
                   <div class="row mt-3">
                     <div class="col flex-fill section-title">
                       <p class="mb-1 titleFonts">Fonts</p>
@@ -338,6 +415,7 @@
                           </div>
                         </div>
                       </div>
+                    </div>
                     </div>
                     <hr class="mt-4 mb-4" />
 
@@ -464,26 +542,6 @@
 
 
 
-          <div class="custom-control custom-switch">
-            <input type="checkbox" class="custom-control-input" id="holderName" data-toggle="toggle">
-            <label class="custom-control-label" for="holderName">Include card holder name</label>
-          </div>
-          <div class="custom-control custom-switch">
-            <input type="checkbox" class="custom-control-input" id="showPayMethod" data-toggle="toggle">
-            <label class="custom-control-label" for="showPayMethod">Show only saved Payment Methods</label>
-          </div>
-          <div class="custom-control custom-switch">
-            <input type="checkbox" class="custom-control-input" id="hideCVC" data-toggle="toggle">
-            <label class="custom-control-label" for="hideCVC">Hide CVC field</label>
-          </div>
-          <div class="custom-control custom-switch">
-            <input type="checkbox" class="custom-control-input" id="placeholderData" data-toggle="toggle">
-            <label class="custom-control-label" for="placeholderData">Include placeholder data</label>
-          </div>
-          <div class="custom-control custom-switch">
-            <input type="checkbox" class="custom-control-input" id="noBorder" data-toggle="toggle">
-            <label class="custom-control-label" for="noBorder">Remove Borders</label>
-          </div>
           <div class="form-group">
             <label for="formControlRange">Change button edges</label>
             <input type="range" class="form-control-range" id="buttonEdges" onchange="buttonEdges(this.value);" min="0" max="25" value="5">
