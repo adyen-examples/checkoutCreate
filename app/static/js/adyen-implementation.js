@@ -43,6 +43,27 @@ const flagUrlMap = {
 	}
 }
 
+const testCardBrandsMap = {
+	"visa": {
+		"src": "https://checkoutshopper-live.adyen.com/checkoutshopper/images/logos/visa.svg",
+		"cardNumber": "4111 1111 1111 1111",
+		"expiry": "03/30",
+		"cvc": "737"
+	},
+	"mc": {
+		"src": "https://checkoutshopper-live.adyen.com/checkoutshopper/images/logos/mc.svg",
+		"cardNumber": "2222 4107 4036 0010",
+		"expiry": "03/30",
+		"cvc": "737"
+	},
+	"amex": {
+		"src": "https://checkoutshopper-live.adyen.com/checkoutshopper/images/logos/amex.svg",
+		"cardNumber": "3700 0000 0000 002",
+		"expiry": "03/30",
+		"cvc": "7373"
+	}
+}
+
 
 // Country dropdown changes the flag image and reloads the dropin with new country values
 function changeSelect(el) {
@@ -505,8 +526,18 @@ let r = document.querySelector(':root');
 
 // Colour picker changes button color
 function setDynamicCSS() {
-	colorVal = document.getElementById("buttonColorPick").value
+	colorVal = document.getElementById("buttonColorPick").value;
 	r.style.setProperty('--background-color', colorVal);
+}
+
+function backgroundColor() {
+	let bgVal = document.getElementById("bgColorPick").value;
+	r.style.setProperty('--bg-color', bgVal);
+}
+
+function dropinColor() {
+	let dropinColor = document.getElementById("dropinColorPick").value;
+	r.style.setProperty('--dropin-color', dropinColor);
 }
 
 function buttonEdges () {
@@ -568,6 +599,12 @@ function turnCard() {
 		document.getElementById("card").classList.remove('card-visited');
 	}
  }
+
+function changeTestCard(brandValue) {
+	document.getElementById('brand_img').src = testCardBrandsMap[brandValue.value].src;
+	document.getElementById('cardNumber').innerText = testCardBrandsMap[brandValue.value].cardNumber;
+	document.getElementById('cvc').innerText = testCardBrandsMap[brandValue.value].cvc
+}
 
 initCheckout();
 
