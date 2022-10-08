@@ -365,7 +365,7 @@
                     <!-- toggle -->
                     <div class="col-2 text-right">
                       <div class="text-alignment">
-                        <select onchange="positionText(this)" id="positionText"  class="textalign-selector__select" autocomplete="off">
+                        <select onchange="positionText(this)" id="positionText" class="textalign-selector__select" autocomplete="off">
                         <option selected value="left" style="text-align: left">Left</option>  
                         <option value="center" style="text-align: center">Center</option>
                         <option value="right" style="text-align: right">Right</option>
@@ -373,6 +373,20 @@
                         <div class="dropdown-icon" aria-hidden="true">
                           <img src="{{ url_for('static', filename='img/dropdown.svg') }}" alt="Dropdown caret">
                         </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row container">
+                    <!-- text -->
+                    <div class="col-6"></div>
+                    <!-- title -->
+                    <div class="col-4">
+                      <p class="textFonts text-left ml-3">Colour</p>
+                    </div>
+                    <!-- toggle -->
+                    <div class="col-2 text-right">
+                      <div>
+                        <input type="color" name="" id="textColorPick" onchange="textColor()">
                       </div>
                     </div>
                   </div>
@@ -419,7 +433,7 @@
                     <!-- text -->
                     <div class="col-6">
                       <p class="textFonts">
-                        Select the colour of your checkout
+                        Select the colour & style of your checkout
                       </p>
                     </div>
                     <!-- title -->

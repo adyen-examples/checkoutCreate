@@ -472,7 +472,7 @@ a:hover {
 	outline:none;
 	padding:0 0 0 12px;
 	position:relative;
-	width:100%
+	width:100%;
 }
 
 @media (min-width:768px){
@@ -494,7 +494,7 @@ a:hover {
 	margin:0 -12px 0 -42px;
 	outline:none;
 	padding-left:42px;
-	width:180px
+	width:180px;
 }
 
 .text-alignment:focus{
@@ -994,15 +994,36 @@ a:hover {
 .adyen-checkout__payment-method__name {
 	font-weight: var(--text-bold) !important;
 	font-style: var(--text-italic) !important;
+	color: var(--text-color) !important;
 }
 
 .adyen-checkout__label__text {
 	font-weight: var(--text-bold) !important;
 	font-style: var(--text-italic) !important;
+	color: var(--text-color) !important;
 }
 
 .adyen-checkout__checkbox__label {
 	font-weight: var(--text-bold) !important;
 	font-style: var(--text-italic) !important;
-
+	color: var(--text-color) !important;
 }
+
+.adyen-checkout__button__text {
+	font-weight: var(--text-bold) !important;
+	font-style: var(--text-italic) !important;
+	color: var(--text-color) !important;
+}
+
+.adyen-checkout__card__brands img {
+    border-radius: 3px;
+    height: 16px;
+    width: 24px;
+    left: 0;
+    position: absolute;
+    top: 0;
+}
+
+
+
+

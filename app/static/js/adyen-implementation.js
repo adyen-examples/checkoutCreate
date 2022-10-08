@@ -545,6 +545,12 @@ function dropinTabColor() {
 	r.style.setProperty('--dropin-tab-color', dropinTabColor);
 }
 
+function textColor() {
+	let textColor = document.getElementById("textColorPick").value;
+	r.style.setProperty('--text-color', textColor);
+}
+
+
 function buttonEdges () {
 	let edgeValue = document.getElementById('buttonEdges').value
 	let pixelVal = edgeValue + 'px'
@@ -578,6 +584,10 @@ function resetDynamicCSS () {
 	r.style.setProperty('--dropin-color', null);
 	r.style.setProperty('--dropin-tab-color', null);
 	r.style.setProperty('--dropin-font', null)
+	r.style.setProperty('--text-color', null);
+	r.style.setProperty('--text-bold', null);
+	r.style.setProperty('--text-italic', null);
+	r.style.setProperty('--text-align', null);
 }
 
 function dropinWidth () {
