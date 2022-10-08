@@ -1024,6 +1024,22 @@ a:hover {
     top: 0;
 }
 
+#textColorPick, #bgColorPick, #dropinColorPick, #dropinTabColorPick, #buttonColorPick{
+    border-radius: 20px;
+    height: 25px;
+    width: 25px;
+    border:2px solid #36BF52;;
+    outline:none;
+    -webkit-appearance: none;
+}
+
+#textColorPick::-webkit-color-swatch-wrapper, #bgColorPick::-webkit-color-swatch-wrapper, #dropinColorPick::-webkit-color-swatch-wrapper, #dropinTabColorPick::-webkit-color-swatch-wrapper, #buttonColorPick::-webkit-color-swatch-wrapper {
+    padding: 0; 
+}
+#textColorPick::-webkit-color-swatch, #bgColorPick::-webkit-color-swatch, #dropinColorPick::-webkit-color-swatch, #dropinTabColorPick::-webkit-color-swatch, #buttonColorPick::-webkit-color-swatch {
+    border:none;
+    border-radius: 50%;
+}
 
 
 
