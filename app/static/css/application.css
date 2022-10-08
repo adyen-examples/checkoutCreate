@@ -736,11 +736,10 @@ a:hover {
 	-webkit-perspective: 600px;
 	-moz-perspective: 600px;
 	perspective: 600px;
-
+	background: rgb(6, 6, 46);
 }
 
 .card__part {
-	box-shadow: 1px 1px #aaa3a3;
 	top: 0;
 	position: absolute;
 	z-index: 1000;
