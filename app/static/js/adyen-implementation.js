@@ -661,7 +661,37 @@ function makeItalic() {
 
 console.log(fontValue)
 }
+// document.getElementById('placeholderData').parentNode.addEventListener('click', function (event) {
+//hiding payment methods functions
+function showPaypal() {
+	const element = document.querySelector('[aria-label="PayPal"]');
+	console.log(element);
+	// const paypalParent = document.getElementsByClassName('adyen-checkout__payment-method--paypal')
 
+	const paypalState = document.getElementById('showPaypal').checked;
+	console.log(paypalState);
+	if (paypalState == true) {
+		element.style.display = ""
+	} else {
+		element.style.display = "none"
+	}
+	// if (paypalState.classList.contains('checked')) {
+	// 	console.log('checked')
+	// } else {
+	// 	console.log('not checked')
+	// }
+
+	// if (document.getElementById("makeItalic").classList.contains("italic-active")) {
+	// 	document.getElementById("makeItalic").classList.remove("italic-active")
+	// 	r.style.setProperty('--text-italic', null)
+	// 	console.log("i'm checked")
+	// }
+	// else {
+	// 	document.getElementById("makeItalic").classList.add("italic-active")
+	// 	r.style.setProperty('--text-italic', "italic")
+	// 	console.log("not checked")
+	// }
+}
 
 
 initCheckout();
