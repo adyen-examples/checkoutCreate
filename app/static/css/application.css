@@ -51,6 +51,7 @@ a:hover {
 
 .dropIn-UI {
 	background-color: var(--secondary-text);
+	background: var(--bg-color) !important;
 }
 
 .config-UI {
