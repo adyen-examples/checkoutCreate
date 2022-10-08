@@ -913,9 +913,9 @@ a:hover {
 	--main-text: #00112c;
 	--secondary-text: #ffffff;
 	--main-font: "Roboto", sans-serif;
-  --text-align: left;
+	--text-align: left;
 	--text-bold: normal;
-  --text-italic: normal;
+	--text-italic: normal;
 }
 
 
@@ -953,20 +953,20 @@ a:hover {
 }
 
 
-  .adyen-checkout__payment-method {
-		width: var(--dropin-width) !important;
-		font-size: var(--dropin-font) !important;
-		font-family: var(--font-options) !important;
-		text-align: var(--text-align) !important;
-		border-radius: var(--body-edges) !important;
-	    border: var(--border-off) !important;
-	    background: var(--dropin-color) !important;
-		font-weight: var(--text-bold) !important;
-	 }
+.adyen-checkout__payment-method {
+	width: var(--dropin-width) !important;
+	font-size: var(--dropin-font) !important;
+	font-family: var(--font-options) !important;
+	text-align: var(--text-align) !important;
+	border-radius: var(--body-edges) !important;
+	border: var(--border-off) !important;
+	background: var(--dropin-tab-color) !important;
+	font-weight: var(--text-bold) !important;
+}
 
-	 .adyen-checkout__dropin  {
-		text-align: var(--text-align) !important;
-	 }
+.adyen-checkout__dropin  {
+	text-align: var(--text-align) !important;
+}
 
 
 .adyen-checkout__payment-method--selected {
