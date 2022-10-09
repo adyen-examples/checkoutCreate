@@ -588,12 +588,20 @@ function resetDynamicCSS () {
 	r.style.setProperty('--text-bold', null);
 	r.style.setProperty('--text-italic', null);
 	r.style.setProperty('--text-align', null);
+	r.style.setProperty('--payButton-width', null);
 }
 
 function dropinWidth () {
 	let widthValue = document.getElementById("changeWidth").value
 	let widthpx = widthValue + 'px'
 	r.style.setProperty('--dropin-width', widthpx);
+	console.log(widthpx)
+}
+
+function payButtonWidth () {
+	let payWidthValue = document.getElementById("payButtonWidth").value
+	let payWidthpx = payWidthValue + 'px'
+	r.style.setProperty('--payButton-width', payWidthpx);
 	console.log(widthpx)
 }
 
