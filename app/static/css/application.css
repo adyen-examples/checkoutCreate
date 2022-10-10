@@ -1119,3 +1119,23 @@ a:hover {
 .form-control-range {
   width: 50%;
 }
+/* 
+:not(pre)>code[class*=language-], pre[class*=language-] {
+    background: #00112c !important;
+} */
+
+pre {
+	outline: 1px solid #ccc;
+	padding: 5px;
+	margin: 5px;
+	background: #00112c;
+	color: #078F3E;
+}
+.string { 
+	color: white; 
+}
+.number { color: #0abf53; }
+.boolean { color: #0088FF; }
+.null { color: magenta; }
+.key { color: #A5AFBD; }
+
