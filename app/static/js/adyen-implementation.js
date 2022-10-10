@@ -699,7 +699,17 @@ function makeItalic() {
 
 console.log(fontValue)
 }
-
+// document.getElementById('placeholderData').parentNode.addEventListener('click', function (event) {
+//hiding payment methods functions
+function showPaypal() {
+	const paypalState = document.getElementById('showPaypal').checked;
+	const paypalBox = document.querySelector('.adyen-checkout__payment-method--paypal')
+	if (paypalState == true) {
+		paypalBox.style.display = ""
+	} else {
+		paypalBox.style.display = "none"
+	}
+}
 
 
 initCheckout();
