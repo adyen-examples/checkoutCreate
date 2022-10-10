@@ -70,6 +70,23 @@
           <div id="dropin-container" class="payment p-5">
             <!-- Component will be rendered here -->
           </div>
+          <!-- Hidden status page to show on completion -->
+          <div class="status-container successDiv" id="successDiv">
+            <div class="status">
+                <img src="{{ url_for('static', filename='img/success.svg') }}" class="status-image"/>
+                <img src="{{ url_for('static', filename='img/thank-you.svg') }}" class="status-image-thank-you"/>
+                <p class="status-message">Your order has been successfully placed.</p>
+                <a class="button" onclick="restartDropin()">Return Home</a>
+            </div>
+          </div>
+          <div class="status-container errorDiv">
+            <div class="status">
+                <p class="status-message">Error!</p>
+                <p class="status-message">Review response in console and refer to <a
+                        href="https://docs.adyen.com/development-resources/response-handling">Response handling.</a></p>
+                <a class="button" onclick="restartDropin()">Return Home</a>
+            </div>
+          </div>
 
           <!-- Test cards container -->
           <div class="test-cards-container fixed-bottom text-left">
@@ -1005,7 +1022,7 @@
                   role="tabpanel"
                   aria-labelledby="save-tab"
                 >
-                  bye
+                  <p id="configCode"></p>
                 </div>
               </div>
             </div>

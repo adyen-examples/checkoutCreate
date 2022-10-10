@@ -407,6 +407,8 @@ async function initCheckout() {
 
 		};
 		console.log(configuration)
+		document.getElementById("configCode").innerHTML = String(configuration);
+
 
 		console.log(openFirst)
 
@@ -483,6 +485,11 @@ async function callServer(url, data) {
 	return await res.json();
 }
 
+const successDiv = document.querySelector('.successDiv')
+successDiv.style.display = "none"
+const errorDiv = document.querySelector('.errorDiv')
+errorDiv.style.display = "none"
+
 // Handles responses sent from your server to the client
 function handleServerResponse(res, dropin) {
 	if (res.action) {
@@ -490,20 +497,40 @@ function handleServerResponse(res, dropin) {
 	} else {
 		switch (res.resultCode) {
 			case "Authorised":
-				window.location.href = "/result/success";
+				let currentDiv = document.getElementById("dropin-container");
+				successDiv.style.display = ""
+				currentDiv.style.display = "none"
+				// window.location.href = "/result/success";
 				break;
 			case "Pending":
 			case "Received":
 				window.location.href = "/result/pending";
 				break;
 			case "Refused":
-				window.location.href = "/result/failed";
+				let thisDiv = document.getElementById("dropin-container");
+				errorDiv.style.display = ""
+				thisDiv.style.display = "none"
+				// window.location.href = "/result/failed";
 				break;
 			default:
 				window.location.href = "/result/error";
 				break;
 		}
 	}
+}
+
+function restartDropin() {
+	const currentDiv = document.getElementById("dropin-container");
+	currentDiv.style.display = ""
+	const newDiv = document.createElement('div');
+	currentDiv.replaceWith(newDiv)
+	newDiv.setAttribute("id", "dropin-container");
+	newDiv.setAttribute("class", "payment p-5")
+	newDiv.style.display = ""
+	successDiv.style.display = "none"
+	errorDiv.style.display = "none"
+	// oldDiv = newDiv
+	initCheckout()	
 }
 
 // Test cards JS
