@@ -304,10 +304,46 @@
                   <!-- line - section end -->
                   <hr class="mt-4 mb-4" />
 
-                  <!-- section titile "Payment Method Behaviour" -->
-                  <div class="row mt-3">
-                    <div class="col flex-fill section-title">
-                      <p class="mb-1 titleFonts">Payment Method Behaviour</p>
+
+                <!-- section for hiding/showing payment methods -->
+                <div class="row mt-3">
+                  <div class="col flex-fill section-title">
+                    <p class="mb-1 titleFonts">Payment Methods</p>
+                  </div>
+                  <div class="row container">
+                    <!-- section description -->
+                    <div class="col-6">
+                      <p class="textFonts">
+                        Choose which payment methods you would like to see at checkout
+                      </p>
+                    </div>
+                    <!-- title -->
+                    <div class="col-3">
+                      <p class="textFonts text-left ml-3">Paypal</p>
+                    </div>
+                    <!-- toggle -->
+                    <div class="col-3">
+                      <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="showPaypal" data-toggle="toggle" onchange="showPaypal()" checked>
+                        <label class="custom-control-label" for="showPaypal"></label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- line - section end -->
+                <hr class="mt-4 mb-4" />
+
+                <!-- section titile "Payment Method Behaviour" -->
+                <div class="row mt-3">
+                  <div class="col flex-fill section-title">
+                    <p class="mb-1 titleFonts">Payment Method Behaviour</p>
+                  </div>
+                  <div class="row container">
+                    <!-- text -->
+                    <div class="col-6">
+                      <p class="textFonts">
+                        Select how you'd like your payment methods to behave at checkout
+                      </p>
                     </div>
                     <div class="row container">
                       <!-- text -->
@@ -907,12 +943,33 @@
                         </div>
                       </div>
                     </div>
-                    <div class="row container mb-2">
-                      <!-- text -->
-                      <div class="col-6"></div>
-                      <!-- title -->
-                      <div class="col-3">
-                        <p class="textFonts text-left ml-3">Pay button width</p>
+
+                  </div>
+                  <div class="row container">
+                    <!-- text -->
+                    <div class="col-6"></div>
+                    <!-- title -->
+                    <div class="col-3">
+                      <p class="textFonts text-left ml-3">Pay button width</p>
+                    </div>
+                    <!-- toggle -->
+                    <div class="col-3 text-right">
+                      <div class="form-group">
+                        <input type="range" class="form-control-range" id="payButtonWidth" min="265" max="665" value="100%" onchange="payButtonWidth(this.value)">
+                      </div>
+                      </div>
+                  </div>
+                  <div class="row container">
+                    <!-- text -->
+                    <div class="col-6"></div>
+                    <!-- title -->
+                    <div class="col-3">
+                      <p class="textFonts text-left ml-3">Payment methods spacing</p>
+                    </div>
+                    <!-- toggle -->
+                    <div class="col-3 text-right">
+                      <div class="form-group">
+                        <input type="range" class="form-control-range" id="paymentsSpacing" min="0" max="50" value="0" onchange="paymentsSpacing(this.value)">
                       </div>
                       <!-- toggle -->
                       <div class="col-3 text-left">

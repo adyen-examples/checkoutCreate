@@ -925,6 +925,14 @@ a:hover {
   --text-bold: normal;
   --text-italic: normal;
   --small-text: 12px;
+  --payButton-width: 100%;
+	--payments-spacing: 0px 0;
+	--paymentselected-margin: 8px 0;
+	--selectedBody-edges: 12px;
+	--topedges-left: 12px;
+	--topedges-right: 12px;
+	--bottomedges-left: 12px;
+	--bottomedges-right: 12px;
 }
 
 .card-visited .card__back {
@@ -952,6 +960,14 @@ a:hover {
   border-radius: var(--button-edges) !important;
 }
 
+.adyen-checkout__button.adyen-checkout__button--pay {
+	width: var(--payButton-width) !important;
+	margin-right: auto;
+    margin-left: auto;
+	display: flex;
+    justify-content: center;
+}
+
 .form-group {
   width: 250px;
   /* Full-width */
@@ -960,14 +976,26 @@ a:hover {
 }
 
 .adyen-checkout__payment-method {
-  width: var(--dropin-width) !important;
-  font-size: var(--dropin-font) !important;
-  font-family: var(--font-options) !important;
-  text-align: var(--text-align) !important;
-  border-radius: var(--body-edges) !important;
-  border: var(--border-off) !important;
-  background: var(--dropin-tab-color) !important;
-  font-weight: var(--text-bold) !important;
+	width: var(--dropin-width) !important;
+	font-size: var(--dropin-font) !important;
+	font-family: var(--font-options) !important;
+	text-align: var(--text-align) !important;
+	border-radius: var(--body-edges) !important;
+	border: var(--border-off) !important;
+	background: var(--dropin-tab-color) !important;
+	font-weight: var(--text-bold) !important;
+	margin: var(--payments-spacing) !important;
+}
+
+.adyen-checkout__payment-methods-list li:nth-child(2){
+	border-top-left-radius: var(--topedges-left) !important;
+	border-top-right-radius: var(--topedges-right) !important;
+}
+
+
+.adyen-checkout__payment-methods-list li:last-child {
+  border-bottom-left-radius: var(--bottomedges-left) !important;
+  border-bottom-right-radius: var(--bottomedges-right) !important;
 }
 
 .adyen-checkout__dropin {
@@ -975,7 +1003,10 @@ a:hover {
 }
 
 .adyen-checkout__payment-method--selected {
-  background: var(--dropin-color) !important;
+	background: var(--dropin-color) !important;
+	margin: var(--paymentselected-margin) !important;
+	border-radius: var(--selectedBody-edges) !important;
+
 }
 
 .adyen-checkout__payment-method__radio {
