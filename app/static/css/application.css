@@ -954,10 +954,10 @@ a:hover {
   -moz-transform: rotateY(0deg);
 }
 
-.adyen-checkout__button {
+/* .adyen-checkout__button {
   background: var(--background-color) !important;
   border-radius: var(--button-edges) !important;
-}
+} */
 
 .adyen-checkout__button.adyen-checkout__button--pay {
 	width: var(--payButton-width) !important;
@@ -965,6 +965,8 @@ a:hover {
     margin-left: auto;
 	display: flex;
     justify-content: center;
+	background: var(--background-color) !important;
+  	border-radius: var(--button-edges) !important;
 }
 
 .form-group {
