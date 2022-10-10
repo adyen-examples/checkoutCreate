@@ -909,7 +909,7 @@ a:hover {
   --dropin-width: 500px;
   --dropin-font: 17px;
   --button-edges: 10px;
-  --body-edges: 10px;
+  --body-edges: 0px;
   --border-off: 1px solid #e6e9eb;
   --active-background: #f7f8f9;
   --bg-color: white;
