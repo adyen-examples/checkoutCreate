@@ -406,11 +406,9 @@ async function initCheckout() {
 			}
 
 		};
-		console.log(configuration)
-		document.getElementById("configCode").innerHTML = String(configuration);
-
-
-		console.log(openFirst)
+		// cloning configuration object to filter and log
+		const cloneConfig = Object.assign({}, configuration)
+		logConfig(cloneConfig);
 
 		const checkout = await AdyenCheckout(configuration);
 		checkout.create('dropin', {
@@ -430,6 +428,23 @@ async function initCheckout() {
 		console.error(error);
 		alert("Error occurred. Look at console for details");
 	}
+}
+
+// logging configuration object to UI
+function logConfig(cloneConfig) {
+	console.log(cloneConfig);
+	// let filteredConfig = loggedConfig
+
+	delete cloneConfig.paymentMethodsResponse;
+	cloneConfig.clientKey = "***"
+	cloneConfig.paymentMethodsConfiguration.paypal.merchantId = "***"
+	
+	let finalConfig = {"configuration": cloneConfig}
+	let stringConfig = JSON.stringify(finalConfig, null, 2);
+
+	console.log(stringConfig)
+
+	document.getElementById("configCode").innerHTML = syntaxHighlight(stringConfig);
 }
 
 /*function filterUnimplemented(pm) {
@@ -736,6 +751,30 @@ function showPaypal() {
 	} else {
 		paypalBox.style.display = "none"
 	}
+}
+
+//JSON highlight code styling
+function output(inp) {
+    document.body.appendChild(document.createElement('pre')).innerHTML = inp;
+}
+
+function syntaxHighlight(json) {
+    json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+        var cls = 'number';
+        if (/^"/.test(match)) {
+            if (/:$/.test(match)) {
+                cls = 'key';
+            } else {
+                cls = 'string';
+            }
+        } else if (/true|false/.test(match)) {
+            cls = 'boolean';
+        } else if (/null/.test(match)) {
+            cls = 'null';
+        }
+        return '<span class="' + cls + '">' + match + '</span>';
+    });
 }
 
 
