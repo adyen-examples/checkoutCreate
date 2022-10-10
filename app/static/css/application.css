@@ -472,7 +472,7 @@ a:hover {
 	outline:none;
 	padding:0 0 0 12px;
 	position:relative;
-	width:100%
+	width:100%;
 }
 
 @media (min-width:768px){
@@ -494,7 +494,7 @@ a:hover {
 	margin:0 -12px 0 -42px;
 	outline:none;
 	padding-left:42px;
-	width:180px
+	width:180px;
 }
 
 .text-alignment:focus{
@@ -902,7 +902,7 @@ a:hover {
 	--dropin-width: 500px;
 	--dropin-font: 17px;
 	--button-edges: 10px;
-	--body-edges: 10px;
+	--body-edges: 0px;
 	--border-off: 1px solid #e6e9eb;
 	--active-background: #f7f8f9;
 	--bg-color: white;
@@ -916,6 +916,14 @@ a:hover {
 	--text-align: left;
 	--text-bold: normal;
 	--text-italic: normal;
+	--payButton-width: 100%;
+	--payments-spacing: 0px 0;
+	--paymentselected-margin: 8px 0;
+	--selectedBody-edges: 12px;
+	--topedges-left: 12px;
+	--topedges-right: 12px;
+	--bottomedges-left: 12px;
+	--bottomedges-right: 12px;
 }
 
 
@@ -945,6 +953,14 @@ a:hover {
 	border-radius: var(--button-edges) !important;
 }
 
+.adyen-checkout__button.adyen-checkout__button--pay {
+	width: var(--payButton-width) !important;
+	margin-right: auto;
+    margin-left: auto;
+	display: flex;
+    justify-content: center;
+}
+
 .form-group {
 	width: 250px;
 	/* Full-width */
@@ -962,15 +978,28 @@ a:hover {
 	border: var(--border-off) !important;
 	background: var(--dropin-tab-color) !important;
 	font-weight: var(--text-bold) !important;
+	margin: var(--payments-spacing) !important;
+}
+
+.adyen-checkout__payment-methods-list li:nth-child(2){
+	border-top-left-radius: var(--topedges-left) !important;
+	border-top-right-radius: var(--topedges-right) !important;
+}
+
+
+.adyen-checkout__payment-methods-list li:last-child {
+  border-bottom-left-radius: var(--bottomedges-left) !important;
+  border-bottom-right-radius: var(--bottomedges-right) !important;
 }
 
 .adyen-checkout__dropin  {
 	text-align: var(--text-align) !important;
 }
 
-
 .adyen-checkout__payment-method--selected {
 	background: var(--dropin-color) !important;
+	margin: var(--paymentselected-margin) !important;
+	border-radius: var(--selectedBody-edges) !important;
 }
 
 .adyen-checkout__payment-method__radio {
@@ -994,15 +1023,52 @@ a:hover {
 .adyen-checkout__payment-method__name {
 	font-weight: var(--text-bold) !important;
 	font-style: var(--text-italic) !important;
+	color: var(--text-color) !important;
 }
 
 .adyen-checkout__label__text {
 	font-weight: var(--text-bold) !important;
 	font-style: var(--text-italic) !important;
+	color: var(--text-color) !important;
 }
 
 .adyen-checkout__checkbox__label {
 	font-weight: var(--text-bold) !important;
 	font-style: var(--text-italic) !important;
-
+	color: var(--text-color) !important;
 }
+
+.adyen-checkout__button__text {
+	font-weight: var(--text-bold) !important;
+	font-style: var(--text-italic) !important;
+	color: var(--text-color) !important;
+}
+
+.adyen-checkout__card__brands img {
+    border-radius: 3px;
+    height: 16px;
+    width: 24px;
+    left: 0;
+    position: absolute;
+    top: 0;
+}
+
+#textColorPick, #bgColorPick, #dropinColorPick, #dropinTabColorPick, #buttonColorPick{
+    border-radius: 20px;
+    height: 25px;
+    width: 25px;
+    border:2px solid #36BF52;;
+    outline:none;
+    -webkit-appearance: none;
+}
+
+#textColorPick::-webkit-color-swatch-wrapper, #bgColorPick::-webkit-color-swatch-wrapper, #dropinColorPick::-webkit-color-swatch-wrapper, #dropinTabColorPick::-webkit-color-swatch-wrapper, #buttonColorPick::-webkit-color-swatch-wrapper {
+    padding: 0; 
+}
+#textColorPick::-webkit-color-swatch, #bgColorPick::-webkit-color-swatch, #dropinColorPick::-webkit-color-swatch, #dropinTabColorPick::-webkit-color-swatch, #buttonColorPick::-webkit-color-swatch {
+    border:none;
+    border-radius: 50%;
+}
+
+
+

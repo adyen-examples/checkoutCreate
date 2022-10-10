@@ -545,6 +545,12 @@ function dropinTabColor() {
 	r.style.setProperty('--dropin-tab-color', dropinTabColor);
 }
 
+function textColor() {
+	let textColor = document.getElementById("textColorPick").value;
+	r.style.setProperty('--text-color', textColor);
+}
+
+
 function buttonEdges () {
 	let edgeValue = document.getElementById('buttonEdges').value
 	let pixelVal = edgeValue + 'px'
@@ -555,6 +561,11 @@ function bodyEdges () {
 	let bodyEdgeValue = document.getElementById('bodyEdges').value
 	let bodyPixelVal = bodyEdgeValue + 'px'
 	r.style.setProperty('--body-edges', bodyPixelVal);
+	r.style.setProperty('--selectedBody-edges', bodyPixelVal);
+	r.style.setProperty('--topedges-left', bodyPixelVal);
+	r.style.setProperty('--topedges-right', bodyPixelVal);
+	r.style.setProperty('--bottomedges-left', bodyPixelVal);
+	r.style.setProperty('--bottomedges-right', bodyPixelVal);
 }
 
 
@@ -573,11 +584,24 @@ function resetDynamicCSS () {
 	r.style.setProperty('--background-color', null);
 	r.style.setProperty('--dropin-width', null);
 	r.style.setProperty('--body-edges', null);
+	r.style.setProperty('--selectedBody-edges', null);
+	r.style.setProperty('--topedges-left', null);
+	r.style.setProperty('--topedges-right', null);
+	r.style.setProperty('--bottomedges-left', null);
+	r.style.setProperty('--bottomedges-right', null);
 	r.style.setProperty('--button-edges', null);
 	r.style.setProperty('--bg-color', null);
 	r.style.setProperty('--dropin-color', null);
 	r.style.setProperty('--dropin-tab-color', null);
 	r.style.setProperty('--dropin-font', null)
+	r.style.setProperty('--text-color', null);
+	r.style.setProperty('--text-bold', null);
+	r.style.setProperty('--text-italic', null);
+	r.style.setProperty('--text-align', null);
+	r.style.setProperty('--payButton-width', null);
+	r.style.setProperty('--payments-spacing', null);
+	r.style.setProperty('--paymentselected-margin', null);
+	r.style.setProperty('--font-options', null);
 }
 
 function dropinWidth () {
@@ -585,6 +609,20 @@ function dropinWidth () {
 	let widthpx = widthValue + 'px'
 	r.style.setProperty('--dropin-width', widthpx);
 	console.log(widthpx)
+}
+
+function payButtonWidth () {
+	let payWidthValue = document.getElementById("payButtonWidth").value
+	let payWidthpx = payWidthValue + 'px'
+	r.style.setProperty('--payButton-width', payWidthpx);
+}
+
+function paymentsSpacing () {
+	let paymentSpacingValue = document.getElementById("paymentsSpacing").value
+	let paymentSpacingpx = paymentSpacingValue + 'px'
+	r.style.setProperty('--payments-spacing', paymentSpacingpx);
+	r.style.setProperty('--paymentselected-margin', paymentSpacingpx);
+	console.log(paymentSpacingpx)
 }
 
 function fontWidth () {
