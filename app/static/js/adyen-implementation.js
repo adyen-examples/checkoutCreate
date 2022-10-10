@@ -570,6 +570,7 @@ let r = document.querySelector(':root');
 function setDynamicCSS() {
 	colorVal = document.getElementById("buttonColorPick").value;
 	r.style.setProperty('--background-color', colorVal);
+	updateStyleCode();
 }
 
 function backgroundColor() {
@@ -580,16 +581,20 @@ function backgroundColor() {
 function dropinColor() {
 	let dropinColor = document.getElementById("dropinColorPick").value;
 	r.style.setProperty('--dropin-color', dropinColor);
+	updateStyleCode();
+
 }
 
 function dropinTabColor() {
 	let dropinTabColor = document.getElementById("dropinTabColorPick").value;
 	r.style.setProperty('--dropin-tab-color', dropinTabColor);
+	updateStyleCode();
 }
 
 function textColor() {
 	let textColor = document.getElementById("textColorPick").value;
 	r.style.setProperty('--text-color', textColor);
+	updateStyleCode();
 }
 
 
@@ -597,6 +602,7 @@ function buttonEdges () {
 	let edgeValue = document.getElementById('buttonEdges').value
 	let pixelVal = edgeValue + 'px'
 	r.style.setProperty('--button-edges', pixelVal);
+	updateStyleCode();
 }
 
 function bodyEdges () {
@@ -608,6 +614,7 @@ function bodyEdges () {
 	r.style.setProperty('--topedges-right', bodyPixelVal);
 	r.style.setProperty('--bottomedges-left', bodyPixelVal);
 	r.style.setProperty('--bottomedges-right', bodyPixelVal);
+	updateStyleCode();
 }
 
 
@@ -615,10 +622,11 @@ function bodyEdges () {
 document.getElementById('noBorder').parentNode.addEventListener('click', function (event) {
 	if (this.querySelector('input').checked) {
 		r.style.setProperty('--border-off', "0")
-		console.log(borderValue)
+		updateStyleCode();
 	}
 	else {
 		r.style.setProperty('--border-off', null)
+		updateStyleCode();
 	}
 })
 
@@ -651,12 +659,14 @@ function dropinWidth () {
 	let widthpx = widthValue + 'px'
 	r.style.setProperty('--dropin-width', widthpx);
 	console.log(widthpx)
+	updateStyleCode()
 }
 
 function payButtonWidth () {
 	let payWidthValue = document.getElementById("payButtonWidth").value
 	let payWidthpx = payWidthValue + 'px'
 	r.style.setProperty('--payButton-width', payWidthpx);
+	updateStyleCode();
 }
 
 function paymentsSpacing () {
@@ -664,13 +674,14 @@ function paymentsSpacing () {
 	let paymentSpacingpx = paymentSpacingValue + 'px'
 	r.style.setProperty('--payments-spacing', paymentSpacingpx);
 	r.style.setProperty('--paymentselected-margin', paymentSpacingpx);
-	console.log(paymentSpacingpx)
+	updateStyleCode();
 }
 
 function fontWidth () {
 	let fontValue = document.getElementById("fontSize").value
 	let fontpx = fontValue + 'px'
 	r.style.setProperty('--dropin-font', fontpx);
+	updateStyleCode();
 }
 
 // Copy to clipboard function
@@ -698,7 +709,7 @@ function changeTestCard(brandValue) {
 function positionText() {
 	let positionValue = document.getElementById("positionText").value
 	r.style.setProperty('--text-align', positionValue);
-	console.log(positionValue)
+	updateStyleCode();
 }
 
 function makeBold() {
@@ -706,12 +717,12 @@ function makeBold() {
 	if (document.getElementById("makeBold").classList.contains("bold-active")) {
 		document.getElementById("makeBold").classList.remove("bold-active")
 		r.style.setProperty('--text-bold', null)
-		console.log("i'm checked")
+		updateStyleCode();
 	}
 	else {
 		document.getElementById("makeBold").classList.add("bold-active")
 		r.style.setProperty('--text-bold', "bold")
-		console.log("not checked")
+		updateStyleCode();
 	}
 }
 
@@ -721,12 +732,12 @@ function makeItalic() {
 	if (document.getElementById("makeItalic").classList.contains("italic-active")) {
 		document.getElementById("makeItalic").classList.remove("italic-active")
 		r.style.setProperty('--text-italic', null)
-		console.log("i'm checked")
+		updateStyleCode();
 	}
 	else {
 		document.getElementById("makeItalic").classList.add("italic-active")
 		r.style.setProperty('--text-italic', "italic")
-		console.log("not checked")
+		updateStyleCode();
 	}
 }
 // document.getElementById('showPayMethod').parentNode.addEventListener('click', function (event); 
@@ -735,11 +746,8 @@ function makeItalic() {
  function changeFont() {
     r.style.setProperty('--font-options', null);
 	let fontValue = document.getElementById("font_select").value
-
-
-		r.style.setProperty('--font-options', fontValue);	
-
-console.log(fontValue)
+	r.style.setProperty('--font-options', fontValue);
+	updateStyleCode();
 }
 // document.getElementById('placeholderData').parentNode.addEventListener('click', function (event) {
 //hiding payment methods functions
@@ -754,9 +762,6 @@ function showPaypal() {
 }
 
 //JSON highlight code styling
-function output(inp) {
-    document.body.appendChild(document.createElement('pre')).innerHTML = inp;
-}
 
 function syntaxHighlight(json) {
     json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -776,6 +781,89 @@ function syntaxHighlight(json) {
         return '<span class="' + cls + '">' + match + '</span>';
     });
 }
+
+// // CSS printing
+// // let styledDiv = document.getElementsByClassName('adyen-checkout__payment-method');
+// const cloneCSS = Object.assign({}, oldDiv)
+// let cssCode = styledDiv.style
+// document.getElementById("cssCode").innerHTML = syntaxHighlight(cssCode);
+// let divContent = document.querySelector('dropin-container')
+//  let cssCode = window.getComputedStyle(divContent).display;
+// let stringCSS = JSON.stringify(cssCode, null, 2);
+//  document.getElementById("cssCode").innerHTML = stringCSS;
+
+// let paymentCont = document.getElementById('dropin-container');
+// console.log(window.getComputedStyle(paymentCont, null));
+
+
+function updateStyleCode () {
+	let cssjson = {
+		".adyen-checkout__payment-method": {
+			'width': getComputedStyle(r).getPropertyValue('--dropin-width'),
+			'font-size': getComputedStyle(r).getPropertyValue('--dropin-font'),
+			'font-family': getComputedStyle(r).getPropertyValue('--font-options'),
+			'text-align': getComputedStyle(r).getPropertyValue('--text-align'),
+			'border-radius': getComputedStyle(r).getPropertyValue('--body-edges'),
+			'border': getComputedStyle(r).getPropertyValue('--border-off'),
+			'background': getComputedStyle(r).getPropertyValue('--dropin-tab-color'),
+			'font-weight': getComputedStyle(r).getPropertyValue('--text-bold'),
+			'margin': getComputedStyle(r).getPropertyValue('--payments-spacing')
+		},
+		".adyen-checkout__button.adyen-checkout__button--pay": {
+			'width': getComputedStyle(r).getPropertyValue('--payButton-width'),
+			'background': getComputedStyle(r).getPropertyValue('--background-color'),
+			'border-radius': getComputedStyle(r).getPropertyValue('--button-edges')
+		},
+		".adyen-checkout__payment-methods-list li:nth-child(2)": {
+			'border-top-left-radius': getComputedStyle(r).getPropertyValue('--topedges-left'),
+			'border-top-right-radius': getComputedStyle(r).getPropertyValue('--topedges-right')
+		},
+		".adyen-checkout__payment-methods-list li:last-child": {
+			'border-bottom-left-radius': getComputedStyle(r).getPropertyValue('--bottomedges-left'),
+			'border-bottom-right-radius': getComputedStyle(r).getPropertyValue('--bottomedges-right')
+		},
+		".adyen-checkout__dropin": {
+			'text-align': getComputedStyle(r).getPropertyValue('--text-align')
+		},
+		'.adyen-checkout__payment-method--selected': {
+			'background': getComputedStyle(r).getPropertyValue('--dropin-color'),
+			'margin': getComputedStyle(r).getPropertyValue('--paymentselected-margin'),
+			'border-radius': getComputedStyle(r).getPropertyValue('--selectedBody-edges')
+		},
+		'.adyen-checkout__payment-method__name': {
+			'font-weight': getComputedStyle(r).getPropertyValue('--text-bold'),
+			'font-style': getComputedStyle(r).getPropertyValue('--text-italic'),
+			'color': getComputedStyle(r).getPropertyValue('--text-color')
+		},
+		'.adyen-checkout__label__text': {
+			'font-weight': getComputedStyle(r).getPropertyValue('--text-bold'),
+			'font-style': getComputedStyle(r).getPropertyValue('--text-italic'),
+			'color': getComputedStyle(r).getPropertyValue('--text-color')
+		},
+		'.adyen-checkout__checkbox__label': {
+			'font-weight': getComputedStyle(r).getPropertyValue('--text-bold'),
+			'font-style': getComputedStyle(r).getPropertyValue('--text-italic'),
+			'color': getComputedStyle(r).getPropertyValue('--text-color')
+		},
+		'.adyen-checkout__button__text': {
+			'font-weight': getComputedStyle(r).getPropertyValue('--text-bold'),
+			'font-style': getComputedStyle(r).getPropertyValue('--text-italic'),
+			'color': getComputedStyle(r).getPropertyValue('--text-color')
+		}
+	}
+	var styleStr = "";
+    for(var i in cssjson){
+        styleStr += i + " {\n"
+        for(var j in cssjson[i]){
+            styleStr += "\t" + j + ":" + cssjson[i][j] + ";\n"     
+        }
+        styleStr += "}\n" 
+    }
+	// let stringCSS = JSON.stringify(css, null, 2);
+	document.getElementById("cssCode").innerHTML = styleStr;
+}
+updateStyleCode();
+
 
 
 initCheckout();

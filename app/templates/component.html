@@ -44,10 +44,9 @@
       integrity="sha384-Dm1w8jaVOWA8rxpzkxA41DIyw5VlBjpoMTPfAijlfepYGgLKF+hke3NKeU/KTX7t"
       crossorigin="anonymous"
     />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/themes/prism.min.css"
-    />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/styles/default.min.css">
+
 
     <title>Checkout Create</title>
   </head>
@@ -1027,6 +1026,7 @@
                   aria-labelledby="save-tab"
                 >
                   <pre id="configCode"><code id="configCode" class="configCode"></code></pre>
+                  <pre id="cssCode"><code class="css-code" id="cssCode" ></code></pre>
                 </div>
               </div>
             </div>
@@ -1040,14 +1040,6 @@
       integrity="sha384-vMZOl6V83EY2UXaXsPUxH5Pt5VpyLeHpSFnANBVjcH5l7yZmJO0QBl3s6XbKwjiN"
       crossorigin="anonymous"
     ></script>
-    <script>
-    $.getJSON('https://api.github.com/users/trevorsenior?callback=?', 
-    function(data) {
-        var jsonString = JSON.stringify(data, null, 4);
-        $('#configCode').text(jsonString);
-        prettyPrint(); //apply syntax highlighting to to JSON
-    });
-  </script>
 
     <!-- data from front-end -->
     <script id="client-key" type="application/json">
@@ -1093,8 +1085,14 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/prism.min.js"></script>
-
+    <!-- convert json to css -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/json-to-css-variables@1.0.0/index.min.js"></script> -->
+    <!-- [Attributes by Finsweet] Code Highlight -->
+    <!-- <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/highlight.min.js"></script>
+    <script async src="https://cdn.jsdelivr.net/npm/@finsweet/attributes-codehighlight@1/codehighlight.js"></script>   -->
+    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/highlight.min.js"></script>
+    <!-- and it's easy to individually load additional languages -->
+    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/languages/go.min.js"></script>
   </body>
 </html>
 
