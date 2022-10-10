@@ -144,7 +144,7 @@
                     </div>
                     <!-- Panel footer start -->
                     <div class="panel-footer">
-                      <!-- <div id="card" class="card">
+                      <div id="card" class="card p-0 text-center">
                         <div class="card__front card__part">
                           <img
                             class="card__front-square card__square"
@@ -178,37 +178,28 @@
                             />
                           </div>
                         </div>
-                      </div> -->
+                      </div>
+
                       <!-- Under card footer -->
-                      <div class="container">
-                        <div class="row">
-                          <div class="col">
-                            <!-- load card -->
-                          </div>
-                        </div>
-                        <div class="row">
-                          <!-- copy pan -->
-                          <div class="col"></div>
-                          <p
-                            type="button"
-                            id="btn"
-                            class="btn"
-                            toggle="tooltip"
-                            data-clipboard-action="copy"
-                            data-placement="top"
-                            data-clipboard-target="p#cardNumber"
-                            onclick="resetCard()"
-                            title="Copy to clipboard"
+                      <div>
+                        <div class="row m-0">
+                          <div
+                            class="col copyBtnsStyle panCopy mr-1"
+                            onclick="copyToClipboard"
                           >
-                            copy
-                          </p>
-                          <!-- copy expiry -->
-                          <div class="col">
-                            <p>two</p>
+                            <p class="copyText">
+                              PAN <i class="bi bi-clipboard"></i>
+                            </p>
                           </div>
-                          <!-- copy cvc -->
-                          <div class="col">
-                            <p>three</p>
+                          <div class="col copyBtnsStyle expiryCopy ml-1 mr-1">
+                            <p class="copyText">
+                              EXPIRY <i class="bi bi-clipboard"></i>
+                            </p>
+                          </div>
+                          <div class="col copyBtnsStyle cvcCopy ml-1">
+                            <p class="copyText">
+                              CVC <i class="bi bi-clipboard"></i>
+                            </p>
                           </div>
                         </div>
                       </div>
@@ -565,7 +556,7 @@
                     <div class="col flex-fill section-title">
                       <p class="mb-1 titleFonts">Fonts</p>
                     </div>
-                    <div class="row container mb-2">
+                    <div class="row container mb-2 p-0">
                       <!-- text -->
                       <div class="col-6">
                         <p class="textFonts">
@@ -650,7 +641,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="row container mb-2">
+                    <div class="row container mb-2 p-0">
                       <!-- text -->
                       <div class="col-6"></div>
                       <!-- title -->
@@ -674,7 +665,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="row container mb-2">
+                    <div class="row container mb-2 p-0">
                       <!-- text -->
                       <div class="col-6"></div>
                       <!-- title -->
@@ -713,7 +704,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="row container mb-2">
+                    <div class="row container mb-2 p-0">
                       <!-- text -->
                       <div class="col-6"></div>
                       <!-- title -->
@@ -732,7 +723,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="row container mb-2">
+                    <div class="row container mb-2 p-0">
                       <!-- text -->
                       <div class="col-6"></div>
                       <!-- title -->
@@ -752,7 +743,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="row container mb-2">
+                    <div class="row container mb-2 p-0">
                       <!-- text -->
                       <div class="col-6"></div>
                       <!-- title -->
@@ -781,7 +772,7 @@
                     <div class="col flex-fill section-title">
                       <p class="mb-1 titleFonts">Colour & Style</p>
                     </div>
-                    <div class="row container mb-2">
+                    <div class="row container mb-2 p-0">
                       <!-- text -->
                       <div class="col-6">
                         <p class="textFonts">
@@ -806,7 +797,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="row container mb-2">
+                    <div class="row container mb-2 p-0">
                       <!-- text -->
                       <div class="col-6"></div>
                       <!-- title -->
@@ -827,7 +818,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="row container mb-2">
+                    <div class="row container mb-2 p-0">
                       <!-- text -->
                       <div class="col-6"></div>
                       <!-- title -->
@@ -848,7 +839,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="row container mb-2">
+                    <div class="row container mb-2 p-0">
                       <!-- text -->
                       <div class="col-6"></div>
                       <!-- title -->
@@ -865,7 +856,7 @@
                         />
                       </div>
                     </div>
-                    <div class="row container mb-2">
+                    <div class="row container mb-2 p-0">
                       <!-- text -->
                       <div class="col-6"></div>
                       <!-- title -->
@@ -889,7 +880,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="row container mb-2">
+                    <div class="row container mb-2 p-0">
                       <!-- text -->
                       <div class="col-6"></div>
                       <!-- title -->
@@ -913,7 +904,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="row container mb-2">
+                    <div class="row container mb-2 p-0">
                       <!-- text -->
                       <div class="col-6"></div>
                       <!-- title -->
@@ -943,7 +934,7 @@
                     <div class="col flex-fill section-title">
                       <p class="mb-1 titleFonts">Dimensions</p>
                     </div>
-                    <div class="row container mb-2">
+                    <div class="row container mb-2 p-0">
                       <!-- text -->
                       <div class="col-6">
                         <p class="textFonts">
@@ -970,7 +961,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="row container">
+                  <div class="row container mb-2 p-0">
                     <!-- text -->
                     <div class="col-6"></div>
                     <!-- title -->
@@ -992,7 +983,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="row container">
+                  <div class="row container mb-2 p-0">
                     <!-- text -->
                     <div class="col-6"></div>
                     <!-- title -->
