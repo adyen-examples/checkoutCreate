@@ -564,6 +564,8 @@ a:hover {
   padding: 0 0 0 12px;
   position: relative;
   width: 100%;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 @media (min-width: 768px) {
@@ -709,8 +711,10 @@ a:hover {
   height: 0%;
   background-color: rgb(6, 6, 46);
   color: var(--main-grey);
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
 }
 
 .test-cards-display {
@@ -744,6 +748,7 @@ a:hover {
   -moz-perspective: 600px;
   perspective: 600px;
   background: rgb(6, 6, 46);
+  margin: 1rem auto;
 }
 
 .card__part {
@@ -981,7 +986,7 @@ a:hover {
 }
 
 .form-group {
-  width: 250px;
+  width: 9rem;
   /* Full-width */
   height: 35px;
   /* Specified height */
@@ -1021,18 +1026,6 @@ a:hover {
 
 .adyen-checkout__payment-method__radio {
   /* Radio button in payment method header */
-}
-
-.checkout .col {
-  background: var(--bg-color) !important;
-}
-
-.panel-footer {
-  margin-left: 40px;
-}
-
-.panel-body {
-  background: white;
 }
 
 .adyen-checkout__payment-method__name {
@@ -1126,7 +1119,7 @@ a:hover {
 
 .form-control-file,
 .form-control-range {
-  width: 50%;
+  /* width: 50%; */
 }
 /* 
 :not(pre)>code[class*=language-], pre[class*=language-] {
@@ -1154,4 +1147,40 @@ pre {
 }
 .key {
   color: #a5afbd;
+}
+
+.form-control-range::before {
+  background-color: red;
+  color: red;
+  background: red;
+}
+
+.panel-collapse .collapse .show {
+  width: 5000px !important;
+}
+
+.copyBtnsStyle {
+  font-family: var(--main-font);
+  background: var(--main-text);
+  border-radius: 10px;
+  color: var(--main-grey);
+  font-size: 0.9rem;
+  padding: 0;
+}
+
+.copyText {
+  margin: auto;
+}
+
+@media (max-width: 1500px) {
+  /* screen width (or the .grid) needs to be at least 500px wide, in order to display the .sidebar, because min-width of 200px is exactly 40% of 500px, so display it when 500px and more, but hide it when less */
+  .config-UI {
+    display: none;
+  }
+  .dropIn-UI {
+    width: 100%;
+    display: flex;
+    margin: 0%;
+    padding: 0;
+  }
 }
