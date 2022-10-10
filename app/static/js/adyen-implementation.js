@@ -1,5 +1,6 @@
 const clientKey = JSON.parse(document.getElementById('client-key').innerHTML);
 const storedCountry = document.getElementById('country-code');
+const payMethodsFE = document.getElementById('pay-methods')
 // let country = "GB";
 let countrySettings = "NL";
 
@@ -343,8 +344,9 @@ function getCountryData(countrySettings) {
 
 async function initCheckout() {
 	try {
-		const paymentMethodsResponse = await callServer("/api/getPaymentMethods", countrySettings);
+		const paymentMethodsResponse = await callServer("/api/getPaymentMethods", countrySettings, payMethods);
 		console.log(countrySettings)
+		console.log(payMethods)
 		let prettyResponse = JSON.stringify(paymentMethodsResponse, null, 2)
 		console.log(prettyResponse)
 		console.log(openFirst);
@@ -395,7 +397,7 @@ async function initCheckout() {
 			onSubmit: (state, dropin) => {
 
 				if (state.isValid) {
-					handleSubmission(state, dropin, "/api/initiatePayment", countrySettings);
+					handleSubmission(state, dropin, "/api/initiatePayment", countrySettings, payMethods);
 				}
 			},
 			onAdditionalDetails: (state, dropin) => {
@@ -471,12 +473,13 @@ function logConfig(cloneConfig) {
 
 // Event handlers called when the shopper selects the pay button,
 // or when additional information is required to complete the payment
-async function handleSubmission(state, dropin, url, countrySettings) {
+async function handleSubmission(state, dropin, url, countrySettings, payMethods) {
 	try {
 		//keeping the country data for the /payments call
 		const mergedData = {
 			...state.data,
-			...countrySettings
+			...countrySettings,
+			...payMethods
 		}
 		const res = await callServer(url, mergedData);
 		let prettyResponse = JSON.stringify(res, null, 2)
@@ -489,7 +492,7 @@ async function handleSubmission(state, dropin, url, countrySettings) {
 }
 
 // Calls your server endpoints
-async function callServer(url, data) {
+async function callServer(url, data, payMethods) {
 	const res = await fetch(url, {
 		method: "POST",
 		body: data ? JSON.stringify(data) : "",
@@ -751,13 +754,27 @@ function makeItalic() {
 }
 // document.getElementById('placeholderData').parentNode.addEventListener('click', function (event) {
 //hiding payment methods functions
-function showPaypal() {
+// function showPaypal() {
+// 	const paypalState = document.getElementById('showPaypal').checked;
+// 	const paypalBox = document.querySelector('.adyen-checkout__payment-method--paypal')
+// 	if (paypalState == true) {
+// 		paypalBox.style.display = ""
+// 	} else {
+// 		paypalBox.style.display = "none"
+// 	}
+// }
+
+let payMethods =[
+	"paypal"
+]
+
+function blockPaypal() {
 	const paypalState = document.getElementById('showPaypal').checked;
-	const paypalBox = document.querySelector('.adyen-checkout__payment-method--paypal')
+	// const paypalBox = document.querySelector('.adyen-checkout__payment-method--paypal')
 	if (paypalState == true) {
-		paypalBox.style.display = ""
+		payMethods.splice("paypal");
 	} else {
-		paypalBox.style.display = "none"
+		payMethods.push("paypal");
 	}
 }
 
