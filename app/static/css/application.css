@@ -705,7 +705,7 @@ a:hover {
 /* Test card container */
 
 #test-cards-btn {
-  width: 20%;
+  width: 20rem;
   margin-left: 2%;
   padding: 0;
   height: 0%;
@@ -1156,7 +1156,7 @@ pre {
 }
 
 .panel-collapse .collapse .show {
-  width: 5000px !important;
+  width: 15rem !important;
 }
 
 .copyBtnsStyle {
@@ -1166,6 +1166,8 @@ pre {
   color: var(--main-grey);
   font-size: 0.9rem;
   padding: 0;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 .copyText {
