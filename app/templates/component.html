@@ -110,7 +110,7 @@
 
           <!-- Test cards container -->
           <div class="test-cards-container fixed-bottom text-left">
-            <button id="test-cards-btn" class="btn btnprimary test-cards-btn">
+            <a id="test-cards-btn" class="btn btnprimary test-cards-btn">
               <div class="panel-group textFonts">
                 <div class="panel panel-default">
                   <div id="collapse1" class="panel-collapse collapse">
@@ -154,9 +154,7 @@
                             class="card__front-logo card__logo"
                             src="{{ url_for('static', filename='img/LogoAdyen.png') }}"
                           />
-                          <p class="card_numer" id="cardNumber">
-                            4111 1111 1111 1111
-                          </p>
+                          <p class="card_numer" id="cardNumber">4111 1111 1111 1111</p>
                           <div class="card__space-75">
                             <span class="card__label">Card holder</span>
                             <p class="card__info">John Doe</p>
@@ -183,24 +181,24 @@
                       <!-- Under card footer -->
                       <div>
                         <div class="row m-0">
-                          <div
-                            class="col copyBtnsStyle panCopy mr-1"
+                          <!-- <div -->
+                            <!-- class="col copyBtnsStyle panCopy mr-1"
                             onclick="copyToClipboard"
-                          >
-                            <p class="copyText">
+                          > -->
+                            <button class="btn" type="button" id="btn" data-clipboard-action="copy" data-clipboard-target="p#cardNumber.card_numer" onclick="resetCard()" title="Copy to clipboard">
                               PAN <i class="bi bi-clipboard"></i>
-                            </p>
-                          </div>
-                          <div class="col copyBtnsStyle expiryCopy ml-1 mr-1">
-                            <p class="copyText">
+                            </button>
+                          <!-- </div> -->
+                          <!-- <div class="col copyBtnsStyle expiryCopy ml-1 mr-1"> -->
+                            <button class="btn" data-clipboard-action="copy" id="copy-expiry" data-clipboard-target="p#expiry" onclick="resetCard()" title="Copy to clipboard">
                               EXPIRY <i class="bi bi-clipboard"></i>
-                            </p>
-                          </div>
-                          <div class="col copyBtnsStyle cvcCopy ml-1">
-                            <p class="copyText">
+                            </button>
+                          <!-- </div> -->
+                          <!-- <div class="col copyBtnsStyle cvcCopy ml-1"> -->
+                            <button class="btn" data-clipboard-action="copy" id="copy-cvc" data-clipboard-target="p#cvc" onclick="turnCard()" title="Copy to clipboard">
                               CVC <i class="bi bi-clipboard"></i>
-                            </p>
-                          </div>
+                            </button>
+                          <!-- </div> -->
                         </div>
                       </div>
                     </div>
@@ -221,7 +219,7 @@
                   </div>
                 </div>
               </div>
-            </button>
+            </a>
           </div>
         </div>
 
@@ -544,420 +542,419 @@
                   </div>
                 </div>
 
-                <!-- Theme & Styles content - 2nd tab -->
-                <div
-                  class="tab-pane fade config-content-panel"
-                  id="themes"
-                  role="tabpanel"
-                  aria-labelledby="profile-tab"
-                >
-                  <!-- Fonts -->
-                  <div class="row mt-3">
-                    <div class="col flex-fill section-title">
-                      <p class="mb-1 titleFonts">Fonts</p>
+              <!-- Theme & Styles content - 2nd tab -->
+              <div
+                class="tab-pane fade config-content-panel"
+                id="themes"
+                role="tabpanel"
+                aria-labelledby="profile-tab"
+              >
+                <!-- Fonts -->
+                <div class="row mt-3">
+                  <div class="col flex-fill section-title">
+                    <p class="mb-1 titleFonts">Fonts</p>
+                  </div>
+                  <div class="row container mb-2 p-0">
+                    <!-- text -->
+                    <div class="col-6">
+                      <p class="textFonts">
+                        Choose your font styles and size
+                      </p>
                     </div>
-                    <div class="row container mb-2 p-0">
-                      <!-- text -->
-                      <div class="col-6">
-                        <p class="textFonts">
-                          Choose your font styles and size
-                        </p>
-                      </div>
-                      <!-- title -->
-                      <div class="col-3">
-                        <p class="textFonts text-left ml-3">Font</p>
-                      </div>
-                      <!-- toggle -->
-                      <div class="col-3 text-center">
-                        <div class="font-selector textFonts">
-                          <select
-                            onchange="changeFont(this)"
-                            id="font_select"
-                            class="font-selector__select"
-                            aria-label="font"
-                            autocomplete="off"
+                    <!-- title -->
+                    <div class="col-3">
+                      <p class="textFonts text-left ml-3">Font</p>
+                    </div>
+                    <!-- toggle -->
+                    <div class="col-3 text-center">
+                      <div class="font-selector textFonts">
+                        <select
+                          onchange="changeFont(this)"
+                          id="font_select"
+                          class="font-selector__select"
+                          aria-label="font"
+                          autocomplete="off"
+                        >
+                          <option
+                            value="Segoe UI, sans-serif, Helvetica, Arial"
+                            style="
+                              font-family: 'Segoe UI', sans-serif, Helvetica,
+                                Arial;
+                            "
                           >
-                            <option
-                              value="Segoe UI, sans-serif, Helvetica, Arial"
-                              style="
-                                font-family: 'Segoe UI', sans-serif, Helvetica,
-                                  Arial;
-                              "
-                            >
-                              Segoe UI
-                            </option>
-                            <option
-                              value="Roboto Condensed, sans-serif"
-                              style="
-                                font-family: 'Roboto Condensed', sans-serif;
-                              "
-                            >
-                              Roboto Condensed
-                            </option>
-                            <option
-                              value="Engagement, cursive"
-                              style="font-family: 'Engagement', cursive"
-                            >
-                              Engagement
-                            </option>
-                            <option
-                              value="Lato, sans-serif"
-                              style="font-family: 'Lato', sans-serif"
-                            >
-                              Lato
-                            </option>
-                            <option
-                              value="Times New Roman, Times, serif"
-                              style="
-                                font-family: 'Times New Roman', Times, serif;
-                              "
-                            >
-                              Times New Roman
-                            </option>
-                            <option
-                              value="Arial, Helvetica, sans-serif"
-                              style="
-                                font-family: 'Arial', Helvetica, sans-serif;
-                              "
-                            >
-                              Arial
-                            </option>
-                            <option
-                              value="Lucida Console, 'Courier New', monospace"
-                              style="
-                                font-family: 'Lucida Console', 'Courier New',
-                                  monospace;
-                              "
-                            >
-                              Lucida
-                            </option>
-                          </select>
-                          <div class="dropdown-icon" aria-hidden="true">
-                            <img
-                              src="{{ url_for('static', filename='img/dropdown.svg') }}"
-                              alt="Dropdown caret"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row container mb-2 p-0">
-                      <!-- text -->
-                      <div class="col-6"></div>
-                      <!-- title -->
-                      <div class="col-3">
-                        <p class="textFonts text-left ml-3">Size</p>
-                      </div>
-                      <!-- toggle -->
-                      <div class="col-3 text-center">
-                        <div class="form-group">
-                          <div class="custom-control custom-switch">
-                            <input
-                              type="range"
-                              class="form-control-range"
-                              id="fontSize"
-                              min="13"
-                              max="17"
-                              value="17"
-                              onchange="fontWidth(this.value)"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row container mb-2 p-0">
-                      <!-- text -->
-                      <div class="col-6"></div>
-                      <!-- title -->
-                      <div class="col-3">
-                        <p class="textFonts text-left ml-3">Alignment</p>
-                      </div>
-                      <!-- toggle -->
-                      <div class="col-3 text-center">
-                        <div class="text-alignment textFonts">
-                          <select
-                            onchange="positionText(this)"
-                            id="positionText"
-                            class="textalign-selector__select"
-                            autocomplete="off"
+                            Segoe UI
+                          </option>
+                          <option
+                            value="Roboto Condensed, sans-serif"
+                            style="
+                              font-family: 'Roboto Condensed', sans-serif;
+                            "
                           >
-                            <option
-                              selected
-                              value="left"
-                              style="text-align: left"
-                            >
-                              Left
-                            </option>
-                            <option value="center" style="text-align: center">
-                              Center
-                            </option>
-                            <option value="right" style="text-align: right">
-                              Right
-                            </option>
-                          </select>
-                          <div class="dropdown-icon" aria-hidden="true">
-                            <img
-                              src="{{ url_for('static', filename='img/dropdown.svg') }}"
-                              alt="Dropdown caret"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row container mb-2 p-0">
-                      <!-- text -->
-                      <div class="col-6"></div>
-                      <!-- title -->
-                      <div class="col-3">
-                        <p class="textFonts text-left ml-3">Colour</p>
-                      </div>
-                      <!-- toggle -->
-                      <div class="col-3 text-center">
-                        <div>
-                          <input
-                            type="color"
-                            name=""
-                            id="textColorPick"
-                            onchange="textColor()"
+                            Roboto Condensed
+                          </option>
+                          <option
+                            value="Engagement, cursive"
+                            style="font-family: 'Engagement', cursive"
+                          >
+                            Engagement
+                          </option>
+                          <option
+                            value="Lato, sans-serif"
+                            style="font-family: 'Lato', sans-serif"
+                          >
+                            Lato
+                          </option>
+                          <option
+                            value="Times New Roman, Times, serif"
+                            style="
+                              font-family: 'Times New Roman', Times, serif;
+                            "
+                          >
+                            Times New Roman
+                          </option>
+                          <option
+                            value="Arial, Helvetica, sans-serif"
+                            style="
+                              font-family: 'Arial', Helvetica, sans-serif;
+                            "
+                          >
+                            Arial
+                          </option>
+                          <option
+                            value="Lucida Console, 'Courier New', monospace"
+                            style="
+                              font-family: 'Lucida Console', 'Courier New',
+                                monospace;
+                            "
+                          >
+                            Lucida
+                          </option>
+                        </select>
+                        <div class="dropdown-icon" aria-hidden="true">
+                          <img
+                            src="{{ url_for('static', filename='img/dropdown.svg') }}"
+                            alt="Dropdown caret"
                           />
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row container mb-2 p-0">
-                      <!-- text -->
-                      <div class="col-6"></div>
-                      <!-- title -->
-                      <div class="col-3">
-                        <p class="textFonts text-left ml-3">Bold</p>
-                      </div>
-                      <!-- toggle -->
-                      <div class="col-3 text-center">
-                        <div class="boldImage">
-                          <img src="static/img/bold.png" />
-                          <button
-                            type="button"
-                            id="makeBold"
-                            class="btn"
-                            onclick="makeBold()"
-                          ></button>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row container mb-2 p-0">
-                      <!-- text -->
-                      <div class="col-6"></div>
-                      <!-- title -->
-                      <div class="col-3">
-                        <p class="textFonts text-left ml-3">Italic</p>
-                      </div>
-                      <!-- toggle -->
-                      <div class="col-3 text-center">
-                        <div class="italicImage">
-                          <img src="static/img/italic.png" />
-                          <button
-                            type="button"
-                            id="makeItalic"
-                            class="btn"
-                            onclick="makeItalic()"
-                          ></button>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <!-- line and end of section -->
-                  <hr class="mt-4 mb-4" />
-
-                  <!-- Colours and styles -->
-                  <div class="row mt-3">
-                    <div class="col flex-fill section-title">
-                      <p class="mb-1 titleFonts">Colour & Style</p>
+                  <div class="row container mb-2 p-0">
+                    <!-- text -->
+                    <div class="col-6"></div>
+                    <!-- title -->
+                    <div class="col-3">
+                      <p class="textFonts text-left ml-3">Size</p>
                     </div>
-                    <div class="row container mb-2 p-0">
-                      <!-- text -->
-                      <div class="col-6">
-                        <p class="textFonts">
-                          Select the colour & style of your checkout
-                        </p>
-                      </div>
-                      <!-- title -->
-                      <div class="col-3">
-                        <p class="textFonts text-left ml-3">
-                          Website background
-                        </p>
-                      </div>
-                      <!-- toggle -->
-                      <div class="col-3 text-center">
-                        <div>
+                    <!-- toggle -->
+                    <div class="col-3 text-center">
+                      <div class="form-group">
+                        <div class="custom-control custom-switch">
                           <input
-                            type="color"
-                            name=""
-                            id="bgColorPick"
-                            onchange="backgroundColor()"
+                            type="range"
+                            class="form-control-range"
+                            id="fontSize"
+                            min="13"
+                            max="17"
+                            value="17"
+                            onchange="fontWidth(this.value)"
                           />
                         </div>
                       </div>
                     </div>
-                    <div class="row container mb-2 p-0">
-                      <!-- text -->
-                      <div class="col-6"></div>
-                      <!-- title -->
-                      <div class="col-3">
-                        <p class="textFonts text-left ml-3">
-                          Active checkout background
-                        </p>
-                      </div>
-                      <!-- toggle -->
-                      <div class="col-3 text-center">
-                        <div>
-                          <input
-                            type="color"
-                            name=""
-                            id="dropinColorPick"
-                            onchange="dropinColor()"
+                  </div>
+                  <div class="row container mb-2 p-0">
+                    <!-- text -->
+                    <div class="col-6"></div>
+                    <!-- title -->
+                    <div class="col-3">
+                      <p class="textFonts text-left ml-3">Alignment</p>
+                    </div>
+                    <!-- toggle -->
+                    <div class="col-3 text-center">
+                      <div class="text-alignment textFonts">
+                        <select
+                          onchange="positionText(this)"
+                          id="positionText"
+                          class="textalign-selector__select"
+                          autocomplete="off"
+                        >
+                          <option
+                            selected
+                            value="left"
+                            style="text-align: left"
+                          >
+                            Left
+                          </option>
+                          <option value="center" style="text-align: center">
+                            Center
+                          </option>
+                          <option value="right" style="text-align: right">
+                            Right
+                          </option>
+                        </select>
+                        <div class="dropdown-icon" aria-hidden="true">
+                          <img
+                            src="{{ url_for('static', filename='img/dropdown.svg') }}"
+                            alt="Dropdown caret"
                           />
                         </div>
                       </div>
                     </div>
-                    <div class="row container mb-2 p-0">
-                      <!-- text -->
-                      <div class="col-6"></div>
-                      <!-- title -->
-                      <div class="col-3">
-                        <p class="textFonts text-left ml-3">
-                          Collapsed payment methods background
-                        </p>
-                      </div>
-                      <!-- toggle -->
-                      <div class="col-3 text-center">
-                        <div>
-                          <input
-                            type="color"
-                            name=""
-                            id="dropinTabColorPick"
-                            onchange="dropinTabColor()"
-                          />
-                        </div>
-                      </div>
+                  </div>
+                  <div class="row container mb-2 p-0">
+                    <!-- text -->
+                    <div class="col-6"></div>
+                    <!-- title -->
+                    <div class="col-3">
+                      <p class="textFonts text-left ml-3">Colour</p>
                     </div>
-                    <div class="row container mb-2 p-0">
-                      <!-- text -->
-                      <div class="col-6"></div>
-                      <!-- title -->
-                      <div class="col-3">
-                        <p class="textFonts text-left ml-3">Pay button</p>
-                      </div>
-                      <!-- toggle -->
-                      <div class="col-3 text-center">
+                    <!-- toggle -->
+                    <div class="col-3 text-center">
+                      <div>
                         <input
                           type="color"
                           name=""
-                          id="buttonColorPick"
-                          onchange="setDynamicCSS()"
+                          id="textColorPick"
+                          onchange="textColor()"
                         />
                       </div>
                     </div>
-                    <div class="row container mb-2 p-0">
-                      <!-- text -->
-                      <div class="col-6"></div>
-                      <!-- title -->
-                      <div class="col-3">
-                        <p class="textFonts text-left ml-3">
-                          Change button edges
-                        </p>
-                      </div>
-                      <!-- toggle -->
-                      <div class="col-3 text-center">
-                        <div class="form-group">
-                          <input
-                            type="range"
-                            class="form-control-range"
-                            id="buttonEdges"
-                            onchange="buttonEdges(this.value);"
-                            min="0"
-                            max="25"
-                            value="5"
-                          />
-                        </div>
-                      </div>
+                  </div>
+                  <div class="row container mb-2 p-0">
+                    <!-- text -->
+                    <div class="col-6"></div>
+                    <!-- title -->
+                    <div class="col-3">
+                      <p class="textFonts text-left ml-3">Bold</p>
                     </div>
-                    <div class="row container mb-2 p-0">
-                      <!-- text -->
-                      <div class="col-6"></div>
-                      <!-- title -->
-                      <div class="col-3">
-                        <p class="textFonts text-left ml-3">
-                          Change checkout edges
-                        </p>
-                      </div>
-                      <!-- toggle -->
-                      <div class="col-3 text-center">
-                        <div class="form-group">
-                          <input
-                            type="range"
-                            class="form-control-range"
-                            id="bodyEdges"
-                            onchange="bodyEdges(this.value);"
-                            min="0"
-                            max="25"
-                            value="5"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row container mb-2 p-0">
-                      <!-- text -->
-                      <div class="col-6"></div>
-                      <!-- title -->
-                      <div class="col-3">
-                        <p class="textFonts text-left ml-3">Remove Borders</p>
-                      </div>
-                      <!-- toggle -->
-                      <div class="col-3 text-center">
-                        <div class="custom-control custom-switch">
-                          <input
-                            type="checkbox"
-                            class="custom-control-input"
-                            id="noBorder"
-                            data-toggle="toggle"
-                          />
-                          <label
-                            class="custom-control-label"
-                            for="noBorder"
-                          ></label>
-                        </div>
+                    <!-- toggle -->
+                    <div class="col-3 text-center">
+                      <div class="boldImage">
+                        <img src="static/img/bold.png" />
+                        <button
+                          type="button"
+                          id="makeBold"
+                          class="btn"
+                          onclick="makeBold()"
+                        ></button>
                       </div>
                     </div>
                   </div>
-                  <hr class="mt-4 mb-4" />
-                  <!-- Dimensions -->
-                  <div class="row mt-3">
-                    <div class="col flex-fill section-title">
-                      <p class="mb-1 titleFonts">Dimensions</p>
+                  <div class="row container mb-2 p-0">
+                    <!-- text -->
+                    <div class="col-6"></div>
+                    <!-- title -->
+                    <div class="col-3">
+                      <p class="textFonts text-left ml-3">Italic</p>
                     </div>
-                    <div class="row container mb-2 p-0">
-                      <!-- text -->
-                      <div class="col-6">
-                        <p class="textFonts">
-                          Define the size of your checkout
-                        </p>
+                    <!-- toggle -->
+                    <div class="col-3 text-center">
+                      <div class="italicImage">
+                        <img src="static/img/italic.png" />
+                        <button
+                          type="button"
+                          id="makeItalic"
+                          class="btn"
+                          onclick="makeItalic()"
+                        ></button>
                       </div>
-                      <!-- title -->
-                      <div class="col-3">
-                        <p class="textFonts text-left ml-3">Checkout width</p>
+                    </div>
+                  </div>
+                </div>
+                <!-- line and end of section -->
+                <hr class="mt-4 mb-4" />
+
+                <!-- Colours and styles -->
+                <div class="row mt-3">
+                  <div class="col flex-fill section-title">
+                    <p class="mb-1 titleFonts">Colour & Style</p>
+                  </div>
+                  <div class="row container mb-2 p-0">
+                    <!-- text -->
+                    <div class="col-6">
+                      <p class="textFonts">
+                        Select the colour & style of your checkout
+                      </p>
+                    </div>
+                    <!-- title -->
+                    <div class="col-3">
+                      <p class="textFonts text-left ml-3">
+                        Website background
+                      </p>
+                    </div>
+                    <!-- toggle -->
+                    <div class="col-3 text-center">
+                      <div>
+                        <input
+                          type="color"
+                          name=""
+                          id="bgColorPick"
+                          onchange="backgroundColor()"
+                        />
                       </div>
-                      <!-- toggle -->
-                      <div class="col-3 text-center">
-                        <div class="form-group">
-                          <input
-                            type="range"
-                            class="form-control-range"
-                            id="changeWidth"
-                            min="300"
-                            max="700"
-                            value="500"
-                            onchange="dropinWidth(this.value)"
-                          />
-                        </div>
+                    </div>
+                  </div>
+                  <div class="row container mb-2 p-0">
+                    <!-- text -->
+                    <div class="col-6"></div>
+                    <!-- title -->
+                    <div class="col-3">
+                      <p class="textFonts text-left ml-3">
+                        Active checkout background
+                      </p>
+                    </div>
+                    <!-- toggle -->
+                    <div class="col-3 text-center">
+                      <div>
+                        <input
+                          type="color"
+                          name=""
+                          id="dropinColorPick"
+                          onchange="dropinColor()"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row container mb-2 p-0">
+                    <!-- text -->
+                    <div class="col-6"></div>
+                    <!-- title -->
+                    <div class="col-3">
+                      <p class="textFonts text-left ml-3">
+                        Collapsed payment methods background
+                      </p>
+                    </div>
+                    <!-- toggle -->
+                    <div class="col-3 text-center">
+                      <div>
+                        <input
+                          type="color"
+                          name=""
+                          id="dropinTabColorPick"
+                          onchange="dropinTabColor()"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row container mb-2 p-0">
+                    <!-- text -->
+                    <div class="col-6"></div>
+                    <!-- title -->
+                    <div class="col-3">
+                      <p class="textFonts text-left ml-3">Pay button</p>
+                    </div>
+                    <!-- toggle -->
+                    <div class="col-3 text-center">
+                      <input
+                        type="color"
+                        name=""
+                        id="buttonColorPick"
+                        onchange="setDynamicCSS()"
+                      />
+                    </div>
+                  </div>
+                  <div class="row container mb-2 p-0">
+                    <!-- text -->
+                    <div class="col-6"></div>
+                    <!-- title -->
+                    <div class="col-3">
+                      <p class="textFonts text-left ml-3">
+                        Change button edges
+                      </p>
+                    </div>
+                    <!-- toggle -->
+                    <div class="col-3 text-center">
+                      <div class="form-group">
+                        <input
+                          type="range"
+                          class="form-control-range"
+                          id="buttonEdges"
+                          onchange="buttonEdges(this.value);"
+                          min="0"
+                          max="25"
+                          value="5"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row container mb-2 p-0">
+                    <!-- text -->
+                    <div class="col-6"></div>
+                    <!-- title -->
+                    <div class="col-3">
+                      <p class="textFonts text-left ml-3">
+                        Change checkout edges
+                      </p>
+                    </div>
+                    <!-- toggle -->
+                    <div class="col-3 text-center">
+                      <div class="form-group">
+                        <input
+                          type="range"
+                          class="form-control-range"
+                          id="bodyEdges"
+                          onchange="bodyEdges(this.value);"
+                          min="0"
+                          max="25"
+                          value="5"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row container mb-2 p-0">
+                    <!-- text -->
+                    <div class="col-6"></div>
+                    <!-- title -->
+                    <div class="col-3">
+                      <p class="textFonts text-left ml-3">Remove Borders</p>
+                    </div>
+                    <!-- toggle -->
+                    <div class="col-3 text-center">
+                      <div class="custom-control custom-switch">
+                        <input
+                          type="checkbox"
+                          class="custom-control-input"
+                          id="noBorder"
+                          data-toggle="toggle"
+                        />
+                        <label
+                          class="custom-control-label"
+                          for="noBorder"
+                        ></label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr class="mt-4 mb-4" />
+                <!-- Dimensions -->
+                <div class="row mt-3">
+                  <div class="col flex-fill section-title">
+                    <p class="mb-1 titleFonts">Dimensions</p>
+                  </div>
+                  <div class="row container mb-2 p-0">
+                    <!-- text -->
+                    <div class="col-6">
+                      <p class="textFonts">
+                        Define the size of your checkout
+                      </p>
+                    </div>
+                    <!-- title -->
+                    <div class="col-3">
+                      <p class="textFonts text-left ml-3">Checkout width</p>
+                    </div>
+                    <!-- toggle -->
+                    <div class="col-3 text-center">
+                      <div class="form-group">
+                        <input
+                          type="range"
+                          class="form-control-range"
+                          id="changeWidth"
+                          min="300"
+                          max="700"
+                          value="500"
+                          onchange="dropinWidth(this.value)"
+                        />
                       </div>
                     </div>
                   </div>
@@ -1016,6 +1013,7 @@
                     </button>
                   </div>
                 </div>
+              </div>
 
                 <!-- Save your creation content -->
                 <div
@@ -1024,7 +1022,6 @@
                   role="tabpanel"
                   aria-labelledby="save-tab"
                 >
-                  <<<<<<< Updated upstream
                   <div class="row mt-3">
                     <div class="col flex-fill section-title">
                       <p class="mb-1 titleFonts">Adyen Configuration</p>
@@ -1051,21 +1048,13 @@
                       </div>
                     </div>
                   </div>
-                  =======
-                  <pre
-                    id="configCode"
-                  ><code id="configCode" class="configCode"></code></pre>
-                  <pre
-                    id="cssCode"
-                  ><code class="css-code" id="cssCode" ></code></pre>
-                  >>>>>>> Stashed changes
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+
     <!-- Adyen JS from TEST environment (change to live for production)-->
     <script
       src="https://checkoutshopper-live.adyen.com/checkoutshopper/sdk/5.15.0/adyen.js"
@@ -1092,6 +1081,13 @@
 
     <!-- Clipboard JS -->
     <script>
+      let panText = document.getElementById('cardNumber').innerText
+      console.log(panText)
+      document.getElementById('btn').setAttribute("data-clipboard-text", String(panText))
+      let expiryText = document.getElementById('expiry').innerText
+      document.getElementById('copy-expiry').setAttribute("data-clipboard-text", String(expiryText))
+      let cvcText = document.getElementById('cvc').innerText
+      document.getElementById('copy-cvc').setAttribute("data-clipboard-text", String(cvcText))
       var clipboard = new Clipboard(".btn")
       clipboard.on("success", function (e) {
         console.log(e)

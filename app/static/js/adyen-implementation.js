@@ -588,6 +588,9 @@ function copyToClipboard() {
   // Alert the copied text
   alert("Copied the text: " + copyPAN)
 }
+
+
+
 let r = document.querySelector(":root")
 
 // Colour picker changes button color
@@ -713,16 +716,29 @@ function fontWidth() {
 // }
 
 function turnCard() {
+	updateCardCopy();
   document.getElementById("card").classList.add("card-visited")
   // cardDiv.setAttribute("class", "card-visited")
 }
 function resetCard() {
+	updateCardCopy();
   if (document.getElementById("card").classList.contains("card-visited")) {
     document.getElementById("card").classList.remove("card-visited")
   }
 }
 
+function updateCardCopy() {
+	let panText = document.getElementById('cardNumber').innerText
+	console.log(panText)
+	document.getElementById('btn').setAttribute("data-clipboard-text", String(panText))
+	let expiryText = document.getElementById('expiry').innerText
+	document.getElementById('copy-expiry').setAttribute("data-clipboard-text", String(expiryText))
+	let cvcText = document.getElementById('cvc').innerText
+	document.getElementById('copy-cvc').setAttribute("data-clipboard-text", String(cvcText))
+}
+
 function changeTestCard(brandValue) {
+	updateCardCopy();
   document.getElementById("brand_img").src =
     testCardBrandsMap[brandValue.value].src
   document.getElementById("cardNumber").innerText =
