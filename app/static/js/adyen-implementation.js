@@ -63,6 +63,7 @@ const testCardBrandsMap = {
   },
 }
 
+
 // Country dropdown changes the flag image and reloads the dropin with new country values
 function changeSelect(el) {
   document.getElementById("flag_img").src = flagUrlMap[el.value].src
@@ -572,7 +573,7 @@ function restartDropin() {
   initCheckout()
 }
 
-// Test cards JS
+// Test cards JS - NOT IN USE
 function copyToClipboard() {
   // Get the text field
   let copyPAN = document.getElementById("cardNumber").textContent
@@ -709,17 +710,14 @@ function fontWidth() {
   updateStyleCode()
 }
 
-// Copy to clipboard function
-// function copyToClipboard(e) {
-// 	const cb = navigator.clipboard;
-// 	cb.writeText(e.target.innerText)
-// }
-
+// this turns the test card around on copyCVC button click
 function turnCard() {
 	updateCardCopy();
   document.getElementById("card").classList.add("card-visited")
   // cardDiv.setAttribute("class", "card-visited")
 }
+
+// this turns the card back to front if on reverse and copyPAN or copyExiry button gets clicked
 function resetCard() {
 	updateCardCopy();
   if (document.getElementById("card").classList.contains("card-visited")) {
@@ -727,6 +725,7 @@ function resetCard() {
   }
 }
 
+// this updates the button attribute copy text to reflect the current card on UI
 function updateCardCopy() {
 	let panText = document.getElementById('cardNumber').innerText
 	console.log(panText)
@@ -737,6 +736,7 @@ function updateCardCopy() {
 	document.getElementById('copy-cvc').setAttribute("data-clipboard-text", String(cvcText))
 }
 
+// this is for the drop down to change test cards
 function changeTestCard(brandValue) {
 	updateCardCopy();
   document.getElementById("brand_img").src =
@@ -803,7 +803,7 @@ function changeFont() {
 let payMethods =[
 	"paypal"
 ]
-
+ // attempt to add txvariant to blockPaymentMethods array on button click
 function blockPaypal() {
 	const paypalState = document.getElementById('showPaypal').checked;
 	// const paypalBox = document.querySelector('.adyen-checkout__payment-method--paypal')
@@ -813,6 +813,8 @@ function blockPaypal() {
 		payMethods.push("paypal");
 	}
 }
+
+// interim solution to hide payment methods - USE ONLY AT THE END - breaks on dropin reload
 function showPaypal() {
   const paypalState = document.getElementById("showPaypal").checked
   const paypalBox = document.querySelector(
@@ -823,6 +825,102 @@ function showPaypal() {
   } else {
     paypalBox.style.display = "none"
   }
+}
+
+function showIdeal() {
+	const idealState = document.getElementById("showIdeal").checked
+	const idealBox = document.querySelector(
+		".adyen-checkout__payment-method--ideal"
+	)
+	if (idealState == true) {
+		idealBox.style.display = ""
+	} else {
+		idealBox.style.display = "none"
+	}
+}
+
+function showKlarna() {
+	const klarnaState = document.getElementById("showKlarna").checked
+	const klarnaBox = document.querySelector(
+		".adyen-checkout__payment-method--klarna"
+	)
+	if (klarnaState == true) {
+		klarnaBox.style.display = ""
+	} else {
+		klarnaBox.style.display = "none"
+	}
+}
+
+function showGooglePay() {
+	const googlepayState = document.getElementById("showGooglePay").checked
+	const googlepayBox = document.querySelector(
+		".adyen-checkout__payment-method--paywithgoogle"
+	)
+	if (googlepayState == true) {
+		googlepayBox.style.display = ""
+	} else {
+		googlepayBox.style.display = "none"
+	}
+}
+
+function showWeChat() {
+	const weChatState = document.getElementById("showWeChat").checked
+	const weChatBox = document.querySelector(
+		".adyen-checkout__payment-method--wechatpayQR"
+	)
+	if (weChatState == true) {
+		weChatBox.style.display = ""
+	} else {
+		weChatBox.style.display = "none"
+	}
+}
+
+function showAliPay() {
+	const alipayState = document.getElementById("showAliPay").checked
+	const alipayBox = document.querySelector(
+		".adyen-checkout__payment-method--alipay"
+	)
+	if (alipayState == true) {
+		alipayBox.style.display = ""
+	} else {
+		alipayBox.style.display = "none"
+	}
+}
+
+function showPaysafecard() {
+	const paysafecardState = document.getElementById("showPaysafecard").checked
+	const paysafecardBox = document.querySelector(
+		".adyen-checkout__payment-method--paysafecard"
+	)
+	if (paysafecardState == true) {
+		paysafecardBox.style.display = ""
+	} else {
+		paysafecardBox.style.display = "none"
+	}
+}
+
+function showClearpay() {
+	const clearpayState = document.getElementById("showClearpay").checked
+	const clearpayBox = document.querySelector(
+		".adyen-checkout__payment-method--clearpay"
+	)
+	if (clearpayState == true) {
+		clearpayBox.style.display = ""
+	} else {
+		clearpayBox.style.display = "none"
+	}
+}
+
+function showTrustly() {
+	const trustlyState = document.getElementById("showTrustly").checked
+	const trustlyBox = document.querySelector(
+		".adyen-checkout__payment-method--trustly"
+	)
+	if (trustlyState == true) {
+		trustlyBox.style.display = ""
+	} else {
+		trustlyBox.style.display = "none"
+	}
 }
 
 //JSON highlight code styling
