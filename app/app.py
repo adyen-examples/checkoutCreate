@@ -29,9 +29,10 @@ def create_app():
     @app.route('/api/getPaymentMethods', methods=['GET', 'POST'])
     def get_payment_methods():
         request_data = request.get_json()
-        # print (request_data)
+        print (request_data)
         locale_data = request_data
-        return adyen_payment_methods(locale_data)
+        payMethodsFE = request.get_json()
+        return adyen_payment_methods(payMethodsFE, locale_data)
 
 
     @app.route('/api/initiatePayment', methods=['POST'])

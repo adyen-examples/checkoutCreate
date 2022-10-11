@@ -10,7 +10,7 @@ Should have a payment state on your server from which you can fetch information 
 '''
 
 
-def adyen_payment_methods(locale_data):
+def adyen_payment_methods(locale_data, payMethodsFE):
     adyen = Adyen.Adyen()
     adyen.payment.client.xapikey = get_adyen_api_key()
     adyen.payment.client.platform = "test" # change to live for production
@@ -23,6 +23,7 @@ def adyen_payment_methods(locale_data):
     payment_methods_request['shopperReference'] = "UniqueReference"
     payment_methods_request['channel'] = "Web"
     payment_methods_request['merchantAccount'] = "CheckoutCreateDemo"
+    payment_methods_request['blockedPaymentMethods'] = []
 
 
 

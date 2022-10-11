@@ -1172,7 +1172,14 @@ pre {
   margin: auto;
 }
 
-@media (max-width: 1500px) {
+.btn {
+  color: var(--main-grey);
+}
+.btn:hover {
+	color: #687282;
+}
+
+@media (max-width: 500px) {
   /* screen width (or the .grid) needs to be at least 500px wide, in order to display the .sidebar, because min-width of 200px is exactly 40% of 500px, so display it when 500px and more, but hide it when less */
   .config-UI {
     display: none;

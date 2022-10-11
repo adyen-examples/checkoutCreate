@@ -142,6 +142,7 @@ def sanatizeRequest(payments_request):
     del payments_request['postalCode']
     del payments_request['street']
 
+
     # loaded = json.loads(payments_request)
     # for item in loaded:
     #     for key in ["currency", "locale"]:
