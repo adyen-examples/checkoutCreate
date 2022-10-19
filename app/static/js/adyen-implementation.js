@@ -1,5 +1,6 @@
 const clientKey = JSON.parse(document.getElementById("client-key").innerHTML)
 const storedCountry = document.getElementById("country-code")
+const currentPM = document.getElementById("pay-methods")
 // let country = "GB";
 let countrySettings = "NL"
 
@@ -7,6 +8,9 @@ let countrySettings = "NL"
 const urlCountryParams = new URLSearchParams(window.location.search)
 const countryURL = urlCountryParams.get("country")
 console.log(countryURL)
+
+let payMethods =[];
+let payArray = Object.values(payMethods);
 
 // global configuration variables
 let openFirst = true
@@ -61,6 +65,20 @@ const testCardBrandsMap = {
     expiry: "03/30",
     cvc: "7373",
   },
+}
+
+// Get old Drop-in
+function getOldDiv() {
+  const oldDiv = document.getElementById("dropin-container")
+  const newDiv = document.createElement("div")
+}
+
+// Create new Drop-in and replace for the old one
+function replaceDiv() {
+  oldDiv.replaceWith(newDiv);
+  newDiv.setAttribute("id", "dropin-container");
+  newDiv.setAttribute("class", "payment p-5");
+  initCheckout();
 }
 
 
@@ -350,16 +368,22 @@ function getCountryData(countrySettings) {
   )
 }
 
+let blockedPM = {"blockedPaymentMethods": payArray};
+
 async function initCheckout() {
   try {
+    const mergeData = {
+      ...countrySettings,
+      ...blockedPM
+    }
     const paymentMethodsResponse = await callServer(
       "/api/getPaymentMethods",
-      countrySettings
+      mergeData
     )
-    console.log(countrySettings)
+    console.log(mergeData)
+    // console.log(payArray)
     let prettyResponse = JSON.stringify(paymentMethodsResponse, null, 2)
     console.log(prettyResponse)
-    console.log(openFirst)
     let configuration = {
       paymentMethodsResponse: paymentMethodsResponse,
       clientKey,
@@ -410,7 +434,8 @@ async function initCheckout() {
             state,
             dropin,
             "/api/initiatePayment",
-            countrySettings
+            countrySettings,
+            payArray
           )
         }
       },
@@ -455,6 +480,18 @@ async function initCheckout() {
   }
 }
 
+async function unmountContainer() {
+  try {
+    const checkout = await AdyenCheckout();
+    checkout
+      .unmount("#dropin-container")
+  } catch (error) {
+    console.error(error)
+    alert("Error occurred. Look at console for details")
+  }
+}
+
+
 // logging configuration object to UI
 function logConfig(cloneConfig) {
   console.log(cloneConfig)
@@ -496,12 +533,13 @@ function logConfig(cloneConfig) {
 
 // Event handlers called when the shopper selects the pay button,
 // or when additional information is required to complete the payment
-async function handleSubmission(state, dropin, url, countrySettings) {
+async function handleSubmission(state, dropin, url, countrySettings, payArray) {
   try {
     //keeping the country data for the /payments call
     const mergedData = {
       ...state.data,
       ...countrySettings,
+      ...payArray
     }
     const res = await callServer(url, mergedData)
     let prettyResponse = JSON.stringify(res, null, 2)
@@ -724,6 +762,7 @@ function resetCard() {
     document.getElementById("card").classList.remove("card-visited")
   }
 }
+// updateCardCopy()
 
 // this updates the button attribute copy text to reflect the current card on UI
 function updateCardCopy() {
@@ -789,6 +828,7 @@ function changeFont() {
   updateStyleCode()
 }
 // document.getElementById('placeholderData').parentNode.addEventListener('click', function (event) {
+
 //hiding payment methods functions
 // function showPaypal() {
 // 	const paypalState = document.getElementById('showPaypal').checked;
@@ -799,45 +839,68 @@ function changeFont() {
 // 		paypalBox.style.display = "none"
 // 	}
 // }
+// const filteredPM =[]
+// let updatedPM =[]
 
-let payMethods =[
-	"paypal"
-]
- // attempt to add txvariant to blockPaymentMethods array on button click
+
+
+
+// Add txvariants to blockPaymentMethods array on button click
+// -------PayPal---------
 function blockPaypal() {
 	const paypalState = document.getElementById('showPaypal').checked;
-	// const paypalBox = document.querySelector('.adyen-checkout__payment-method--paypal')
 	if (paypalState == true) {
-		payMethods.splice("paypal");
+    const oldDiv = document.getElementById("dropin-container")
+    const newDiv = document.createElement("div")
+    const filteredPM = payMethods.filter((s) => !s.match("paypal"));
+    payMethods = filteredPM;
+    payArray = Object.values(payMethods);
+    blockedPM = {"blockedPaymentMethods": payArray};
+    oldDiv.replaceWith(newDiv)
+    newDiv.setAttribute("id", "dropin-container")
+    newDiv.setAttribute("class", "payment p-5")
+    initCheckout()
 	} else {
+    const oldDiv = document.getElementById("dropin-container")
+    const newDiv = document.createElement("div")
 		payMethods.push("paypal");
+    payArray = Object.values(payMethods);
+    blockedPM = {"blockedPaymentMethods": payArray};
+    oldDiv.replaceWith(newDiv)
+    newDiv.setAttribute("id", "dropin-container")
+    newDiv.setAttribute("class", "payment p-5")
+    initCheckout()
+	}
+}
+// -------Ideal---------
+function blockIdeal() {
+	const idealState = document.getElementById('showIdeal').checked;
+	if (idealState == true) {
+    const oldDiv = document.getElementById("dropin-container")
+    const newDiv = document.createElement("div")
+    const filteredPM = payMethods.filter((s) => !s.match("ideal"));
+    payMethods = filteredPM;
+    payArray = Object.values(payMethods);
+    blockedPM = {"blockedPaymentMethods": payArray};
+    oldDiv.replaceWith(newDiv)
+    newDiv.setAttribute("id", "dropin-container")
+    newDiv.setAttribute("class", "payment p-5")
+    initCheckout();
+	} else {
+    const oldDiv = document.getElementById("dropin-container")
+    const newDiv = document.createElement("div")
+		payMethods.push("ideal");
+    payArray = Object.values(payMethods);
+    blockedPM = {"blockedPaymentMethods": payArray};
+    oldDiv.replaceWith(newDiv)
+    newDiv.setAttribute("id", "dropin-container")
+    newDiv.setAttribute("class", "payment p-5")
+    initCheckout()
 	}
 }
 
 // interim solution to hide payment methods - USE ONLY AT THE END - breaks on dropin reload
-function showPaypal() {
-  const paypalState = document.getElementById("showPaypal").checked
-  const paypalBox = document.querySelector(
-    ".adyen-checkout__payment-method--paypal"
-  )
-  if (paypalState == true) {
-    paypalBox.style.display = ""
-  } else {
-    paypalBox.style.display = "none"
-  }
-}
 
-function showIdeal() {
-	const idealState = document.getElementById("showIdeal").checked
-	const idealBox = document.querySelector(
-		".adyen-checkout__payment-method--ideal"
-	)
-	if (idealState == true) {
-		idealBox.style.display = ""
-	} else {
-		idealBox.style.display = "none"
-	}
-}
 
 function showKlarna() {
 	const klarnaState = document.getElementById("showKlarna").checked

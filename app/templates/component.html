@@ -349,7 +349,7 @@
                           class="custom-control-input"
                           id="showPaypal"
                           data-toggle="toggle"
-                          onchange="showPaypal()"
+                          onchange="blockPaypal()"
                           checked
                         />
                         <label
@@ -372,7 +372,7 @@
                           class="custom-control-input"
                           id="showIdeal"
                           data-toggle="toggle"
-                          onchange="showIdeal()"
+                          onchange="blockIdeal()"
                           checked
                         />
                         <label
@@ -1255,7 +1255,7 @@
       {{ countryCode|default("NL")|tojson }}
     </script>
     <script id="pay-methods" type="application/json">
-      {{ payMethodsFE|default("")|tojson}}
+      {{ payArray|default("")|tojson}}
     </script>
 
     <!-- local JS -->

@@ -29,6 +29,8 @@ def adyen_payments(frontend_request, locale_data):
     payments_request['countryCode'] = locale_data['countryCode']  
     payments_request['merchantAccount'] = "CheckoutCreateDemo"
     payments_request['recurringExpiry'] = "2022-08-01T23:59:59+02:00"
+    payments_request['0'] = []
+    payments_request['1'] = []
     # payments_request['paymentMethod'] = {"subtype": "redirect"}
 
 
@@ -141,6 +143,9 @@ def sanatizeRequest(payments_request):
     del payments_request['houseNumberOrName']
     del payments_request['postalCode']
     del payments_request['street']
+    del payments_request['0']
+    del payments_request['1']
+
 
 
     # loaded = json.loads(payments_request)
