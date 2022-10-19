@@ -110,13 +110,15 @@ function changeSelect(el) {
     oldDiv.replaceWith(newDiv)
     newDiv.setAttribute("id", "dropin-container")
     newDiv.setAttribute("class", "payment p-5")
-    initCheckout()
+    updateToggles();
+    initCheckout();
   } else if (document.getElementById("dropin-container")) {
     const oldDiv = document.getElementById("dropin-container")
     const newDiv = document.createElement("div")
     oldDiv.replaceWith(newDiv)
     newDiv.setAttribute("id", "dropin-container")
     newDiv.setAttribute("class", "payment p-5")
+    updateToggles();
     initCheckout()
   }
 }
@@ -381,7 +383,6 @@ async function initCheckout() {
       mergeData
     )
     console.log(mergeData)
-    // console.log(payArray)
     let prettyResponse = JSON.stringify(paymentMethodsResponse, null, 2)
     console.log(prettyResponse)
     let configuration = {
@@ -597,6 +598,7 @@ function handleServerResponse(res, dropin) {
   }
 }
 
+// not it use
 function restartDropin() {
   const currentDiv = document.getElementById("dropin-container")
   currentDiv.style.display = ""
@@ -607,29 +609,12 @@ function restartDropin() {
   newDiv.style.display = ""
   successDiv.style.display = "none"
   errorDiv.style.display = "none"
-  // oldDiv = newDiv
   initCheckout()
 }
 
-// Test cards JS - NOT IN USE
-function copyToClipboard() {
-  // Get the text field
-  let copyPAN = document.getElementById("cardNumber").textContent
-  console.log(copyPAN)
-
-  // Select the text field
-  // copyPAN.select();
-  // copyPAN.setSelectionRange(0, 99999); // For mobile devices
-
-  // Copy the text inside the text field
-  navigator.clipboard.write(copyPAN)
-
-  // Alert the copied text
-  alert("Copied the text: " + copyPAN)
-}
 
 
-
+// define r as root of document for css variables
 let r = document.querySelector(":root")
 
 // Colour picker changes button color
@@ -638,37 +623,37 @@ function setDynamicCSS() {
   r.style.setProperty("--background-color", colorVal)
   updateStyleCode()
 }
-
+// change page background colour
 function backgroundColor() {
   let bgVal = document.getElementById("bgColorPick").value
   r.style.setProperty("--bg-color", bgVal)
 }
-
+// change active payment method colour
 function dropinColor() {
   let dropinColor = document.getElementById("dropinColorPick").value
   r.style.setProperty("--dropin-color", dropinColor)
   updateStyleCode()
 }
-
+// change collapsed payment methods' colours
 function dropinTabColor() {
   let dropinTabColor = document.getElementById("dropinTabColorPick").value
   r.style.setProperty("--dropin-tab-color", dropinTabColor)
   updateStyleCode()
 }
-
+// change text colour
 function textColor() {
   let textColor = document.getElementById("textColorPick").value
   r.style.setProperty("--text-color", textColor)
   updateStyleCode()
 }
-
+// change pay buttons' edges (staright to round)
 function buttonEdges() {
   let edgeValue = document.getElementById("buttonEdges").value
   let pixelVal = edgeValue + "px"
   r.style.setProperty("--button-edges", pixelVal)
   updateStyleCode()
 }
-
+// change Drop-in's edges (straight to round)
 function bodyEdges() {
   let bodyEdgeValue = document.getElementById("bodyEdges").value
   let bodyPixelVal = bodyEdgeValue + "px"
@@ -681,7 +666,7 @@ function bodyEdges() {
   updateStyleCode()
 }
 
-// Funtion to remove borders
+// Function to remove borders
 document
   .getElementById("noBorder")
   .parentNode.addEventListener("click", function (event) {
@@ -694,6 +679,7 @@ document
     }
   })
 
+// Reset CSS values to default Drop-in
 function resetDynamicCSS() {
   r.style.setProperty("--background-color", null)
   r.style.setProperty("--dropin-width", null)
@@ -717,7 +703,7 @@ function resetDynamicCSS() {
   r.style.setProperty("--paymentselected-margin", null)
   r.style.setProperty("--font-options", null)
 }
-
+// change dropin container width
 function dropinWidth() {
   let widthValue = document.getElementById("changeWidth").value
   let widthpx = widthValue + "px"
@@ -725,14 +711,14 @@ function dropinWidth() {
   console.log(widthpx)
   updateStyleCode()
 }
-
+// change pay buttons' width
 function payButtonWidth() {
   let payWidthValue = document.getElementById("payButtonWidth").value
   let payWidthpx = payWidthValue + "px"
   r.style.setProperty("--payButton-width", payWidthpx)
   updateStyleCode()
 }
-
+// change spacing of payment methods tabs
 function paymentsSpacing() {
   let paymentSpacingValue = document.getElementById("paymentsSpacing").value
   let paymentSpacingpx = paymentSpacingValue + "px"
@@ -740,7 +726,7 @@ function paymentsSpacing() {
   r.style.setProperty("--paymentselected-margin", paymentSpacingpx)
   updateStyleCode()
 }
-
+// change font size
 function fontWidth() {
   let fontValue = document.getElementById("fontSize").value
   let fontpx = fontValue + "px"
@@ -752,7 +738,6 @@ function fontWidth() {
 function turnCard() {
 	updateCardCopy();
   document.getElementById("card").classList.add("card-visited")
-  // cardDiv.setAttribute("class", "card-visited")
 }
 
 // this turns the card back to front if on reverse and copyPAN or copyExiry button gets clicked
@@ -762,7 +747,6 @@ function resetCard() {
     document.getElementById("card").classList.remove("card-visited")
   }
 }
-// updateCardCopy()
 
 // this updates the button attribute copy text to reflect the current card on UI
 function updateCardCopy() {
@@ -785,13 +769,13 @@ function changeTestCard(brandValue) {
   document.getElementById("cvc").innerText =
     testCardBrandsMap[brandValue.value].cvc
 }
-
+// change text position
 function positionText() {
   let positionValue = document.getElementById("positionText").value
   r.style.setProperty("--text-align", positionValue)
   updateStyleCode()
 }
-
+// make text bold
 function makeBold() {
   if (document.getElementById("makeBold").classList.contains("bold-active")) {
     document.getElementById("makeBold").classList.remove("bold-active")
@@ -804,7 +788,7 @@ function makeBold() {
   }
 }
 
-//makie text italic
+// make text italic
 function makeItalic() {
   if (
     document.getElementById("makeItalic").classList.contains("italic-active")
@@ -818,34 +802,68 @@ function makeItalic() {
     updateStyleCode()
   }
 }
-// document.getElementById('showPayMethod').parentNode.addEventListener('click', function (event);
+
 //drop down selector for the different font styles
-//document.getElementById("font_select").parentNode.addEventListener('change', function() {
 function changeFont() {
   r.style.setProperty("--font-options", null)
   let fontValue = document.getElementById("font_select").value
   r.style.setProperty("--font-options", fontValue)
   updateStyleCode()
 }
-// document.getElementById('placeholderData').parentNode.addEventListener('click', function (event) {
 
-//hiding payment methods functions
-// function showPaypal() {
-// 	const paypalState = document.getElementById('showPaypal').checked;
-// 	const paypalBox = document.querySelector('.adyen-checkout__payment-method--paypal')
-// 	if (paypalState == true) {
-// 		paypalBox.style.display = ""
-// 	} else {
-// 		paypalBox.style.display = "none"
-// 	}
-// }
-// const filteredPM =[]
-// let updatedPM =[]
+// default toggles for NL
+document.getElementById('trustlyCol').style.display = "none"
+document.getElementById('trustlyBox').style.display = "none"
+document.getElementById('trustlyToggle').style.display = "none"
 
+// Remove toggle from txvariants not applicable for the 
+function updateToggles(){
+  if(countrySettings.countryCode == 'GB' ) {
+    document.getElementById('trustlyCol').style.display = ""
+    document.getElementById('trustlyBox').style.display = ""
+    document.getElementById('trustlyToggle').style.display = ""
+  }
+  else if(countrySettings.countryCode == 'NL' ) {
+    document.getElementById('trustlyCol').style.display = "none"
+    document.getElementById('trustlyBox').style.display = "none"
+    document.getElementById('trustlyToggle').style.display = "none"
+  }
+  else if (countrySettings.countryCode == 'US' ){
+    document.getElementById('trustlyCol').style.display = "none"
+    document.getElementById('trustlyBox').style.display = "none"
+    document.getElementById('trustlyToggle').style.display = "none"
 
-
-
+  }
+}
 // Add txvariants to blockPaymentMethods array on button click
+// -------Cards - visa+mastercard+amex ---------
+function blockCard() {
+	const CardState = document.getElementById('showCard').checked;
+	if (CardState == true) {
+    const oldDiv = document.getElementById("dropin-container")
+    const newDiv = document.createElement("div")
+    const filteredPM = payMethods.filter((s) => !s.match("visa") && !s.match("mc") && !s.match("amex"));
+    payMethods = filteredPM;
+    payArray = Object.values(payMethods);
+    blockedPM = {"blockedPaymentMethods": payArray};
+    oldDiv.replaceWith(newDiv)
+    newDiv.setAttribute("id", "dropin-container")
+    newDiv.setAttribute("class", "payment p-5")
+    initCheckout()
+	} else {
+    const oldDiv = document.getElementById("dropin-container")
+    const newDiv = document.createElement("div")
+		payMethods.push("visa");
+    payMethods.push("mc");
+    payMethods.push("amex");
+    payArray = Object.values(payMethods);
+    blockedPM = {"blockedPaymentMethods": payArray};
+    oldDiv.replaceWith(newDiv)
+    newDiv.setAttribute("id", "dropin-container")
+    newDiv.setAttribute("class", "payment p-5")
+    initCheckout()
+	}
+}
 // -------PayPal---------
 function blockPaypal() {
 	const paypalState = document.getElementById('showPaypal').checked;
@@ -898,96 +916,190 @@ function blockIdeal() {
     initCheckout()
 	}
 }
-
-// interim solution to hide payment methods - USE ONLY AT THE END - breaks on dropin reload
-
-
-function showKlarna() {
-	const klarnaState = document.getElementById("showKlarna").checked
-	const klarnaBox = document.querySelector(
-		".adyen-checkout__payment-method--klarna"
-	)
+// -------Klarna---------
+function blockKlarna() {
+	const klarnaState = document.getElementById('showKlarna').checked;
 	if (klarnaState == true) {
-		klarnaBox.style.display = ""
+    const oldDiv = document.getElementById("dropin-container")
+    const newDiv = document.createElement("div")
+    const filteredPM = payMethods.filter((s) => !s.match("klarna"));
+    payMethods = filteredPM;
+    payArray = Object.values(payMethods);
+    blockedPM = {"blockedPaymentMethods": payArray};
+    oldDiv.replaceWith(newDiv)
+    newDiv.setAttribute("id", "dropin-container")
+    newDiv.setAttribute("class", "payment p-5")
+    initCheckout();
 	} else {
-		klarnaBox.style.display = "none"
+    const oldDiv = document.getElementById("dropin-container")
+    const newDiv = document.createElement("div")
+		payMethods.push("klarna");
+    payArray = Object.values(payMethods);
+    blockedPM = {"blockedPaymentMethods": payArray};
+    oldDiv.replaceWith(newDiv)
+    newDiv.setAttribute("id", "dropin-container")
+    newDiv.setAttribute("class", "payment p-5")
+    initCheckout()
 	}
 }
-
-function showGooglePay() {
-	const googlepayState = document.getElementById("showGooglePay").checked
-	const googlepayBox = document.querySelector(
-		".adyen-checkout__payment-method--paywithgoogle"
-	)
-	if (googlepayState == true) {
-		googlepayBox.style.display = ""
+// -------GooglePay---------
+function blockGooglePay() {
+	const GooglePayState = document.getElementById('showGooglePay').checked;
+	if (GooglePayState == true) {
+    const oldDiv = document.getElementById("dropin-container")
+    const newDiv = document.createElement("div")
+    const filteredPM = payMethods.filter((s) => !s.match("paywithgoogle"));
+    payMethods = filteredPM;
+    payArray = Object.values(payMethods);
+    blockedPM = {"blockedPaymentMethods": payArray};
+    oldDiv.replaceWith(newDiv)
+    newDiv.setAttribute("id", "dropin-container")
+    newDiv.setAttribute("class", "payment p-5")
+    initCheckout();
 	} else {
-		googlepayBox.style.display = "none"
+    const oldDiv = document.getElementById("dropin-container")
+    const newDiv = document.createElement("div")
+		payMethods.push("paywithgoogle");
+    payArray = Object.values(payMethods);
+    blockedPM = {"blockedPaymentMethods": payArray};
+    oldDiv.replaceWith(newDiv)
+    newDiv.setAttribute("id", "dropin-container")
+    newDiv.setAttribute("class", "payment p-5")
+    initCheckout()
 	}
 }
-
-function showWeChat() {
-	const weChatState = document.getElementById("showWeChat").checked
-	const weChatBox = document.querySelector(
-		".adyen-checkout__payment-method--wechatpayQR"
-	)
-	if (weChatState == true) {
-		weChatBox.style.display = ""
+// -------WeChat---------
+function blockWeChat() {
+	const WeChatState = document.getElementById('showWeChat').checked;
+	if (WeChatState == true) {
+    const oldDiv = document.getElementById("dropin-container")
+    const newDiv = document.createElement("div")
+    const filteredPM = payMethods.filter((s) => !s.match("wechatpayQR"));
+    payMethods = filteredPM;
+    payArray = Object.values(payMethods);
+    blockedPM = {"blockedPaymentMethods": payArray};
+    oldDiv.replaceWith(newDiv)
+    newDiv.setAttribute("id", "dropin-container")
+    newDiv.setAttribute("class", "payment p-5")
+    initCheckout();
 	} else {
-		weChatBox.style.display = "none"
+    const oldDiv = document.getElementById("dropin-container")
+    const newDiv = document.createElement("div")
+		payMethods.push("wechatpayQR");
+    payArray = Object.values(payMethods);
+    blockedPM = {"blockedPaymentMethods": payArray};
+    oldDiv.replaceWith(newDiv)
+    newDiv.setAttribute("id", "dropin-container")
+    newDiv.setAttribute("class", "payment p-5")
+    initCheckout()
 	}
 }
-
-function showAliPay() {
-	const alipayState = document.getElementById("showAliPay").checked
-	const alipayBox = document.querySelector(
-		".adyen-checkout__payment-method--alipay"
-	)
-	if (alipayState == true) {
-		alipayBox.style.display = ""
+// -------AliPay---------
+function blockAliPay() {
+	const AliPayState = document.getElementById('showAliPay').checked;
+	if (AliPayState == true) {
+    const oldDiv = document.getElementById("dropin-container")
+    const newDiv = document.createElement("div")
+    const filteredPM = payMethods.filter((s) => !s.match("alipay"));
+    payMethods = filteredPM;
+    payArray = Object.values(payMethods);
+    blockedPM = {"blockedPaymentMethods": payArray};
+    oldDiv.replaceWith(newDiv)
+    newDiv.setAttribute("id", "dropin-container")
+    newDiv.setAttribute("class", "payment p-5")
+    initCheckout();
 	} else {
-		alipayBox.style.display = "none"
+    const oldDiv = document.getElementById("dropin-container")
+    const newDiv = document.createElement("div")
+		payMethods.push("alipay");
+    payArray = Object.values(payMethods);
+    blockedPM = {"blockedPaymentMethods": payArray};
+    oldDiv.replaceWith(newDiv)
+    newDiv.setAttribute("id", "dropin-container")
+    newDiv.setAttribute("class", "payment p-5")
+    initCheckout()
 	}
 }
-
-function showPaysafecard() {
-	const paysafecardState = document.getElementById("showPaysafecard").checked
-	const paysafecardBox = document.querySelector(
-		".adyen-checkout__payment-method--paysafecard"
-	)
-	if (paysafecardState == true) {
-		paysafecardBox.style.display = ""
+// -------Paysafecard---------
+function blockPaysafecard() {
+	const PaysafecardState = document.getElementById('showPaysafecard').checked;
+	if (PaysafecardState == true) {
+    const oldDiv = document.getElementById("dropin-container")
+    const newDiv = document.createElement("div")
+    const filteredPM = payMethods.filter((s) => !s.match("paysafecard"));
+    payMethods = filteredPM;
+    payArray = Object.values(payMethods);
+    blockedPM = {"blockedPaymentMethods": payArray};
+    oldDiv.replaceWith(newDiv)
+    newDiv.setAttribute("id", "dropin-container")
+    newDiv.setAttribute("class", "payment p-5")
+    initCheckout();
 	} else {
-		paysafecardBox.style.display = "none"
+    const oldDiv = document.getElementById("dropin-container")
+    const newDiv = document.createElement("div")
+		payMethods.push("paysafecard");
+    payArray = Object.values(payMethods);
+    blockedPM = {"blockedPaymentMethods": payArray};
+    oldDiv.replaceWith(newDiv)
+    newDiv.setAttribute("id", "dropin-container")
+    newDiv.setAttribute("class", "payment p-5")
+    initCheckout()
 	}
 }
-
-function showClearpay() {
-	const clearpayState = document.getElementById("showClearpay").checked
-	const clearpayBox = document.querySelector(
-		".adyen-checkout__payment-method--clearpay"
-	)
-	if (clearpayState == true) {
-		clearpayBox.style.display = ""
+// -------Clearpay---------
+function blockClearpay() {
+	const ClearpayState = document.getElementById('showClearpay').checked;
+	if (ClearpayState == true) {
+    const oldDiv = document.getElementById("dropin-container")
+    const newDiv = document.createElement("div")
+    const filteredPM = payMethods.filter((s) => !s.match("clearpay"));
+    payMethods = filteredPM;
+    payArray = Object.values(payMethods);
+    blockedPM = {"blockedPaymentMethods": payArray};
+    oldDiv.replaceWith(newDiv)
+    newDiv.setAttribute("id", "dropin-container")
+    newDiv.setAttribute("class", "payment p-5")
+    initCheckout();
 	} else {
-		clearpayBox.style.display = "none"
+    const oldDiv = document.getElementById("dropin-container")
+    const newDiv = document.createElement("div")
+		payMethods.push("clearpay");
+    payArray = Object.values(payMethods);
+    blockedPM = {"blockedPaymentMethods": payArray};
+    oldDiv.replaceWith(newDiv)
+    newDiv.setAttribute("id", "dropin-container")
+    newDiv.setAttribute("class", "payment p-5")
+    initCheckout()
 	}
 }
-
-function showTrustly() {
-	const trustlyState = document.getElementById("showTrustly").checked
-	const trustlyBox = document.querySelector(
-		".adyen-checkout__payment-method--trustly"
-	)
-	if (trustlyState == true) {
-		trustlyBox.style.display = ""
+// -------Trustly---------
+function blockTrustly() {
+	const TrustlyState = document.getElementById('showTrustly').checked;
+	if (TrustlyState == true) {
+    const oldDiv = document.getElementById("dropin-container")
+    const newDiv = document.createElement("div")
+    const filteredPM = payMethods.filter((s) => !s.match("trustly"));
+    payMethods = filteredPM;
+    payArray = Object.values(payMethods);
+    blockedPM = {"blockedPaymentMethods": payArray};
+    oldDiv.replaceWith(newDiv)
+    newDiv.setAttribute("id", "dropin-container")
+    newDiv.setAttribute("class", "payment p-5")
+    initCheckout();
 	} else {
-		trustlyBox.style.display = "none"
+    const oldDiv = document.getElementById("dropin-container")
+    const newDiv = document.createElement("div")
+		payMethods.push("trustly");
+    payArray = Object.values(payMethods);
+    blockedPM = {"blockedPaymentMethods": payArray};
+    oldDiv.replaceWith(newDiv)
+    newDiv.setAttribute("id", "dropin-container")
+    newDiv.setAttribute("class", "payment p-5")
+    initCheckout()
 	}
 }
 
 //JSON highlight code styling
-
 function syntaxHighlight(json) {
   json = json.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
   return json.replace(
@@ -1010,19 +1122,7 @@ function syntaxHighlight(json) {
   )
 }
 
-// // CSS printing
-// // let styledDiv = document.getElementsByClassName('adyen-checkout__payment-method');
-// const cloneCSS = Object.assign({}, oldDiv)
-// let cssCode = styledDiv.style
-// document.getElementById("cssCode").innerHTML = syntaxHighlight(cssCode);
-// let divContent = document.querySelector('dropin-container')
-//  let cssCode = window.getComputedStyle(divContent).display;
-// let stringCSS = JSON.stringify(cssCode, null, 2);
-//  document.getElementById("cssCode").innerHTML = stringCSS;
-
-// let paymentCont = document.getElementById('dropin-container');
-// console.log(window.getComputedStyle(paymentCont, null));
-
+// Get css values from current page and print to "Save your creation"
 function updateStyleCode() {
   let cssjson = {
     ".adyen-checkout__payment-method": {
@@ -1083,7 +1183,7 @@ function updateStyleCode() {
       "font-weight": getComputedStyle(r).getPropertyValue("--text-bold"),
       "font-style": getComputedStyle(r).getPropertyValue("--text-italic"),
       color: getComputedStyle(r).getPropertyValue("--text-color"),
-    },
+    }
   }
   var styleStr = ""
   for (var i in cssjson) {

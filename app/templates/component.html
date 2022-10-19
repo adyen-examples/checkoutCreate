@@ -339,6 +339,29 @@
                     </div>
                     <!-- title -->
                     <div class="col-3">
+                      <p class="textFonts text-left ml-3">Card</p>
+                    </div>
+                    <!-- toggle -->
+                    <div class="col-3">
+                      <div class="custom-control custom-switch text-center">
+                        <input
+                          type="checkbox"
+                          class="custom-control-input"
+                          id="showCard"
+                          data-toggle="toggle"
+                          onchange="blockCard()"
+                          checked
+                        />
+                        <label
+                          class="custom-control-label"
+                          for="showCard"
+                        ></label>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                    </div>
+                    <!-- title -->
+                    <div class="col-3">
                       <p class="textFonts text-left ml-3">Paypal</p>
                     </div>
                     <!-- toggle -->
@@ -395,7 +418,7 @@
                           class="custom-control-input"
                           id="showKlarna"
                           data-toggle="toggle"
-                          onchange="showKlarna()"
+                          onchange="blockKlarna()"
                           checked
                         />
                         <label
@@ -418,7 +441,7 @@
                           class="custom-control-input"
                           id="showAliPay"
                           data-toggle="toggle"
-                          onchange="showAliPay()"
+                          onchange="blockAliPay()"
                           checked
                         />
                         <label
@@ -441,7 +464,7 @@
                           class="custom-control-input"
                           id="showGooglePay"
                           data-toggle="toggle"
-                          onchange="showGooglePay()"
+                          onchange="blockGooglePay()"
                           checked
                         />
                         <label
@@ -464,7 +487,7 @@
                           class="custom-control-input"
                           id="showWeChat"
                           data-toggle="toggle"
-                          onchange="showWeChat()"
+                          onchange="blockWeChat()"
                           checked
                         />
                         <label
@@ -487,7 +510,7 @@
                           class="custom-control-input"
                           id="showPaysafecard"
                           data-toggle="toggle"
-                          onchange="showPaysafecard()"
+                          onchange="blockPaysafecard()"
                           checked
                         />
                         <label
@@ -510,7 +533,7 @@
                           class="custom-control-input"
                           id="showClearpay"
                           data-toggle="toggle"
-                          onchange="showClearpay()"
+                          onchange="blockClearpay()"
                           checked
                         />
                         <label
@@ -519,21 +542,21 @@
                         ></label>
                       </div>
                     </div>
-                    <div class="col-6">
+                    <div id="trustlyCol" class="col-6" display="none">
                     </div>
                     <!-- title -->
-                    <div class="col-3">
+                    <div id="trustlyBox" class="col-3" display="none">
                       <p class="textFonts text-left ml-3">Trustly</p>
                     </div>
                     <!-- toggle -->
-                    <div class="col-3">
+                    <div id="trustlyToggle" class="col-3" display="none">
                       <div class="custom-control custom-switch text-center">
                         <input
                           type="checkbox"
                           class="custom-control-input"
                           id="showTrustly"
                           data-toggle="toggle"
-                          onchange="showTrustly()"
+                          onchange="blockTrustly()"
                           checked
                         />
                         <label
