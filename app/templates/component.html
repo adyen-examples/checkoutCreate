@@ -519,14 +519,14 @@
                         ></label>
                       </div>
                     </div>
-                    <div class="col-6">
+                    <div id="clearpayCol" class="col-6">
                     </div>
                     <!-- title -->
-                    <div class="col-3">
+                    <div id="clearpayBox" class="col-3">
                       <p class="textFonts text-left ml-3">Clearpay</p>
                     </div>
                     <!-- toggle -->
-                    <div class="col-3">
+                    <div id="clearpayToggle" class="col-3">
                       <div class="custom-control custom-switch text-center">
                         <input
                           type="checkbox"
@@ -1282,6 +1282,7 @@
     </script>
 
     <!-- local JS -->
+    <script src="{{ url_for('static', filename='js/test-cards.js') }}"></script>
     <script src="{{ url_for('static', filename='js/adyen-implementation.js') }}"></script>
 
     <!-- Clipboard.js script -->
@@ -1299,13 +1300,9 @@
       var clipboard = new Clipboard(".btn")
       clipboard.on("success", function (e) {
         console.log(e)
-        // setTooltip(e.trigger, 'Copied!');
-        // hideTooltip(e.trigger);
       })
       clipboard.on("error", function (e) {
         console.log(e)
-        // setTooltip(e.trigger, 'Failed!');
-        // hideTooltip(e.trigger);
       })
     </script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -1324,53 +1321,8 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
-    <!-- convert json to css -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/json-to-css-variables@1.0.0/index.min.js"></script> -->
-    <!-- [Attributes by Finsweet] Code Highlight -->
-    <!-- <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/highlight.min.js"></script>
-    <script async src="https://cdn.jsdelivr.net/npm/@finsweet/attributes-codehighlight@1/codehighlight.js"></script>   -->
+
     <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/highlight.min.js"></script>
-    <!-- and it's easy to individually load additional languages -->
     <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/languages/go.min.js"></script>
   </body>
 </html>
-
-<!-- <div>
-      <button
-        type="button"
-        id="btn"
-        class="btn"
-        toggle="tooltip"
-        data-clipboard-action="copy"
-        data-placement="top"
-        data-clipboard-target="p#cardNumber"
-        onclick="resetCard()"
-        title="Copy to clipboard"
-      >
-        Copy PAN
-      </button>
-      <button
-        type="button"
-        id="btn"
-        class="btn"
-        toggle="tooltip"
-        data-clipboard-action="copy"
-        data-clipboard-target="p#expiry"
-        title="Copy to clipboard"
-        onclick="resetCard()"
-      >
-        Copy Expiry date
-      </button>
-      <button
-        type="button"
-        id="btn"
-        class="btn"
-        toggle="tooltip"
-        data-clipboard-action="copy"
-        data-clipboard-target="p#cvc"
-        title="Copy to clipboard"
-        onclick="turnCard()"
-      >
-        Copy CVC
-      </button>
-    </div> -->
