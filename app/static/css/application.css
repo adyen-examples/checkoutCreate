@@ -106,7 +106,7 @@ a:hover {
   background: #00112c;
   border: 0;
   border-radius: 6px;
-  color: #fff;
+  color: #fff !important;
   cursor: pointer;
   display: inline-block;
   font-size: 1em;
