@@ -20,7 +20,7 @@ An external tool which allows you to build a drop-in integration and make custom
 1. Clone this repo:
 
 ```
-git clone https://github.com/adyen-examples/checkout-create.git
+git clone https://github.com/adyen-examples/checkoutCreate.git
 ```
 
 2. Run `source ./setup.sh` to:
