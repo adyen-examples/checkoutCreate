@@ -17,7 +17,7 @@ An external tool which allows you to build a drop-in integration and make custom
 
 ## Installation
 
-1. Clone this repo
+1. Clone this repo:
 
 ```
 git clone https://github.com/adyen-examples/checkout-create.git
