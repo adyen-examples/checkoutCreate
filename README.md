@@ -1,28 +1,8 @@
-# [Adyen Checkout](https://docs.adyen.com/checkout) integration demo
+# Checkout Create
+## Interactive Drop-in creation and styling tool 
 
-This repository includes examples of PCI-compliant UI integrations for online payments with Adyen. Within this demo app, we've created a simplified version of an e-commerce website, complete with commented code to highlight key features and concepts of Adyen's API. Check out the underlying code to see how you can integrate Adyen to give your shoppers the option to pay with their preferred payment methods, all in a seamless checkout experience.
+An external tool which allows you to build a drop-in integration and make customizations as outlined in our style sheet. Enables you to experiment and see what your checkout could potentially look like. You can then retrive the final result alongside the changes so it can be exported for your team to fully implement your vision.
 
-![Card Checkout Demo](app/static/img/cardcheckout.gif)
-
-## Supported Integrations
-
-**Python with Flask** demos of the following client-side integrations are available in this repository:
-
-- [Drop-in](https://docs.adyen.com/checkout/drop-in-web)
-- [Component](https://docs.adyen.com/checkout/components-web)
-  - ACH
-  - Alipay
-  - Boleto
-  - Card
-  - Dotpay
-  - Giropay
-  - iDEAL
-  - Klarna
-  - PayPal
-  - SEPA Direct Debit
-  - Sofort
-
-Please make sure to [add the above payment methods to your Adyen account](https://docs.adyen.com/payment-methods#add-payment-methods-to-your-account) before testing!
 
 ## Requirements
 
@@ -31,13 +11,14 @@ Please make sure to [add the above payment methods to your Adyen account](https:
   - flask
   - uuid
   - Adyen v6.0.0 or higher
+  - requests
 
 ## Installation
 
 1. Clone this repo
 
 ```
-git clone https://github.com/adyen-examples/adyen-python-online-payments.git
+git clone https://github.com/adyen-examples/checkout-create.git
 ```
 
 2. Run `source ./setup.sh` to:
