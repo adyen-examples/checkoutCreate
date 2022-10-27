@@ -1129,6 +1129,7 @@ a:hover {
 
 .form-control-file,
 .form-control-range {
+  accent-color: #36bf52!important;
   /* width: 50%; */
 }
 /* 
