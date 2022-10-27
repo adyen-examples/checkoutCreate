@@ -1014,12 +1014,12 @@ a:hover {
   margin: var(--payments-spacing) !important;
 }
 
-.adyen-checkout__payment-methods-list li:nth-child(2) {
+.adyen-checkout__payment-method--selected+.adyen-checkout__payment-method, .adyen-checkout__payment-method:first-child {
   border-top-left-radius: var(--topedges-left) !important;
   border-top-right-radius: var(--topedges-right) !important;
 }
 
-.adyen-checkout__payment-methods-list li:last-child {
+.adyen-checkout__payment-method--next-selected, .adyen-checkout__payment-method:last-child {
   border-bottom-left-radius: var(--bottomedges-left) !important;
   border-bottom-right-radius: var(--bottomedges-right) !important;
 }
