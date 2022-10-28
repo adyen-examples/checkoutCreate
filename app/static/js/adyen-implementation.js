@@ -24,6 +24,7 @@ let holderName = false
 let showPayMethod = true
 let hideCVC = false
 let placeholderData = false
+let instantArray = []
 
 /**
  * Hiding toggles of local payment methods not supported for NL (initial page load)
@@ -416,6 +417,7 @@ async function initCheckout() {
         resolve()
         reject()
       },
+      instantPaymentTypes: instantArray
     })
     .mount("#dropin-container")
     return await checkout
@@ -423,6 +425,22 @@ async function initCheckout() {
     console.error(error)
     alert("Error occurred. Look at console for details")
   }
+}
+
+
+function showInstantPay(){
+  const instantPayState = document.getElementById('instantPay').checked;
+  const oldDiv = document.getElementById("dropin-container")
+  const newDiv = document.createElement("div")
+	if (instantPayState == true) {
+    instantArray = ['paywithgoogle']
+	} else {
+		instantArray = []
+	}
+  oldDiv.replaceWith(newDiv)
+  newDiv.setAttribute("id", "dropin-container")
+  newDiv.setAttribute("class", "payment p-5")
+  initCheckout()
 }
 
 async function unmountDropin() {
