@@ -1,30 +1,43 @@
-let r = document.querySelector(":root")
 const clientKey = JSON.parse(document.getElementById("client-key").innerHTML)
 const storedCountry = document.getElementById("country-code")
 const currentPM = document.getElementById("pay-methods")
-// let country = "GB";
-let countrySettings = "NL"
+
 
 // Used to retrieve country value from url
 const urlCountryParams = new URLSearchParams(window.location.search)
 const countryURL = urlCountryParams.get("country")
 console.log(countryURL)
 
-let payMethods =[];
-let payArray = Object.values(payMethods);
-
 /**
  * Global configuration variables
+ * @param {HTMLHtmlElement} r - Identifies root of document for css variables
+ * @param {boolean} openFirst - Status of "Open first payment method" toggle
+ * @param {boolean} billAdd - Status of "Add billing address" toggle
+ * @param {boolean} onlyStored - Status of "Add card holder name" toggle
+ * @param {boolean} holderName - Status of "Show only stored payment methods" toggle
+ * @param {boolean} showPayMethod - Status of "Show stored payment methods" toggle
+ * @param {boolean} hideCVC - Status of "Hide CVC field" toggle
+ * @param {boolean} placeholderData - Status of "Include placeholder data" toggle
+ * @param {Array} instantArray - Instant Payment Methods "Enable" toggle - populate array if active = true
+ * @param {Array} payMethods - Payment methods included in the array will be "blocked"
+ * @param {Array} payArray - Payment methods values to include in the blockedPaymentMethods array
+ * @param {string} countrySettings - Value of the currently selected shopper's country
  * 
  */ 
+let r = document.querySelector(":root")
 let openFirst = true
 let billAdd = false
-let onlyStored = true
+let onlyStored = false
 let holderName = false
 let showPayMethod = true
 let hideCVC = false
 let placeholderData = false
 let instantArray = []
+let payMethods =[];
+let payArray = Object.values(payMethods);
+let countrySettings = "NL"
+
+console.log(r.constructor)
 
 /**
  * Hiding toggles of local payment methods not supported for NL (initial page load)
@@ -194,9 +207,9 @@ document
     const oldDiv = document.getElementById("dropin-container")
     const newDiv = document.createElement("div")
     if (this.querySelector("input").checked) {
-      onlyStored = false
-    } else {
       onlyStored = true
+    } else {
+      onlyStored = false
     }
     oldDiv.replaceWith(newDiv)
     newDiv.setAttribute("id", "dropin-container")
