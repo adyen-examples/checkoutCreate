@@ -19,7 +19,7 @@ let payArray = Object.values(payMethods);
  */ 
 let openFirst = true
 let billAdd = false
-let onlyStored = true
+let onlyStored = false
 let holderName = false
 let showPayMethod = true
 let hideCVC = false
@@ -194,9 +194,9 @@ document
     const oldDiv = document.getElementById("dropin-container")
     const newDiv = document.createElement("div")
     if (this.querySelector("input").checked) {
-      onlyStored = false
-    } else {
       onlyStored = true
+    } else {
+      onlyStored = false
     }
     oldDiv.replaceWith(newDiv)
     newDiv.setAttribute("id", "dropin-container")
@@ -873,13 +873,33 @@ function makeItalic() {
     ) {
       document.getElementById("makeItalic").classList.remove("italic-active")
       r.style.setProperty("--text-italic", null)
+      r.style.setProperty("--italic-selected", null)
       updateStyleCode()
     } else {
       document.getElementById("makeItalic").classList.add("italic-active")
       r.style.setProperty("--text-italic", "italic")
+      r.style.setProperty("--italic-selected", "1px solid #36bf52")
       updateStyleCode()
     }
   }
+
+
+// make text bold
+function makeBold() {
+  if (
+    document.getElementById("makeBold").classList.contains("bold-active")
+  ) {
+    document.getElementById("makeBold").classList.remove("bold-active")
+    r.style.setProperty("--text-bold", null)
+    r.style.setProperty("--bold-selected", null)
+    updateStyleCode()
+  } else {
+    document.getElementById("makeBold").classList.add("bold-active")
+    r.style.setProperty("--text-bold", "bold")
+    r.style.setProperty("--bold-selected", "1px solid #36bf52")
+    updateStyleCode()
+  }
+}
   
   //drop down selector for the different font styles
   function changeFont() {
