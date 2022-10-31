@@ -1,12 +1,6 @@
 const clientKey = JSON.parse(document.getElementById("client-key").innerHTML)
 const storedCountry = document.getElementById("country-code")
-const currentPM = document.getElementById("pay-methods")
 
-
-// Used to retrieve country value from url
-const urlCountryParams = new URLSearchParams(window.location.search)
-const countryURL = urlCountryParams.get("country")
-console.log(countryURL)
 
 /**
  * Global configuration variables
@@ -297,10 +291,6 @@ document
 
 if (storedCountry) {
   const selectedCountry = JSON.parse(storedCountry.innerHTML)
-  countrySettings = getCountryData(selectedCountry)
-}
-if (countryURL) {
-  const selectedCountry = countryURL
   countrySettings = getCountryData(selectedCountry)
 }
 
