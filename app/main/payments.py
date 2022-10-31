@@ -140,6 +140,7 @@ def sanatizeRequest(payments_request):
     del payments_request['houseNumberOrName']
     del payments_request['postalCode']
     del payments_request['street']
+    del payments_request['stateOrProvince']
 
 
 
