@@ -393,9 +393,10 @@ a:hover {
   margin: 0;
   outline: none;
   padding: 0 0 0 12px;
-  position: relative;
+  position: absolute;
   font-size: var(--small-text);
   width: 10px;
+  bottom:0px;
 }
 
 @media (min-width: 768px) {
@@ -411,6 +412,7 @@ a:hover {
 }
 
 .country-selector__select {
+  position: relative;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -449,8 +451,9 @@ a:hover {
   margin: auto 0 auto auto;
   outline: none;
   padding: 0 0 0 12px;
-  position: relative;
+  position: absolute;
   width: 100%;
+  bottom: 0px;
 }
 
 @media (min-width: 768px) {
@@ -467,7 +470,7 @@ a:hover {
   border: 0;
   cursor: pointer;
   flex: 1;
-
+  position: relative;
   height: 100%;
   margin: 0 -12px 0 -42px;
   outline: none;
@@ -501,8 +504,9 @@ a:hover {
   margin: auto 0 auto auto;
   outline: none;
   padding: 0 0 0 12px;
-  position: relative;
+  position: absolute;
   width: 100%;
+  bottom: 0px;
 }
 
 /* .left {
@@ -524,6 +528,7 @@ a:hover {
 }
 
 .textalign-selector__select {
+  position: relative;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;

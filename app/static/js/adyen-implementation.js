@@ -936,6 +936,8 @@ function resetDynamicCSS() {
     r.style.setProperty("--payments-spacing", null)
     r.style.setProperty("--paymentselected-margin", null)
     r.style.setProperty("--font-options", null)
+    r.style.setProperty("--bold-selected", null)
+    r.style.setProperty("--italic-selected", null)
   }
 
 // logging configuration object to UI
