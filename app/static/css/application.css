@@ -672,6 +672,7 @@ a:hover {
 #payment-page .checkout {
   margin-top: 100px;
   background: var(--bg-color) !important;
+  margin-bottom: 100px;
 }
 
 #payment-page .settings {
@@ -701,6 +702,7 @@ a:hover {
   overflow: scroll;
   height: 100vh;
 }
+
 
 /* Adyen Components */
 .payment {
@@ -971,16 +973,15 @@ a:hover {
 :root {
   --background-color: #00112c;
   --font-options: "Segoe UI", sans-serif, Helvetica, Arial;
-  --background-color: #00112c;
   --dropin-width: 500px;
   --dropin-font: 17px;
   --button-edges: 10px;
   --body-edges: 0px;
   --border-off: 1px solid #e6e9eb;
   --active-background: #f7f8f9;
-  --bg-color: white;
+  --bg-color: #ffffff;
   --dropin-color: #f7f8f9;
-  --dropin-tab-color: white;
+  --dropin-tab-color: #ffffff;
   --main-green: #0abf53;
   --main-grey: #f3f5f9;
   --main-text: #00112c;
@@ -998,6 +999,7 @@ a:hover {
   --topedges-right: 12px;
   --bottomedges-left: 12px;
   --bottomedges-right: 12px;
+  /* --text-color: #00112c; */
 }
 
 .card-visited .card__back {
