@@ -798,6 +798,7 @@ function updateColorPickers() {
   let fontColorInput = document.getElementById("textColorPick")
   let fontColor = getComputedStyle(r).getPropertyValue("--text-color")
   let fontColorNoSpace = fontColor.replace(/\s/g, '');
+  // let buttonTextColor = getComputedStyle(r).getPropertyValue("--main-text")
   fontColorInput.value = fontColorNoSpace
   // website background
   let bgColorInput = document.getElementById("bgColorPick")
@@ -958,7 +959,7 @@ function resetDynamicCSS() {
     r.style.setProperty("--dropin-color", '#f7f8f9')
     r.style.setProperty("--dropin-tab-color", '#ffffff')
     r.style.setProperty("--dropin-font", null)
-    r.style.setProperty("--text-color", '#00112c')
+    r.style.setProperty("--text-color", null)
     r.style.setProperty("--text-bold", null)
     r.style.setProperty("--text-italic", null)
     r.style.setProperty("--text-align", null)
@@ -968,6 +969,7 @@ function resetDynamicCSS() {
     r.style.setProperty("--font-options", null)
     r.style.setProperty("--bold-selected", null)
     r.style.setProperty("--italic-selected", null)
+    r.style.setProperty("--secondary-text", "#ffffff")
     updateColorPickers()
   }
 
