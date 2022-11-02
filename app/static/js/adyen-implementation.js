@@ -1,34 +1,40 @@
-let r = document.querySelector(":root")
 const clientKey = JSON.parse(document.getElementById("client-key").innerHTML)
 const storedCountry = document.getElementById("country-code")
-const currentPM = document.getElementById("pay-methods")
-// let country = "GB";
-let countrySettings = "NL"
 
-// Used to retrieve country value from url
-const urlCountryParams = new URLSearchParams(window.location.search)
-const countryURL = urlCountryParams.get("country")
-console.log(countryURL)
-
-let payMethods =[];
-let payArray = Object.values(payMethods);
 
 /**
  * Global configuration variables
- * 
- */ 
+ * @param {HTMLHtmlElement} r - Identifies root of document for css variables
+ * @param {boolean} openFirst - Status of "Open first payment method" toggle
+ * @param {boolean} billAdd - Status of "Add billing address" toggle
+ * @param {boolean} onlyStored - Status of "Add card holder name" toggle
+ * @param {boolean} holderName - Status of "Show only stored payment methods" toggle
+ * @param {boolean} showPayMethod - Status of "Show stored payment methods" toggle
+ * @param {boolean} hideCVC - Status of "Hide CVC field" toggle
+ * @param {boolean} placeholderData - Status of "Include placeholder data" toggle
+ * @param {Array} instantArray - Instant Payment Methods "Enable" toggle - populate array if active = true
+ * @param {Array} payMethods - Payment methods included in the array will be "blocked"
+ * @param {Array} payArray - Payment methods values to include in the blockedPaymentMethods array
+ * @param {string} countrySettings - Value of the currently selected shopper's country
+ *
+ */
+let r = document.querySelector(":root")
 let openFirst = true
 let billAdd = false
-let onlyStored = true
+let onlyStored = false
 let holderName = false
 let showPayMethod = true
 let hideCVC = false
 let placeholderData = false
+let instantArray = []
+let payMethods =[];
+let payArray = Object.values(payMethods);
+let countrySettings = "NL"
 
 /**
  * Hiding toggles of local payment methods not supported for NL (initial page load)
- * 
- */ 
+ *
+ */
 document.getElementById('trustlyCol').style.display = "none"
 document.getElementById('trustlyBox').style.display = "none"
 document.getElementById('trustlyToggle').style.display = "none"
@@ -91,7 +97,7 @@ const countryVariables = [
 /**
  * Country dropdown changes the flag image and reloads the dropin with new country values
  * Calls /paymentMethods to retrieve available txvariants for that country
- * @param {*} el 
+ * @param {*} el
  */
 async function changeSelect(el) {
   // let countryPM = getConfiguration();
@@ -193,9 +199,9 @@ document
     const oldDiv = document.getElementById("dropin-container")
     const newDiv = document.createElement("div")
     if (this.querySelector("input").checked) {
-      onlyStored = false
-    } else {
       onlyStored = true
+    } else {
+      onlyStored = false
     }
     oldDiv.replaceWith(newDiv)
     newDiv.setAttribute("id", "dropin-container")
@@ -283,10 +289,6 @@ document
 
 if (storedCountry) {
   const selectedCountry = JSON.parse(storedCountry.innerHTML)
-  countrySettings = getCountryData(selectedCountry)
-}
-if (countryURL) {
-  const selectedCountry = countryURL
   countrySettings = getCountryData(selectedCountry)
 }
 
@@ -416,6 +418,7 @@ async function initCheckout() {
         resolve()
         reject()
       },
+      instantPaymentTypes: instantArray
     })
     .mount("#dropin-container")
     return await checkout
@@ -423,6 +426,22 @@ async function initCheckout() {
     console.error(error)
     alert("Error occurred. Look at console for details")
   }
+}
+
+
+function showInstantPay(){
+  const instantPayState = document.getElementById('instantPay').checked;
+  const oldDiv = document.getElementById("dropin-container")
+  const newDiv = document.createElement("div")
+	if (instantPayState == true) {
+    instantArray = ['paywithgoogle']
+	} else {
+		instantArray = []
+	}
+  oldDiv.replaceWith(newDiv)
+  newDiv.setAttribute("id", "dropin-container")
+  newDiv.setAttribute("class", "payment p-5")
+  initCheckout()
 }
 
 async function unmountDropin() {
@@ -771,6 +790,38 @@ function dropinColor() {
   r.style.setProperty("--dropin-color", dropinColor)
   updateStyleCode()
 }
+/**
+ * @function updateColorPickers - Gets current colour value to show on colour pickers
+ */
+function updateColorPickers() {
+  // font color
+  let fontColorInput = document.getElementById("textColorPick")
+  let fontColor = getComputedStyle(r).getPropertyValue("--text-color")
+  let fontColorNoSpace = fontColor.replace(/\s/g, '');
+  fontColorInput.value = fontColorNoSpace
+  // website background
+  let bgColorInput = document.getElementById("bgColorPick")
+  let bgColor = getComputedStyle(r).getPropertyValue("--bg-color")
+  let bgColorNoSpace = bgColor.replace(/\s/g, '');
+  bgColorInput.value = bgColorNoSpace
+  // active payment method background
+  let activeColorInput = document.getElementById("dropinColorPick")
+  let activeColor = getComputedStyle(r).getPropertyValue("--dropin-color")
+  let activeColorNoSpace = activeColor.replace(/\s/g, '');
+  activeColorInput.value = activeColorNoSpace
+  // collapsed payment methods
+  let tabColorInput = document.getElementById("dropinTabColorPick")
+  let tabColor = getComputedStyle(r).getPropertyValue("--dropin-tab-color")
+  let tabColorNoSpace = tabColor.replace(/\s/g, '');
+  tabColorInput.value = tabColorNoSpace
+  // pay button
+  let buttonColorInput = document.getElementById("buttonColorPick")
+  let buttonColor = getComputedStyle(r).getPropertyValue("--background-color")
+  let buttonColorNoSpace = buttonColor.replace(/\s/g, '');
+  buttonColorInput.value = buttonColorNoSpace
+  //
+}
+// console.log(tabColorNoSpace.constructor)
 /** @function dropinTabColor - Changes collapsed payment methods' colours */
 function dropinTabColor() {
   let dropinTabColor = document.getElementById("dropinTabColorPick").value
@@ -855,14 +906,34 @@ function makeItalic() {
     ) {
       document.getElementById("makeItalic").classList.remove("italic-active")
       r.style.setProperty("--text-italic", null)
+      r.style.setProperty("--italic-selected", null)
       updateStyleCode()
     } else {
       document.getElementById("makeItalic").classList.add("italic-active")
       r.style.setProperty("--text-italic", "italic")
+      r.style.setProperty("--italic-selected", "1px solid #36bf52")
       updateStyleCode()
     }
   }
-  
+
+
+// make text bold
+function makeBold() {
+  if (
+    document.getElementById("makeBold").classList.contains("bold-active")
+  ) {
+    document.getElementById("makeBold").classList.remove("bold-active")
+    r.style.setProperty("--text-bold", null)
+    r.style.setProperty("--bold-selected", null)
+    updateStyleCode()
+  } else {
+    document.getElementById("makeBold").classList.add("bold-active")
+    r.style.setProperty("--text-bold", "bold")
+    r.style.setProperty("--bold-selected", "1px solid #36bf52")
+    updateStyleCode()
+  }
+}
+
   //drop down selector for the different font styles
   function changeFont() {
     r.style.setProperty("--font-options", null)
@@ -874,7 +945,7 @@ function makeItalic() {
 
 // Reset CSS values to default Drop-in
 function resetDynamicCSS() {
-    r.style.setProperty("--background-color", null)
+    r.style.setProperty("--background-color", '#00112c')
     r.style.setProperty("--dropin-width", null)
     r.style.setProperty("--body-edges", null)
     r.style.setProperty("--selectedBody-edges", null)
@@ -883,11 +954,11 @@ function resetDynamicCSS() {
     r.style.setProperty("--bottomedges-left", null)
     r.style.setProperty("--bottomedges-right", null)
     r.style.setProperty("--button-edges", null)
-    r.style.setProperty("--bg-color", null)
-    r.style.setProperty("--dropin-color", null)
-    r.style.setProperty("--dropin-tab-color", null)
+    r.style.setProperty("--bg-color", '#ffffff')
+    r.style.setProperty("--dropin-color", '#f7f8f9')
+    r.style.setProperty("--dropin-tab-color", '#ffffff')
     r.style.setProperty("--dropin-font", null)
-    r.style.setProperty("--text-color", null)
+    r.style.setProperty("--text-color", '#00112c')
     r.style.setProperty("--text-bold", null)
     r.style.setProperty("--text-italic", null)
     r.style.setProperty("--text-align", null)
@@ -895,6 +966,9 @@ function resetDynamicCSS() {
     r.style.setProperty("--payments-spacing", null)
     r.style.setProperty("--paymentselected-margin", null)
     r.style.setProperty("--font-options", null)
+    r.style.setProperty("--bold-selected", null)
+    r.style.setProperty("--italic-selected", null)
+    updateColorPickers()
   }
 
 // logging configuration object to UI
@@ -1022,5 +1096,7 @@ function restartDropin() {
   initCheckout()
   successDiv.style.display = "none"
 }
+
+updateColorPickers()
 
 initCheckout()

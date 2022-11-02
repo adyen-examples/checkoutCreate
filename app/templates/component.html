@@ -29,7 +29,7 @@
     />
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Oleo+Script:wght@700&display=swap");
-      @import url("https://fonts.googleapis.com/css2?family=Engagement&family=Lato:ital@1&family=Roboto+Condensed:wght@300&display=swap");
+      @import url('https://fonts.googleapis.com/css2?family=Engagement&family=PT+Sans+Caption&family=Roboto+Condensed:wght@300&display=swap');
     </style>
 
     <!-- local CSS -->
@@ -570,6 +570,45 @@
                   <!-- line - section end -->
                   <hr class="mt-4 mb-4" />
 
+                  <!-- section titile "Instant Payment Methods" -->
+                  <div class="row mt-3">
+                    <div class="col flex-fill section-title">
+                      <p class="mb-1 titleFonts">Instant Payment Methods</p>
+                    </div>
+
+                    <!-- text -->
+                    <div class="col-6">
+                      <p class="textFonts">
+                        Show instant payment methods at the top
+                      </p>
+                    </div>
+                    <!-- title -->
+                    <div class="col-3">
+                      <p class="textFonts text-left ml-3">
+                        Enable
+                      </p>
+                    </div>
+                    <!-- toggle -->
+                    <div class="col-3 text-center">
+                      <div class="custom-control custom-switch">
+                        <input
+                          type="checkbox"
+                          class="custom-control-input"
+                          id="instantPay"
+                          data-toggle="toggle"
+                          onchange="showInstantPay()"
+                        />
+                        <label
+                          class="custom-control-label"
+                          for="instantPay"
+                        ></label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- line - section end -->
+                  <hr class="mt-4 mb-4" />
+
                   <!-- section titile "Payment Method Behaviour" -->
                   <div class="row mt-3">
                     <div class="col flex-fill section-title">
@@ -611,7 +650,7 @@
                     <!-- title -->
                     <div class="col-3">
                       <p class="textFonts text-left ml-3">
-                        Hide stored payment methods
+                        Show stored payment methods
                       </p>
                     </div>
                     <!-- toggle -->
@@ -784,10 +823,9 @@
                           autocomplete="off"
                         >
                           <option
-                            value="Segoe UI, sans-serif, Helvetica, Arial"
+                            value="Segoe UI, sans-serif"
                             style="
-                              font-family: 'Segoe UI', sans-serif, Helvetica,
-                                Arial;
+                              font-family: 'Segoe UI', sans-serif;
                             "
                           >
                             Segoe UI
@@ -802,23 +840,43 @@
                           </option>
                           <option
                             value="Engagement, cursive"
-                            style="font-family: 'Engagement', cursive"
+                            style="font-family: 'Engagement', cursive;"
                           >
                             Engagement
                           </option>
                           <option
-                            value="Lato, sans-serif"
-                            style="font-family: 'Lato', sans-serif"
+                            value="Verdana, sans-serif"
+                            style="font-family: 'Verdana', sans-serif;"
                           >
-                            Lato
+                            Verdana
                           </option>
+                           <option
+                            value="Courier New, monospace"
+                            style="font-family: 'Courier New', monospace;"
+                          >
+                            Courier New
+                          </option>
+                           <option
+                            value="'Trebuchet MS, sans-serif"
+                            style="font-family: 'Trebuchet MS', sans-serif;"
+                          >
+                            Trebuchet MS
+                          </option> 
                           <option
-                            value="Times New Roman, Times, serif"
+                            value="Tahoma, sans-serif"
                             style="
-                              font-family: 'Times New Roman', Times, serif;
+                              font-family: 'Tahoma', sans-serif;
                             "
                           >
-                            Times New Roman
+                            Tahoma
+                          </option>
+                          <option
+                          value="PT Sans Caption, sans-serif"
+                          style="
+                            font-family: 'PT Sans Caption', sans-serif;
+                          "
+                          >
+                            PT Sans Caption
                           </option>
                           <option
                             value="Arial, Helvetica, sans-serif"
@@ -829,10 +887,9 @@
                             Arial
                           </option>
                           <option
-                            value="Lucida Console, 'Courier New', monospace"
+                            value="Lucida Console, monospace"
                             style="
-                              font-family: 'Lucida Console', 'Courier New',
-                                monospace;
+                              font-family: 'Lucida Console', monospace;
                             "
                           >
                             Lucida
@@ -890,14 +947,15 @@
                           <option
                             selected
                             value="left"
-                            style="text-align: left"
                           >
                             Left
                           </option>
-                          <option value="center" style="text-align: center">
+                          <option value="center"
+                          >
                             Center
                           </option>
-                          <option value="right" style="text-align: right">
+                          <option value="right"
+                          >
                             Right
                           </option>
                         </select>
@@ -1216,7 +1274,7 @@
                   <hr class="mt-4 mb-4" />
 
                   <div>
-                    <button type="button" onclick="resetDynamicCSS()">
+                    <button type="button" class="resetStyle" onclick="resetDynamicCSS()">
                       Reset Style
                     </button>
                   </div>
