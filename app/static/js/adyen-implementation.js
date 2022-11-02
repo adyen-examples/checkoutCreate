@@ -31,8 +31,6 @@ let payMethods =[];
 let payArray = Object.values(payMethods);
 let countrySettings = "NL"
 
-console.log(r.constructor)
-
 /**
  * Hiding toggles of local payment methods not supported for NL (initial page load)
  * 
@@ -792,6 +790,38 @@ function dropinColor() {
   r.style.setProperty("--dropin-color", dropinColor)
   updateStyleCode()
 }
+/**
+ * @function updateColorPickers - Gets current colour value to show on colour pickers
+ */
+function updateColorPickers() {
+  // font color
+  let fontColorInput = document.getElementById("textColorPick")
+  let fontColor = getComputedStyle(r).getPropertyValue("--text-color")
+  let fontColorNoSpace = fontColor.replace(/\s/g, '');
+  fontColorInput.value = fontColorNoSpace
+  // website background
+  let bgColorInput = document.getElementById("bgColorPick")
+  let bgColor = getComputedStyle(r).getPropertyValue("--bg-color")
+  let bgColorNoSpace = bgColor.replace(/\s/g, '');
+  bgColorInput.value = bgColorNoSpace
+  // active payment method background
+  let activeColorInput = document.getElementById("dropinColorPick")
+  let activeColor = getComputedStyle(r).getPropertyValue("--dropin-color")
+  let activeColorNoSpace = activeColor.replace(/\s/g, '');
+  activeColorInput.value = activeColorNoSpace
+  // collapsed payment methods
+  let tabColorInput = document.getElementById("dropinTabColorPick")
+  let tabColor = getComputedStyle(r).getPropertyValue("--dropin-tab-color")
+  let tabColorNoSpace = tabColor.replace(/\s/g, '');
+  tabColorInput.value = tabColorNoSpace
+  // pay button
+  let buttonColorInput = document.getElementById("buttonColorPick")
+  let buttonColor = getComputedStyle(r).getPropertyValue("--background-color")
+  let buttonColorNoSpace = buttonColor.replace(/\s/g, '');
+  buttonColorInput.value = buttonColorNoSpace
+  //
+}
+// console.log(tabColorNoSpace.constructor)
 /** @function dropinTabColor - Changes collapsed payment methods' colours */
 function dropinTabColor() {
   let dropinTabColor = document.getElementById("dropinTabColorPick").value
@@ -915,7 +945,7 @@ function makeBold() {
 
 // Reset CSS values to default Drop-in
 function resetDynamicCSS() {
-    r.style.setProperty("--background-color", null)
+    r.style.setProperty("--background-color", '#00112c')
     r.style.setProperty("--dropin-width", null)
     r.style.setProperty("--body-edges", null)
     r.style.setProperty("--selectedBody-edges", null)
@@ -924,11 +954,11 @@ function resetDynamicCSS() {
     r.style.setProperty("--bottomedges-left", null)
     r.style.setProperty("--bottomedges-right", null)
     r.style.setProperty("--button-edges", null)
-    r.style.setProperty("--bg-color", null)
-    r.style.setProperty("--dropin-color", null)
-    r.style.setProperty("--dropin-tab-color", null)
+    r.style.setProperty("--bg-color", '#ffffff')
+    r.style.setProperty("--dropin-color", '#f7f8f9')
+    r.style.setProperty("--dropin-tab-color", '#ffffff')
     r.style.setProperty("--dropin-font", null)
-    r.style.setProperty("--text-color", null)
+    r.style.setProperty("--text-color", '#00112c')
     r.style.setProperty("--text-bold", null)
     r.style.setProperty("--text-italic", null)
     r.style.setProperty("--text-align", null)
@@ -936,6 +966,7 @@ function resetDynamicCSS() {
     r.style.setProperty("--payments-spacing", null)
     r.style.setProperty("--paymentselected-margin", null)
     r.style.setProperty("--font-options", null)
+    updateColorPickers()
   }
 
 // logging configuration object to UI
@@ -1063,5 +1094,7 @@ function restartDropin() {
   initCheckout()
   successDiv.style.display = "none"
 }
+
+updateColorPickers()
 
 initCheckout()
