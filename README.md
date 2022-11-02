@@ -61,3 +61,7 @@ Find out more in our [Contributing](https://github.com/adyen-examples/.github/bl
 ## License
 
 MIT license. For more information, see the **LICENSE** file in the root directory
+
+---
+
+*v1.1.0-alpha*
