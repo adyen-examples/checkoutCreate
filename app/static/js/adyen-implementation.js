@@ -16,8 +16,8 @@ const storedCountry = document.getElementById("country-code")
  * @param {Array} payMethods - Payment methods included in the array will be "blocked"
  * @param {Array} payArray - Payment methods values to include in the blockedPaymentMethods array
  * @param {string} countrySettings - Value of the currently selected shopper's country
- * 
- */ 
+ *
+ */
 let r = document.querySelector(":root")
 let openFirst = true
 let billAdd = false
@@ -33,8 +33,8 @@ let countrySettings = "NL"
 
 /**
  * Hiding toggles of local payment methods not supported for NL (initial page load)
- * 
- */ 
+ *
+ */
 document.getElementById('trustlyCol').style.display = "none"
 document.getElementById('trustlyBox').style.display = "none"
 document.getElementById('trustlyToggle').style.display = "none"
@@ -97,7 +97,7 @@ const countryVariables = [
 /**
  * Country dropdown changes the flag image and reloads the dropin with new country values
  * Calls /paymentMethods to retrieve available txvariants for that country
- * @param {*} el 
+ * @param {*} el
  */
 async function changeSelect(el) {
   // let countryPM = getConfiguration();
@@ -933,7 +933,7 @@ function makeBold() {
     updateStyleCode()
   }
 }
-  
+
   //drop down selector for the different font styles
   function changeFont() {
     r.style.setProperty("--font-options", null)
@@ -966,6 +966,8 @@ function resetDynamicCSS() {
     r.style.setProperty("--payments-spacing", null)
     r.style.setProperty("--paymentselected-margin", null)
     r.style.setProperty("--font-options", null)
+    r.style.setProperty("--bold-selected", null)
+    r.style.setProperty("--italic-selected", null)
     updateColorPickers()
   }
 
