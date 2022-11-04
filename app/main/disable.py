@@ -18,7 +18,7 @@ def disable_card(storedPaymentMethodId):
 
     disable_request['shopperReference'] = "UniqueReference"
     disable_request['recurringDetailReference'] =  f"{storedPaymentMethodId}"
-    disable_request['merchantAccount'] = "CheckoutCreateDemo"
+    disable_request['merchantAccount'] = get_adyen_merchant_account()
     print("/disable request:\n" + str(disable_request))
 
     disable_response = adyen.recurring.disable(disable_request)
