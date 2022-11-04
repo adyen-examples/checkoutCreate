@@ -103,7 +103,7 @@ def adyen_payments(frontend_request, locale_data):
         payments_request
 
 
-    sanatizeRequest(payments_request)
+    sanitizeRequest(payments_request)
     print("/payments request:\n" + str(payments_request))
 
     payments_response = adyen.checkout.payments(payments_request)
@@ -133,16 +133,16 @@ def currency_locale(country):
     elif country == "US":
         return "USD"
 
-def sanatizeRequest(payments_request):
-    del payments_request['locale']
-    del payments_request['currency']
-    del payments_request['city']
-    del payments_request['houseNumberOrName']
-    del payments_request['postalCode']
-    del payments_request['street']
-    del payments_request['stateOrProvince']
+def sanitizeRequest(payment_request):
+    safe_delete(payment_request, 'locale')
+    safe_delete(payment_request, 'currency')
 
-
+    safe_delete(payment_request, 'city')
+    safe_delete(payment_request, 'currency')
+    safe_delete(payment_request, 'houseNumberOrName')
+    safe_delete(payment_request, 'postalCode')
+    safe_delete(payment_request, 'street')
+    safe_delete(payment_request, 'stateOrProvince')
 
     # loaded = json.loads(payments_request)
     # for item in loaded:
@@ -165,3 +165,8 @@ def sanatizeRequest(payments_request):
     #     element.pop('currency', None)
     # with open('cleanData.json', 'w') as payments_request:
 
+def safe_delete(payment_request, key):
+    try:
+        del payment_request[key]
+    except KeyError:
+        print('Error while trying to delete key : ' + key)
