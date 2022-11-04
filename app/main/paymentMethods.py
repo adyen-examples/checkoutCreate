@@ -22,7 +22,7 @@ def adyen_payment_methods(locale_data):
     payment_methods_request['countryCode'] = locale_data['countryCode'] 
     payment_methods_request['shopperReference'] = "UniqueReference"
     payment_methods_request['channel'] = "Web"
-    payment_methods_request['merchantAccount'] = "CheckoutCreateDemo"
+    payment_methods_request['merchantAccount'] = get_adyen_merchant_account()
     payment_methods_request['blockedPaymentMethods'] = locale_data['blockedPaymentMethods']
 
 
