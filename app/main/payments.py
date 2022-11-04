@@ -27,7 +27,7 @@ def adyen_payments(frontend_request, locale_data):
     payments_request['shopperReference'] = "UniqueReference"
     payments_request['returnUrl'] = "http://localhost:8080/api/handleShopperRedirect"
     payments_request['countryCode'] = locale_data['countryCode']  
-    payments_request['merchantAccount'] = get_adyen_merchant_account()
+    payments_request['merchantAccount'] = "CheckoutCreateDemo"
     payments_request['recurringExpiry'] = "2022-08-01T23:59:59+02:00"
 
 
