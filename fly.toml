@@ -1,6 +1,6 @@
-# fly.toml file generated for checkout-create on 2022-11-07T15:12:40+01:00
+# fly.toml file generated for adyencheckout on 2022-11-07T16:40:06+01:00
 
-app = "checkout-create"
+app = "adyencheckout"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
