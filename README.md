@@ -1,6 +1,11 @@
 # Checkout Create
 ## Interactive Drop-in creation and styling tool 
 
+
+[Try the tool online here!](https://adyencheckout.fly.dev/).
+
+_⚠️WARNING⚠️: Do not use real payment information online! There are test cards available at the bottom of the page_
+
 > :warning: **This tool is being worked on and is in Alpha stage**
 
 An external tool which allows you to build a drop-in integration and make customizations as outlined in our style sheet. Enables you to experiment and see what your checkout could potentially look like. You can then retrive the final result alongside the changes so it can be exported for your team to fully implement your vision.
