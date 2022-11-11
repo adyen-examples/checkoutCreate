@@ -1,0 +1,17 @@
+# flyctl launch added from .gitignore
+**/.idea
+**/.DS_Store
+
+**/config.ini
+
+**/venv
+
+**/.git
+**/*.pyc
+**/__pycache__
+**/*.egg-info
+**/dist
+**/build
+**/.vscode
+
+**/.env

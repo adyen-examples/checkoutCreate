@@ -1,9 +1,28 @@
 # Checkout Create
 ## Interactive Drop-in creation and styling tool 
 
+
+[Try the tool online here!](https://adyencheckout.fly.dev/).
+
+_⚠️WARNING⚠️: Do not use real payment information online! There are test cards available at the bottom of the page_
+
 > :warning: **This tool is being worked on and is in Alpha stage**
 
 An external tool which allows you to build a drop-in integration and make customizations as outlined in our style sheet. Enables you to experiment and see what your checkout could potentially look like. You can then retrive the final result alongside the changes so it can be exported for your team to fully implement your vision.
+
+
+
+## Run this integration in seconds using [Gitpod](https://gitpod.io/)
+
+* Open your [Adyen Test Account](https://ca-test.adyen.com/ca/ca/overview/default.shtml) and create a set of [API keys](https://docs.adyen.com/user-management/how-to-get-the-api-key).
+* Go to [gitpod account variables](https://gitpod.io/variables).
+* Set the `ADYEN_API_KEY`, `ADYEN_CLIENT_KEY`, `ADYEN_HMAC_KEY` and `ADYEN_MERCHANT_ACCOUNT variables`.
+* Click the button below!
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/adyen-examples/checkoutCreate)
+
+_NOTE: To allow the Adyen Drop-In and Components to load, you have to add `https://*.gitpod.io` as allowed origin for your chosen set of [API Credentials](https://ca-test.adyen.com/ca/ca/config/api_credentials_new.shtml)_
+
 
 
 ## Requirements
