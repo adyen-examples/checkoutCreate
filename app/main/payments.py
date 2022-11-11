@@ -9,7 +9,7 @@ perform a call to /payments
 '''
 
 
-def adyen_payments(frontend_request, locale_data):
+def adyen_payments(frontend_request, locale_data, host_url):
     adyen = Adyen.Adyen()
     adyen.payment.client.xapikey = get_adyen_api_key()
     adyen.payment.client.platform = "test" # change to live for production
@@ -25,7 +25,7 @@ def adyen_payments(frontend_request, locale_data):
     payments_request['channel'] = "Web"
     payments_request['reference'] = f"Reference {uuid.uuid4()}" 
     payments_request['shopperReference'] = "UniqueReference"
-    payments_request['returnUrl'] = "http://localhost:8080/api/handleShopperRedirect"
+    payments_request['returnUrl'] = f"{host_url}/api/handleShopperRedirect"
     payments_request['countryCode'] = locale_data['countryCode']  
     payments_request['merchantAccount'] = get_adyen_merchant_account()
     payments_request['recurringExpiry'] = "2022-08-01T23:59:59+02:00"
