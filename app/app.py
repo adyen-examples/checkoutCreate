@@ -37,9 +37,10 @@ def create_app():
     @app.route('/api/initiatePayment', methods=['POST'])
     def initiate_payment():
         request_data = request.get_json()
+        host_url = request.host_url 
         # print (request_data)
         locale_data = request_data
-        return adyen_payments(request, locale_data)
+        return adyen_payments(request, locale_data, host_url)
 
     @app.route('/api/submitAdditionalDetails', methods=['POST'])
     def payment_details():
@@ -64,7 +65,6 @@ def create_app():
 
         # Redirect shopper to landing page depending on payment success/failure
         if redirect_response["resultCode"] == 'Authorised':
-            print ('I reach here')
             return redirect(url_for('checkout_success'))
         elif redirect_response["resultCode"] == 'Received' or redirect_response["resultCode"] == 'Pending':
             return redirect(url_for('checkout_pending'))
