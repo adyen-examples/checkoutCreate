@@ -31,17 +31,6 @@ let payMethods =[];
 let payArray = Object.values(payMethods);
 let countrySettings = "NL"
 
-/**
- * Hiding toggles of local payment methods not supported for NL (initial page load)
- *
- */
-document.getElementById('trustlyCol').style.display = "none"
-document.getElementById('trustlyBox').style.display = "none"
-document.getElementById('trustlyToggle').style.display = "none"
-document.getElementById('clearpayCol').style.display = "none"
-document.getElementById('clearpayBox').style.display = "none"
-document.getElementById('clearpayToggle').style.display = "none"
-
 // identify checkout div and create new empty div to replace with
 const oldDiv = document.getElementById("dropin-container")
 const newDiv = document.createElement("div")
@@ -60,6 +49,7 @@ const flagUrlMap = {
     src: "https://ca-test.adyen.com/ca/adl/img/flags/us.svg"
   }
 }
+
 /**
  * Country specific variables
  */
@@ -95,36 +85,136 @@ const countryVariables = [
 ]
 
 /**
+ * @param {Array} PMnames - maps txvariant to display name of Payment Method
+ */
+ const PMnames = [
+  {tx: "paypal", txname: "Paypal"},
+  {tx: "ideal", txname: "Ideal"},
+  {tx: "klarna", txname: "Klarna"},
+  {tx: "alipay", txname: "AliPay"},
+  {tx: "paywithgoogle", txname: "GooglePay"},
+  {tx: "wechatpayQR", txname: "WeChat"},
+  {tx: "paysafecard", txname: "Paysafecard"},
+  {tx: "clearpay", txname: "Clearpay"},
+  {tx: "trustly", txname: "Trustly"},
+]
+
+async function onLoad() {
+  getToggles();
+}
+
+function setAttributes(el, options) {
+  Object.keys(options).forEach(function(attr) {
+    el.setAttribute(attr, options[attr]);
+  })
+}
+
+/**
+ * @function createToggles - creates toggles to enable/disable payment methods according to /paymentMethods response
+ * @param {string} tx - txvariant
+ * @param {string} PMname - Payment Method name
+ */
+async function createToggles(tx, PMname){
+  // create first column div and set attributes
+  let column = document.createElement("div")
+  setAttributes(column,{
+    "id": `${tx}Col`,
+    "class": "col-6"
+  })
+  // create second column div and set attributes
+  let boxPM = document.createElement("div")
+  setAttributes(boxPM, {
+    "id": `${tx}Box`,
+    "class": "col-3"
+  })
+  // print Payment Method title
+  let titlePM = document.createElement("p")
+  titlePM.setAttribute("class", "textFonts text-left ml-3")
+  let textPM = document.createTextNode(PMname[0].txname)
+  // put text inside <p>
+  titlePM.appendChild(textPM);
+  // put <p> inside <div>
+  boxPM.appendChild(titlePM)
+  // create toggle div and set attributes
+  let toggleDiv = document.createElement("div")
+  setAttributes(toggleDiv, {
+    "id": `${tx}Toggle`,
+    "class": "col-3"
+  })
+  // create switch
+  let toggleSwitch = document.createElement("div")
+  toggleSwitch.setAttribute("class", "custom-control custom-switch text-center")
+  // create toggle input
+  let toggleInput = document.createElement("input")
+  setAttributes(toggleInput, {
+    "class": "custom-control-input",
+    "type": "checkbox",
+    "data-toggle": "toggle",
+    "id": `show${PMname[0].txname}`,
+    "onchange": `block${PMname[0].txname}()`,
+    "checked": true 
+  })
+  // create label
+  let toggleLabel = document.createElement("label")
+  setAttributes(toggleLabel, {
+    "class": "custom-control-label",
+    "for": `show${PMname[0].txname}`
+  })
+  // put switch <div> inside the toggle <div>
+  toggleDiv.appendChild(toggleSwitch)
+  // put <input> and <label> inside <div>
+  toggleSwitch.appendChild(toggleInput)
+  toggleSwitch.appendChild(toggleLabel)
+  // put all created divs inside parent div
+  parentPM.appendChild(column)
+  parentPM.appendChild(boxPM)
+  parentPM.appendChild(toggleDiv)
+}
+
+/**
+ * @function getToggles - updates toggles for enable/disable payment methods
+ * @param {HTMLHtmlElement} parentPM - parent div for payment methods section
+ * @param {Array} children - all children under parentPM
+ * @param {Array} ids - IDs of children
+ */
+async function getToggles(){
+  const parentPM = document.getElementById('parentPM')
+  const children = Array.from(parentPM.children)
+  // get IDs of children divs
+  const ids = children.map(element => {
+    return element.id
+  })
+  // loop through div IDs for toggles existing on the page and remove all but Card
+  const filteredIds = ids.filter((s) => !s.match("schemeTitle") && !s.match("schemeCol") && !s.match("schemeBox") && !s.match("schemeToggle"))
+  filteredIds.forEach(function (item) {
+    let divId = document.getElementById(item);
+    divId.remove();
+  });
+  // call /paymentMethods with no filter to get txvariants for that country
+  let txvariants = await getCountryPM()
+  // loop through each value of response array - but do not count scheme/cards
+  txvariants.filter(function(tx) {
+    return tx != 'scheme';
+  }).forEach( tx =>{
+    let PMname = PMnames.filter(obj =>{
+      return obj.tx === tx
+    })
+    createToggles(tx, PMname);
+})
+}
+
+/**
  * Country dropdown changes the flag image and reloads the dropin with new country values
  * Calls /paymentMethods to retrieve available txvariants for that country
  * @param {*} el
  */
 async function changeSelect(el) {
-  // let countryPM = getConfiguration();
+  console.log(el)
   console.log(Object.values)
   document.getElementById("flag_img").src = flagUrlMap[el.value].src
   const country = el.value
   countrySettings = getCountryData(country)
-  let txvariants = await getCountryPM()
-  console.log(txvariants)
-  if (txvariants.includes("trustly") === true) {
-    document.getElementById('trustlyCol').style.display = ""
-    document.getElementById('trustlyBox').style.display = ""
-    document.getElementById('trustlyToggle').style.display = ""
-  } else {
-    document.getElementById('trustlyCol').style.display = "none"
-    document.getElementById('trustlyBox').style.display = "none"
-    document.getElementById('trustlyToggle').style.display = "none"
-  }
-  if (txvariants.includes("clearpay") === true) {
-    document.getElementById('clearpayCol').style.display = ""
-    document.getElementById('clearpayBox').style.display = ""
-    document.getElementById('clearpayToggle').style.display = ""
-  } else {
-    document.getElementById('clearpayCol').style.display = "none"
-    document.getElementById('clearpayBox').style.display = "none"
-    document.getElementById('clearpayToggle').style.display = "none"
-  }
+  getToggles();
   if (
     document.getElementById("dropin-container") &&
     document.getElementById("placeholderData").checked == true
@@ -1102,3 +1192,5 @@ function restartDropin() {
 updateColorPickers()
 
 initCheckout()
+
+onLoad()
