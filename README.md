@@ -83,4 +83,4 @@ MIT license. For more information, see the **LICENSE** file in the root director
 
 ---
 
-*v1.1.0-alpha*
+*v1.2.0-alpha*
