@@ -144,6 +144,7 @@ async function createToggles(tx, PMname){
   // create switch
   let toggleSwitch = document.createElement("div")
   toggleSwitch.setAttribute("class", "custom-control custom-switch text-center")
+  toggleSwitch.setAttribute("id", `${tx}`)
   // create toggle input
   let toggleInput = document.createElement("input")
   setAttributes(toggleInput, {
@@ -151,7 +152,7 @@ async function createToggles(tx, PMname){
     "type": "checkbox",
     "data-toggle": "toggle",
     "id": `show${PMname[0].txname}`,
-    "onchange": `block${PMname[0].txname}()`,
+    "onchange": "blockPM(this)",
     "checked": true 
   })
   // create label
@@ -651,21 +652,27 @@ function blockCard() {
   newDiv.setAttribute("class", "payment p-5")
   initCheckout()
 }
-// -------PayPal---------
+// ------- All other payment methods ---------
 /**
- * @function blockPaypal - adds/removes paypal as txvariant to blockPaymentMethods array
+ * @function blockPM - adds/removes the txvariant of the toggle to blockPaymentMethods array
  */
-function blockPaypal() {
-	const paypalState = document.getElementById('showPaypal').checked;
+ function blockPM(element) {
+	// const pmState = document.getElementById(`show${PMname[0].txname}`).checked;
   const oldDiv = document.getElementById("dropin-container")
   const newDiv = document.createElement("div")
-	if (paypalState == true) {
-    const filteredPM = payMethods.filter((s) => !s.match("paypal"));
+  let thisParentPM = element.parentNode;
+  console.log(thisParentPM.id)
+  let thisPM = thisParentPM.querySelector("input")
+  const pmState = thisPM.checked
+  console.log(pmState)
+  let currentTX = thisParentPM.id
+	if (pmState == true) {
+    const filteredPM = payMethods.filter((s) => !s.match(currentTX));
     payMethods = filteredPM;
     payArray = Object.values(payMethods);
     blockedPM = {"blockedPaymentMethods": payArray};
 	} else {
-		payMethods.push("paypal");
+		payMethods.push(currentTX);
     payArray = Object.values(payMethods);
     blockedPM = {"blockedPaymentMethods": payArray};
 	}
@@ -673,190 +680,6 @@ function blockPaypal() {
   newDiv.setAttribute("id", "dropin-container")
   newDiv.setAttribute("class", "payment p-5")
   initCheckout()
-}
-// -------Ideal---------
-/**
- * @function blockIdeal - adds/removes ideal as txvariant to blockPaymentMethods array
- */
-function blockIdeal() {
-	const idealState = document.getElementById('showIdeal').checked;
-  const oldDiv = document.getElementById("dropin-container")
-  const newDiv = document.createElement("div")
-	if (idealState == true) {
-    const filteredPM = payMethods.filter((s) => !s.match("ideal"));
-    payMethods = filteredPM;
-    payArray = Object.values(payMethods);
-    blockedPM = {"blockedPaymentMethods": payArray};
-	} else {
-		payMethods.push("ideal");
-    payArray = Object.values(payMethods);
-    blockedPM = {"blockedPaymentMethods": payArray};
-	}
-  oldDiv.replaceWith(newDiv)
-  newDiv.setAttribute("id", "dropin-container")
-  newDiv.setAttribute("class", "payment p-5")
-  initCheckout();
-}
-// -------Klarna---------
-/**
- * @function blockKlarna - adds/removes klarna as txvariant to blockPaymentMethods array
- */
-function blockKlarna() {
-	const klarnaState = document.getElementById('showKlarna').checked;
-  const oldDiv = document.getElementById("dropin-container")
-  const newDiv = document.createElement("div")
-	if (klarnaState == true) {
-    const filteredPM = payMethods.filter((s) => !s.match("klarna"));
-    payMethods = filteredPM;
-    payArray = Object.values(payMethods);
-    blockedPM = {"blockedPaymentMethods": payArray};
-	} else {
-		payMethods.push("klarna");
-    payArray = Object.values(payMethods);
-    blockedPM = {"blockedPaymentMethods": payArray};
-	}
-  oldDiv.replaceWith(newDiv)
-  newDiv.setAttribute("id", "dropin-container")
-  newDiv.setAttribute("class", "payment p-5")
-  initCheckout();
-}
-// -------GooglePay---------
-/**
- * @function blockGooglePay - adds/removes paywithgoogle as txvariant to blockPaymentMethods array
- */
-function blockGooglePay() {
-	const GooglePayState = document.getElementById('showGooglePay').checked;
-  const oldDiv = document.getElementById("dropin-container")
-  const newDiv = document.createElement("div")
-	if (GooglePayState == true) {
-    const filteredPM = payMethods.filter((s) => !s.match("paywithgoogle"));
-    payMethods = filteredPM;
-    payArray = Object.values(payMethods);
-    blockedPM = {"blockedPaymentMethods": payArray};
-	} else {
-		payMethods.push("paywithgoogle");
-    payArray = Object.values(payMethods);
-    blockedPM = {"blockedPaymentMethods": payArray};
-	}
-  oldDiv.replaceWith(newDiv)
-  newDiv.setAttribute("id", "dropin-container")
-  newDiv.setAttribute("class", "payment p-5")
-  initCheckout();
-}
-// -------WeChat---------
-/**
- * @function blockWeChat - adds/removes wechatpayQR as txvariant to blockPaymentMethods array
- */
-function blockWeChat() {
-	const WeChatState = document.getElementById('showWeChat').checked;
-  const oldDiv = document.getElementById("dropin-container")
-  const newDiv = document.createElement("div")
-	if (WeChatState == true) {
-    const filteredPM = payMethods.filter((s) => !s.match("wechatpayQR"));
-    payMethods = filteredPM;
-    payArray = Object.values(payMethods);
-    blockedPM = {"blockedPaymentMethods": payArray};
-	} else {
-		payMethods.push("wechatpayQR");
-    payArray = Object.values(payMethods);
-    blockedPM = {"blockedPaymentMethods": payArray};
-	}
-  oldDiv.replaceWith(newDiv)
-  newDiv.setAttribute("id", "dropin-container")
-  newDiv.setAttribute("class", "payment p-5")
-  initCheckout();
-}
-// -------AliPay---------
-/**
- * @function blockAliPay - adds/removes alipay as txvariant to blockPaymentMethods array
- */
-function blockAliPay() {
-	const AliPayState = document.getElementById('showAliPay').checked;
-  const oldDiv = document.getElementById("dropin-container")
-  const newDiv = document.createElement("div")
-	if (AliPayState == true) {
-    const filteredPM = payMethods.filter((s) => !s.match("alipay"));
-    payMethods = filteredPM;
-    payArray = Object.values(payMethods);
-    blockedPM = {"blockedPaymentMethods": payArray};
-	} else {
-		payMethods.push("alipay");
-    payArray = Object.values(payMethods);
-    blockedPM = {"blockedPaymentMethods": payArray};
-	}
-  oldDiv.replaceWith(newDiv)
-  newDiv.setAttribute("id", "dropin-container")
-  newDiv.setAttribute("class", "payment p-5")
-  initCheckout();
-}
-// -------Paysafecard---------
-/**
- * @function blockPaysafecard - adds/removes paysafecard as txvariant to blockPaymentMethods array
- */
-function blockPaysafecard() {
-	const PaysafecardState = document.getElementById('showPaysafecard').checked;
-  const oldDiv = document.getElementById("dropin-container")
-  const newDiv = document.createElement("div")
-	if (PaysafecardState == true) {
-    const filteredPM = payMethods.filter((s) => !s.match("paysafecard"));
-    payMethods = filteredPM;
-    payArray = Object.values(payMethods);
-    blockedPM = {"blockedPaymentMethods": payArray};
-	} else {
-		payMethods.push("paysafecard");
-    payArray = Object.values(payMethods);
-    blockedPM = {"blockedPaymentMethods": payArray};
-	}
-  oldDiv.replaceWith(newDiv)
-  newDiv.setAttribute("id", "dropin-container")
-  newDiv.setAttribute("class", "payment p-5")
-  initCheckout();
-}
-// -------Clearpay---------
-/**
- * @function blockClearpay - adds/removes clearpay as txvariant to blockPaymentMethods array
- */
-function blockClearpay() {
-	const ClearpayState = document.getElementById('showClearpay').checked;
-  const oldDiv = document.getElementById("dropin-container")
-  const newDiv = document.createElement("div")
-	if (ClearpayState == true) {
-    const filteredPM = payMethods.filter((s) => !s.match("clearpay"));
-    payMethods = filteredPM;
-    payArray = Object.values(payMethods);
-    blockedPM = {"blockedPaymentMethods": payArray};
-	} else {
-		payMethods.push("clearpay");
-    payArray = Object.values(payMethods);
-    blockedPM = {"blockedPaymentMethods": payArray};
-	}
-  oldDiv.replaceWith(newDiv)
-  newDiv.setAttribute("id", "dropin-container")
-  newDiv.setAttribute("class", "payment p-5")
-  initCheckout();
-}
-// -------Trustly---------
-/**
- * @function blockTrustly - adds/removes trustly as txvariant to blockPaymentMethods array
- */
-function blockTrustly() {
-	const TrustlyState = document.getElementById('showTrustly').checked;
-  const oldDiv = document.getElementById("dropin-container")
-  const newDiv = document.createElement("div")
-	if (TrustlyState == true) {
-    const filteredPM = payMethods.filter((s) => !s.match("trustly"));
-    payMethods = filteredPM;
-    payArray = Object.values(payMethods);
-    blockedPM = {"blockedPaymentMethods": payArray};
-	} else {
-		payMethods.push("trustly");
-    payArray = Object.values(payMethods);
-    blockedPM = {"blockedPaymentMethods": payArray};
-	}
-  oldDiv.replaceWith(newDiv)
-  newDiv.setAttribute("id", "dropin-container")
-  newDiv.setAttribute("class", "payment p-5")
-  initCheckout();
 }
 
 /**
