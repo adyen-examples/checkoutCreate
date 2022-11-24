@@ -881,6 +881,14 @@ function dropinColor() {
   updateStyleCode()
 }
 /**
+ * @function activeBorderColor - Changes active payment method border colour
+ */
+ function activeBorderColor() {
+  let activeBorderColor = document.getElementById("activeBorderColorPick").value
+  r.style.setProperty("--selectedBorder-color", activeBorderColor)
+  updateStyleCode()
+}
+/**
  * @function updateColorPickers - Gets current colour value to show on colour pickers
  */
 function updateColorPickers() {
@@ -911,6 +919,18 @@ function updateColorPickers() {
   let buttonColorNoSpace = buttonColor.replace(/\s/g, '');
   buttonColorInput.value = buttonColorNoSpace
   //
+  // pay button text colour 
+  let buttonTextColorInput = document.getElementById("payTextColorPick")
+  let buttonTextColor = getComputedStyle(r).getPropertyValue("--payText-color")
+  let buttonTextColorNoSpace = buttonTextColor.replace(/\s/g, '');
+  buttonTextColorInput.value = buttonTextColorNoSpace
+  //
+  // active checkout border 
+  let activeBorderColorInput = document.getElementById("activeBorderColorPick")
+  let activeBorderColor = getComputedStyle(r).getPropertyValue("--selectedBorder-color")
+  let activeBorderColorNoSpace = activeBorderColor.replace(/\s/g, '');
+  activeBorderColorInput.value = activeBorderColorNoSpace
+  //
 }
 // console.log(tabColorNoSpace.constructor)
 /** @function dropinTabColor - Changes collapsed payment methods' colours */
@@ -925,6 +945,14 @@ function textColor() {
   r.style.setProperty("--text-color", textColor)
   updateStyleCode()
 }
+
+// change pay button text colour
+function payTextColor() {
+  let payTextColor = document.getElementById("payTextColorPick").value
+  r.style.setProperty("--payText-color", payTextColor)
+  updateStyleCode()
+}
+
 // change pay buttons' edges (staright to round)
 function buttonEdges() {
   let edgeValue = document.getElementById("buttonEdges").value
@@ -1060,6 +1088,8 @@ function resetDynamicCSS() {
     r.style.setProperty("--bold-selected", null)
     r.style.setProperty("--italic-selected", null)
     r.style.setProperty("--secondary-text", "#ffffff")
+    r.style.setProperty("--payText-color", null)
+    r.style.setProperty("--selectedBorder-color", null)
     updateColorPickers()
   }
 
@@ -1120,7 +1150,7 @@ function updateStyleCode() {
     ".adyen-checkout__button.adyen-checkout__button--pay": {
       width: getComputedStyle(r).getPropertyValue("--payButton-width"),
       background: getComputedStyle(r).getPropertyValue("--background-color"),
-      "border-radius": getComputedStyle(r).getPropertyValue("--button-edges"),
+      "border-radius": getComputedStyle(r).getPropertyValue("--button-edges")
     },
     ".adyen-checkout__payment-methods-list li:nth-child(2)": {
       "border-top-left-radius":
