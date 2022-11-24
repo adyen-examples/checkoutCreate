@@ -114,7 +114,7 @@ const countryVariables = [
   {tx: "nordea", txname: "Nordea"},
   {tx: "paymaya_connect", txname: "PayMaya Connect"},
   {tx: "paymaya_wallet", txname: "PayMaya Wallet"},
-  {tx: "paypal", txname: "PayPal"},
+  {tx: "PAYPAL", txname: "PayPal"},
   {tx: "paysafecard", txname: "PaySafeCard"}, 
   {tx: "googlepay", txname: "Google Pay"}, 
   {tx: "paywithgoogle", txname: "Google Pay"}, 
@@ -124,6 +124,7 @@ const countryVariables = [
   {tx: "vipps", txname: "Vipps"}, 
   {tx: "wechatpay", txname: "WeChat Pay"},
   {tx: "wechatpayQR", txname: "WeChatPay QR"},
+  {tx: "wechatpayWeb", txname: "WeChatPay Web"},
   {tx: "zip", txname: "Zip"}
 ]
 
