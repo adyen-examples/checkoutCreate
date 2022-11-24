@@ -77,8 +77,19 @@ a:hover {
   height: 100vh;
 } */
 
+@font-face {
+  font-family: Fakt;
+  src: url("./fonts/Fakt-Normal.otf") format("opentype");
+}
+
+@font-face {
+  font-family: Fakt;
+  font-weight: bold;
+  src: url("./fonts/Fakt-SemiBold.otf") format("opentype");
+}
+
 .config-Title {
-  font-family: "Roboto", sans-serif;
+  font-family: "Fakt", sans-serif;
   font-weight: 400;
   font-weight: bold;
 }
@@ -96,6 +107,7 @@ a:hover {
 .titleFonts {
   font-family: var(--main-font);
   font-weight: 600;
+  font-weight: bold;
   font-size: 20px;
 }
 
@@ -986,7 +998,7 @@ a:hover {
   --main-grey: #f3f5f9;
   --main-text: #00112c;
   --secondary-text: #ffffff;
-  --main-font: "Roboto", sans-serif;
+  --main-font: "Fakt", sans-serif;
   --text-align: left;
   --text-bold: normal;
   --text-italic: normal;
