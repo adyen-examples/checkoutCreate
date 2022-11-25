@@ -124,6 +124,7 @@ const countryVariables = [
   {tx: "vipps", txname: "Vipps"}, 
   {tx: "wechatpay", txname: "WeChat Pay"},
   {tx: "wechatpayQR", txname: "WeChatPay QR"},
+  {tx: "wechatpayWeb", txname: "WeChatPay Web"},
   {tx: "zip", txname: "Zip"}
 ]
 
