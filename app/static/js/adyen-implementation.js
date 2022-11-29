@@ -47,6 +47,39 @@ const flagUrlMap = {
   },
   US: {
     src: "https://ca-test.adyen.com/ca/adl/img/flags/us.svg"
+  },
+  FR: {
+    src: "https://ca-test.adyen.com/ca/adl/img/flags/fr.svg"
+  },
+  DE: {
+    src: "https://ca-test.adyen.com/ca/adl/img/flags/de.svg"
+  },
+  ES: {
+    src: "https://ca-test.adyen.com/ca/adl/img/flags/es.svg"
+  },
+  IT: {
+    src: "https://ca-test.adyen.com/ca/adl/img/flags/it.svg"
+  },
+  SE: {
+    src: "https://ca-test.adyen.com/ca/adl/img/flags/se.svg"
+  },
+  NO: {
+    src: "https://ca-test.adyen.com/ca/adl/img/flags/no.svg"
+  },
+  DK: {
+    src: "https://ca-test.adyen.com/ca/adl/img/flags/dk.svg"
+  },
+  FI: {
+    src: "https://ca-test.adyen.com/ca/adl/img/flags/fi.svg"
+  },
+  PL: {
+    src: "https://ca-test.adyen.com/ca/adl/img/flags/pl.svg"
+  },
+  BE: {
+    src: "https://ca-test.adyen.com/ca/adl/img/flags/be.svg"
+  },
+  PT: {
+    src: "https://ca-test.adyen.com/ca/adl/img/flags/pt.svg"
   }
 }
 
@@ -81,6 +114,105 @@ const countryVariables = [
     street: "71 5th Avenue",
     stateOrProvince: "NY",
     houseNumberOrName: "Floor 11",
+  },
+  {
+    countryCode: "FR",
+    currency: "EUR",
+    locale: "en_FR",
+    city: "Paris",
+    postalCode: "75009",
+    street: "Boulevard Haussmann",
+    houseNumberOrName: "6-8",
+  },
+  {
+    countryCode: "DE",
+    currency: "EUR",
+    locale: "en_DE",
+    city: "Berlin",
+    postalCode: "10117",
+    street: "Friedrichstrasse 63",
+    houseNumberOrName: "17",
+  },
+  {
+    countryCode: "ES",
+    currency: "EUR",
+    locale: "en_ES",
+    city: "Madrid",
+    postalCode: "28001",
+    street: "Calle Serrano",
+    houseNumberOrName: "37",
+  },
+  {
+    countryCode: "IT",
+    currency: "EUR",
+    locale: "en_IT",
+    city: "Milan",
+    postalCode: "20124",
+    street: "Via Joe Colombo",
+    houseNumberOrName: "6",
+  },
+  {
+    countryCode: "SE",
+    currency: "SEK",
+    locale: "en_SE",
+    city: "Stockholm",
+    postalCode: "111 22",
+    street: "Kungsbron",
+    houseNumberOrName: "2",
+  },
+  {
+    countryCode: "NO",
+    currency: "NOK",
+    locale: "en_NO",
+    city: "Oslo",
+    postalCode: "0150",
+    street: "Kirsten Flagstads Plass",
+    houseNumberOrName: "1",
+  },
+  {
+    countryCode: "DK",
+    currency: "DKK",
+    locale: "en_DK",
+    city: "Copenhagen",
+    postalCode: "1471",
+    street: "Ny Vestergade",
+    houseNumberOrName: "10",
+  },
+  {
+    countryCode: "FI",
+    currency: "EUR",
+    locale: "en_FI",
+    city: "Helsinki",
+    postalCode: "00170",
+    street: "Aleksanterinkatu",
+    houseNumberOrName: "16",
+  },
+  {
+    countryCode: "PL",
+    currency: "PLN",
+    locale: "en_PL",
+    city: "Warsaw",
+    postalCode: "00-667",
+    street: "Koszyki",
+    houseNumberOrName: "61",
+  },
+  {
+    countryCode: "BE",
+    currency: "EUR",
+    locale: "en_BE",
+    city: "Brussels",
+    postalCode: "1050",
+    street: "Avenue Arnaud Fraiteur",
+    houseNumberOrName: "15-23",
+  },
+  {
+    countryCode: "PT",
+    currency: "EUR",
+    locale: "en_PT",
+    city: "Lisbon",
+    postalCode: "1200-479",
+    street: "Av. 24 de Julho",
+    houseNumberOrName: "49",
   },
 ]
 
@@ -733,6 +865,14 @@ function dropinColor() {
   updateStyleCode()
 }
 /**
+ * @function activeBorderColor - Changes active payment method border colour
+ */
+ function activeBorderColor() {
+  let activeBorderColor = document.getElementById("activeBorderColorPick").value
+  r.style.setProperty("--selectedBorder-color", activeBorderColor)
+  updateStyleCode()
+}
+/**
  * @function updateColorPickers - Gets current colour value to show on colour pickers
  */
 function updateColorPickers() {
@@ -763,6 +903,18 @@ function updateColorPickers() {
   let buttonColorNoSpace = buttonColor.replace(/\s/g, '');
   buttonColorInput.value = buttonColorNoSpace
   //
+  // pay button text colour 
+  let buttonTextColorInput = document.getElementById("payTextColorPick")
+  let buttonTextColor = getComputedStyle(r).getPropertyValue("--payText-color")
+  let buttonTextColorNoSpace = buttonTextColor.replace(/\s/g, '');
+  buttonTextColorInput.value = buttonTextColorNoSpace
+  //
+  // active checkout border 
+  let activeBorderColorInput = document.getElementById("activeBorderColorPick")
+  let activeBorderColor = getComputedStyle(r).getPropertyValue("--selectedBorder-color")
+  let activeBorderColorNoSpace = activeBorderColor.replace(/\s/g, '');
+  activeBorderColorInput.value = activeBorderColorNoSpace
+  //
 }
 // console.log(tabColorNoSpace.constructor)
 /** @function dropinTabColor - Changes collapsed payment methods' colours */
@@ -777,6 +929,14 @@ function textColor() {
   r.style.setProperty("--text-color", textColor)
   updateStyleCode()
 }
+
+// change pay button text colour
+function payTextColor() {
+  let payTextColor = document.getElementById("payTextColorPick").value
+  r.style.setProperty("--payText-color", payTextColor)
+  updateStyleCode()
+}
+
 // change pay buttons' edges (staright to round)
 function buttonEdges() {
   let edgeValue = document.getElementById("buttonEdges").value
@@ -912,6 +1072,8 @@ function resetDynamicCSS() {
     r.style.setProperty("--bold-selected", null)
     r.style.setProperty("--italic-selected", null)
     r.style.setProperty("--secondary-text", "#ffffff")
+    r.style.setProperty("--payText-color", null)
+    r.style.setProperty("--selectedBorder-color", null)
     updateColorPickers()
   }
 
@@ -972,7 +1134,7 @@ function updateStyleCode() {
     ".adyen-checkout__button.adyen-checkout__button--pay": {
       width: getComputedStyle(r).getPropertyValue("--payButton-width"),
       background: getComputedStyle(r).getPropertyValue("--background-color"),
-      "border-radius": getComputedStyle(r).getPropertyValue("--button-edges"),
+      "border-radius": getComputedStyle(r).getPropertyValue("--button-edges")
     },
     ".adyen-checkout__payment-methods-list li:nth-child(2)": {
       "border-top-left-radius":

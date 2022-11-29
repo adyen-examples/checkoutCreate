@@ -999,7 +999,9 @@ a:hover {
   --topedges-right: 12px;
   --bottomedges-left: 12px;
   --bottomedges-right: 12px;
-  /* --text-color: #00112c; */
+  --selectedBorder-color:#e6e9eb;
+  --text-color: #00112c;
+  --payText-color: #ffffff;
 }
 
 .card-visited .card__back {
@@ -1074,6 +1076,7 @@ a:hover {
   background: var(--dropin-color) !important;
   margin: var(--paymentselected-margin) !important;
   border-radius: var(--selectedBody-edges) !important;
+  border-color: var(--selectedBorder-color) !important;
 }
 
 .adyen-checkout__payment-method__radio {
@@ -1101,7 +1104,7 @@ a:hover {
 .adyen-checkout__button__text {
   font-weight: var(--text-bold) !important;
   font-style: var(--text-italic) !important;
-  color: var(--text-color) !important;
+  color: var(--payText-color) !important;
 }
 
 .adyen-checkout__card__brands img {
@@ -1117,7 +1120,9 @@ a:hover {
 #bgColorPick,
 #dropinColorPick,
 #dropinTabColorPick,
-#buttonColorPick {
+#buttonColorPick,
+#activeBorderColorPick,
+#payTextColorPick {
   border-radius: 20px;
   height: 25px;
   width: 25px;
@@ -1131,14 +1136,18 @@ a:hover {
 #bgColorPick::-webkit-color-swatch-wrapper,
 #dropinColorPick::-webkit-color-swatch-wrapper,
 #dropinTabColorPick::-webkit-color-swatch-wrapper,
-#buttonColorPick::-webkit-color-swatch-wrapper {
+#buttonColorPick::-webkit-color-swatch-wrapper,
+#activeBorderColorPick::-webkit-color-swatch-wrapper,
+#payTextColorPick::-webkit-color-swatch-wrapper {
   padding: 0;
 }
 #textColorPick::-webkit-color-swatch,
 #bgColorPick::-webkit-color-swatch,
 #dropinColorPick::-webkit-color-swatch,
 #dropinTabColorPick::-webkit-color-swatch,
-#buttonColorPick::-webkit-color-swatch {
+#buttonColorPick::-webkit-color-swatch,
+#activeBorderColorPick::-webkit-color-swatch,
+#payTextColorPick::-webkit-color-swatch {
   border: none;
   border-radius: 50%;
 }
@@ -1161,7 +1170,8 @@ a:hover {
 /* Targets selectors or drop-downs */
 .country-selector,
 .font-selector,
-.text-alignment {
+.text-alignment 
+{
   width: 9rem;
   margin-right: 1rem;
 }
