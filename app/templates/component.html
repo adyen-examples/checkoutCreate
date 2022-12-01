@@ -40,12 +40,10 @@
     />
 
     <!-- Adyen CSS from TEST environment (change to live for production)-->
-    <link
-      rel="stylesheet"
-      href="https://checkoutshopper-live.adyen.com/checkoutshopper/sdk/5.15.0/adyen.css"
-      integrity="sha384-Dm1w8jaVOWA8rxpzkxA41DIyw5VlBjpoMTPfAijlfepYGgLKF+hke3NKeU/KTX7t"
-      crossorigin="anonymous"
-    />
+    <link rel="stylesheet"
+    href="https://checkoutshopper-live.adyen.com/checkoutshopper/sdk/5.29.0/adyen.css"
+    integrity="sha384-jAG16Mh+vYdXeyWKqPqL7chbdFT1aS5qjt/8jGJz5vBrI1RJ3m6/uFfMZt8li/rT"
+    crossorigin="anonymous">
 
     <link
       rel="stylesheet"
@@ -1165,11 +1163,9 @@
       </div>
 
     <!-- Adyen JS from TEST environment (change to live for production)-->
-    <script
-      src="https://checkoutshopper-live.adyen.com/checkoutshopper/sdk/5.15.0/adyen.js"
-      integrity="sha384-vMZOl6V83EY2UXaXsPUxH5Pt5VpyLeHpSFnANBVjcH5l7yZmJO0QBl3s6XbKwjiN"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://checkoutshopper-live.adyen.com/checkoutshopper/sdk/5.29.0/adyen.js"
+    integrity="sha384-V7uOD/4bQuWLJRCDSfc60tVzD6rYW5BkkY3GYnaFjgg/guMih1Kx6N5Vo9dBtN3y"
+    crossorigin="anonymous"></script>
 
     <!-- data from front-end -->
     <script id="client-key" type="application/json">
@@ -1225,5 +1221,23 @@
 
     <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/highlight.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/languages/go.min.js"></script>
+
+    <script type="text/javascript">
+      function googleTranslateElementInit() {
+          new google.translate.TranslateElement(
+              {pageLanguage: 'en'},
+              'google_translate_element'
+          );
+      }
+    </script>
+
+  <script type="text/javascript"
+          src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+  </script>
   </body>
+  <footer class="footer footer--fixed-header">
+    <div class="container">
+      <div class="row justify-content-end" id="google_translate_element"></div>
+    </div>
+  </footer>
 </html>
