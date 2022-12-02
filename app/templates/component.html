@@ -1034,6 +1034,110 @@
                   </div>
                 </div>
                 <hr class="mt-4 mb-4" />
+                <div class="row mt-3">
+                  <div class="col flex-fill section-title">
+                    <p class="mb-1 titleFonts">PayPal</p>
+                  </div>
+                  <div class="row container mb-2 p-0">
+                    <!-- text -->
+                    <div class="col-6">
+                      <p class="textFonts">
+                        Customise the look of PayPal
+                      </p>
+                    </div>
+                    <!-- title -->
+                    <div class="col-3">
+                      <p class="textFonts text-left ml-3">Label</p>
+                    </div>
+                    <!-- toggle -->
+                    <div class="col-3 text-center">
+                      <div class="country-selector textFonts">
+                        <select
+                          onchange="changePayPal(this)"
+                          id="paypal_label_select"
+                          class="country-selector__select"
+                          aria-label="PayPal Label"
+                          autocomplete="off"
+                        >
+                          <option value="paypal">Default</option>
+                          <option value="checkout">Checkout</option>
+                          <option value="buynow">Buy Now</option>
+                          <option value="pay">Pay With</option>
+                          <option value="installment">Installment</option>
+                        </select>
+                        <div class="dropdown-icon" aria-hidden="true">
+                          <img
+                            src="{{ url_for('static', filename='img/dropdown.svg') }}"
+                            alt="Dropdown caret"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row container mb-2 p-0">
+                    <!-- text -->
+                    <div class="col-6">
+                    </div>
+                    <!-- title -->
+                    <div class="col-3">
+                      <p class="textFonts text-left ml-3">Colour</p>
+                    </div>
+                    <!-- toggle -->
+                    <div class="col-3 text-center">
+                      <div class="country-selector textFonts">
+                        <select
+                          onchange="changePayPal(this)"
+                          id="paypal_color_select"
+                          class="country-selector__select"
+                          aria-label="PayPal Type"
+                          autocomplete="off"
+                        >
+                          <option value="gold">Gold</option>
+                          <option value="blue">Blue</option>
+                          <option value="silver">Silver</option>
+                          <option value="white">White</option>
+                          <option value="black">Black</option>
+                        </select>
+                        <div class="dropdown-icon" aria-hidden="true">
+                          <img
+                            src="{{ url_for('static', filename='img/dropdown.svg') }}"
+                            alt="Dropdown caret"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row container mb-2 p-0">
+                    <!-- text -->
+                    <div class="col-6"></div>
+                    <!-- title -->
+                    <div class="col-3">
+                      <p class="textFonts text-left ml-3">Shape</p>
+                    </div>
+                    <!-- toggle -->
+                    <div class="col-3 text-right">
+                      <div class="country-selector textFonts">
+                        <select
+                          onchange="changePayPal(this)"
+                          id="paypal_shape_select"
+                          class="country-selector__select"
+                          aria-label="PayPal Shape"
+                          autocomplete="off"
+                        >
+                          <option value="rect">Rectangular</option>
+                          <option value="pill">Pill</option>
+                        </select>
+                        <div class="dropdown-icon" aria-hidden="true">
+                          <img
+                            src="{{ url_for('static', filename='img/dropdown.svg') }}"
+                            alt="Dropdown caret"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr class="mt-4 mb-4" />
                 <!-- Dimensions -->
                 <div class="row mt-3">
                   <div class="col flex-fill section-title">
