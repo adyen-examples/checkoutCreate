@@ -944,6 +944,15 @@ function buttonEdges() {
   r.style.setProperty("--button-edges", pixelVal)
   updateStyleCode()
 }
+/**
+ * @function activeBorderWidth - Changes active payment method border width
+ */
+ function activeBorderWidth() {
+  let activeBorderWidth = document.getElementById("activeBorderSize").value
+  let borderPixelVal = activeBorderWidth + "px"
+  r.style.setProperty("--selectedBorder-width", borderPixelVal)
+  updateStyleCode()
+}
 // change Drop-in's edges (straight to round)
 function bodyEdges() {
   let bodyEdgeValue = document.getElementById("bodyEdges").value
@@ -1088,6 +1097,7 @@ function resetDynamicCSS() {
     r.style.setProperty("--secondary-text", "#ffffff")
     r.style.setProperty("--payText-color", null)
     r.style.setProperty("--selectedBorder-color", null)
+    r.style.setProperty("--selectedBorder-width", null)
     updateColorPickers()
   }
 

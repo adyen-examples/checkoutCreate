@@ -954,6 +954,7 @@ border-top-left-radius: 5px;
   --selectedBorder-color:#e6e9eb;
   --text-color: #00112c;
   --payText-color: #ffffff;
+  --selectedBorder-width: 1px;
 }
 
 .card-visited .card__back {
@@ -1029,6 +1030,7 @@ border-top-left-radius: 5px;
   margin: var(--paymentselected-margin) !important;
   border-radius: var(--selectedBody-edges) !important;
   border-color: var(--selectedBorder-color) !important;
+  border-width: var(--selectedBorder-width) !important;
 }
 
 .adyen-checkout__payment-method__radio {
