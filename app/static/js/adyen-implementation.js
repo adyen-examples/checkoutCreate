@@ -954,6 +954,15 @@ function buttonEdges() {
   r.style.setProperty("--button-edges", pixelVal)
   updateStyleCode()
 }
+/**
+ * @function activeBorderWidth - Changes active payment method border width
+ */
+ function activeBorderWidth() {
+  let activeBorderWidth = document.getElementById("activeBorderSize").value
+  let borderPixelVal = activeBorderWidth + "px"
+  r.style.setProperty("--selectedBorder-width", borderPixelVal)
+  updateStyleCode()
+}
 // change Drop-in's edges (straight to round)
 function bodyEdges() {
   let bodyEdgeValue = document.getElementById("bodyEdges").value
@@ -1019,12 +1028,12 @@ function makeItalic() {
     ) {
       document.getElementById("makeItalic").classList.remove("italic-active")
       r.style.setProperty("--text-italic", null)
-      r.style.setProperty("--italic-selected", null)
+      r.style.setProperty("--align-selected", null)
       updateStyleCode()
     } else {
       document.getElementById("makeItalic").classList.add("italic-active")
       r.style.setProperty("--text-italic", "italic")
-      r.style.setProperty("--italic-selected", "1px solid #36bf52")
+      r.style.setProperty("--align-selected", "#00112c")
       updateStyleCode()
     }
   }
@@ -1037,16 +1046,30 @@ function makeBold() {
   ) {
     document.getElementById("makeBold").classList.remove("bold-active")
     r.style.setProperty("--text-bold", null)
-    r.style.setProperty("--bold-selected", null)
+    r.style.setProperty("--align-selected", null)
     updateStyleCode()
   } else {
     document.getElementById("makeBold").classList.add("bold-active")
     r.style.setProperty("--text-bold", "bold")
-    r.style.setProperty("--bold-selected", "1px solid #36bf52")
+    r.style.setProperty("--align-selected", "#00112c")
     updateStyleCode()
   }
 }
 
+//align the drop in text 
+function alignText(element) {
+  let alignCheck = element.classList.contains("align-active")
+  let alignValue = element.id
+  if (alignCheck == true) {
+    element.classList.remove("align-active")
+    r.style.setProperty("--text-align", null)
+    r.style.setProperty("--align-selected", null)
+  } else {
+    element.classList.add("align-active")
+    r.style.setProperty("--text-align", alignValue)
+    r.style.setProperty("--align-selected", "#00112c")
+  }
+}
   //drop down selector for the different font styles
   function changeFont() {
     r.style.setProperty("--font-options", null)
@@ -1106,6 +1129,7 @@ function resetDynamicCSS() {
     r.style.setProperty("--secondary-text", "#ffffff")
     r.style.setProperty("--payText-color", null)
     r.style.setProperty("--selectedBorder-color", null)
+    r.style.setProperty("--selectedBorder-width", null)
     updateColorPickers()
   }
 

@@ -734,46 +734,6 @@
                     <div class="col-6"></div>
                     <!-- title -->
                     <div class="col-3">
-                      <p class="textFonts text-left ml-3">Alignment</p>
-                    </div>
-                    <!-- toggle -->
-                    <div class="col-3 text-center">
-                      <div class="text-alignment textFonts">
-                        <select
-                          onchange="positionText(this)"
-                          id="positionText"
-                          class="textalign-selector__select"
-                          autocomplete="off"
-                        >
-                          <option
-                            selected
-                            value="left"
-                          >
-                            Left
-                          </option>
-                          <option value="center"
-                          >
-                            Center
-                          </option>
-                          <option value="right"
-                          >
-                            Right
-                          </option>
-                        </select>
-                        <div class="dropdown-icon" aria-hidden="true">
-                          <img
-                            src="{{ url_for('static', filename='img/dropdown.svg') }}"
-                            alt="Dropdown caret"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row container mb-2 p-0">
-                    <!-- text -->
-                    <div class="col-6"></div>
-                    <!-- title -->
-                    <div class="col-3">
                       <p class="textFonts text-left ml-3">Colour</p>
                     </div>
                     <!-- toggle -->
@@ -811,39 +771,39 @@
                     <!-- text -->
                     <div class="col-6"></div>
                     <!-- title -->
-                    <div class="col-3">
-                      <p class="textFonts text-left ml-3">Bold</p>
-                    </div>
                     <!-- toggle -->
                     <div class="col-3 text-center">
-                      <div class="boldImage">
-                        <img src="static/img/bold.png" />
-                        <button
+                      <div class="text-alignment textFonts align__btngroup">
+                          <button
                           type="button"
-                          id="makeBold"
-                          class="btn"
-                          onclick="makeBold()"
-                        ></button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row container mb-2 p-0">
-                    <!-- text -->
-                    <div class="col-6"></div>
-                    <!-- title -->
-                    <div class="col-3">
-                      <p class="textFonts text-left ml-3">Italic</p>
-                    </div>
-                    <!-- toggle -->
-                    <div class="col-3 text-center">
-                      <div class="italicImage">
-                        <img src="static/img/italic.png" />
+                          id="left"
+                          class="btn alignbutton"
+                          onclick="alignText(this)"
+                        ><img src="static/img/align-left.png" alt="Left Alignment" width="20" height="20"></button>
+                          <button
+                          type="button"
+                          id="center"
+                          class="btn alignbutton"
+                          onclick="alignText(this)"
+                        ><img src="static/img/align-justify.png" alt="Center Alignment" width="20" height="20"></button>
+                          <button
+                          type="button"
+                          id="right"
+                          class="btn alignbutton"
+                          onclick="alignText(this)"
+                        > <img src="static/img/align-right.png" alt="Right Alignment" width="20" height="20"></button>
+                          <button
+                            type="button"
+                            id="makeBold"
+                            class="btn alignbutton"
+                            onclick="makeBold()"
+                          ><img class="boldImage" src="static/img/bold.png" /></button>
                         <button
                           type="button"
                           id="makeItalic"
-                          class="btn"
+                          class="btn alignbutton"
                           onclick="makeItalic()"
-                        ></button>
+                        ><img class="italicImage" src="static/img/italic.png" /></button>
                       </div>
                     </div>
                   </div>
@@ -919,6 +879,30 @@
                           name=""
                           id="activeBorderColorPick"
                           onchange="activeBorderColor()"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row container mb-2 p-0">
+                    <!-- text -->
+                    <div class="col-6"></div>
+                    <!-- title -->
+                    <div class="col-3">
+                      <p class="textFonts text-left ml-3">
+                        Active checkout border width
+                      </p>
+                    </div>
+                    <!-- toggle -->
+                    <div class="col-3 text-center">
+                      <div class="form-group">
+                        <input
+                          type="range"
+                          class="form-control-range"
+                          id="activeBorderSize"
+                          onchange="activeBorderWidth(this.value);"
+                          min="0"
+                          max="10"
+                          value="1"
                         />
                       </div>
                     </div>
