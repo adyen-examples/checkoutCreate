@@ -77,8 +77,19 @@ a:hover {
   height: 100vh;
 } */
 
+@font-face {
+  font-family: "Fakt";
+  src: url("./fonts/Fakt-Normal.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Fakt";
+  font-weight: bold;
+  src: url("./fonts/Fakt-SemiBold.otf") format("opentype");
+}
+
 .config-Title {
-  font-family: "Roboto", sans-serif;
+  font-family: "Fakt", sans-serif;
   font-weight: 400;
   font-weight: bold;
 }
@@ -96,6 +107,7 @@ a:hover {
 .titleFonts {
   font-family: var(--main-font);
   font-weight: 600;
+  font-weight: bold;
   font-size: 20px;
 }
 
@@ -652,7 +664,7 @@ border-top-left-radius: 5px;
 
 .p-5 {
   overflow: scroll;
-  height: 100vh;
+  height: 110vh;
 }
 
 
@@ -938,7 +950,7 @@ border-top-left-radius: 5px;
   --main-grey: #f3f5f9;
   --main-text: #00112c;
   --secondary-text: #ffffff;
-  --main-font: "Roboto", sans-serif;
+  --main-font: "Fakt", sans-serif;
   --text-align: left;
   --text-bold: normal;
   --text-italic: normal;
@@ -1210,4 +1222,29 @@ pre {
     margin: 0%;
     padding: 0;
   }
+}
+
+
+.footer {
+    /* position: absolute; */
+    bottom: 0;
+    width: 100%;
+    border-top: 1px solid #dce0e5;
+    padding: 24px 0;
+    text-align: left;
+    font-size: 14px;
+    background: white;
+}
+.footer > .container {
+  padding-right: 15px;
+  padding-left: 15px;
+  /* padding-top: 15px; */
+  text-align: left;
+}
+
+.footer.footer--fixed-header {
+  margin: 24px auto;
+  z-index: 98;
+  position: relative;
+  background-color: #fff;
 }

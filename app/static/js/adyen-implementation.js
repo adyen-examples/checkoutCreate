@@ -260,6 +260,11 @@ const countryVariables = [
   {tx: "zip", txname: "Zip"}
 ]
 
+//Paypal style variables
+let palColor = "gold"
+let palShape = "rect"
+let palLabel = "paypal"
+
 async function onLoad() {
   getToggles();
 }
@@ -622,6 +627,11 @@ async function getConfiguration() {
         amount: {
           currency: countrySettings.currency || "EUR",
           value: 4000,
+        },
+        style: {
+          label: palLabel,
+          color: palColor,
+          shape: palShape
         },
         environment: "test", // Change this to "live" when you're ready to accept live PayPal payments
         countryCode: countrySettings.countryCode || "NL", // Only needed for test. This will be automatically retrieved when you are in production.
@@ -1067,6 +1077,28 @@ function alignText(element) {
     r.style.setProperty("--font-options", fontValue)
     updateStyleCode()
   }
+
+
+//PayPal button Style
+function changePayPal(palValue){
+  console.log(palValue)
+  const oldDiv = document.getElementById("dropin-container")
+  const newDiv = document.createElement("div")
+  if (palValue.id == "paypal_color_select") {
+    palColor = palValue.value
+    console.log(palColor)
+  } else if (palValue.id == "paypal_shape_select") {
+    palShape = palValue.value
+    console.log(palShape)
+  } else {
+    palLabel = palValue.value
+    console.log(palLabel)
+  }
+  oldDiv.replaceWith(newDiv)
+  newDiv.setAttribute("id", "dropin-container")
+  newDiv.setAttribute("class", "payment p-5")
+  initCheckout()
+}
 
 
 // Reset CSS values to default Drop-in

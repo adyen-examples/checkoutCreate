@@ -29,6 +29,7 @@ def adyen_payments(frontend_request, locale_data, host_url):
     payments_request['countryCode'] = locale_data['countryCode']  
     payments_request['merchantAccount'] = get_adyen_merchant_account()
     payments_request['recurringExpiry'] = "2022-08-01T23:59:59+02:00"
+    payments_request['billingAddress'] = {"city": locale_data['city'], "country": locale_data['countryCode'], "houseNumberOrName": locale_data['houseNumberOrName'], "postalCode": locale_data['postalCode'], "street": locale_data['street']}
 
 
     payments_request.update(payment_info)
@@ -39,25 +40,21 @@ def adyen_payments(frontend_request, locale_data, host_url):
         payments_request['shopperName'] = {"firstName": "Test", "lastName": "Shopper"}
         payments_request['lineItems'] = [
             {
-                'quantity': "1",
-                'amountExcludingTax': "1950",
-                'taxPercentage': "1111",
-                'description': "Sunglasses",
-                'id': "Item #1",
-                'taxAmount': "50",
-                'amountIncludingTax': "2000",
-                'taxCategory': "High"
+                "quantity":"1",
+                "taxPercentage":"2100",
+                "description":"Shoes",
+                "id":"Item #1",
+                "amountIncludingTax":"400"
             },
             {
-                'quantity': "1",
-                'amountExcludingTax': "1950",
-                'taxPercentage': "1111",
-                'description': "Headphones",
-                'id': "Item #2",
-                'taxAmount': "50",
-                'amountIncludingTax': "2000",
-                'taxCategory': "High"
-            }]
+                "quantity":"2",
+                "taxPercentage":"2100",
+                "description":"Socks",
+                "id":"Item #2",
+                "amountIncludingTax":"300",
+                "productUrl": "URL_TO_PURCHASED_ITEM"
+            }
+        ]
 
     elif txvariant == 'clearpay':
         payments_request['shopperName'] = {"firstName": "Test", "lastName": "Shopper"}
