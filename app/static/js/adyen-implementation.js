@@ -877,12 +877,12 @@ function makeItalic() {
     ) {
       document.getElementById("makeItalic").classList.remove("italic-active")
       r.style.setProperty("--text-italic", null)
-      r.style.setProperty("--italic-selected", null)
+      r.style.setProperty("--align-selected", null)
       updateStyleCode()
     } else {
       document.getElementById("makeItalic").classList.add("italic-active")
       r.style.setProperty("--text-italic", "italic")
-      r.style.setProperty("--italic-selected", "1px solid #36bf52")
+      r.style.setProperty("--align-selected", "#00112c")
       updateStyleCode()
     }
   }
@@ -895,16 +895,30 @@ function makeBold() {
   ) {
     document.getElementById("makeBold").classList.remove("bold-active")
     r.style.setProperty("--text-bold", null)
-    r.style.setProperty("--bold-selected", null)
+    r.style.setProperty("--align-selected", null)
     updateStyleCode()
   } else {
     document.getElementById("makeBold").classList.add("bold-active")
     r.style.setProperty("--text-bold", "bold")
-    r.style.setProperty("--bold-selected", "1px solid #36bf52")
+    r.style.setProperty("--align-selected", "#00112c")
     updateStyleCode()
   }
 }
 
+//align the drop in text 
+function alignText(element) {
+  let alignCheck = element.classList.contains("align-active")
+  let alignValue = element.id
+  if (alignCheck == true) {
+    element.classList.remove("align-active")
+    r.style.setProperty("--text-align", null)
+    r.style.setProperty("--align-selected", null)
+  } else {
+    element.classList.add("align-active")
+    r.style.setProperty("--text-align", alignValue)
+    r.style.setProperty("--align-selected", "#00112c")
+  }
+}
   //drop down selector for the different font styles
   function changeFont() {
     r.style.setProperty("--font-options", null)
