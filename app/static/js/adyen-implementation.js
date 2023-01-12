@@ -807,7 +807,7 @@ function blockCard() {
   const oldDiv = document.getElementById("dropin-container")
   const newDiv = document.createElement("div")
 	if (CardState == true) {
-    const filteredPM = payMethods.filter((s) => !s.match("visa") && !s.match("mc") && !s.match("amex"));
+    const filteredPM = payMethods.filter((s) => !s.match("visa") && !s.match("mc") && !s.match("amex") && !s.match("cup"));
     payMethods = filteredPM;
     payArray = Object.values(payMethods);
     blockedPM = {"blockedPaymentMethods": payArray};
@@ -815,6 +815,7 @@ function blockCard() {
 		payMethods.push("visa");
     payMethods.push("mc");
     payMethods.push("amex");
+    payMethods.push("cup");
     payArray = Object.values(payMethods);
     blockedPM = {"blockedPaymentMethods": payArray};
 	}
