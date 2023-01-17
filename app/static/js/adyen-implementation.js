@@ -875,9 +875,17 @@ function dropinColor() {
   updateStyleCode()
 }
 /**
+ * @function collapsedBorderColor - Changes collapsed payment method border colour
+ */
+ function collapsedBorderColor() {
+  let collapsedBorderColor = document.getElementById("collapsedBorderColorPick").value
+  r.style.setProperty("--collapsedBorder-color", collapsedBorderColor)
+  updateStyleCode()
+}
+/**
  * @function activeBorderColor - Changes active payment method border colour
  */
- function activeBorderColor() {
+function activeBorderColor() {
   let activeBorderColor = document.getElementById("activeBorderColorPick").value
   r.style.setProperty("--selectedBorder-color", activeBorderColor)
   updateStyleCode()
@@ -925,6 +933,12 @@ function updateColorPickers() {
   let activeBorderColorNoSpace = activeBorderColor.replace(/\s/g, '');
   activeBorderColorInput.value = activeBorderColorNoSpace
   //
+   // collapsed checkout border 
+   let collapsedBorderColorInput = document.getElementById("collapsedBorderColorPick")
+   let collapsedBorderColor = getComputedStyle(r).getPropertyValue("--collapsedBorder-color")
+   let collapsedBorderColorNoSpace = collapsedBorderColor.replace(/\s/g, '');
+   collapsedBorderColorInput.value = collapsedBorderColorNoSpace
+   //
 }
 // console.log(tabColorNoSpace.constructor)
 /** @function dropinTabColor - Changes collapsed payment methods' colours */
@@ -1130,6 +1144,7 @@ function resetDynamicCSS() {
     r.style.setProperty("--payText-color", null)
     r.style.setProperty("--selectedBorder-color", null)
     r.style.setProperty("--selectedBorder-width", null)
+    r.style.setProperty("--collapsedBorder-color", null)
     updateColorPickers()
   }
 
