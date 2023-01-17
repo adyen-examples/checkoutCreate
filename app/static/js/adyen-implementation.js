@@ -246,7 +246,7 @@ const countryVariables = [
   {tx: "nordea", txname: "Nordea"},
   {tx: "paymaya_connect", txname: "PayMaya Connect"},
   {tx: "paymaya_wallet", txname: "PayMaya Wallet"},
-  {tx: "PAYPAL", txname: "PayPal"},
+  {tx: "paypal", txname: "PayPal"},
   {tx: "paysafecard", txname: "PaySafeCard"}, 
   {tx: "googlepay", txname: "Google Pay"}, 
   {tx: "paywithgoogle", txname: "Google Pay"}, 
@@ -310,7 +310,7 @@ async function createToggles(tx, PMname){
   // create switch
   let toggleSwitch = document.createElement("div")
   toggleSwitch.setAttribute("class", "custom-control custom-switch text-center")
-  toggleSwitch.setAttribute("id", `${tx}`)
+  toggleSwitch.setAttribute("id", `${tx}Switch`)
   // create toggle input
   let toggleInput = document.createElement("input")
   setAttributes(toggleInput, {
