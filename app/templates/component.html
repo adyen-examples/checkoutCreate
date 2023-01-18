@@ -1243,6 +1243,11 @@
                       </div>
                     </div>
                   </div>
+                  <div id="saveStyle">
+                    <button type="button" class="resetStyle" onclick="saveStyle()">
+                      Save Style
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1257,7 +1262,7 @@
 
     <!-- data from front-end -->
     <script id="client-key" type="application/json">
-      {{ client_key|tojson }}
+      {{ client_key|default("")|tojson }}
     </script>
     <script id="country-code" type="application/json">
       {{ countryCode|default("NL")|tojson }}

@@ -267,6 +267,16 @@ let palLabel = "paypal"
 
 async function onLoad() {
   getToggles();
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  if (urlParams.has('saveId')) {
+    const saveId = urlParams.get('saveId')
+    const getStyleResponse = await callServer(
+      "/loadStyles",
+      saveId
+    )
+    loadStyle(getStyleResponse)
+  }
 }
 
 function setAttributes(el, options) {
@@ -836,7 +846,8 @@ function blockCard() {
   let thisPM = thisParentPM.querySelector("input")
   const pmState = thisPM.checked
   console.log(pmState)
-  let currentTX = thisParentPM.id
+  let currentTXid = thisParentPM.id
+  let currentTX = currentTXid.replace("Switch","")
 	if (pmState == true) {
     const filteredPM = payMethods.filter((s) => !s.match(currentTX));
     payMethods = filteredPM;
@@ -1133,6 +1144,14 @@ function resetDynamicCSS() {
     updateColorPickers()
   }
 
+// Reset CSS values to default Drop-in
+  function loadStyle(styleData) {
+    for (const [key, value] of Object.entries(styleData)) {
+      r.style.setProperty(key, value);
+    }
+      updateColorPickers()
+    }
+
 // logging configuration object to UI
 function logConfig(cloneConfig) {
   console.log(cloneConfig)
@@ -1173,6 +1192,55 @@ function syntaxHighlight(json) {
     }
   )
 }
+
+
+async function saveStyle() {
+  styleData = {
+  "--background-color": getComputedStyle(r).getPropertyValue("--background-color"),
+  "--dropin-width": getComputedStyle(r).getPropertyValue("--dropin-width"),
+  "--body-edges": getComputedStyle(r).getPropertyValue("--body-edges"),
+  "--selectedBody-edges": getComputedStyle(r).getPropertyValue("--selectedBody-edges"),
+  "--topedges-left": getComputedStyle(r).getPropertyValue("--topedges-left"),
+  "--topedges-right": getComputedStyle(r).getPropertyValue("--topedges-right"),
+  "--bottomedges-left": getComputedStyle(r).getPropertyValue("--bottomedges-left"),
+  "--bottomedges-right": getComputedStyle(r).getPropertyValue("--bottomedges-right"),
+  "--button-edges": getComputedStyle(r).getPropertyValue("--button-edges"),
+  "--bg-color": getComputedStyle(r).getPropertyValue("--bg-color"),
+  "--dropin-color": getComputedStyle(r).getPropertyValue("--dropin-color"),
+  "--dropin-tab-color": getComputedStyle(r).getPropertyValue("--dropin-tab-color"),
+  "--dropin-font": getComputedStyle(r).getPropertyValue("--dropin-font"),
+  "--text-color": getComputedStyle(r).getPropertyValue("--text-color"),
+  "--text-bold": getComputedStyle(r).getPropertyValue("--text-bold"),
+  "--text-italic": getComputedStyle(r).getPropertyValue("--text-italic"),
+  "--text-align": getComputedStyle(r).getPropertyValue("--text-align"),
+  "--payButton-width": getComputedStyle(r).getPropertyValue("--payButton-width"),
+  "--payments-spacing": getComputedStyle(r).getPropertyValue("--payments-spacing"),
+  "--paymentselected-margin": getComputedStyle(r).getPropertyValue("--paymentselected-margin"),
+  "--font-options": getComputedStyle(r).getPropertyValue("--font-options"),
+  "--bold-selected": getComputedStyle(r).getPropertyValue("--bold-selected"),
+  "--italic-selected": getComputedStyle(r).getPropertyValue("--italic-selected"),
+  "--secondary-text": getComputedStyle(r).getPropertyValue("--secondary-text"),
+  "--payText-color": getComputedStyle(r).getPropertyValue("--payText-color"),
+  "--selectedBorder-color": getComputedStyle(r).getPropertyValue("--selectedBorder-color"),
+  "--selectedBorder-width": getComputedStyle(r).getPropertyValue("--selectedBorder-width")
+  }
+
+  const saveStyleResponse = await callServer(
+    "/testButton",
+    styleData
+  )
+  saveId = saveStyleResponse.saveId
+  baseUrl = window.location.host;
+  printUrl = `${baseUrl}/load?saveId=${saveId}`
+  console.log(`${baseUrl}/load?saveId=${saveId}`)
+  const para = document.createElement("p");
+  const node = document.createTextNode(printUrl);
+  para.appendChild(node);
+  const element = document.getElementById("saveStyle");
+  element.appendChild(para);
+}
+
+
 
 function updateStyleCode() {
   let cssjson = {

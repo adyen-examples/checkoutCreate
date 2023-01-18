@@ -1,4 +1,8 @@
 import logging
+import uuid
+import sqlite3
+import json
+from os.path import exists
 
 from Adyen.util import is_valid_hmac_notification
 from flask import Flask, render_template, send_from_directory, request, redirect, url_for, abort
@@ -9,6 +13,7 @@ from main.redirect import handle_shopper_redirect
 from main.additional_details import get_payment_details
 from main.disable import disable_card
 from main.config import *
+from main import database
 
 
 def create_app():
@@ -24,6 +29,44 @@ def create_app():
     @app.route('/')
     def checkout():
         return render_template('component.html', client_key=get_adyen_client_key())
+
+    @app.route('/testButton', methods=['POST', 'GET'])
+    def test_button():
+        generateId = uuid.uuid4()
+        saveId = str(generateId)
+        styleData = request.get_json()
+        print(styleData)
+        value = json.dumps(styleData)
+        result = database.insert_variables(saveId, value)
+        print("this is the result ", result)
+        # existingStoreNames = [item[0] for item in result]
+        # print(existingStoreNames)
+        # if result:
+        #     print(result[0]['storeName'])
+        return result
+
+    @app.route('/load', methods=['GET'])
+    def get_saved_style():
+        args = request.args
+        saveId = args.get('saveId')
+        location = args.get('location')
+        # saveId = request.get(saveId)
+        print(saveId)
+        print(location)
+        result = database.get_variables(saveId)
+        # existingStoreNames = [item[0] for item in result]
+        # print(existingStoreNames)
+        # if result:
+        #     print(result[0]['storeName'])
+        return render_template('component.html', client_key=get_adyen_client_key())
+
+    @app.route('/loadStyles', methods=['GET', 'POST'])
+    def load_style():
+        request_data = request.get_json()
+        saveId = str(request_data)
+        print("saveId from url:\n" + str(request_data))
+        result = database.get_variables(saveId)
+        return result
 
 
     @app.route('/api/getPaymentMethods', methods=['GET', 'POST'])
@@ -117,12 +160,25 @@ def create_app():
     def favicon():
         return send_from_directory(os.path.join(app.root_path, 'static'),
                                    'img/favicon.ico')
+                                
+    initialise_db(app.root_path)
 
     return app
 
 
 def page_not_found(error):
     return render_template('error.html'), 404
+
+def initialise_db(directory_path):
+    """Function to connect to SQLite DB, including DB creation and config if required"""
+
+    # create path to DB file and store in config
+    path_to_db_file = os.path.join(directory_path, 'app.sqlite')
+    database.set_path_to_db_file(path_to_db_file)
+
+    # check if DB file already exists - if not, execute DDL to create table
+    if not exists(path_to_db_file):
+        database.create_table()
 
 
 if __name__ == '__main__':
