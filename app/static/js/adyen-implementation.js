@@ -1233,12 +1233,14 @@ async function saveStyle() {
   baseUrl = window.location.host;
   printUrl = `${baseUrl}/load?saveId=${saveId}`
   console.log(`${baseUrl}/load?saveId=${saveId}`)
-  const para = document.createElement("p");
-  const node = document.createTextNode(printUrl);
-  para.appendChild(node);
-  const element = document.getElementById("saveStyle");
-  element.appendChild(para);
+  // const para = document.createElement("p");
+  // const node = document.createTextNode(printUrl);
+  // para.appendChild(node);
+  // const element = document.getElementById("myInput");
+  // element.appendChild(para);
+  document.getElementById("myInput").value = printUrl;
 }
+
 
 
 
