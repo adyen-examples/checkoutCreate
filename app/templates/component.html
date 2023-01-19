@@ -933,6 +933,27 @@
                     <div class="col-6"></div>
                     <!-- title -->
                     <div class="col-3">
+                      <p class="textFonts text-left ml-3">
+                        Collapsed payment methods border
+                      </p>
+                    </div>
+                    <!-- toggle -->
+                    <div class="col-3 text-center">
+                      <div>
+                        <input
+                          type="color"
+                          name=""
+                          id="collapsedBorderColorPick"
+                          onchange="collapsedBorderColor()"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row container mb-2 p-0">
+                    <!-- text -->
+                    <div class="col-6"></div>
+                    <!-- title -->
+                    <div class="col-3">
                       <p class="textFonts text-left ml-3">Pay button</p>
                     </div>
                     <!-- toggle -->
@@ -1244,9 +1265,29 @@
                     </div>
                   </div>
                   <div id="saveStyle">
-                    <button type="button" class="resetStyle" onclick="saveStyle()">
+                    <button type="button" class="resetStyle" onclick="saveStyle()" data-toggle="modal" data-target="#exampleModal">
                       Save Style
                     </button>
+                  </div>
+                  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content col-12">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Saved style link</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                              <label style="font-weight: 600"><span class="message"></span></label><br />
+                              <div class="row">
+                                <input class="col-10 ur" type="url" placeholder=""
+                                    id="myInput" aria-describedby="inputGroup-sizing-default" style="height: 40px;">
+                                <button id="copy-url"data-clipboard-action="copy" data-clipboard-target="input#myInput" class="btn cpy" onclick="copied()"><i class="bi bi-clipboard"></i></button>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1287,6 +1328,8 @@
       document.getElementById('copy-expiry').setAttribute("data-clipboard-text", String(expiryText))
       let cvcText = document.getElementById('cvc').innerText
       document.getElementById('copy-cvc').setAttribute("data-clipboard-text", String(cvcText))
+      let urlText = document.getElementById('myInput').value
+      document.getElementById('copy-url').setAttribute("data-clipboard-text", String(urlText))
       var clipboard = new Clipboard(".btn")
       clipboard.on("success", function (e) {
         console.log(e)
@@ -1294,6 +1337,13 @@
       clipboard.on("error", function (e) {
         console.log(e)
       })
+      function copied() {
+        $(".message").text("link copied");
+        setTimeout(messageTimer, 3000);
+      }
+      function messageTimer() {
+        $(".message").text("");
+      }
     </script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script

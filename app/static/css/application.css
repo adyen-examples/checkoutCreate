@@ -65,6 +65,10 @@ a:hover {
   background: var(--bg-color) !important;
 }
 
+#dropin-container{
+  margin-bottom: 2rem
+}
+
 .config-UI {
   background-color: var(--main-grey);
   /* border-top-left-radius: 20px;
@@ -964,6 +968,7 @@ border-top-left-radius: 5px;
   --bottomedges-left: 12px;
   --bottomedges-right: 12px;
   --selectedBorder-color:#e6e9eb;
+  --collapsedBorder-color: #e6e9eb;
   --text-color: #00112c;
   --payText-color: #ffffff;
   --selectedBorder-width: 1px;
@@ -1021,12 +1026,14 @@ border-top-left-radius: 5px;
   background: var(--dropin-tab-color) !important;
   font-weight: var(--text-bold) !important;
   margin: var(--payments-spacing) !important;
+  border-color: var(--collapsedBorder-color) !important;
 }
 
 .adyen-checkout__payment-method--selected+.adyen-checkout__payment-method, .adyen-checkout__payment-method:first-child {
   border-top-left-radius: var(--topedges-left) !important;
   border-top-right-radius: var(--topedges-right) !important;
 }
+
 
 .adyen-checkout__payment-method--next-selected, .adyen-checkout__payment-method:last-child {
   border-bottom-left-radius: var(--bottomedges-left) !important;
@@ -1088,7 +1095,8 @@ border-top-left-radius: 5px;
 #dropinTabColorPick,
 #buttonColorPick,
 #activeBorderColorPick,
-#payTextColorPick {
+#payTextColorPick,
+#collapsedBorderColorPick {
   border-radius: 20px;
   height: 25px;
   width: 25px;
@@ -1104,7 +1112,8 @@ border-top-left-radius: 5px;
 #dropinTabColorPick::-webkit-color-swatch-wrapper,
 #buttonColorPick::-webkit-color-swatch-wrapper,
 #activeBorderColorPick::-webkit-color-swatch-wrapper,
-#payTextColorPick::-webkit-color-swatch-wrapper {
+#payTextColorPick::-webkit-color-swatch-wrapper,
+#collapsedBorderColorPick::-webkit-color-swatch-wrapper {
   padding: 0;
 }
 #textColorPick::-webkit-color-swatch,
@@ -1113,7 +1122,9 @@ border-top-left-radius: 5px;
 #dropinTabColorPick::-webkit-color-swatch,
 #buttonColorPick::-webkit-color-swatch,
 #activeBorderColorPick::-webkit-color-swatch,
-#payTextColorPick::-webkit-color-swatch {
+#payTextColorPick::-webkit-color-swatch,
+#payTextColorPick::-webkit-color-swatch,
+#collapsedBorderColorPick::-webkit-color-swatch {
   border: none;
   border-radius: 50%;
 }
@@ -1224,6 +1235,82 @@ pre {
   }
 }
 
+/* modal styling for link sharing */
+.mt-100{
+
+  margin-top: 100px;
+
+}
+
+/* .modal {
+  background-image: linear-gradient(rgb(35, 79, 71) 0%, rgb(36, 121, 106) 100.2%)
+} */
+
+.modal-title {
+  font-weight: 900;
+}
+
+.modal-content{
+   border-radius: 13px;
+}
+
+.modal-body {
+  color: #3b3b3b;
+}
+
+.img-thumbnail {
+  border-radius: 33px;
+  width: 61px;
+  height: 61px;
+}
+
+.fab:before {
+  position: relative;
+  top: 13px;
+}
+
+.smd {
+  width: 200px;
+  font-size: small;
+  text-align: center;
+}
+
+.modal-footer {
+  display: block;
+}
+
+.ur {
+  border: none;
+  background-color: #f7f8f9;
+  border-bottom-left-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.cpy {
+  border: none;
+  background-color: var(--main-green);
+  border-bottom-right-radius: 4px;
+  border-top-right-radius: 4px;
+  cursor: pointer;
+}
+
+button.focus,
+button:focus {
+  outline: 0;
+  box-shadow: none !important;
+
+}
+
+.ur.focus,
+.ur:focus {
+  outline: 0;
+  box-shadow: none !important;
+}
+
+.message{
+  font-size: 11px;
+  color: #ee5535;
+}
 
 .footer {
     /* position: absolute; */
@@ -1248,3 +1335,17 @@ pre {
   position: relative;
   background-color: #fff;
 }
+
+/* Responsiveness */
+
+@media only screen and (max-width: 900px) {
+  .config-UI{
+    display: none;
+  }
+  .payment, .p5{
+    flex-direction: row;
+    width: fit-content;
+  }
+
+}
+
