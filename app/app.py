@@ -28,6 +28,7 @@ def create_app():
     # Routes:
     @app.route('/')
     def checkout():
+        delete_old()
         return render_template('component.html', client_key=get_adyen_client_key())
 
     @app.route('/testButton', methods=['POST', 'GET'])
@@ -35,15 +36,20 @@ def create_app():
         generateId = uuid.uuid4()
         saveId = str(generateId)
         styleData = request.get_json()
-        print(styleData)
+        # print(styleData)
         value = json.dumps(styleData)
         result = database.insert_variables(saveId, value)
-        print("this is the result ", result)
+        # print("this is the result ", result)
         # existingStoreNames = [item[0] for item in result]
         # print(existingStoreNames)
         # if result:
         #     print(result[0]['storeName'])
         return result
+
+    @app.route('/tempDeleteTable', methods=['POST', 'GET'])
+    def temp_delete():
+        database.temp_delete_table()
+        return 'done'
 
     @app.route('/load', methods=['GET'])
     def get_saved_style():
@@ -51,8 +57,8 @@ def create_app():
         saveId = args.get('saveId')
         location = args.get('location')
         # saveId = request.get(saveId)
-        print(saveId)
-        print(location)
+        # print(saveId)
+        # print(location)
         result = database.get_variables(saveId)
         # existingStoreNames = [item[0] for item in result]
         # print(existingStoreNames)
@@ -72,7 +78,7 @@ def create_app():
     @app.route('/api/getPaymentMethods', methods=['GET', 'POST'])
     def get_payment_methods():
         request_data = request.get_json()
-        print ("request_data:\n" + str(request_data))
+        # print ("request_data:\n" + str(request_data))
         locale_data = request_data
         return adyen_payment_methods(locale_data)
 
@@ -179,6 +185,9 @@ def initialise_db(directory_path):
     # check if DB file already exists - if not, execute DDL to create table
     if not exists(path_to_db_file):
         database.create_table()
+
+def delete_old():
+    database.delete_old_data()
 
 
 if __name__ == '__main__':

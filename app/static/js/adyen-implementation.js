@@ -386,8 +386,8 @@ async function getToggles(){
  * @param {*} el
  */
 async function changeSelect(el) {
-  console.log(el)
-  console.log(Object.values)
+  // console.log(el)
+  // console.log(Object.values)
   document.getElementById("flag_img").src = flagUrlMap[el.value].src
   const country = el.value
   countrySettings = getCountryData(country)
@@ -594,7 +594,7 @@ async function paymentMethods() {
     "/api/getPaymentMethods",
     mergeData
   )
-  console.log(paymentMethodsResponse)
+  // console.log(paymentMethodsResponse)
   return await paymentMethodsResponse
 }
 
@@ -842,10 +842,10 @@ function blockCard() {
   const oldDiv = document.getElementById("dropin-container")
   const newDiv = document.createElement("div")
   let thisParentPM = element.parentNode;
-  console.log(thisParentPM.id)
+  // console.log(thisParentPM.id)
   let thisPM = thisParentPM.querySelector("input")
   const pmState = thisPM.checked
-  console.log(pmState)
+  // console.log(pmState)
   let currentTXid = thisParentPM.id
   let currentTX = currentTXid.replace("Switch","")
 	if (pmState == true) {
@@ -1019,7 +1019,7 @@ function dropinWidth() {
     let widthValue = document.getElementById("changeWidth").value
     let widthpx = widthValue + "px"
     r.style.setProperty("--dropin-width", widthpx)
-    console.log(widthpx)
+    // console.log(widthpx)
     updateStyleCode()
   }
   // change pay buttons' width
@@ -1106,18 +1106,18 @@ function alignText(element) {
 
 //PayPal button Style
 function changePayPal(palValue){
-  console.log(palValue)
+  // console.log(palValue)
   const oldDiv = document.getElementById("dropin-container")
   const newDiv = document.createElement("div")
   if (palValue.id == "paypal_color_select") {
     palColor = palValue.value
-    console.log(palColor)
+    // console.log(palColor)
   } else if (palValue.id == "paypal_shape_select") {
     palShape = palValue.value
-    console.log(palShape)
+    // console.log(palShape)
   } else {
     palLabel = palValue.value
-    console.log(palLabel)
+    // console.log(palLabel)
   }
   oldDiv.replaceWith(newDiv)
   newDiv.setAttribute("id", "dropin-container")
@@ -1169,7 +1169,7 @@ function resetDynamicCSS() {
 
 // logging configuration object to UI
 function logConfig(cloneConfig) {
-  console.log(cloneConfig)
+  // console.log(cloneConfig)
   // let filteredConfig = loggedConfig
 
   delete cloneConfig.paymentMethodsResponse
@@ -1179,7 +1179,7 @@ function logConfig(cloneConfig) {
   let finalConfig = { configuration: cloneConfig }
   let stringConfig = JSON.stringify(finalConfig, null, 2)
 
-  console.log(stringConfig)
+  // console.log(stringConfig)
 
   document.getElementById("configCode").innerHTML =
     syntaxHighlight(stringConfig)
@@ -1247,7 +1247,7 @@ async function saveStyle() {
   saveId = saveStyleResponse.saveId
   baseUrl = window.location.host;
   printUrl = `${baseUrl}/load?saveId=${saveId}`
-  console.log(`${baseUrl}/load?saveId=${saveId}`)
+  // console.log(`${baseUrl}/load?saveId=${saveId}`)
   // const para = document.createElement("p");
   // const node = document.createTextNode(printUrl);
   // para.appendChild(node);
