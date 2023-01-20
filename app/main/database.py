@@ -17,25 +17,26 @@ def _execute_sql(sql, read):
         cursor.execute(sql)
         if read == 'true':
             output = cursor.fetchall()
-            print(output)
+            # print(output)
             return output
         cursor.close()
 
 # function to create database table
 def create_table():
-    sql_create_table = """CREATE TABLE styles(saveId PRIMARY KEY, value NOT NULL);"""
+    sql_create_table = """CREATE TABLE styles(saveId PRIMARY KEY, value NOT NULL, age INTEGER);"""
     _execute_sql(sql_create_table, False)
+    
 
 
 # function to insert a user into the database table
 def insert_variables(saveId, value):
-    print("Printing saveId ", saveId)
-    sql_insert_variables = "INSERT INTO styles VALUES ('" + saveId + "', '" + value + "');"
+    # print("Printing saveId ", saveId)
+    sql_insert_variables = "INSERT INTO styles VALUES ('" + saveId + "', '" + value + "', datetime('now'));"
     _execute_sql(sql_insert_variables, False)
     result = {'saveId': saveId}
     return result
 
-# function to validate login details and retrieve lemId
+# function to get stored variables
 def get_variables(saveId):
     sql_get_variables = "SELECT * FROM styles"
     read = 'true'
@@ -53,34 +54,46 @@ def get_variables(saveId):
         return 'user error'
 
 
-# function to validate login details and retrieve lemId
-def get_variables1(saveId):
-    sql_get_vars = """SELECT value FROM variables WHERE saveId = ?"""
+# function to delete old data after a set amount of time
+def delete_old_data():
+    sql_delete_vars = """DELETE FROM styles WHERE age <= datetime('now', '-14 days')"""
+    sql_get_remaining = "SELECT * FROM styles"
     try:
         conn = sqlite3.connect(_path_to_db_file)
         cursor = conn.cursor()
         print("Connected to SQLite")
-        cursor.execute(sql_get_vars, (saveId,))
+        cursor.execute(sql_get_remaining)
+        current = cursor.fetchall()
+        allIDs = [item[0] for item in current]
+        ages = [item[2] for item in current]
+        # print("These are the initial IDs in DB", allIDs)
+        # print("These are the ages", ages)
+        cursor.execute(sql_delete_vars)
+        conn.commit()
+        print('deleted')
+        cursor.execute(sql_get_remaining)
         variables = cursor.fetchall()
-        print("Printing saveId ", lem_id)
+        storedIDs = [item[0] for item in variables]
+        # print("These are the reamining IDs in DB", storedIDs)
         print(variables)
-        storesList = []
-        allStores = []
-        for variablesArray in variables:
-            store = storeArray[0]
-            result = get_stores_for_le(store)
-            storesList.append(result)
-            print("StoreID:\n"+ store)
-            print(result)
-            storeResult = json.loads(result)
-            storeName = storeResult['reference']
-            storeStatus = storeResult['status']
-            storeObj = {"storeName": storeName, "storeId":store, "status":storeStatus}
-            print(storeResult['reference'])
-            allStores.append(storeObj)
-            print(allStores)
         cursor.close()
-        return allStores
+        return 'deleted'
+    except sqlite3.Error as error:
+        print("Failed to read data from sqlite table", error)
+    finally:
+        if conn:
+            conn.close()
+            print("The SQLite connection is closed")
+
+def temp_delete_table():
+    sql_delete_table = """DROP TABLE styles"""
+    try:
+        conn = sqlite3.connect(_path_to_db_file)
+        cursor = conn.cursor()
+        print("Connected to SQLite")
+        cursor.execute(sql_delete_table)
+        cursor.close()
+        return 'deleted'
     except sqlite3.Error as error:
         print("Failed to read data from sqlite table", error)
     finally:
