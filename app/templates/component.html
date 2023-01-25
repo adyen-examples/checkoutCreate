@@ -1238,11 +1238,16 @@
                   role="tabpanel"
                   aria-labelledby="save-tab"
                 >
+                <div id="saveStyle">
+                  <button type="button" class="saveStyle" onclick="saveStyle()" data-toggle="modal" data-target="#exampleModal">
+                    Create a share link 
+                  </button>
+                </div>
                   <div class="row mt-3">
                     <div class="col flex-fill section-title">
                       <p class="mb-1 titleFonts">Adyen Configuration</p>
                     </div>
-                    <div class="row container">
+                    <div class="row container config">
                       <!-- section description -->
                       <div class="col-12 mb-2">
                         <pre
@@ -1255,7 +1260,7 @@
                     <div class="col flex-fill section-title">
                       <p class="mb-1 titleFonts">CSS Configuration</p>
                     </div>
-                    <div class="row container">
+                    <div class="row container config">
                       <!-- section description -->
                       <div class="col-12 mb-2">
                         <pre
@@ -1263,11 +1268,6 @@
                         ><code class="css-code" id="cssCode" ></code></pre>
                       </div>
                     </div>
-                  </div>
-                  <div id="saveStyle">
-                    <button type="button" class="resetStyle" onclick="saveStyle()" data-toggle="modal" data-target="#exampleModal">
-                      Save Style
-                    </button>
                   </div>
                   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
