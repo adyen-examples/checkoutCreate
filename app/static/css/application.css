@@ -20,7 +20,7 @@ a {
 }
 
 .nav-link.active {
-  background-color: var(--main-green) !important;
+  background-color: var(--main-text) !important;
   color: var(--main-grey) !important;
 }
 
@@ -66,7 +66,7 @@ a:hover {
 }
 
 #dropin-container{
-  margin-bottom: 2rem
+ 
 }
 
 .config-UI {
@@ -382,6 +382,23 @@ a:hover {
   margin-left: 16px;
   margin-right: 24px;
 }
+
+/* save button start*/
+.saveStyle {
+  color: #fff;
+  justify-content: center;
+  background: var(--main-green) !important;
+  border-radius: 6px !important;
+  border: none;
+  width: 160px;
+  height: 30px;
+
+}
+
+.saveStyle:focus {
+  outline-color: #36bf52;
+}
+/* save button end*/
 
 /* resest button start */
 .resetStyle {
@@ -1166,6 +1183,11 @@ border-top-left-radius: 5px;
 :not(pre)>code[class*=language-], pre[class*=language-] {
     background: #00112c !important;
 } */
+.config {
+    padding-left: 0px;
+    right: 20px;
+    position: relative;
+}
 
 pre {
   outline: 1px solid #ccc;
