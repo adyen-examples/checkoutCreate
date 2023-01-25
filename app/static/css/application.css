@@ -1171,6 +1171,7 @@ pre {
   outline: 1px solid #ccc;
   padding: 5px;
   margin: 5px;
+	border-radius: 10px;
   background: #00112c;
   color: #078f3e;
 }
