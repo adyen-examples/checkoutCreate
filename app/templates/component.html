@@ -69,9 +69,14 @@
     <div class="cotainer-fluid h-100">
       <div class="row flex-fill">
         <!-- Dropin UI -->
+        <!-- nav -->
+        <!-- content -->
         <div
           class="checkout col-7 dropIn-UI justify-content-center text-center m-0 p-0"
         >
+        <div class="banner text-left">
+          
+        </div>
           <div id="dropin-container" class="payment p-5">
             <!-- Component will be rendered here -->
           </div>
@@ -826,27 +831,6 @@
                     <!-- title -->
                     <div class="col-3">
                       <p class="textFonts text-left ml-3">
-                        Website background
-                      </p>
-                    </div>
-                    <!-- toggle -->
-                    <div class="col-3 text-center">
-                      <div>
-                        <input
-                          type="color"
-                          name=""
-                          id="bgColorPick"
-                          onchange="backgroundColor()"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row container mb-2 p-0">
-                    <!-- text -->
-                    <div class="col-6"></div>
-                    <!-- title -->
-                    <div class="col-3">
-                      <p class="textFonts text-left ml-3">
                         Active checkout background
                       </p>
                     </div>
@@ -1222,13 +1206,83 @@
                     </div>
                   </div>
                   <hr class="mt-4 mb-4" />
+                </div>
 
-                  <div>
+                <hr class="mt-4 mb-4" />
+                <!-- Website -->
+                    <div class="row mt-3">
+                  <div class="col flex-fill section-title">
+                    <p class="mb-1 titleFonts">Website</p>
+                  </div>
+                  <div class="row container mb-2 p-0">
+                    <!-- text -->
+                    <div class="col-6">
+                      <p class="textFonts">
+                        Customise the website styling
+                      </p>
+                    </div>
+                    <!-- title -->
+                    <div class="col-3">
+                      <p class="textFonts text-left ml-3">
+                        Website background
+                      </p>
+                    </div>
+                    <!-- toggle -->
+                    <div class="col-3 text-center">
+                      <div>
+                        <input
+                          type="color"
+                          name=""
+                          id="bgColorPick"
+                          onchange="backgroundColor()"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row container mb-2 p-0">
+                    <!-- text -->
+                    <div class="col-6"></div>
+                    <!-- title -->
+                    <div class="col-3">
+                      <p class="textFonts text-left ml-3">
+                        Banner colour
+                      </p>
+                    </div>
+                    <!-- toggle -->
+                    <div class="col-3 text-center">
+                      <div>
+                        <input
+                          type="color"
+                          name=""
+                          id="bannerColorPick"
+                          onchange="bannerColor()"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row container mb-2 p-0">
+                    <!-- text -->
+                    <div class="col-6"></div>
+                    <!-- title -->
+                    <div class="col-3">
+                      <p class="textFonts text-left ml-3">
+                        Merchant logo URL
+                      </p>
+                    </div>
+                    <!-- toggle -->
+                    <div class="col-3 text-center">
+                      <div class="input-group mb-3">
+                      <input type="text" class="form-control" id="merchantLogoUrl" aria-describedby="basic-addon3" onchange="loadMerchantLogo()">
+                    </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- reset button -->
+                 <div>
                     <button type="button" class="resetStyle" onclick="resetDynamicCSS()">
                       Reset Style
                     </button>
                   </div>
-                </div>
               </div>
 
                 <!-- Save your creation content -->
