@@ -43,6 +43,19 @@ function bannerColor() {
   bannerEl.style.backgroundColor = bannerInput
 }
 
+// Toggle config page:
+function toggleConfig() {
+  const checkPreview = document.querySelector(".preview-basket")
+  const configUI = document.querySelector(".config-UI")
+  if (checkPreview.style.display === "none") {
+    checkPreview.style.display = "block"
+    configUI.style.display = "none"
+  } else {
+    configUI.style.display = "block"
+    checkPreview.style.display = "none"
+  }
+}
+
 // merchantLogoLoad
 function loadMerchantLogo() {
   const merchantURL = document.querySelector("#merchantLogoUrl").value

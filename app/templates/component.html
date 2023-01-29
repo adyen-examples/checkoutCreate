@@ -147,7 +147,7 @@
                     </div>
                     <!-- Panel footer start -->
                     <div class="panel-footer">
-                      <div id="card" class="card p-0 text-center">
+                      <div id="card" class="cards p-0 text-center">
                         <div class="card__front card__part">
                           <img
                             class="card__front-square card__square"
@@ -227,6 +227,73 @@
         </div>
 
         <!-- config UI -->
+        <!-- Preview basket page -->
+        <div class="container preview-basket p-3 col-5">
+          <div class="container p-4">
+            <div class="row">
+              <div class="col">
+                <p class="previewTitle">order summary</p>
+              </div>
+              <div class="col text-right">
+                <button type="button" class="saveStyle" onclick="toggleConfig()">
+                    Show configuration
+                  </button>
+              </div>
+            </div>
+          </div>
+          <div class="basket-items container p-3">
+            <div class="item card item-1 p-2">
+             <div class="container">
+              <div class="row">
+                <div class="col-sm">
+                  <img src="https://www.mystoredemo.io/static/02.png" alt="" class="item-image">
+                </div>
+                <div class="col-sm item-text">
+                  <p class="item-text">Headphones</p>
+                </div>
+                <div class="col-sm text-right item-text">
+                  <p class="item-text">£10</p>
+                </div>
+              </div>
+            </div>
+            </div>
+            <div class="item card item-2 p-2">
+             <div class="container">
+              <div class="row">
+                <div class="col-sm">
+                  <img src="https://www.mystoredemo.io/static/09.png" alt="" class="item-image">
+                </div>
+                <div class="col-sm item-text">
+                  <p class="item-text">Purse</p>
+                </div>
+                <div class="col-sm text-right item-text">
+                  <p class="item-text">£20</p>
+                </div>
+              </div>
+            </div>
+            </div>
+            <div class="item card item-3 p-2">
+             <div class="container">
+              <div class="row">
+                <div class="col-sm">
+                  <img src="https://www.mystoredemo.io/static/01.png" alt="" class="item-image">
+                </div>
+                <div class="col-sm item-text">
+                  <p class="item-text">T-shirt</p>
+                </div>
+                <div class="col-sm text-right item-text">
+                  <p class="item-text">£10</p>
+                </div>
+              </div>
+            </div>
+            </div>
+            <div class="totalCost item text-right">
+              <p class=""><span class="totalSpan">Total</span> £20</p>
+            </div>
+          </div>
+
+        </div>
+
         <div class="col-5 config-UI p-0">
           <div class="container p-5">
             <h4 class="config-Title">Design Your Own Checkout</h4>
@@ -268,6 +335,19 @@
                     aria-controls="save"
                     aria-selected="false"
                     >Save your creation</a
+                  >
+                </li>
+                 <li class="nav-item text-right">
+                  <a
+                    class="nav-link"
+                    id="save-tab"
+                    data-toggle="tab"
+                    href=""
+                    role="tab"
+                    aria-controls="save"
+                    aria-selected="false"
+                    onclick="toggleConfig()"
+                    >Preview Basket</a
                   >
                 </li>
               </ul>

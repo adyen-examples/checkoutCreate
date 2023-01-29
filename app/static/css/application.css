@@ -774,7 +774,7 @@ a:hover {
 /* End of card container */
 
 /* Virtual Card CSS */
-.card {
+.cards {
   width: 290px;
   height: 172px;
   -webkit-perspective: 600px;
@@ -1380,4 +1380,47 @@ button:focus {
 .logo {
   height: 100%;
   margin: auto;
+  background-color: transparent;
+}
+
+/* preview basket */
+.preview-basket {
+  display: none;
+}
+
+.previewTitle {
+  text-transform: uppercase;
+  font-size: large;
+  font-weight: bolder;
+  color: #00112c;
+}
+
+.item {
+  width: 80%;
+  justify-content: center;
+  margin: 1rem;
+  padding-bottom: 1rem;
+  margin-bottom: 100px;
+}
+
+.item-image {
+  height: 100px;
+}
+
+.item-text {
+  margin: auto;
+}
+
+.card {
+  margin: 1rem auto;
+}
+
+.totalCost {
+  margin: 0 auto;
+  font-weight: bold;
+  font-size: larger;
+}
+
+.totalSpan {
+  padding: 0 1rem;
 }
