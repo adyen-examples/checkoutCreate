@@ -1202,6 +1202,8 @@ function resetDynamicCSS() {
   r.style.setProperty("--selectedBorder-color", null)
   r.style.setProperty("--selectedBorder-width", null)
   r.style.setProperty("--collapsedBorder-color", null)
+  document.querySelector(".logo").src=""
+  bannerEl.classList.remove("undoHidden")
   updateColorPickers()
 }
 
