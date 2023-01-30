@@ -454,12 +454,11 @@ async function getToggles() {
  * @param {*} el
  */
 async function changeSelect(el) {
-  // console.log(el)
-  // console.log(Object.values)
+  console.log(el)
+  console.log(Object.values)
   document.getElementById("flag_img").src = flagUrlMap[el.value].src
   const country = el.value
   countrySettings = getCountryData(country)
-  getToggles()
   if (
     document.getElementById("dropin-container") &&
     document.getElementById("placeholderData").checked == true
@@ -489,6 +488,7 @@ async function changeSelect(el) {
     newDiv.setAttribute("class", "payment p-5")
     initCheckout()
   }
+  getToggles()
 }
 
 /**
@@ -567,10 +567,10 @@ document
   .parentNode.addEventListener("click", function (event) {
     const oldDiv = document.getElementById("dropin-container")
     const newDiv = document.createElement("div")
-    if (this.querySelector("input").checked) {
-      showPayMethod = false
-    } else {
+    if (this.querySelector("input").checked == false) {
       showPayMethod = true
+    } else {
+      showPayMethod = false
     }
     oldDiv.replaceWith(newDiv)
     newDiv.setAttribute("id", "dropin-container")
@@ -601,7 +601,7 @@ document
   .parentNode.addEventListener("click", function (event) {
     const oldDiv = document.getElementById("dropin-container")
     const newDiv = document.createElement("div")
-    if (this.querySelector("input").checked) {
+    if (this.querySelector("input").checked == true) {
       placeholderData = {
         holderName: "Jane Doe",
         billingAddress: {
@@ -1244,13 +1244,11 @@ function loadStyle(styleData) {
 
 // Load config based on the data from db
 function loadConfig(configData) {
-  for (const [key, value] of Object.entries(configData)) {
-    // keyVariable = key
-    // storedValue = value
-    // keyVariable = storedValue
+  filteredData = Object.fromEntries(Object.entries(configData).filter(([key]) => !key.match('showPayMethod') && !key.match('placeHolderData')))
+  for (const [key, value] of Object.entries(filteredData)) {
     console.log(key, value)
     if (value == true){
-      document.getElementById(key).setAttribute("checked", true)
+      document.getElementById(key).checked = true
     }
   }
   openFirst = configData.openFirst
@@ -1258,24 +1256,34 @@ function loadConfig(configData) {
   onlyStored = configData.onlyStored
   holderName = configData.holderName 
   showPayMethod = configData.showPayMethod
-  if (showPayMethod == false){
-    document.getElementById("showPayMethod").setAttribute("checked", true)
+  if (showPayMethod == true){
+    document.getElementById("showPayMethod").checked = false
   }
   else{
-    document.getElementById("showPayMethod").setAttribute("checked", false)
+    document.getElementById("showPayMethod").checked = true
   }
   hideCVC = configData.hideCVC
   placeholderData = configData.placeholderData
   if (placeholderData == false){
-    document.getElementById("placeholderData").setAttribute("checked", false)
+    document.getElementById("placeholderData").checked = false
   }
-  else{
-    document.getElementById("placeholderData").setAttribute("checked", true)
+  else {
+    document.getElementById("placeholderData").checked = true
   }
   instantArray = configData.instantArray
+  if (instantArray == []){
+    document.getElementById("instantPay").checked = false
+  }
+  else{
+    document.getElementById("instantPay").checked = true
+  }
   payMethods = configData.payMethods
   payArray = configData.payArray
   countrySettings = configData.countrySettings
+  savedCountry = countrySettings.countryCode
+  let countryDropdown = document.getElementById("country_select")
+  countryDropdown.value = savedCountry
+  document.getElementById("flag_img").src = flagUrlMap[savedCountry].src
 
   // if (billAdd == true){
   //   document.getElementById("billAdd").setAttribute("checked", true)
