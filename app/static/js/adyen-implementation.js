@@ -26,10 +26,18 @@ let holderName = false
 let showPayMethod = true
 let hideCVC = false
 let placeholderData = false
-let instantArray = []
+let instantArray = [];
 let payMethods =[];
 let payArray = Object.values(payMethods);
-let countrySettings = "NL"
+let countrySettings = {
+  countryCode: "NL",
+  currency: "EUR",
+  locale: "en_NL",
+  city: "Amsterdam",
+  postalCode: "1011DJ",
+  street: "Simon Carmiggeltstraat",
+  houseNumberOrName: "6 - 50"
+};
 
 // identify checkout div and create new empty div to replace with
 const oldDiv = document.getElementById("dropin-container")
@@ -274,11 +282,22 @@ async function onLoad() {
     const getStyleResponse = await callServer(
       "/loadStyles",
       saveId
+    );
+    console.log(getStyleResponse);
+    if (getStyleResponse != '{"error": "no user"}'){
+      loadStyle(getStyleResponse)
+    }
+    const getConfigResponse = await callServer(
+      "/loadConfig",
+      saveId
     )
-    loadStyle(getStyleResponse)
+    if (getConfigResponse != '{"error": "no user"}'){
+      loadConfig(getConfigResponse)
+    }
   }
 }
 
+// Function to add mutiple attributes to a div
 function setAttributes(el, options) {
   Object.keys(options).forEach(function(attr) {
     el.setAttribute(attr, options[attr]);
@@ -427,7 +446,7 @@ async function changeSelect(el) {
  * Funtion to toggle first payment method open
  */
 document
-  .getElementById("firstPayBox")
+  .getElementById("openFirst")
   .parentNode.addEventListener("click", function (event) {
     const oldDiv = document.getElementById("dropin-container")
     const newDiv = document.createElement("div")
@@ -664,6 +683,7 @@ async function getConfiguration() {
       handleSubmission(state, dropin, "/api/submitAdditionalDetails")
     }
   }
+  console.log(configuration)
   let cloneConfig = Object.assign({}, configuration)
   logConfig(cloneConfig)
   return await configuration
@@ -1156,16 +1176,58 @@ function resetDynamicCSS() {
     r.style.setProperty("--selectedBorder-color", null)
     r.style.setProperty("--selectedBorder-width", null)
     r.style.setProperty("--collapsedBorder-color", null)
+    r.style.setProperty("--border-off", "0")
     updateColorPickers()
   }
 
-// Reset CSS values to default Drop-in
-  function loadStyle(styleData) {
-    for (const [key, value] of Object.entries(styleData)) {
-      r.style.setProperty(key, value);
+// Load saved style based on the data from db
+function loadStyle(styleData) {
+  for (const [key, value] of Object.entries(styleData)) {
+    r.style.setProperty(key, value);
+  }
+    updateColorPickers()
+  }
+
+// Load config based on the data from db
+function loadConfig(configData) {
+  for (const [key, value] of Object.entries(configData)) {
+    // keyVariable = key
+    // storedValue = value
+    // keyVariable = storedValue
+    console.log(key, value)
+    if (value == true){
+      document.getElementById(key).setAttribute("checked", true)
     }
-      updateColorPickers()
-    }
+  }
+  openFirst = configData.openFirst
+  billAdd = configData.billAdd
+  onlyStored = configData.onlyStored
+  holderName = configData.holderName 
+  showPayMethod = configData.showPayMethod
+  if (showPayMethod == false){
+    document.getElementById("showPayMethod").setAttribute("checked", true)
+  }
+  else{
+    document.getElementById("showPayMethod").setAttribute("checked", false)
+  }
+  hideCVC = configData.hideCVC
+  placeholderData = configData.placeholderData
+  if (placeholderData == false){
+    document.getElementById("placeholderData").setAttribute("checked", false)
+  }
+  else{
+    document.getElementById("placeholderData").setAttribute("checked", true)
+  }
+  instantArray = configData.instantArray
+  payMethods = configData.payMethods
+  payArray = configData.payArray
+  countrySettings = configData.countrySettings
+
+  // if (billAdd == true){
+  //   document.getElementById("billAdd").setAttribute("checked", true)
+  // }
+  console.log(configData);
+}
 
 // logging configuration object to UI
 function logConfig(cloneConfig) {
@@ -1237,14 +1299,34 @@ async function saveStyle() {
   "--secondary-text": getComputedStyle(r).getPropertyValue("--secondary-text"),
   "--payText-color": getComputedStyle(r).getPropertyValue("--payText-color"),
   "--selectedBorder-color": getComputedStyle(r).getPropertyValue("--selectedBorder-color"),
-  "--selectedBorder-width": getComputedStyle(r).getPropertyValue("--selectedBorder-width")
+  "--selectedBorder-width": getComputedStyle(r).getPropertyValue("--selectedBorder-width"),
+  "--border-off": getComputedStyle(r).getPropertyValue("--border-off")
   }
+  configData = {
+    "openFirst": openFirst,
+    "billAdd": billAdd,
+    "onlyStored": onlyStored,
+    "holderName": holderName ,
+    "showPayMethod": showPayMethod,
+    "hideCVC": hideCVC,
+    "placeholderData": placeholderData,
+    "instantArray": instantArray,
+    "payMethods": payMethods,
+    "payArray": payArray,
+    "countrySettings": countrySettings
+  }
+  console.log(configData)
 
   const saveStyleResponse = await callServer(
-    "/testButton",
+    "/saveStyle",
     styleData
   )
   saveId = saveStyleResponse.saveId
+  const saveConfigResponse = await callServer(
+    `/saveConfig/${saveId}`,
+    configData
+  )
+  configResponse = saveConfigResponse
   baseUrl = window.location.host;
   printUrl = `${baseUrl}/load?saveId=${saveId}`
   // console.log(`${baseUrl}/load?saveId=${saveId}`)
@@ -1346,6 +1428,7 @@ function restartDropin() {
 
 updateColorPickers()
 
+onLoad()
+
 initCheckout()
 
-onLoad()
