@@ -65,8 +65,7 @@ a:hover {
   background: var(--bg-color) !important;
 }
 
-#dropin-container{
- 
+#dropin-container {
 }
 
 .config-UI {
@@ -392,7 +391,6 @@ a:hover {
   border: none;
   width: 160px;
   height: 30px;
-
 }
 
 .saveStyle:focus {
@@ -429,7 +427,7 @@ a:hover {
   position: absolute;
   font-size: var(--small-text);
   width: 10px;
-  bottom:0px;
+  bottom: 0px;
 }
 
 @media (min-width: 768px) {
@@ -537,8 +535,7 @@ a:hover {
   bottom: 0px;
 }
 
-.alignbutton:focus
-{
+.alignbutton:focus {
   box-shadow: inset 0 0 0 1px #dce0e5;
   background-color: var(--align-selected);
 }
@@ -550,26 +547,26 @@ a:hover {
   box-shadow: inset 0 0 0 1px #dce0e5;
 }
 
-.align__btngroup{
-margin-top: 4px;
-align-items: center;
-display: flex;
-justify-content: left;
+.align__btngroup {
+  margin-top: 4px;
+  align-items: center;
+  display: flex;
+  justify-content: left;
 }
 
 .align__btngroup > .alignbutton {
   border-radius: 0px;
-  }
-
-.align__btngroup > .alignbutton:first-of-type{
-border-bottom-left-radius: 5px;
-border-top-left-radius: 5px;
 }
 
-.align__btngroup > .alignbutton:last-of-type{
+.align__btngroup > .alignbutton:first-of-type {
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.align__btngroup > .alignbutton:last-of-type {
   border-bottom-right-radius: 5px;
   border-top-right-radius: 5px;
-  }
+}
 
 .italicImage {
   width: 15px;
@@ -688,7 +685,6 @@ border-top-left-radius: 5px;
   height: 110vh;
 }
 
-
 /* Adyen Components */
 .payment {
   width: 100%;
@@ -778,7 +774,7 @@ border-top-left-radius: 5px;
 /* End of card container */
 
 /* Virtual Card CSS */
-.card {
+.cards {
   width: 290px;
   height: 172px;
   -webkit-perspective: 600px;
@@ -796,15 +792,14 @@ border-top-left-radius: 5px;
   display: inline-block;
   width: 290px;
   height: 172px;
-  background-image: 
-    linear-gradient(
-      to right bottom,
-      #0abf53,
-      #009a78,
-      #007183,
-      #00496f,
-      #00112c
-    );
+  background-image: linear-gradient(
+    to right bottom,
+    #0abf53,
+    #009a78,
+    #007183,
+    #00496f,
+    #00112c
+  );
   /*linear-gradient(to right bottom, #fd8369, #fc7870, #f96e78, #f56581, #ee5d8a)*/
   background-repeat: no-repeat;
   background-position: center;
@@ -984,7 +979,7 @@ border-top-left-radius: 5px;
   --topedges-right: 12px;
   --bottomedges-left: 12px;
   --bottomedges-right: 12px;
-  --selectedBorder-color:#e6e9eb;
+  --selectedBorder-color: #e6e9eb;
   --collapsedBorder-color: #e6e9eb;
   --text-color: #00112c;
   --payText-color: #ffffff;
@@ -1046,13 +1041,14 @@ border-top-left-radius: 5px;
   border-color: var(--collapsedBorder-color) !important;
 }
 
-.adyen-checkout__payment-method--selected+.adyen-checkout__payment-method, .adyen-checkout__payment-method:first-child {
+.adyen-checkout__payment-method--selected + .adyen-checkout__payment-method,
+.adyen-checkout__payment-method:first-child {
   border-top-left-radius: var(--topedges-left) !important;
   border-top-right-radius: var(--topedges-right) !important;
 }
 
-
-.adyen-checkout__payment-method--next-selected, .adyen-checkout__payment-method:last-child {
+.adyen-checkout__payment-method--next-selected,
+.adyen-checkout__payment-method:last-child {
   border-bottom-left-radius: var(--bottomedges-left) !important;
   border-bottom-right-radius: var(--bottomedges-right) !important;
 }
@@ -1112,6 +1108,7 @@ border-top-left-radius: 5px;
 #dropinTabColorPick,
 #buttonColorPick,
 #activeBorderColorPick,
+#bannerColorPick,
 #payTextColorPick,
 #collapsedBorderColorPick {
   border-radius: 20px;
@@ -1130,6 +1127,7 @@ border-top-left-radius: 5px;
 #buttonColorPick::-webkit-color-swatch-wrapper,
 #activeBorderColorPick::-webkit-color-swatch-wrapper,
 #payTextColorPick::-webkit-color-swatch-wrapper,
+#bannerColorPick::-webkit-color-swatch-wrapper,
 #collapsedBorderColorPick::-webkit-color-swatch-wrapper {
   padding: 0;
 }
@@ -1141,6 +1139,7 @@ border-top-left-radius: 5px;
 #activeBorderColorPick::-webkit-color-swatch,
 #payTextColorPick::-webkit-color-swatch,
 #payTextColorPick::-webkit-color-swatch,
+#bannerColorPick::-webkit-color-swatch,
 #collapsedBorderColorPick::-webkit-color-swatch {
   border: none;
   border-radius: 50%;
@@ -1164,8 +1163,7 @@ border-top-left-radius: 5px;
 /* Targets selectors or drop-downs */
 .country-selector,
 .font-selector,
-.text-alignment 
-{
+.text-alignment {
   width: 9rem;
   margin-right: 1rem;
 }
@@ -1176,7 +1174,7 @@ border-top-left-radius: 5px;
 
 .form-control-file,
 .form-control-range {
-  accent-color: #36bf52!important;
+  accent-color: #36bf52 !important;
   /* width: 50%; */
 }
 /* 
@@ -1184,16 +1182,16 @@ border-top-left-radius: 5px;
     background: #00112c !important;
 } */
 .config {
-    padding-left: 0px;
-    right: 20px;
-    position: relative;
+  padding-left: 0px;
+  right: 20px;
+  position: relative;
 }
 
 pre {
   outline: 1px solid #ccc;
   padding: 5px;
   margin: 5px;
-	border-radius: 10px;
+  border-radius: 10px;
   background: #00112c;
   color: #078f3e;
 }
@@ -1242,7 +1240,7 @@ pre {
   color: var(--main-grey);
 }
 .btn:hover {
-	color: #687282;
+  color: #687282;
 }
 
 @media (max-width: 500px) {
@@ -1259,10 +1257,8 @@ pre {
 }
 
 /* modal styling for link sharing */
-.mt-100{
-
+.mt-100 {
   margin-top: 100px;
-
 }
 
 /* .modal {
@@ -1273,8 +1269,8 @@ pre {
   font-weight: 900;
 }
 
-.modal-content{
-   border-radius: 13px;
+.modal-content {
+  border-radius: 13px;
 }
 
 .modal-body {
@@ -1321,7 +1317,6 @@ button.focus,
 button:focus {
   outline: 0;
   box-shadow: none !important;
-
 }
 
 .ur.focus,
@@ -1330,20 +1325,20 @@ button:focus {
   box-shadow: none !important;
 }
 
-.message{
+.message {
   font-size: 11px;
   color: #ee5535;
 }
 
 .footer {
-    /* position: absolute; */
-    bottom: 0;
-    width: 100%;
-    border-top: 1px solid #dce0e5;
-    padding: 24px 0;
-    text-align: left;
-    font-size: 14px;
-    background: white;
+  /* position: absolute; */
+  bottom: 0;
+  width: 100%;
+  border-top: 1px solid #dce0e5;
+  padding: 24px 0;
+  text-align: left;
+  font-size: 14px;
+  background: white;
 }
 .footer > .container {
   padding-right: 15px;
@@ -1362,13 +1357,70 @@ button:focus {
 /* Responsiveness */
 
 @media only screen and (max-width: 900px) {
-  .config-UI{
+  .config-UI {
     display: none;
   }
-  .payment, .p5{
+  .payment,
+  .p5 {
     flex-direction: row;
     width: fit-content;
   }
-
 }
 
+/* Banner */
+.banner {
+  height: 64px;
+  display: none;
+}
+
+.undoHidden {
+  display: block;
+}
+
+.logo {
+  height: 100%;
+  margin: auto;
+  background-color: transparent;
+}
+
+/* preview basket */
+.preview-basket {
+  display: none;
+}
+
+.previewTitle {
+  text-transform: uppercase;
+  font-size: large;
+  font-weight: bolder;
+  color: #00112c;
+}
+
+.item {
+  width: 80%;
+  justify-content: center;
+  margin: 1rem;
+  padding-bottom: 1rem;
+  margin-bottom: 100px;
+}
+
+.item-image {
+  height: 100px;
+}
+
+.item-text {
+  margin: auto;
+}
+
+.card {
+  margin: 1rem auto;
+}
+
+.totalCost {
+  margin: 0 auto;
+  font-weight: bold;
+  font-size: larger;
+}
+
+.totalSpan {
+  padding: 0 1rem;
+}
