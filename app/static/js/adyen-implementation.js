@@ -1227,8 +1227,10 @@ function resetDynamicCSS() {
     r.style.setProperty("--selectedBorder-width", null)
     r.style.setProperty("--collapsedBorder-color", null)
     r.style.setProperty("--border-off", "0")
-    document.querySelector(".logo").src=""
+    document.querySelector('#merchantLogoUrl').value = ''
     bannerEl.classList.remove("undoHidden")
+    bannerEl.style.setProperty("background-color", '#ffffff')
+    bannerEl.removeChild(bannerEl.firstChild)
     updateColorPickers()
   }
 
