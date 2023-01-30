@@ -22,10 +22,12 @@ def _execute_sql(sql, read):
         cursor.close()
 
 # function to create database table
-def create_table():
-    sql_create_table = """CREATE TABLE styles(saveId PRIMARY KEY, value NOT NULL, age INTEGER);"""
-    _execute_sql(sql_create_table, False)
-    
+def create_tables():
+    sql_create_style = """CREATE TABLE styles(saveId PRIMARY KEY, value NOT NULL, age INTEGER);"""
+    _execute_sql(sql_create_style, False)
+    sql_create_config = """CREATE TABLE config(saveId PRIMARY KEY, value NOT NULL, age INTEGER);"""
+    _execute_sql(sql_create_config, False)
+
 
 
 # function to insert a user into the database table
@@ -33,6 +35,12 @@ def insert_variables(saveId, value):
     # print("Printing saveId ", saveId)
     sql_insert_variables = "INSERT INTO styles VALUES ('" + saveId + "', '" + value + "', datetime('now'));"
     _execute_sql(sql_insert_variables, False)
+    result = {'saveId': saveId}
+    return result
+
+def insert_config(saveId, value):
+    sql_insert_config = "INSERT INTO config VALUES ('" + saveId + "', '" + value + "', datetime('now'));"
+    _execute_sql(sql_insert_config, False)
     result = {'saveId': saveId}
     return result
 
@@ -51,7 +59,24 @@ def get_variables(saveId):
         checkValue = storedValues[index]
         return checkValue
     else:
-        return 'user error'
+        return '{"error": "no user"}'
+
+# function to get stored config
+def get_config(saveId):
+    sql_get_config = "SELECT * FROM config"
+    read = 'true'
+    listData = _execute_sql(sql_get_config, read)
+    storedIDs = [item[0] for item in listData]
+    print(storedIDs)
+    storedValues = [item[1] for item in listData]
+    print(storedValues)
+    saveId = saveId
+    if saveId in storedIDs:
+        index = storedIDs.index(saveId)
+        checkValue = storedValues[index]
+        return checkValue
+    else:
+        return '{"error": "no user"}'
 
 
 # function to delete old data after a set amount of time

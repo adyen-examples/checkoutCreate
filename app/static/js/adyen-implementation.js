@@ -25,10 +25,19 @@ let holderName = false
 let showPayMethod = true
 let hideCVC = false
 let placeholderData = false
-let instantArray = []
-let payMethods = []
-let payArray = Object.values(payMethods)
-let countrySettings = "NL"
+let instantArray = [];
+let payMethods =[];
+let payArray = Object.values(payMethods);
+let countrySettings = {
+  countryCode: "NL",
+  currency: "EUR",
+  locale: "en_NL",
+  city: "Amsterdam",
+  postalCode: "1011DJ",
+  street: "Simon Carmiggeltstraat",
+  houseNumberOrName: "6 - 50"
+};
+
 
 // identify checkout div and create new empty div to replace with
 const oldDiv = document.getElementById("dropin-container")
@@ -306,16 +315,30 @@ let palShape = "rect"
 let palLabel = "paypal"
 
 async function onLoad() {
-  getToggles()
-  const queryString = window.location.search
-  const urlParams = new URLSearchParams(queryString)
-  if (urlParams.has("saveId")) {
-    const saveId = urlParams.get("saveId")
-    const getStyleResponse = await callServer("/loadStyles", saveId)
-    loadStyle(getStyleResponse)
+  getToggles();
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  if (urlParams.has('saveId')) {
+    const saveId = urlParams.get('saveId')
+    const getStyleResponse = await callServer(
+      "/loadStyles",
+      saveId
+    );
+    console.log(getStyleResponse);
+    if (getStyleResponse != '{"error": "no user"}'){
+      loadStyle(getStyleResponse)
+    }
+    const getConfigResponse = await callServer(
+      "/loadConfig",
+      saveId
+    )
+    if (getConfigResponse != '{"error": "no user"}'){
+      loadConfig(getConfigResponse)
+    }
   }
 }
 
+// Function to add mutiple attributes to a div
 function setAttributes(el, options) {
   Object.keys(options).forEach(function (attr) {
     el.setAttribute(attr, options[attr])
@@ -472,7 +495,7 @@ async function changeSelect(el) {
  * Funtion to toggle first payment method open
  */
 document
-  .getElementById("firstPayBox")
+  .getElementById("openFirst")
   .parentNode.addEventListener("click", function (event) {
     const oldDiv = document.getElementById("dropin-container")
     const newDiv = document.createElement("div")
@@ -709,6 +732,7 @@ async function getConfiguration() {
       handleSubmission(state, dropin, "/api/submitAdditionalDetails")
     },
   }
+  console.log(configuration)
   let cloneConfig = Object.assign({}, configuration)
   logConfig(cloneConfig)
   return await configuration
@@ -1174,45 +1198,87 @@ function changePayPal(palValue) {
 
 // Reset CSS values to default Drop-in
 function resetDynamicCSS() {
-  r.style.setProperty("--background-color", "#00112c")
-  r.style.setProperty("--dropin-width", null)
-  r.style.setProperty("--body-edges", null)
-  r.style.setProperty("--selectedBody-edges", null)
-  r.style.setProperty("--topedges-left", null)
-  r.style.setProperty("--topedges-right", null)
-  r.style.setProperty("--bottomedges-left", null)
-  r.style.setProperty("--bottomedges-right", null)
-  r.style.setProperty("--button-edges", null)
-  r.style.setProperty("--bg-color", "#ffffff")
-  r.style.setProperty("--dropin-color", "#f7f8f9")
-  r.style.setProperty("--dropin-tab-color", "#ffffff")
-  r.style.setProperty("--dropin-font", null)
-  r.style.setProperty("--text-color", null)
-  r.style.setProperty("--text-bold", null)
-  r.style.setProperty("--text-italic", null)
-  r.style.setProperty("--text-align", null)
-  r.style.setProperty("--payButton-width", null)
-  r.style.setProperty("--payments-spacing", null)
-  r.style.setProperty("--paymentselected-margin", null)
-  r.style.setProperty("--font-options", null)
-  r.style.setProperty("--bold-selected", null)
-  r.style.setProperty("--italic-selected", null)
-  r.style.setProperty("--secondary-text", "#ffffff")
-  r.style.setProperty("--payText-color", null)
-  r.style.setProperty("--selectedBorder-color", null)
-  r.style.setProperty("--selectedBorder-width", null)
-  r.style.setProperty("--collapsedBorder-color", null)
-  document.querySelector(".logo").src=""
-  bannerEl.classList.remove("undoHidden")
-  updateColorPickers()
-}
+    r.style.setProperty("--background-color", '#00112c')
+    r.style.setProperty("--dropin-width", null)
+    r.style.setProperty("--body-edges", null)
+    r.style.setProperty("--selectedBody-edges", null)
+    r.style.setProperty("--topedges-left", null)
+    r.style.setProperty("--topedges-right", null)
+    r.style.setProperty("--bottomedges-left", null)
+    r.style.setProperty("--bottomedges-right", null)
+    r.style.setProperty("--button-edges", null)
+    r.style.setProperty("--bg-color", '#ffffff')
+    r.style.setProperty("--dropin-color", '#f7f8f9')
+    r.style.setProperty("--dropin-tab-color", '#ffffff')
+    r.style.setProperty("--dropin-font", null)
+    r.style.setProperty("--text-color", null)
+    r.style.setProperty("--text-bold", null)
+    r.style.setProperty("--text-italic", null)
+    r.style.setProperty("--text-align", null)
+    r.style.setProperty("--payButton-width", null)
+    r.style.setProperty("--payments-spacing", null)
+    r.style.setProperty("--paymentselected-margin", null)
+    r.style.setProperty("--font-options", null)
+    r.style.setProperty("--bold-selected", null)
+    r.style.setProperty("--italic-selected", null)
+    r.style.setProperty("--secondary-text", "#ffffff")
+    r.style.setProperty("--payText-color", null)
+    r.style.setProperty("--selectedBorder-color", null)
+    r.style.setProperty("--selectedBorder-width", null)
+    r.style.setProperty("--collapsedBorder-color", null)
+    r.style.setProperty("--border-off", "0")
+    document.querySelector(".logo").src=""
+    bannerEl.classList.remove("undoHidden")
+    updateColorPickers()
+  }
 
-// Reset CSS values to default Drop-in
+// Load saved style based on the data from db
 function loadStyle(styleData) {
   for (const [key, value] of Object.entries(styleData)) {
-    r.style.setProperty(key, value)
+    r.style.setProperty(key, value);
   }
-  updateColorPickers()
+    updateColorPickers()
+  }
+
+// Load config based on the data from db
+function loadConfig(configData) {
+  for (const [key, value] of Object.entries(configData)) {
+    // keyVariable = key
+    // storedValue = value
+    // keyVariable = storedValue
+    console.log(key, value)
+    if (value == true){
+      document.getElementById(key).setAttribute("checked", true)
+    }
+  }
+  openFirst = configData.openFirst
+  billAdd = configData.billAdd
+  onlyStored = configData.onlyStored
+  holderName = configData.holderName 
+  showPayMethod = configData.showPayMethod
+  if (showPayMethod == false){
+    document.getElementById("showPayMethod").setAttribute("checked", true)
+  }
+  else{
+    document.getElementById("showPayMethod").setAttribute("checked", false)
+  }
+  hideCVC = configData.hideCVC
+  placeholderData = configData.placeholderData
+  if (placeholderData == false){
+    document.getElementById("placeholderData").setAttribute("checked", false)
+  }
+  else{
+    document.getElementById("placeholderData").setAttribute("checked", true)
+  }
+  instantArray = configData.instantArray
+  payMethods = configData.payMethods
+  payArray = configData.payArray
+  countrySettings = configData.countrySettings
+
+  // if (billAdd == true){
+  //   document.getElementById("billAdd").setAttribute("checked", true)
+  // }
+  console.log(configData);
 }
 
 // logging configuration object to UI
@@ -1258,56 +1324,61 @@ function syntaxHighlight(json) {
 
 async function saveStyle() {
   styleData = {
-    "--background-color":
-      getComputedStyle(r).getPropertyValue("--background-color"),
-    "--dropin-width": getComputedStyle(r).getPropertyValue("--dropin-width"),
-    "--body-edges": getComputedStyle(r).getPropertyValue("--body-edges"),
-    "--selectedBody-edges": getComputedStyle(r).getPropertyValue(
-      "--selectedBody-edges"
-    ),
-    "--topedges-left": getComputedStyle(r).getPropertyValue("--topedges-left"),
-    "--topedges-right":
-      getComputedStyle(r).getPropertyValue("--topedges-right"),
-    "--bottomedges-left":
-      getComputedStyle(r).getPropertyValue("--bottomedges-left"),
-    "--bottomedges-right": getComputedStyle(r).getPropertyValue(
-      "--bottomedges-right"
-    ),
-    "--button-edges": getComputedStyle(r).getPropertyValue("--button-edges"),
-    "--bg-color": getComputedStyle(r).getPropertyValue("--bg-color"),
-    "--dropin-color": getComputedStyle(r).getPropertyValue("--dropin-color"),
-    "--dropin-tab-color":
-      getComputedStyle(r).getPropertyValue("--dropin-tab-color"),
-    "--dropin-font": getComputedStyle(r).getPropertyValue("--dropin-font"),
-    "--text-color": getComputedStyle(r).getPropertyValue("--text-color"),
-    "--text-bold": getComputedStyle(r).getPropertyValue("--text-bold"),
-    "--text-italic": getComputedStyle(r).getPropertyValue("--text-italic"),
-    "--text-align": getComputedStyle(r).getPropertyValue("--text-align"),
-    "--payButton-width":
-      getComputedStyle(r).getPropertyValue("--payButton-width"),
-    "--payments-spacing":
-      getComputedStyle(r).getPropertyValue("--payments-spacing"),
-    "--paymentselected-margin": getComputedStyle(r).getPropertyValue(
-      "--paymentselected-margin"
-    ),
-    "--font-options": getComputedStyle(r).getPropertyValue("--font-options"),
-    "--bold-selected": getComputedStyle(r).getPropertyValue("--bold-selected"),
-    "--italic-selected":
-      getComputedStyle(r).getPropertyValue("--italic-selected"),
-    "--secondary-text":
-      getComputedStyle(r).getPropertyValue("--secondary-text"),
-    "--payText-color": getComputedStyle(r).getPropertyValue("--payText-color"),
-    "--selectedBorder-color": getComputedStyle(r).getPropertyValue(
-      "--selectedBorder-color"
-    ),
-    "--selectedBorder-width": getComputedStyle(r).getPropertyValue(
-      "--selectedBorder-width"
-    ),
+  "--background-color": getComputedStyle(r).getPropertyValue("--background-color"),
+  "--dropin-width": getComputedStyle(r).getPropertyValue("--dropin-width"),
+  "--body-edges": getComputedStyle(r).getPropertyValue("--body-edges"),
+  "--selectedBody-edges": getComputedStyle(r).getPropertyValue("--selectedBody-edges"),
+  "--topedges-left": getComputedStyle(r).getPropertyValue("--topedges-left"),
+  "--topedges-right": getComputedStyle(r).getPropertyValue("--topedges-right"),
+  "--bottomedges-left": getComputedStyle(r).getPropertyValue("--bottomedges-left"),
+  "--bottomedges-right": getComputedStyle(r).getPropertyValue("--bottomedges-right"),
+  "--button-edges": getComputedStyle(r).getPropertyValue("--button-edges"),
+  "--bg-color": getComputedStyle(r).getPropertyValue("--bg-color"),
+  "--dropin-color": getComputedStyle(r).getPropertyValue("--dropin-color"),
+  "--dropin-tab-color": getComputedStyle(r).getPropertyValue("--dropin-tab-color"),
+  "--dropin-font": getComputedStyle(r).getPropertyValue("--dropin-font"),
+  "--text-color": getComputedStyle(r).getPropertyValue("--text-color"),
+  "--text-bold": getComputedStyle(r).getPropertyValue("--text-bold"),
+  "--text-italic": getComputedStyle(r).getPropertyValue("--text-italic"),
+  "--text-align": getComputedStyle(r).getPropertyValue("--text-align"),
+  "--payButton-width": getComputedStyle(r).getPropertyValue("--payButton-width"),
+  "--payments-spacing": getComputedStyle(r).getPropertyValue("--payments-spacing"),
+  "--paymentselected-margin": getComputedStyle(r).getPropertyValue("--paymentselected-margin"),
+  "--font-options": getComputedStyle(r).getPropertyValue("--font-options"),
+  "--bold-selected": getComputedStyle(r).getPropertyValue("--bold-selected"),
+  "--italic-selected": getComputedStyle(r).getPropertyValue("--italic-selected"),
+  "--secondary-text": getComputedStyle(r).getPropertyValue("--secondary-text"),
+  "--payText-color": getComputedStyle(r).getPropertyValue("--payText-color"),
+  "--selectedBorder-color": getComputedStyle(r).getPropertyValue("--selectedBorder-color"),
+  "--selectedBorder-width": getComputedStyle(r).getPropertyValue("--selectedBorder-width"),
+  "--border-off": getComputedStyle(r).getPropertyValue("--border-off")
   }
+  configData = {
+    "openFirst": openFirst,
+    "billAdd": billAdd,
+    "onlyStored": onlyStored,
+    "holderName": holderName ,
+    "showPayMethod": showPayMethod,
+    "hideCVC": hideCVC,
+    "placeholderData": placeholderData,
+    "instantArray": instantArray,
+    "payMethods": payMethods,
+    "payArray": payArray,
+    "countrySettings": countrySettings
+  }
+  console.log(configData)
 
-  const saveStyleResponse = await callServer("/testButton", styleData)
+  const saveStyleResponse = await callServer(
+    "/saveStyle",
+    styleData
+  )
   saveId = saveStyleResponse.saveId
-  baseUrl = window.location.host
+  const saveConfigResponse = await callServer(
+    `/saveConfig/${saveId}`,
+    configData
+  )
+  configResponse = saveConfigResponse
+  baseUrl = window.location.host;
   printUrl = `${baseUrl}/load?saveId=${saveId}`
   // console.log(`${baseUrl}/load?saveId=${saveId}`)
   // const para = document.createElement("p");
@@ -1405,6 +1476,7 @@ function restartDropin() {
 
 updateColorPickers()
 
+onLoad()
+
 initCheckout()
 
-onLoad()
