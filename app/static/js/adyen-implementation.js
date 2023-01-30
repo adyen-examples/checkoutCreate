@@ -1226,11 +1226,11 @@ function resetDynamicCSS() {
     r.style.setProperty("--selectedBorder-color", null)
     r.style.setProperty("--selectedBorder-width", null)
     r.style.setProperty("--collapsedBorder-color", null)
-    r.style.setProperty("--border-off", "0")
+    r.style.setProperty("--border-off", null)
     document.querySelector('#merchantLogoUrl').value = ''
+    document.querySelector('.logo').src = ''
     bannerEl.classList.remove("undoHidden")
     bannerEl.style.setProperty("background-color", '#ffffff')
-    bannerEl.removeChild(bannerEl.firstChild)
     updateColorPickers()
   }
 
@@ -1481,4 +1481,3 @@ updateColorPickers()
 onLoad()
 
 initCheckout()
-
