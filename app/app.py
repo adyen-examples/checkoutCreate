@@ -31,19 +31,22 @@ def create_app():
         delete_old()
         return render_template('component.html', client_key=get_adyen_client_key())
 
-    @app.route('/testButton', methods=['POST', 'GET'])
-    def test_button():
+    @app.route('/saveStyle', methods=['POST', 'GET'])
+    def save_style():
         generateId = uuid.uuid4()
         saveId = str(generateId)
         styleData = request.get_json()
-        # print(styleData)
         value = json.dumps(styleData)
         result = database.insert_variables(saveId, value)
+        return result
+
+    @app.route('/saveConfig/<saveId>', methods=['POST', 'GET'])
+    def save_config(saveId):
+        saveId = saveId
+        configData = request.get_json()
+        value = json.dumps(configData)
+        result = database.insert_config(saveId, value)
         # print("this is the result ", result)
-        # existingStoreNames = [item[0] for item in result]
-        # print(existingStoreNames)
-        # if result:
-        #     print(result[0]['storeName'])
         return result
 
     @app.route('/tempDeleteTable', methods=['POST', 'GET'])
@@ -72,6 +75,14 @@ def create_app():
         saveId = str(request_data)
         print("saveId from url:\n" + str(request_data))
         result = database.get_variables(saveId)
+        return result
+
+    @app.route('/loadConfig', methods=['GET', 'POST'])
+    def load_config():
+        request_data = request.get_json()
+        saveId = str(request_data)
+        print("saveId from url:\n" + str(request_data))
+        result = database.get_config(saveId)
         return result
 
 
@@ -184,7 +195,7 @@ def initialise_db(directory_path):
 
     # check if DB file already exists - if not, execute DDL to create table
     if not exists(path_to_db_file):
-        database.create_table()
+        database.create_tables()
 
 def delete_old():
     database.delete_old_data()
