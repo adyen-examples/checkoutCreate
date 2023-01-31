@@ -54,6 +54,11 @@ def create_app():
         database.temp_delete_table()
         return 'done'
 
+    @app.route('/tempCreateTable', methods=['POST', 'GET'])
+    def temp_create():
+        database.create_tables()()
+        return 'done'
+
     @app.route('/load', methods=['GET'])
     def get_saved_style():
         args = request.args
