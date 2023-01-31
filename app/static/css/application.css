@@ -1079,6 +1079,12 @@ a:hover {
   color: var(--text-color) !important;
 }
 
+.adyen-checkout__fieldset__title {
+  font-weight: var(--text-bold) !important;
+  font-style: var(--text-italic) !important;
+  color: var(--text-color) !important;
+}
+
 .adyen-checkout__label__text {
   font-weight: var(--text-bold) !important;
   font-style: var(--text-italic) !important;
@@ -1112,6 +1118,12 @@ a:hover {
   border-radius: var(--inputBorder-radius) !important;
               
   /* border-width:  */
+}
+
+.adyen-checkout__dropdown__button {
+  box-shadow: inset var(--inputBorder-width) !important; 
+  color: var(--inputBorder-color) !important; 
+  border-radius: var(--inputBorder-radius) !important;
 }
 
 #textColorPick,
@@ -1399,8 +1411,8 @@ button:focus {
   position: absolute;
   top: 10px;
   left: 20px;
-  width: 85px;
-  height: 44px;
+  width: inherit;
+  height: inherit;
   margin: auto;
   background-color: transparent;
 }
