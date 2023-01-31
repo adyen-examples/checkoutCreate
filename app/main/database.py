@@ -27,7 +27,7 @@ def create_tables():
     _execute_sql(sql_create_style, False)
     sql_create_config = """CREATE TABLE config(saveId PRIMARY KEY, value NOT NULL, age INTEGER);"""
     _execute_sql(sql_create_config, False)
-
+    print("created tables")
 
 
 # function to insert a user into the database table
@@ -125,5 +125,7 @@ def temp_delete_table():
         if conn:
             conn.close()
             print("The SQLite connection is closed")
+
+
 
 
