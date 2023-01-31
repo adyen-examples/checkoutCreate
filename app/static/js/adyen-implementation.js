@@ -1,7 +1,6 @@
 const clientKey = JSON.parse(document.getElementById("client-key").innerHTML)
 const storedCountry = document.getElementById("country-code")
 
-
 /**
  * Global configuration variables
  * @param {HTMLHtmlElement} r - Identifies root of document for css variables
@@ -26,61 +25,111 @@ let holderName = false
 let showPayMethod = true
 let hideCVC = false
 let placeholderData = false
-let instantArray = []
+let instantArray = [];
 let payMethods =[];
 let payArray = Object.values(payMethods);
-let countrySettings = "NL"
+let countrySettings = {
+  countryCode: "NL",
+  currency: "EUR",
+  locale: "en_NL",
+  city: "Amsterdam",
+  postalCode: "1011DJ",
+  street: "Simon Carmiggeltstraat",
+  houseNumberOrName: "6 - 50"
+};
+
 
 // identify checkout div and create new empty div to replace with
 const oldDiv = document.getElementById("dropin-container")
 const newDiv = document.createElement("div")
+
+// banner functionality
+function bannerColor() {
+  document.getElementById("banner").style.display = "block"
+  let bannerInput = document.getElementById("bannerColorPick").value
+  console.log(bannerInput, "colour input")
+  r.style.setProperty("--banner-color", bannerInput)
+}
+
+
+// Toggle config page:
+function toggleConfig() {
+  const checkPreview = document.querySelector(".preview-basket")
+  const configUI = document.querySelector(".config-UI")
+  if (checkPreview.style.display === "none") {
+    checkPreview.style.display = "block"
+    configUI.style.display = "none"
+  } else {
+    configUI.style.display = "block"
+    checkPreview.style.display = "none"
+  }
+}
+
+// merchantLogoLoad
+function loadMerchantLogo(merchantURL) {
+  let bannerEl = document.getElementById("banner")
+  if (bannerEl.childElementCount === 0) {
+    // bannerEl.classList.add("undoHidden")
+    document.getElementById("banner").style.display = "block"
+    const merchantLogo = document.createElement("img")
+    merchantLogo.src = `${merchantURL.trim()}`
+    merchantLogo.classList.add("logo")
+    bannerEl.appendChild(merchantLogo)
+    console.log("first input")
+  } 
+  else {
+    const merchantLogo = document.querySelector(".logo")
+    merchantLogo.src = `${merchantURL}`
+    console.log("second input")
+  }
+}
 
 /**
  * Country flag svg image location
  */
 const flagUrlMap = {
   NL: {
-    src: "https://ca-test.adyen.com/ca/adl/img/flags/nl.svg"
+    src: "https://ca-test.adyen.com/ca/adl/img/flags/nl.svg",
   },
   GB: {
-    src: "https://ca-test.adyen.com/ca/adl/img/flags/gb.svg"
+    src: "https://ca-test.adyen.com/ca/adl/img/flags/gb.svg",
   },
   US: {
-    src: "https://ca-test.adyen.com/ca/adl/img/flags/us.svg"
+    src: "https://ca-test.adyen.com/ca/adl/img/flags/us.svg",
   },
   FR: {
-    src: "https://ca-test.adyen.com/ca/adl/img/flags/fr.svg"
+    src: "https://ca-test.adyen.com/ca/adl/img/flags/fr.svg",
   },
   DE: {
-    src: "https://ca-test.adyen.com/ca/adl/img/flags/de.svg"
+    src: "https://ca-test.adyen.com/ca/adl/img/flags/de.svg",
   },
   ES: {
-    src: "https://ca-test.adyen.com/ca/adl/img/flags/es.svg"
+    src: "https://ca-test.adyen.com/ca/adl/img/flags/es.svg",
   },
   IT: {
-    src: "https://ca-test.adyen.com/ca/adl/img/flags/it.svg"
+    src: "https://ca-test.adyen.com/ca/adl/img/flags/it.svg",
   },
   SE: {
-    src: "https://ca-test.adyen.com/ca/adl/img/flags/se.svg"
+    src: "https://ca-test.adyen.com/ca/adl/img/flags/se.svg",
   },
   NO: {
-    src: "https://ca-test.adyen.com/ca/adl/img/flags/no.svg"
+    src: "https://ca-test.adyen.com/ca/adl/img/flags/no.svg",
   },
   DK: {
-    src: "https://ca-test.adyen.com/ca/adl/img/flags/dk.svg"
+    src: "https://ca-test.adyen.com/ca/adl/img/flags/dk.svg",
   },
   FI: {
-    src: "https://ca-test.adyen.com/ca/adl/img/flags/fi.svg"
+    src: "https://ca-test.adyen.com/ca/adl/img/flags/fi.svg",
   },
   PL: {
-    src: "https://ca-test.adyen.com/ca/adl/img/flags/pl.svg"
+    src: "https://ca-test.adyen.com/ca/adl/img/flags/pl.svg",
   },
   BE: {
-    src: "https://ca-test.adyen.com/ca/adl/img/flags/be.svg"
+    src: "https://ca-test.adyen.com/ca/adl/img/flags/be.svg",
   },
   PT: {
-    src: "https://ca-test.adyen.com/ca/adl/img/flags/pt.svg"
-  }
+    src: "https://ca-test.adyen.com/ca/adl/img/flags/pt.svg",
+  },
 }
 
 /**
@@ -219,45 +268,45 @@ const countryVariables = [
 /**
  * @param {Array} PMnames - maps txvariant to display name of Payment Method
  */
- const PMnames = [
-  {tx: "ach", txname: "ACH US Direct Debit"},
-  {tx: "affirm", txname: "Affirm"},
-  {tx: "afterpaytouch", txname: "Afterpay"},
-  {tx: "alipay", txname: "Alipay"},
-  {tx: "amazonpay", txname: "Amazon Pay"},
-  {tx: "blik", txname: "Blik"},
-  {tx: "boleto", txname: "Boleto"},
-  {tx: "clearpay", txname: "Clearpay"},
-  {tx: "directdebit_GB", txname: "Bacs Direct Debit"},
-  {tx: "directEbanking", txname: "Sofort"},
-  {tx: "facilypay", txname: "3x4xOney"},
-  {tx: "giropay", txname: "Giropay"}, 
-  {tx: "ideal", txname: "iDeal"},
-  {tx: "interac", txname: "Interac"},
-  {tx: "kakaopay", txname: "KakaoPay"},
-  {tx: "kcp_banktransfer", txname: "Korean Bank Transfer"}, 
-  {tx: "kcp_payco", txname: "PayCo"},
-  {tx: "klarna", txname: "Klarna Pay Later"}, 
-  {tx: "klarna_account", txname: "Klarna Pay Over Time"},
-  {tx: "klarna_paynow", txname: "Klarna Pay Now"},
-  {tx: "mbway", txname: "MB WAY"}, 
-  {tx: "mobilepay", txname: "Mobile Pay"},
-  {tx: "neteller", txname: "Neteller"},
-  {tx: "nordea", txname: "Nordea"},
-  {tx: "paymaya_connect", txname: "PayMaya Connect"},
-  {tx: "paymaya_wallet", txname: "PayMaya Wallet"},
-  {tx: "paypal", txname: "PayPal"},
-  {tx: "paysafecard", txname: "PaySafeCard"}, 
-  {tx: "googlepay", txname: "Google Pay"}, 
-  {tx: "paywithgoogle", txname: "Google Pay"}, 
-  {tx: "samsungpay", txname: "Samsung Pay"}, 
-  {tx: "sepadirectdebit", txname: "SEPA Direct Debit"},
-  {tx: "trustly", txname: "Trustly"},
-  {tx: "vipps", txname: "Vipps"}, 
-  {tx: "wechatpay", txname: "WeChat Pay"},
-  {tx: "wechatpayQR", txname: "WeChatPay QR"},
-  {tx: "wechatpayWeb", txname: "WeChatPay Web"},
-  {tx: "zip", txname: "Zip"}
+const PMnames = [
+  { tx: "ach", txname: "ACH US Direct Debit" },
+  { tx: "affirm", txname: "Affirm" },
+  { tx: "afterpaytouch", txname: "Afterpay" },
+  { tx: "alipay", txname: "Alipay" },
+  { tx: "amazonpay", txname: "Amazon Pay" },
+  { tx: "blik", txname: "Blik" },
+  { tx: "boleto", txname: "Boleto" },
+  { tx: "clearpay", txname: "Clearpay" },
+  { tx: "directdebit_GB", txname: "Bacs Direct Debit" },
+  { tx: "directEbanking", txname: "Sofort" },
+  { tx: "facilypay", txname: "3x4xOney" },
+  { tx: "giropay", txname: "Giropay" },
+  { tx: "ideal", txname: "iDeal" },
+  { tx: "interac", txname: "Interac" },
+  { tx: "kakaopay", txname: "KakaoPay" },
+  { tx: "kcp_banktransfer", txname: "Korean Bank Transfer" },
+  { tx: "kcp_payco", txname: "PayCo" },
+  { tx: "klarna", txname: "Klarna Pay Later" },
+  { tx: "klarna_account", txname: "Klarna Pay Over Time" },
+  { tx: "klarna_paynow", txname: "Klarna Pay Now" },
+  { tx: "mbway", txname: "MB WAY" },
+  { tx: "mobilepay", txname: "Mobile Pay" },
+  { tx: "neteller", txname: "Neteller" },
+  { tx: "nordea", txname: "Nordea" },
+  { tx: "paymaya_connect", txname: "PayMaya Connect" },
+  { tx: "paymaya_wallet", txname: "PayMaya Wallet" },
+  { tx: "paypal", txname: "PayPal" },
+  { tx: "paysafecard", txname: "PaySafeCard" },
+  { tx: "googlepay", txname: "Google Pay" },
+  { tx: "paywithgoogle", txname: "Google Pay" },
+  { tx: "samsungpay", txname: "Samsung Pay" },
+  { tx: "sepadirectdebit", txname: "SEPA Direct Debit" },
+  { tx: "trustly", txname: "Trustly" },
+  { tx: "vipps", txname: "Vipps" },
+  { tx: "wechatpay", txname: "WeChat Pay" },
+  { tx: "wechatpayQR", txname: "WeChatPay QR" },
+  { tx: "wechatpayWeb", txname: "WeChatPay Web" },
+  { tx: "zip", txname: "Zip" },
 ]
 
 //Paypal style variables
@@ -274,14 +323,25 @@ async function onLoad() {
     const getStyleResponse = await callServer(
       "/loadStyles",
       saveId
+    );
+    console.log(getStyleResponse);
+    if (getStyleResponse != '{"error": "no user"}'){
+      loadStyle(getStyleResponse)
+    }
+    const getConfigResponse = await callServer(
+      "/loadConfig",
+      saveId
     )
-    loadStyle(getStyleResponse)
+    if (getConfigResponse != '{"error": "no user"}'){
+      loadConfig(getConfigResponse)
+    }
   }
 }
 
+// Function to add mutiple attributes to a div
 function setAttributes(el, options) {
-  Object.keys(options).forEach(function(attr) {
-    el.setAttribute(attr, options[attr]);
+  Object.keys(options).forEach(function (attr) {
+    el.setAttribute(attr, options[attr])
   })
 }
 
@@ -290,32 +350,32 @@ function setAttributes(el, options) {
  * @param {string} tx - txvariant
  * @param {string} PMname - Payment Method name
  */
-async function createToggles(tx, PMname){
+async function createToggles(tx, PMname) {
   // create first column div and set attributes
   let column = document.createElement("div")
-  setAttributes(column,{
-    "id": `${tx}Col`,
-    "class": "col-6"
+  setAttributes(column, {
+    id: `${tx}Col`,
+    class: "col-6",
   })
   // create second column div and set attributes
   let boxPM = document.createElement("div")
   setAttributes(boxPM, {
-    "id": `${tx}Box`,
-    "class": "col-3"
+    id: `${tx}Box`,
+    class: "col-3",
   })
   // print Payment Method title
   let titlePM = document.createElement("p")
   titlePM.setAttribute("class", "textFonts text-left ml-3")
   let textPM = document.createTextNode(PMname[0].txname)
   // put text inside <p>
-  titlePM.appendChild(textPM);
+  titlePM.appendChild(textPM)
   // put <p> inside <div>
   boxPM.appendChild(titlePM)
   // create toggle div and set attributes
   let toggleDiv = document.createElement("div")
   setAttributes(toggleDiv, {
-    "id": `${tx}Toggle`,
-    "class": "col-3"
+    id: `${tx}Toggle`,
+    class: "col-3",
   })
   // create switch
   let toggleSwitch = document.createElement("div")
@@ -324,18 +384,18 @@ async function createToggles(tx, PMname){
   // create toggle input
   let toggleInput = document.createElement("input")
   setAttributes(toggleInput, {
-    "class": "custom-control-input",
-    "type": "checkbox",
+    class: "custom-control-input",
+    type: "checkbox",
     "data-toggle": "toggle",
-    "id": `show${PMname[0].txname}`,
-    "onchange": "blockPM(this)",
-    "checked": true
+    id: `show${PMname[0].txname}`,
+    onchange: "blockPM(this)",
+    checked: true,
   })
   // create label
   let toggleLabel = document.createElement("label")
   setAttributes(toggleLabel, {
-    "class": "custom-control-label",
-    "for": `show${PMname[0].txname}`
+    class: "custom-control-label",
+    for: `show${PMname[0].txname}`,
   })
   // put switch <div> inside the toggle <div>
   toggleDiv.appendChild(toggleSwitch)
@@ -354,30 +414,38 @@ async function createToggles(tx, PMname){
  * @param {Array} children - all children under parentPM
  * @param {Array} ids - IDs of children
  */
-async function getToggles(){
-  const parentPM = document.getElementById('parentPM')
+async function getToggles() {
+  const parentPM = document.getElementById("parentPM")
   const children = Array.from(parentPM.children)
   // get IDs of children divs
-  const ids = children.map(element => {
+  const ids = children.map((element) => {
     return element.id
   })
   // loop through div IDs for toggles existing on the page and remove all but Card
-  const filteredIds = ids.filter((s) => !s.match("schemeTitle") && !s.match("schemeCol") && !s.match("schemeBox") && !s.match("schemeToggle"))
+  const filteredIds = ids.filter(
+    (s) =>
+      !s.match("schemeTitle") &&
+      !s.match("schemeCol") &&
+      !s.match("schemeBox") &&
+      !s.match("schemeToggle")
+  )
   filteredIds.forEach(function (item) {
-    let divId = document.getElementById(item);
-    divId.remove();
-  });
+    let divId = document.getElementById(item)
+    divId.remove()
+  })
   // call /paymentMethods with no filter to get txvariants for that country
   let txvariants = await getCountryPM()
   // loop through each value of response array - but do not count scheme/cards
-  txvariants.filter(function(tx) {
-    return tx != 'scheme';
-  }).forEach( tx =>{
-    let PMname = PMnames.filter(obj =>{
-      return obj.tx === tx
+  txvariants
+    .filter(function (tx) {
+      return tx != "scheme"
     })
-    createToggles(tx, PMname);
-})
+    .forEach((tx) => {
+      let PMname = PMnames.filter((obj) => {
+        return obj.tx === tx
+      })
+      createToggles(tx, PMname)
+    })
 }
 
 /**
@@ -386,12 +454,11 @@ async function getToggles(){
  * @param {*} el
  */
 async function changeSelect(el) {
-  // console.log(el)
-  // console.log(Object.values)
+  console.log(el)
+  console.log(Object.values)
   document.getElementById("flag_img").src = flagUrlMap[el.value].src
   const country = el.value
   countrySettings = getCountryData(country)
-  getToggles();
   if (
     document.getElementById("dropin-container") &&
     document.getElementById("placeholderData").checked == true
@@ -412,22 +479,23 @@ async function changeSelect(el) {
     oldDiv.replaceWith(newDiv)
     newDiv.setAttribute("id", "dropin-container")
     newDiv.setAttribute("class", "payment p-5")
-    initCheckout();
+    initCheckout()
   } else if (document.getElementById("dropin-container")) {
     const oldDiv = document.getElementById("dropin-container")
     const newDiv = document.createElement("div")
     oldDiv.replaceWith(newDiv)
     newDiv.setAttribute("id", "dropin-container")
     newDiv.setAttribute("class", "payment p-5")
-    initCheckout();
+    initCheckout()
   }
+  getToggles()
 }
 
 /**
  * Funtion to toggle first payment method open
  */
 document
-  .getElementById("firstPayBox")
+  .getElementById("openFirst")
   .parentNode.addEventListener("click", function (event) {
     const oldDiv = document.getElementById("dropin-container")
     const newDiv = document.createElement("div")
@@ -439,7 +507,7 @@ document
     oldDiv.replaceWith(newDiv)
     newDiv.setAttribute("id", "dropin-container")
     newDiv.setAttribute("class", "payment p-5")
-    initCheckout();
+    initCheckout()
   })
 
 // Function to add billing address
@@ -499,10 +567,10 @@ document
   .parentNode.addEventListener("click", function (event) {
     const oldDiv = document.getElementById("dropin-container")
     const newDiv = document.createElement("div")
-    if (this.querySelector("input").checked) {
-      showPayMethod = false
-    } else {
+    if (this.querySelector("input").checked == false) {
       showPayMethod = true
+    } else {
+      showPayMethod = false
     }
     oldDiv.replaceWith(newDiv)
     newDiv.setAttribute("id", "dropin-container")
@@ -533,7 +601,7 @@ document
   .parentNode.addEventListener("click", function (event) {
     const oldDiv = document.getElementById("dropin-container")
     const newDiv = document.createElement("div")
-    if (this.querySelector("input").checked) {
+    if (this.querySelector("input").checked == true) {
       placeholderData = {
         holderName: "Jane Doe",
         billingAddress: {
@@ -568,27 +636,27 @@ function getCountryData(countrySettings) {
 /**
  * setting the array of blockedPaymentMethods
  */
-let blockedPM = {"blockedPaymentMethods": payArray};
+let blockedPM = { blockedPaymentMethods: payArray }
 
 async function getCountryPM() {
-  let noBlock = {"blockedPaymentMethods": []};
+  let noBlock = { blockedPaymentMethods: [] }
   const mergeData = {
     ...countrySettings,
-    ...noBlock
+    ...noBlock,
   }
   const unblockedResponse = await callServer(
     "/api/getPaymentMethods",
     mergeData
   )
   let payMethodArray = unblockedResponse.paymentMethods
-  let txvariants = payMethodArray.map(({ type }) => type);
+  let txvariants = payMethodArray.map(({ type }) => type)
   return await txvariants
 }
 
 async function paymentMethods() {
   const mergeData = {
     ...countrySettings,
-    ...blockedPM
+    ...blockedPM,
   }
   const paymentMethodsResponse = await callServer(
     "/api/getPaymentMethods",
@@ -599,7 +667,7 @@ async function paymentMethods() {
 }
 
 async function getConfiguration() {
-  const paymentMethodsResponse = await paymentMethods();
+  const paymentMethodsResponse = await paymentMethods()
   let prettyResponse = JSON.stringify(paymentMethodsResponse, null, 2)
   console.log(prettyResponse)
   let configuration = {
@@ -641,13 +709,13 @@ async function getConfiguration() {
         style: {
           label: palLabel,
           color: palColor,
-          shape: palShape
+          shape: palShape,
         },
         environment: "test", // Change this to "live" when you're ready to accept live PayPal payments
         countryCode: countrySettings.countryCode || "NL", // Only needed for test. This will be automatically retrieved when you are in production.
         showPayButton: true,
         merchantId: "AD74FQNVXQY5E",
-      }
+      },
     },
     onSubmit: (state, dropin) => {
       if (state.isValid) {
@@ -662,8 +730,9 @@ async function getConfiguration() {
     },
     onAdditionalDetails: (state, dropin) => {
       handleSubmission(state, dropin, "/api/submitAdditionalDetails")
-    }
+    },
   }
+  console.log(configuration)
   let cloneConfig = Object.assign({}, configuration)
   logConfig(cloneConfig)
   return await configuration
@@ -674,25 +743,25 @@ async function initCheckout() {
     let configuration = await getConfiguration()
     const checkout = await AdyenCheckout(configuration)
     checkout
-    .create("dropin", {
-      showRemovePaymentMethodButton: true,
-      openFirstPaymentMethod: openFirst,
-      showStoredPaymentMethods: onlyStored,
-      showPaymentMethods: showPayMethod,
-      onDisableStoredPaymentMethod: (
-        storedPaymentMethodId,
-        resolve,
-        reject
-      ) => {
-        callServer("/api/disable", {
-          storedPaymentMethodId: storedPaymentMethodId,
-        })
-        resolve()
-        reject()
-      },
-      instantPaymentTypes: instantArray
-    })
-    .mount("#dropin-container")
+      .create("dropin", {
+        showRemovePaymentMethodButton: true,
+        openFirstPaymentMethod: openFirst,
+        showStoredPaymentMethods: onlyStored,
+        showPaymentMethods: showPayMethod,
+        onDisableStoredPaymentMethod: (
+          storedPaymentMethodId,
+          resolve,
+          reject
+        ) => {
+          callServer("/api/disable", {
+            storedPaymentMethodId: storedPaymentMethodId,
+          })
+          resolve()
+          reject()
+        },
+        instantPaymentTypes: instantArray,
+      })
+      .mount("#dropin-container")
     return await checkout
   } catch (error) {
     console.error(error)
@@ -700,16 +769,15 @@ async function initCheckout() {
   }
 }
 
-
-function showInstantPay(){
-  const instantPayState = document.getElementById('instantPay').checked;
+function showInstantPay() {
+  const instantPayState = document.getElementById("instantPay").checked
   const oldDiv = document.getElementById("dropin-container")
   const newDiv = document.createElement("div")
-	if (instantPayState == true) {
-    instantArray = ['paywithgoogle']
-	} else {
-		instantArray = []
-	}
+  if (instantPayState == true) {
+    instantArray = ["paywithgoogle"]
+  } else {
+    instantArray = []
+  }
   oldDiv.replaceWith(newDiv)
   newDiv.setAttribute("id", "dropin-container")
   newDiv.setAttribute("class", "payment p-5")
@@ -721,12 +789,10 @@ async function unmountDropin() {
   checkout.unmount("#dropin-container")
 }
 
-
 async function unmountContainer() {
   try {
-    const checkout = await AdyenCheckout();
-    checkout
-      .unmount("#dropin-container")
+    const checkout = await AdyenCheckout()
+    checkout.unmount("#dropin-container")
   } catch (error) {
     console.error(error)
     alert("Error occurred. Look at console for details")
@@ -745,7 +811,7 @@ async function handleSubmission(state, dropin, url, countrySettings) {
     //keeping the country data for the /payments call
     const mergedData = {
       ...state.data,
-      ...countrySettings
+      ...countrySettings,
     }
     const res = await callServer(url, mergedData)
     let prettyResponse = JSON.stringify(res, null, 2)
@@ -813,21 +879,23 @@ function handleServerResponse(res, dropin) {
  * @function blockCard - adds/removes visa, amex and mastercard as txvariants to blockPaymentMethods array
  */
 function blockCard() {
-	const CardState = document.getElementById('showCard').checked;
+  const CardState = document.getElementById("showCard").checked
   const oldDiv = document.getElementById("dropin-container")
   const newDiv = document.createElement("div")
-	if (CardState == true) {
-    const filteredPM = payMethods.filter((s) => !s.match("visa") && !s.match("mc") && !s.match("amex"));
-    payMethods = filteredPM;
-    payArray = Object.values(payMethods);
-    blockedPM = {"blockedPaymentMethods": payArray};
-	} else {
-		payMethods.push("visa");
-    payMethods.push("mc");
-    payMethods.push("amex");
-    payArray = Object.values(payMethods);
-    blockedPM = {"blockedPaymentMethods": payArray};
-	}
+  if (CardState == true) {
+    const filteredPM = payMethods.filter(
+      (s) => !s.match("visa") && !s.match("mc") && !s.match("amex")
+    )
+    payMethods = filteredPM
+    payArray = Object.values(payMethods)
+    blockedPM = { blockedPaymentMethods: payArray }
+  } else {
+    payMethods.push("visa")
+    payMethods.push("mc")
+    payMethods.push("amex")
+    payArray = Object.values(payMethods)
+    blockedPM = { blockedPaymentMethods: payArray }
+  }
   oldDiv.replaceWith(newDiv)
   newDiv.setAttribute("id", "dropin-container")
   newDiv.setAttribute("class", "payment p-5")
@@ -837,27 +905,27 @@ function blockCard() {
 /**
  * @function blockPM - adds/removes the txvariant of the toggle to blockPaymentMethods array
  */
- function blockPM(element) {
-	// const pmState = document.getElementById(`show${PMname[0].txname}`).checked;
+function blockPM(element) {
+  // const pmState = document.getElementById(`show${PMname[0].txname}`).checked;
   const oldDiv = document.getElementById("dropin-container")
   const newDiv = document.createElement("div")
-  let thisParentPM = element.parentNode;
+  let thisParentPM = element.parentNode
   // console.log(thisParentPM.id)
   let thisPM = thisParentPM.querySelector("input")
   const pmState = thisPM.checked
   // console.log(pmState)
   let currentTXid = thisParentPM.id
-  let currentTX = currentTXid.replace("Switch","")
-	if (pmState == true) {
-    const filteredPM = payMethods.filter((s) => !s.match(currentTX));
-    payMethods = filteredPM;
-    payArray = Object.values(payMethods);
-    blockedPM = {"blockedPaymentMethods": payArray};
-	} else {
-		payMethods.push(currentTX);
-    payArray = Object.values(payMethods);
-    blockedPM = {"blockedPaymentMethods": payArray};
-	}
+  let currentTX = currentTXid.replace("Switch", "")
+  if (pmState == true) {
+    const filteredPM = payMethods.filter((s) => !s.match(currentTX))
+    payMethods = filteredPM
+    payArray = Object.values(payMethods)
+    blockedPM = { blockedPaymentMethods: payArray }
+  } else {
+    payMethods.push(currentTX)
+    payArray = Object.values(payMethods)
+    blockedPM = { blockedPaymentMethods: payArray }
+  }
   oldDiv.replaceWith(newDiv)
   newDiv.setAttribute("id", "dropin-container")
   newDiv.setAttribute("class", "payment p-5")
@@ -888,8 +956,10 @@ function dropinColor() {
 /**
  * @function collapsedBorderColor - Changes collapsed payment method border colour
  */
- function collapsedBorderColor() {
-  let collapsedBorderColor = document.getElementById("collapsedBorderColorPick").value
+function collapsedBorderColor() {
+  let collapsedBorderColor = document.getElementById(
+    "collapsedBorderColorPick"
+  ).value
   r.style.setProperty("--collapsedBorder-color", collapsedBorderColor)
   updateStyleCode()
 }
@@ -902,54 +972,82 @@ function activeBorderColor() {
   updateStyleCode()
 }
 /**
+ * @function inputBorderColor - Changes input field border colour
+ */
+function inputBorderColor() {
+  let inputBorderColor = document.getElementById("inputBorderColorPick").value
+  r.style.setProperty("--inputBorder-color", inputBorderColor)
+  updateStyleCode()
+}
+/**
  * @function updateColorPickers - Gets current colour value to show on colour pickers
  */
 function updateColorPickers() {
   // font color
   let fontColorInput = document.getElementById("textColorPick")
   let fontColor = getComputedStyle(r).getPropertyValue("--text-color")
-  let fontColorNoSpace = fontColor.replace(/\s/g, '');
+  let fontColorNoSpace = fontColor.replace(/\s/g, "")
   // let buttonTextColor = getComputedStyle(r).getPropertyValue("--main-text")
   fontColorInput.value = fontColorNoSpace
   // website background
   let bgColorInput = document.getElementById("bgColorPick")
   let bgColor = getComputedStyle(r).getPropertyValue("--bg-color")
-  let bgColorNoSpace = bgColor.replace(/\s/g, '');
+  let bgColorNoSpace = bgColor.replace(/\s/g, "")
   bgColorInput.value = bgColorNoSpace
   // active payment method background
   let activeColorInput = document.getElementById("dropinColorPick")
   let activeColor = getComputedStyle(r).getPropertyValue("--dropin-color")
-  let activeColorNoSpace = activeColor.replace(/\s/g, '');
+  let activeColorNoSpace = activeColor.replace(/\s/g, "")
   activeColorInput.value = activeColorNoSpace
   // collapsed payment methods
   let tabColorInput = document.getElementById("dropinTabColorPick")
   let tabColor = getComputedStyle(r).getPropertyValue("--dropin-tab-color")
-  let tabColorNoSpace = tabColor.replace(/\s/g, '');
+  let tabColorNoSpace = tabColor.replace(/\s/g, "")
   tabColorInput.value = tabColorNoSpace
   // pay button
   let buttonColorInput = document.getElementById("buttonColorPick")
   let buttonColor = getComputedStyle(r).getPropertyValue("--background-color")
-  let buttonColorNoSpace = buttonColor.replace(/\s/g, '');
+  let buttonColorNoSpace = buttonColor.replace(/\s/g, "")
   buttonColorInput.value = buttonColorNoSpace
   //
-  // pay button text colour 
+  // pay button text colour
   let buttonTextColorInput = document.getElementById("payTextColorPick")
   let buttonTextColor = getComputedStyle(r).getPropertyValue("--payText-color")
-  let buttonTextColorNoSpace = buttonTextColor.replace(/\s/g, '');
+  let buttonTextColorNoSpace = buttonTextColor.replace(/\s/g, "")
   buttonTextColorInput.value = buttonTextColorNoSpace
   //
-  // active checkout border 
+  // active checkout border
   let activeBorderColorInput = document.getElementById("activeBorderColorPick")
-  let activeBorderColor = getComputedStyle(r).getPropertyValue("--selectedBorder-color")
-  let activeBorderColorNoSpace = activeBorderColor.replace(/\s/g, '');
+  let activeBorderColor = getComputedStyle(r).getPropertyValue(
+    "--selectedBorder-color"
+  )
+  let activeBorderColorNoSpace = activeBorderColor.replace(/\s/g, "")
   activeBorderColorInput.value = activeBorderColorNoSpace
   //
-   // collapsed checkout border 
-   let collapsedBorderColorInput = document.getElementById("collapsedBorderColorPick")
-   let collapsedBorderColor = getComputedStyle(r).getPropertyValue("--collapsedBorder-color")
-   let collapsedBorderColorNoSpace = collapsedBorderColor.replace(/\s/g, '');
-   collapsedBorderColorInput.value = collapsedBorderColorNoSpace
-   //
+  // collapsed checkout border
+  let collapsedBorderColorInput = document.getElementById(
+    "collapsedBorderColorPick"
+  )
+  let collapsedBorderColor = getComputedStyle(r).getPropertyValue(
+    "--collapsedBorder-color"
+  )
+  let collapsedBorderColorNoSpace = collapsedBorderColor.replace(/\s/g, "")
+  collapsedBorderColorInput.value = collapsedBorderColorNoSpace
+  //
+    // input field border
+    let inputBorderColorInput = document.getElementById(
+      "inputBorderColorPick"
+    )
+    let inputBorderColor = getComputedStyle(r).getPropertyValue(
+      "--inputBorder-color"
+    )
+    let inputBorderColorNoSpace = inputBorderColor.replace(/\s/g, "")
+    inputBorderColorInput.value = inputBorderColorNoSpace
+    //
+  let bannerInput = document.getElementById("bannerColorPick")
+  let bannerColor = getComputedStyle(r).getPropertyValue("--banner-color")
+  let bannerColorNoSpace = bannerColor.replace(/\s/g, "")
+  bannerInput.value = bannerColorNoSpace
 }
 // console.log(tabColorNoSpace.constructor)
 /** @function dropinTabColor - Changes collapsed payment methods' colours */
@@ -982,10 +1080,19 @@ function buttonEdges() {
 /**
  * @function activeBorderWidth - Changes active payment method border width
  */
- function activeBorderWidth() {
+function activeBorderWidth() {
   let activeBorderWidth = document.getElementById("activeBorderSize").value
   let borderPixelVal = activeBorderWidth + "px"
   r.style.setProperty("--selectedBorder-width", borderPixelVal)
+  updateStyleCode()
+}
+/**
+ * @function inputBorderWidth - Changes input field border width
+ */
+function inputBorderWidth() {
+  let inputBorderWidth = document.getElementById("inputBorderSize").value
+  let borderPixelVal = `0 0 0 ${inputBorderWidth}px`
+  r.style.setProperty("--inputBorder-width", borderPixelVal)
   updateStyleCode()
 }
 // change Drop-in's edges (straight to round)
@@ -1016,59 +1123,55 @@ document
 
 // change dropin container width
 function dropinWidth() {
-    let widthValue = document.getElementById("changeWidth").value
-    let widthpx = widthValue + "px"
-    r.style.setProperty("--dropin-width", widthpx)
-    // console.log(widthpx)
-    updateStyleCode()
-  }
-  // change pay buttons' width
-  function payButtonWidth() {
-    let payWidthValue = document.getElementById("payButtonWidth").value
-    let payWidthpx = payWidthValue + "px"
-    r.style.setProperty("--payButton-width", payWidthpx)
-    updateStyleCode()
-  }
-  // change spacing of payment methods tabs
-  function paymentsSpacing() {
-    let paymentSpacingValue = document.getElementById("paymentsSpacing").value
-    let paymentSpacingpx = paymentSpacingValue + "px"
-    r.style.setProperty("--payments-spacing", paymentSpacingpx)
-    r.style.setProperty("--paymentselected-margin", paymentSpacingpx)
-    updateStyleCode()
-  }
-  // change font size
-  function fontWidth() {
-    let fontValue = document.getElementById("fontSize").value
-    let fontpx = fontValue + "px"
-    r.style.setProperty("--dropin-font", fontpx)
-    updateStyleCode()
-  }
-
+  let widthValue = document.getElementById("changeWidth").value
+  let widthpx = widthValue + "px"
+  r.style.setProperty("--dropin-width", widthpx)
+  // console.log(widthpx)
+  updateStyleCode()
+}
+// change pay buttons' width
+function payButtonWidth() {
+  let payWidthValue = document.getElementById("payButtonWidth").value
+  let payWidthpx = payWidthValue + "px"
+  r.style.setProperty("--payButton-width", payWidthpx)
+  updateStyleCode()
+}
+// change spacing of payment methods tabs
+function paymentsSpacing() {
+  let paymentSpacingValue = document.getElementById("paymentsSpacing").value
+  let paymentSpacingpx = paymentSpacingValue + "px"
+  r.style.setProperty("--payments-spacing", paymentSpacingpx)
+  r.style.setProperty("--paymentselected-margin", paymentSpacingpx)
+  updateStyleCode()
+}
+// change font size
+function fontWidth() {
+  let fontValue = document.getElementById("fontSize").value
+  let fontpx = fontValue + "px"
+  r.style.setProperty("--dropin-font", fontpx)
+  updateStyleCode()
+}
 
 // make text italic
 function makeItalic() {
-    if (
-      document.getElementById("makeItalic").classList.contains("italic-active")
-    ) {
-      document.getElementById("makeItalic").classList.remove("italic-active")
-      r.style.setProperty("--text-italic", null)
-      r.style.setProperty("--align-selected", null)
-      updateStyleCode()
-    } else {
-      document.getElementById("makeItalic").classList.add("italic-active")
-      r.style.setProperty("--text-italic", "italic")
-      r.style.setProperty("--align-selected", "#00112c")
-      updateStyleCode()
-    }
+  if (
+    document.getElementById("makeItalic").classList.contains("italic-active")
+  ) {
+    document.getElementById("makeItalic").classList.remove("italic-active")
+    r.style.setProperty("--text-italic", null)
+    r.style.setProperty("--align-selected", null)
+    updateStyleCode()
+  } else {
+    document.getElementById("makeItalic").classList.add("italic-active")
+    r.style.setProperty("--text-italic", "italic")
+    r.style.setProperty("--align-selected", "#00112c")
+    updateStyleCode()
   }
-
+}
 
 // make text bold
 function makeBold() {
-  if (
-    document.getElementById("makeBold").classList.contains("bold-active")
-  ) {
+  if (document.getElementById("makeBold").classList.contains("bold-active")) {
     document.getElementById("makeBold").classList.remove("bold-active")
     r.style.setProperty("--text-bold", null)
     r.style.setProperty("--align-selected", null)
@@ -1081,7 +1184,7 @@ function makeBold() {
   }
 }
 
-//align the drop in text 
+//align the drop in text
 function alignText(element) {
   let alignCheck = element.classList.contains("align-active")
   let alignValue = element.id
@@ -1095,17 +1198,25 @@ function alignText(element) {
     r.style.setProperty("--align-selected", "#00112c")
   }
 }
-  //drop down selector for the different font styles
-  function changeFont() {
-    r.style.setProperty("--font-options", null)
-    let fontValue = document.getElementById("font_select").value
-    r.style.setProperty("--font-options", fontValue)
-    updateStyleCode()
-  }
 
+//drop down selector for input field shape 
+function changeInputField() {
+  r.style.setProperty("--inputBorder-radius", null)
+  let InputValue = document.getElementById("input_shape_select").value
+  r.style.setProperty("--inputBorder-radius", InputValue)
+  updateStyleCode()
+}
+
+//drop down selector for the different font styles
+function changeFont() {
+  r.style.setProperty("--font-options", null)
+  let fontValue = document.getElementById("font_select").value
+  r.style.setProperty("--font-options", fontValue)
+  updateStyleCode()
+}
 
 //PayPal button Style
-function changePayPal(palValue){
+function changePayPal(palValue) {
   // console.log(palValue)
   const oldDiv = document.getElementById("dropin-container")
   const newDiv = document.createElement("div")
@@ -1124,7 +1235,6 @@ function changePayPal(palValue){
   newDiv.setAttribute("class", "payment p-5")
   initCheckout()
 }
-
 
 // Reset CSS values to default Drop-in
 function resetDynamicCSS() {
@@ -1156,16 +1266,70 @@ function resetDynamicCSS() {
     r.style.setProperty("--selectedBorder-color", null)
     r.style.setProperty("--selectedBorder-width", null)
     r.style.setProperty("--collapsedBorder-color", null)
+    r.style.setProperty("--border-off", null)
+    r.style.setProperty("--banner-color", null)
+    r.style.setProperty("--inputBorder-color", null)
+    r.style.setProperty("--inputBorder-width", null)
+    r.style.setProperty("--inputBorder-radius", null)
+    document.getElementById("banner").style.display = "none"
     updateColorPickers()
   }
 
-// Reset CSS values to default Drop-in
-  function loadStyle(styleData) {
-    for (const [key, value] of Object.entries(styleData)) {
-      r.style.setProperty(key, value);
+// Load saved style based on the data from db
+function loadStyle(styleData) {
+  for (const [key, value] of Object.entries(styleData)) {
+    r.style.setProperty(key, value);
+  }
+  if (styleData.merchantUrl){
+    let merchantURL = styleData.merchantUrl
+    loadMerchantLogo(merchantURL)
+  }
+    updateColorPickers()
+  }
+
+// Load config based on the data from db
+function loadConfig(configData) {
+  filteredData = Object.fromEntries(Object.entries(configData).filter(([key]) => !key.match('showPayMethod') && !key.match('placeHolderData')))
+  for (const [key, value] of Object.entries(filteredData)) {
+    console.log(key, value)
+    if (value == true){
+      document.getElementById(key).checked = true
     }
-      updateColorPickers()
-    }
+  }
+  openFirst = configData.openFirst
+  billAdd = configData.billAdd
+  onlyStored = configData.onlyStored
+  holderName = configData.holderName 
+  showPayMethod = configData.showPayMethod
+  if (showPayMethod == true){
+    document.getElementById("showPayMethod").checked = false
+  }
+  else{
+    document.getElementById("showPayMethod").checked = true
+  }
+  hideCVC = configData.hideCVC
+  placeholderData = configData.placeholderData
+  if (placeholderData == false){
+    document.getElementById("placeholderData").checked = false
+  }
+  else {
+    document.getElementById("placeholderData").checked = true
+  }
+  instantArray = configData.instantArray
+  if (instantArray == []){
+    document.getElementById("instantPay").checked = false
+  }
+  else{
+    document.getElementById("instantPay").checked = true
+  }
+  payMethods = configData.payMethods
+  payArray = configData.payArray
+  countrySettings = configData.countrySettings
+  savedCountry = countrySettings.countryCode
+  let countryDropdown = document.getElementById("country_select")
+  countryDropdown.value = savedCountry
+  document.getElementById("flag_img").src = flagUrlMap[savedCountry].src
+}
 
 // logging configuration object to UI
 function logConfig(cloneConfig) {
@@ -1208,7 +1372,6 @@ function syntaxHighlight(json) {
   )
 }
 
-
 async function saveStyle() {
   styleData = {
   "--background-color": getComputedStyle(r).getPropertyValue("--background-color"),
@@ -1237,14 +1400,39 @@ async function saveStyle() {
   "--secondary-text": getComputedStyle(r).getPropertyValue("--secondary-text"),
   "--payText-color": getComputedStyle(r).getPropertyValue("--payText-color"),
   "--selectedBorder-color": getComputedStyle(r).getPropertyValue("--selectedBorder-color"),
-  "--selectedBorder-width": getComputedStyle(r).getPropertyValue("--selectedBorder-width")
+  "--selectedBorder-width": getComputedStyle(r).getPropertyValue("--selectedBorder-width"),
+  "--border-off": getComputedStyle(r).getPropertyValue("--border-off"),
+  "--banner-color": getComputedStyle(r).getPropertyValue("--banner-color"),
+  "--inputBorder-color": getComputedStyle(r).getPropertyValue("--inputBorder-color"),
+  "--inputBorder-width": getComputedStyle(r).getPropertyValue("--inputBorder-width"),
+  "--inputBorder-radius": getComputedStyle(r).getPropertyValue("--inputBorder-radius"),
+  "merchantUrl": document.querySelector("#merchantLogoUrl").value
   }
+  configData = {
+    "openFirst": openFirst,
+    "billAdd": billAdd,
+    "onlyStored": onlyStored,
+    "holderName": holderName ,
+    "showPayMethod": showPayMethod,
+    "hideCVC": hideCVC,
+    "placeholderData": placeholderData,
+    "instantArray": instantArray,
+    "payMethods": payMethods,
+    "payArray": payArray,
+    "countrySettings": countrySettings,
+  }
+  console.log(configData)
 
   const saveStyleResponse = await callServer(
-    "/testButton",
+    "/saveStyle",
     styleData
   )
   saveId = saveStyleResponse.saveId
+  const saveConfigResponse = await callServer(
+    `/saveConfig/${saveId}`,
+    configData
+  )
+  configResponse = saveConfigResponse
   baseUrl = window.location.host;
   printUrl = `${baseUrl}/load?saveId=${saveId}`
   // console.log(`${baseUrl}/load?saveId=${saveId}`)
@@ -1253,11 +1441,8 @@ async function saveStyle() {
   // para.appendChild(node);
   // const element = document.getElementById("myInput");
   // element.appendChild(para);
-  document.getElementById("myInput").value = printUrl;
+  document.getElementById("myInput").value = printUrl
 }
-
-
-
 
 function updateStyleCode() {
   let cssjson = {
@@ -1271,11 +1456,12 @@ function updateStyleCode() {
       background: getComputedStyle(r).getPropertyValue("--dropin-tab-color"),
       "font-weight": getComputedStyle(r).getPropertyValue("--text-bold"),
       margin: getComputedStyle(r).getPropertyValue("--payments-spacing"),
+      "border-color": getComputedStyle(r).getPropertyValue("--collapsedBorder-color")
     },
     ".adyen-checkout__button.adyen-checkout__button--pay": {
       width: getComputedStyle(r).getPropertyValue("--payButton-width"),
       background: getComputedStyle(r).getPropertyValue("--background-color"),
-      "border-radius": getComputedStyle(r).getPropertyValue("--button-edges")
+      "border-radius": getComputedStyle(r).getPropertyValue("--button-edges"),
     },
     ".adyen-checkout__payment-methods-list li:nth-child(2)": {
       "border-top-left-radius":
@@ -1299,6 +1485,8 @@ function updateStyleCode() {
       "border-radius": getComputedStyle(r).getPropertyValue(
         "--selectedBody-edges"
       ),
+      "border-color": getComputedStyle(r).getPropertyValue("--selectedBorder-color"),
+      "border-width": getComputedStyle(r).getPropertyValue("--selectedBorder-width")
     },
     ".adyen-checkout__payment-method__name": {
       "font-weight": getComputedStyle(r).getPropertyValue("--text-bold"),
@@ -1319,6 +1507,11 @@ function updateStyleCode() {
       "font-weight": getComputedStyle(r).getPropertyValue("--text-bold"),
       "font-style": getComputedStyle(r).getPropertyValue("--text-italic"),
       color: getComputedStyle(r).getPropertyValue("--text-color"),
+    },
+    ".adyen-checkout__input": {
+      "box-shadow": getComputedStyle(r).getPropertyValue("--inputBorder-width"),
+      "color": getComputedStyle(r).getPropertyValue("--inputBorder-color"),
+      "border-radius": getComputedStyle(r).getPropertyValue("--inputBorder-radius")
     }
   }
   var styleStr = ""
@@ -1346,6 +1539,6 @@ function restartDropin() {
 
 updateColorPickers()
 
-initCheckout()
-
 onLoad()
+
+initCheckout()

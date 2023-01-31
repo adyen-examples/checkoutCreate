@@ -69,9 +69,14 @@
     <div class="cotainer-fluid h-100">
       <div class="row flex-fill">
         <!-- Dropin UI -->
+        <!-- nav -->
+        <!-- content -->
         <div
           class="checkout col-7 dropIn-UI justify-content-center text-center m-0 p-0"
         >
+        <div id="banner" class="banner text-left">
+          
+        </div>
           <div id="dropin-container" class="payment p-5">
             <!-- Component will be rendered here -->
           </div>
@@ -142,7 +147,7 @@
                     </div>
                     <!-- Panel footer start -->
                     <div class="panel-footer">
-                      <div id="card" class="card p-0 text-center">
+                      <div id="card" class="cards p-0 text-center">
                         <div class="card__front card__part">
                           <img
                             class="card__front-square card__square"
@@ -222,6 +227,73 @@
         </div>
 
         <!-- config UI -->
+        <!-- Preview basket page -->
+        <div class="container preview-basket p-3 col-5">
+          <div class="container p-4">
+            <div class="row">
+              <div class="col">
+                <p class="previewTitle">order summary</p>
+              </div>
+              <div class="col text-right">
+                <button type="button" class="saveStyle" onclick="toggleConfig()">
+                    Show configuration
+                  </button>
+              </div>
+            </div>
+          </div>
+          <div class="basket-items container p-3">
+            <div class="item card item-1 p-2">
+             <div class="container">
+              <div class="row">
+                <div class="col-sm">
+                  <img src="https://www.mystoredemo.io/static/02.png" alt="" class="item-image">
+                </div>
+                <div class="col-sm item-text">
+                  <p class="item-text">Headphones</p>
+                </div>
+                <div class="col-sm text-right item-text">
+                  <p class="item-text">£10</p>
+                </div>
+              </div>
+            </div>
+            </div>
+            <div class="item card item-2 p-2">
+             <div class="container">
+              <div class="row">
+                <div class="col-sm">
+                  <img src="https://www.mystoredemo.io/static/09.png" alt="" class="item-image">
+                </div>
+                <div class="col-sm item-text">
+                  <p class="item-text">Purse</p>
+                </div>
+                <div class="col-sm text-right item-text">
+                  <p class="item-text">£20</p>
+                </div>
+              </div>
+            </div>
+            </div>
+            <div class="item card item-3 p-2">
+             <div class="container">
+              <div class="row">
+                <div class="col-sm">
+                  <img src="https://www.mystoredemo.io/static/01.png" alt="" class="item-image">
+                </div>
+                <div class="col-sm item-text">
+                  <p class="item-text">T-shirt</p>
+                </div>
+                <div class="col-sm text-right item-text">
+                  <p class="item-text">£10</p>
+                </div>
+              </div>
+            </div>
+            </div>
+            <div class="totalCost item text-right">
+              <p class=""><span class="totalSpan">Total</span> £20</p>
+            </div>
+          </div>
+
+        </div>
+
         <div class="col-5 config-UI p-0">
           <div class="container p-5">
             <h4 class="config-Title">Design Your Own Checkout</h4>
@@ -263,6 +335,19 @@
                     aria-controls="save"
                     aria-selected="false"
                     >Save your creation</a
+                  >
+                </li>
+                 <li class="nav-item text-right">
+                  <a
+                    class="nav-link"
+                    id="save-tab"
+                    data-toggle="tab"
+                    href=""
+                    role="tab"
+                    aria-controls="save"
+                    aria-selected="false"
+                    onclick="toggleConfig()"
+                    >Preview Basket</a
                   >
                 </li>
               </ul>
@@ -435,13 +520,13 @@
                         <input
                           type="checkbox"
                           class="custom-control-input"
-                          id="firstPayBox"
+                          id="openFirst"
                           data-toggle="toggle"
                           checked
                         />
                         <label
                           class="custom-control-label"
-                          for="firstPayBox"
+                          for="openFirst"
                         ></label>
                       </div>
                     </div>
@@ -826,27 +911,6 @@
                     <!-- title -->
                     <div class="col-3">
                       <p class="textFonts text-left ml-3">
-                        Website background
-                      </p>
-                    </div>
-                    <!-- toggle -->
-                    <div class="col-3 text-center">
-                      <div>
-                        <input
-                          type="color"
-                          name=""
-                          id="bgColorPick"
-                          onchange="backgroundColor()"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row container mb-2 p-0">
-                    <!-- text -->
-                    <div class="col-6"></div>
-                    <!-- title -->
-                    <div class="col-3">
-                      <p class="textFonts text-left ml-3">
                         Active checkout background
                       </p>
                     </div>
@@ -904,6 +968,80 @@
                           max="10"
                           value="1"
                         />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row container mb-2 p-0">
+                    <!-- text -->
+                    <div class="col-6"></div>
+                    <!-- title -->
+                    <div class="col-3">
+                      <p class="textFonts text-left ml-3">
+                        Input field border 
+                      </p>
+                    </div>
+                    <!-- toggle -->
+                    <div class="col-3 text-center">
+                      <div>
+                        <input
+                          type="color"
+                          name=""
+                          id="inputBorderColorPick"
+                          onchange="inputBorderColor()"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row container mb-2 p-0">
+                    <!-- text -->
+                    <div class="col-6"></div>
+                    <!-- title -->
+                    <div class="col-3">
+                      <p class="textFonts text-left ml-3">
+                        Input field border width
+                      </p>
+                    </div>
+                    <!-- toggle -->
+                    <div class="col-3 text-center">
+                      <div class="form-group">
+                        <input
+                          type="range"
+                          class="form-control-range"
+                          id="inputBorderSize"
+                          onchange="inputBorderWidth(this.value);"
+                          min="0"
+                          max="4"
+                          value="1"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row container mb-2 p-0">
+                    <!-- text -->
+                    <div class="col-6"></div>
+                    <!-- title -->
+                    <div class="col-3">
+                      <p class="textFonts text-left ml-3">Input field Shape</p>
+                    </div>
+                    <!-- toggle -->
+                    <div class="col-3 text-right">
+                      <div class="country-selector textFonts">
+                        <select
+                          onchange="changeInputField(this)"
+                          id="input_shape_select"
+                          class="country-selector__select"
+                          aria-label="Input field Shape"
+                          autocomplete="off"
+                        >
+                          <option value="6px">Rectangular</option>
+                          <option value="30px">Pill</option>
+                        </select>
+                        <div class="dropdown-icon" aria-hidden="true">
+                          <img
+                            src="{{ url_for('static', filename='img/dropdown.svg') }}"
+                            alt="Dropdown caret"
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -1222,13 +1360,83 @@
                     </div>
                   </div>
                   <hr class="mt-4 mb-4" />
+                </div>
 
-                  <div>
+                <hr class="mt-4 mb-4" />
+                <!-- Website -->
+                    <div class="row mt-3">
+                  <div class="col flex-fill section-title">
+                    <p class="mb-1 titleFonts">Website</p>
+                  </div>
+                  <div class="row container mb-2 p-0">
+                    <!-- text -->
+                    <div class="col-6">
+                      <p class="textFonts">
+                        Customise the website styling
+                      </p>
+                    </div>
+                    <!-- title -->
+                    <div class="col-3">
+                      <p class="textFonts text-left ml-3">
+                        Website background
+                      </p>
+                    </div>
+                    <!-- toggle -->
+                    <div class="col-3 text-center">
+                      <div>
+                        <input
+                          type="color"
+                          name=""
+                          id="bgColorPick"
+                          onchange="backgroundColor()"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row container mb-2 p-0">
+                    <!-- text -->
+                    <div class="col-6"></div>
+                    <!-- title -->
+                    <div class="col-3">
+                      <p class="textFonts text-left ml-3">
+                        Banner colour
+                      </p>
+                    </div>
+                    <!-- toggle -->
+                    <div class="col-3 text-center">
+                      <div>
+                        <input
+                          type="color"
+                          name=""
+                          id="bannerColorPick"
+                          onchange="bannerColor()"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row container mb-2 p-0">
+                    <!-- text -->
+                    <div class="col-6"></div>
+                    <!-- title -->
+                    <div class="col-3">
+                      <p class="textFonts text-left ml-3">
+                        Merchant logo URL
+                      </p>
+                    </div>
+                    <!-- toggle -->
+                    <div class="col-3 text-center">
+                      <div class="input-group mb-3">
+                      <input type="text" class="form-control" id="merchantLogoUrl" aria-describedby="basic-addon3" onchange="loadMerchantLogo(this.value)">
+                    </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- reset button -->
+                 <div>
                     <button type="button" class="resetStyle" onclick="resetDynamicCSS()">
                       Reset Style
                     </button>
                   </div>
-                </div>
               </div>
 
                 <!-- Save your creation content -->
