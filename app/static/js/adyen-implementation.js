@@ -1260,6 +1260,7 @@ function resetDynamicCSS() {
     r.style.setProperty("--border-off", null)
     r.style.setProperty("--banner-color", null)
     r.style.setProperty("--inputBorder-color", null)
+    r.style.setProperty("--inputBorder-width", null)
     document.getElementById("banner").style.display = "none"
     updateColorPickers()
   }
@@ -1388,6 +1389,8 @@ async function saveStyle() {
   "--selectedBorder-width": getComputedStyle(r).getPropertyValue("--selectedBorder-width"),
   "--border-off": getComputedStyle(r).getPropertyValue("--border-off"),
   "--banner-color": getComputedStyle(r).getPropertyValue("--banner-color"),
+  "--inputBorder-color": getComputedStyle(r).getPropertyValue("--inputBorder-color"),
+  "--inputBorder-width": getComputedStyle(r).getPropertyValue("--inputBorder-width"),
   "merchantUrl": document.querySelector("#merchantLogoUrl").value
   }
   configData = {
@@ -1438,6 +1441,7 @@ function updateStyleCode() {
       background: getComputedStyle(r).getPropertyValue("--dropin-tab-color"),
       "font-weight": getComputedStyle(r).getPropertyValue("--text-bold"),
       margin: getComputedStyle(r).getPropertyValue("--payments-spacing"),
+      "border-color": getComputedStyle(r).getPropertyValue("--collapsedBorder-color")
     },
     ".adyen-checkout__button.adyen-checkout__button--pay": {
       width: getComputedStyle(r).getPropertyValue("--payButton-width"),
@@ -1466,6 +1470,8 @@ function updateStyleCode() {
       "border-radius": getComputedStyle(r).getPropertyValue(
         "--selectedBody-edges"
       ),
+      "border-color": getComputedStyle(r).getPropertyValue("--selectedBorder-color"),
+      "border-width": getComputedStyle(r).getPropertyValue("--selectedBorder-width")
     },
     ".adyen-checkout__payment-method__name": {
       "font-weight": getComputedStyle(r).getPropertyValue("--text-bold"),
@@ -1487,6 +1493,10 @@ function updateStyleCode() {
       "font-style": getComputedStyle(r).getPropertyValue("--text-italic"),
       color: getComputedStyle(r).getPropertyValue("--text-color"),
     },
+    ".adyen-checkout__input": {
+      "box-shadow": getComputedStyle(r).getPropertyValue("--inputBorder-width"),
+      "color": getComputedStyle(r).getPropertyValue("--inputBorder-color"),
+    }
   }
   var styleStr = ""
   for (var i in cssjson) {

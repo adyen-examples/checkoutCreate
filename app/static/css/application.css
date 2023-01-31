@@ -986,7 +986,7 @@ a:hover {
   --selectedBorder-width: 1px;
   --banner-color: #ffffff;
   --inputBorder-color: #b9c4c9;
-  --inputBorder-width: 0 0 0 1px;
+  --inputBorder-width: 0 0 0 0px;
 }
 
 .card-visited .card__back {
