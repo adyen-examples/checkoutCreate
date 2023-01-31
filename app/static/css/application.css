@@ -986,7 +986,7 @@ a:hover {
   --selectedBorder-width: 1px;
   --banner-color: #ffffff;
   --inputBorder-color: #b9c4c9;
-  --inputBorder-width: 0 0 0 0px;
+  --inputBorder-width: 0 0 0 1px;
   --inputBorder-radius: 6px;
 }
 
@@ -1396,7 +1396,11 @@ button:focus {
 }
 
 .logo {
-  height: 100%;
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  width: 85px;
+  height: 44px;
   margin: auto;
   background-color: transparent;
 }
