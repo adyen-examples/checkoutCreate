@@ -1492,4 +1492,3 @@ updateColorPickers()
 onLoad()
 
 initCheckout()
-
