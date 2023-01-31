@@ -984,6 +984,7 @@ a:hover {
   --text-color: #00112c;
   --payText-color: #ffffff;
   --selectedBorder-width: 1px;
+  --banner-color: #ffffff;
 }
 
 .card-visited .card__back {
@@ -1371,10 +1372,12 @@ button:focus {
 .banner {
   height: 64px;
   display: none;
+  background-color: var(--banner-color);
 }
 
 .undoHidden {
   display: block;
+  color: var(--banner-color);
 }
 
 .logo {

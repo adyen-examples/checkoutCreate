@@ -44,13 +44,13 @@ const oldDiv = document.getElementById("dropin-container")
 const newDiv = document.createElement("div")
 
 // banner functionality
-const bannerEl = document.querySelector(".banner")
 function bannerColor() {
-  bannerEl.classList.add("undoHidden")
-  const bannerInput = document.querySelector("#bannerColorPick").value
+  document.getElementById("banner").style.display = "block"
+  let bannerInput = document.getElementById("bannerColorPick").value
   console.log(bannerInput, "colour input")
-  bannerEl.style.backgroundColor = bannerInput
+  r.style.setProperty("--banner-color", bannerInput)
 }
+
 
 // Toggle config page:
 function toggleConfig() {
@@ -1026,6 +1026,10 @@ function updateColorPickers() {
   let collapsedBorderColorNoSpace = collapsedBorderColor.replace(/\s/g, "")
   collapsedBorderColorInput.value = collapsedBorderColorNoSpace
   //
+  let bannerInput = document.getElementById("bannerColorPick")
+  let bannerColor = getComputedStyle(r).getPropertyValue("--banner-color")
+  let bannerColorNoSpace = bannerColor.replace(/\s/g, "")
+  bannerInput.value = bannerColorNoSpace
 }
 // console.log(tabColorNoSpace.constructor)
 /** @function dropinTabColor - Changes collapsed payment methods' colours */
@@ -1227,10 +1231,8 @@ function resetDynamicCSS() {
     r.style.setProperty("--selectedBorder-width", null)
     r.style.setProperty("--collapsedBorder-color", null)
     r.style.setProperty("--border-off", null)
-    document.querySelector('#merchantLogoUrl').value = ''
-    document.querySelector('.logo').src = ''
-    bannerEl.classList.remove("undoHidden")
-    bannerEl.style.setProperty("background-color", '#ffffff')
+    r.style.setProperty("--banner-color", null)
+    document.getElementById("banner").style.display = "none"
     updateColorPickers()
   }
 
@@ -1284,11 +1286,6 @@ function loadConfig(configData) {
   let countryDropdown = document.getElementById("country_select")
   countryDropdown.value = savedCountry
   document.getElementById("flag_img").src = flagUrlMap[savedCountry].src
-
-  // if (billAdd == true){
-  //   document.getElementById("billAdd").setAttribute("checked", true)
-  // }
-  console.log(configData);
 }
 
 // logging configuration object to UI
@@ -1361,7 +1358,9 @@ async function saveStyle() {
   "--payText-color": getComputedStyle(r).getPropertyValue("--payText-color"),
   "--selectedBorder-color": getComputedStyle(r).getPropertyValue("--selectedBorder-color"),
   "--selectedBorder-width": getComputedStyle(r).getPropertyValue("--selectedBorder-width"),
-  "--border-off": getComputedStyle(r).getPropertyValue("--border-off")
+  "--border-off": getComputedStyle(r).getPropertyValue("--border-off"),
+  "--banner-color": getComputedStyle(r).getPropertyValue("--banner-color"),
+  "merchantUrl": document.querySelector("#merchantLogoUrl").value
   }
   configData = {
     "openFirst": openFirst,
@@ -1374,7 +1373,7 @@ async function saveStyle() {
     "instantArray": instantArray,
     "payMethods": payMethods,
     "payArray": payArray,
-    "countrySettings": countrySettings
+    "countrySettings": countrySettings,
   }
   console.log(configData)
 
