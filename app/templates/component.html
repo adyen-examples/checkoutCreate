@@ -1021,6 +1021,35 @@
                     <div class="col-6"></div>
                     <!-- title -->
                     <div class="col-3">
+                      <p class="textFonts text-left ml-3">Input field Shape</p>
+                    </div>
+                    <!-- toggle -->
+                    <div class="col-3 text-right">
+                      <div class="country-selector textFonts">
+                        <select
+                          onchange="changeInputField(this)"
+                          id="input_shape_select"
+                          class="country-selector__select"
+                          aria-label="Input field Shape"
+                          autocomplete="off"
+                        >
+                          <option value="6px">Rectangular</option>
+                          <option value="30px">Pill</option>
+                        </select>
+                        <div class="dropdown-icon" aria-hidden="true">
+                          <img
+                            src="{{ url_for('static', filename='img/dropdown.svg') }}"
+                            alt="Dropdown caret"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row container mb-2 p-0">
+                    <!-- text -->
+                    <div class="col-6"></div>
+                    <!-- title -->
+                    <div class="col-3">
                       <p class="textFonts text-left ml-3">
                         Collapsed payment methods background
                       </p>

@@ -987,6 +987,7 @@ a:hover {
   --banner-color: #ffffff;
   --inputBorder-color: #b9c4c9;
   --inputBorder-width: 0 0 0 0px;
+  --inputBorder-radius: 6px;
 }
 
 .card-visited .card__back {
@@ -1107,7 +1108,8 @@ a:hover {
 
 .adyen-checkout__input {
   box-shadow: inset var(--inputBorder-width) !important; 
-  color: var(--inputBorder-color) !important 
+  color: var(--inputBorder-color) !important; 
+  border-radius: var(--inputBorder-radius) !important;
               
   /* border-width:  */
 }

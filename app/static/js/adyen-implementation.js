@@ -1198,6 +1198,15 @@ function alignText(element) {
     r.style.setProperty("--align-selected", "#00112c")
   }
 }
+
+//drop down selector for input field shape 
+function changeInputField() {
+  r.style.setProperty("--inputBorder-radius", null)
+  let InputValue = document.getElementById("input_shape_select").value
+  r.style.setProperty("--inputBorder-radius", InputValue)
+  updateStyleCode()
+}
+
 //drop down selector for the different font styles
 function changeFont() {
   r.style.setProperty("--font-options", null)
@@ -1261,6 +1270,7 @@ function resetDynamicCSS() {
     r.style.setProperty("--banner-color", null)
     r.style.setProperty("--inputBorder-color", null)
     r.style.setProperty("--inputBorder-width", null)
+    r.style.setProperty("--inputBorder-radius", null)
     document.getElementById("banner").style.display = "none"
     updateColorPickers()
   }
@@ -1395,6 +1405,7 @@ async function saveStyle() {
   "--banner-color": getComputedStyle(r).getPropertyValue("--banner-color"),
   "--inputBorder-color": getComputedStyle(r).getPropertyValue("--inputBorder-color"),
   "--inputBorder-width": getComputedStyle(r).getPropertyValue("--inputBorder-width"),
+  "--inputBorder-radius": getComputedStyle(r).getPropertyValue("--inputBorder-radius"),
   "merchantUrl": document.querySelector("#merchantLogoUrl").value
   }
   configData = {
@@ -1500,6 +1511,7 @@ function updateStyleCode() {
     ".adyen-checkout__input": {
       "box-shadow": getComputedStyle(r).getPropertyValue("--inputBorder-width"),
       "color": getComputedStyle(r).getPropertyValue("--inputBorder-color"),
+      "border-radius": getComputedStyle(r).getPropertyValue("--inputBorder-radius")
     }
   }
   var styleStr = ""
