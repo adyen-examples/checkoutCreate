@@ -972,6 +972,14 @@ function activeBorderColor() {
   updateStyleCode()
 }
 /**
+ * @function inputBorderColor - Changes input field border colour
+ */
+function inputBorderColor() {
+  let inputBorderColor = document.getElementById("inputBorderColorPick").value
+  r.style.setProperty("--inputBorder-color", inputBorderColor)
+  updateStyleCode()
+}
+/**
  * @function updateColorPickers - Gets current colour value to show on colour pickers
  */
 function updateColorPickers() {
@@ -1026,6 +1034,16 @@ function updateColorPickers() {
   let collapsedBorderColorNoSpace = collapsedBorderColor.replace(/\s/g, "")
   collapsedBorderColorInput.value = collapsedBorderColorNoSpace
   //
+    // input field border
+    let inputBorderColorInput = document.getElementById(
+      "inputBorderColorPick"
+    )
+    let inputBorderColor = getComputedStyle(r).getPropertyValue(
+      "--inputBorder-color"
+    )
+    let inputBorderColorNoSpace = inputBorderColor.replace(/\s/g, "")
+    inputBorderColorInput.value = inputBorderColorNoSpace
+    //
   let bannerInput = document.getElementById("bannerColorPick")
   let bannerColor = getComputedStyle(r).getPropertyValue("--banner-color")
   let bannerColorNoSpace = bannerColor.replace(/\s/g, "")
@@ -1066,6 +1084,15 @@ function activeBorderWidth() {
   let activeBorderWidth = document.getElementById("activeBorderSize").value
   let borderPixelVal = activeBorderWidth + "px"
   r.style.setProperty("--selectedBorder-width", borderPixelVal)
+  updateStyleCode()
+}
+/**
+ * @function inputBorderWidth - Changes input field border width
+ */
+function inputBorderWidth() {
+  let inputBorderWidth = document.getElementById("inputBorderSize").value
+  let borderPixelVal = `0 0 0 ${inputBorderWidth}px`
+  r.style.setProperty("--inputBorder-width", borderPixelVal)
   updateStyleCode()
 }
 // change Drop-in's edges (straight to round)
@@ -1232,6 +1259,7 @@ function resetDynamicCSS() {
     r.style.setProperty("--collapsedBorder-color", null)
     r.style.setProperty("--border-off", null)
     r.style.setProperty("--banner-color", null)
+    r.style.setProperty("--inputBorder-color", null)
     document.getElementById("banner").style.display = "none"
     updateColorPickers()
   }

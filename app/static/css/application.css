@@ -985,6 +985,8 @@ a:hover {
   --payText-color: #ffffff;
   --selectedBorder-width: 1px;
   --banner-color: #ffffff;
+  --inputBorder-color: #b9c4c9;
+  --inputBorder-width: 0 0 0 1px;
 }
 
 .card-visited .card__back {
@@ -1103,6 +1105,13 @@ a:hover {
   top: 0;
 }
 
+.adyen-checkout__input {
+  box-shadow: inset var(--inputBorder-width) !important; 
+  color: var(--inputBorder-color) !important 
+              
+  /* border-width:  */
+}
+
 #textColorPick,
 #bgColorPick,
 #dropinColorPick,
@@ -1111,7 +1120,8 @@ a:hover {
 #activeBorderColorPick,
 #bannerColorPick,
 #payTextColorPick,
-#collapsedBorderColorPick {
+#collapsedBorderColorPick,
+#inputBorderColorPick {
   border-radius: 20px;
   height: 25px;
   width: 25px;
@@ -1129,7 +1139,8 @@ a:hover {
 #activeBorderColorPick::-webkit-color-swatch-wrapper,
 #payTextColorPick::-webkit-color-swatch-wrapper,
 #bannerColorPick::-webkit-color-swatch-wrapper,
-#collapsedBorderColorPick::-webkit-color-swatch-wrapper {
+#collapsedBorderColorPick::-webkit-color-swatch-wrapper,
+#inputBorderColorPick::-webkit-color-swatch-wrapper {
   padding: 0;
 }
 #textColorPick::-webkit-color-swatch,
@@ -1141,7 +1152,9 @@ a:hover {
 #payTextColorPick::-webkit-color-swatch,
 #payTextColorPick::-webkit-color-swatch,
 #bannerColorPick::-webkit-color-swatch,
-#collapsedBorderColorPick::-webkit-color-swatch {
+#collapsedBorderColorPick::-webkit-color-swatch,
+#inputBorderColorPick::-webkit-color-swatch
+ {
   border: none;
   border-radius: 50%;
 }
