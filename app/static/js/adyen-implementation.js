@@ -66,18 +66,18 @@ function toggleConfig() {
 }
 
 // merchantLogoLoad
-function loadMerchantLogo() {
-  const merchantURL = document.querySelector("#merchantLogoUrl").value
-
-  // Check if image already exists in banner
+function loadMerchantLogo(merchantURL) {
+  let bannerEl = document.getElementById("banner")
   if (bannerEl.childElementCount === 0) {
-    bannerEl.classList.add("undoHidden")
+    // bannerEl.classList.add("undoHidden")
+    document.getElementById("banner").style.display = "block"
     const merchantLogo = document.createElement("img")
     merchantLogo.src = `${merchantURL.trim()}`
     merchantLogo.classList.add("logo")
     bannerEl.appendChild(merchantLogo)
     console.log("first input")
-  } else {
+  } 
+  else {
     const merchantLogo = document.querySelector(".logo")
     merchantLogo.src = `${merchantURL}`
     console.log("second input")
@@ -1240,6 +1240,10 @@ function resetDynamicCSS() {
 function loadStyle(styleData) {
   for (const [key, value] of Object.entries(styleData)) {
     r.style.setProperty(key, value);
+  }
+  if (styleData.merchantUrl){
+    let merchantURL = styleData.merchantUrl
+    loadMerchantLogo(merchantURL)
   }
     updateColorPickers()
   }
