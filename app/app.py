@@ -103,7 +103,6 @@ def create_app():
     def initiate_payment():
         request_data = request.get_json()
         host_url = request.host_url 
-        # print (request_data)
         locale_data = request_data
         return adyen_payments(request, locale_data, host_url)
 
@@ -120,6 +119,9 @@ def create_app():
     def handle_redirect():
         values = request.values.to_dict()  # Get values from query params in request object
         details_request = {}
+        saveId = ""
+        if "saveId" in values:
+            saveId = values["saveId"]
 
         if "payload" in values:
             details_request["details"] = {"payload": values["payload"]}
@@ -130,7 +132,7 @@ def create_app():
 
         # Redirect shopper to landing page depending on payment success/failure
         if redirect_response["resultCode"] == 'Authorised':
-            return redirect(url_for('checkout_success'))
+            return redirect(url_for('checkout_success', saveId=saveId))
         elif redirect_response["resultCode"] == 'Received' or redirect_response["resultCode"] == 'Pending':
             return redirect(url_for('checkout_pending'))
         else:
@@ -139,7 +141,8 @@ def create_app():
 
     @app.route('/result/success', methods=['GET'])
     def checkout_success():
-        return render_template('checkout-success.html')
+        saveId = request.args['saveId']
+        return render_template('checkout-success.html', saveId=saveId)
 
     @app.route('/result/failed', methods=['GET'])
     def checkout_failure():

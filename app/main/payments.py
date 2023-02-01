@@ -25,7 +25,7 @@ def adyen_payments(frontend_request, locale_data, host_url):
     payments_request['channel'] = "Web"
     payments_request['reference'] = f"Reference {uuid.uuid4()}" 
     payments_request['shopperReference'] = "UniqueReference"
-    payments_request['returnUrl'] = f"{host_url}/api/handleShopperRedirect"
+    payments_request['returnUrl'] = f"{host_url}/api/handleShopperRedirect?saveId={locale_data['saveId']}"
     payments_request['countryCode'] = locale_data['countryCode']  
     payments_request['merchantAccount'] = get_adyen_merchant_account()
     payments_request['recurringExpiry'] = "2022-08-01T23:59:59+02:00"
@@ -132,7 +132,7 @@ def currency_locale(country):
 
 def sanitizeRequest(payment_request):
     safe_delete(payment_request, 'locale')
-    safe_delete(payment_request, 'currency')
+    # safe_delete(payment_request, 'currency')
 
     safe_delete(payment_request, 'city')
     safe_delete(payment_request, 'currency')
@@ -140,6 +140,7 @@ def sanitizeRequest(payment_request):
     safe_delete(payment_request, 'postalCode')
     safe_delete(payment_request, 'street')
     safe_delete(payment_request, 'stateOrProvince')
+    safe_delete(payment_request, 'saveId')
 
     # loaded = json.loads(payments_request)
     # for item in loaded:

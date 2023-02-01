@@ -24,10 +24,12 @@
             <img src="{{ url_for('static', filename='img/success.svg') }}" class="status-image"/>
             <img src="{{ url_for('static', filename='img/thank-you.svg') }}" class="status-image-thank-you"/>
             <p class="status-message">Your order has been successfully placed.</p>
-            <a class="button" href="/">Return Home</a>
+            <a class="button" href="{{ url_for('get_saved_style', saveId=saveId)}}">Return Home</a>
         </div>
     </div>
-
+    <script id="client-key" type="application/json">
+      {{ saveId|default("")|tojson }}
+    </script>
   </body>
 </html>
 

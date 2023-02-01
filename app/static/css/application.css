@@ -1208,8 +1208,9 @@ a:hover {
 .form-control-file,
 .form-control-range {
   accent-color: #36bf52 !important;
-  /* width: 50%; */
+    /* width: 50%; */
 }
+
 /* 
 :not(pre)>code[class*=language-], pre[class*=language-] {
     background: #00112c !important;
