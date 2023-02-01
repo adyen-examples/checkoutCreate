@@ -341,6 +341,7 @@ async function onLoad() {
       loadConfig(getConfigResponse)
     }
   }
+  initCheckout()
 }
 
 // Function to add mutiple attributes to a div
@@ -392,7 +393,7 @@ async function createToggles(tx, PMname) {
     class: "custom-control-input",
     type: "checkbox",
     "data-toggle": "toggle",
-    id: `show${PMname[0].txname}`,
+    id: `show${PMname[0].tx}`,
     onchange: "blockPM(this)",
     checked: true,
   })
@@ -400,7 +401,7 @@ async function createToggles(tx, PMname) {
   let toggleLabel = document.createElement("label")
   setAttributes(toggleLabel, {
     class: "custom-control-label",
-    for: `show${PMname[0].txname}`,
+    for: `show${PMname[0].tx}`,
   })
   // put switch <div> inside the toggle <div>
   toggleDiv.appendChild(toggleSwitch)
@@ -1382,6 +1383,10 @@ function loadConfig(configData) {
   }
   payMethods = configData.payMethods
   payArray = configData.payArray
+  payArray.forEach((tx) => {
+    console.log(tx)
+    // document.getElementById(`show${tx}`).checked = false
+  })
   countrySettings = configData.countrySettings
   savedCountry = countrySettings.countryCode
   let countryDropdown = document.getElementById("country_select")
@@ -1604,4 +1609,3 @@ updateColorPickers()
 
 onLoad()
 
-initCheckout()
