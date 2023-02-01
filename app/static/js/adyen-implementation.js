@@ -37,7 +37,10 @@ let countrySettings = {
   street: "Simon Carmiggeltstraat",
   houseNumberOrName: "6 - 50"
 };
-
+let saveId = ""
+// const query = window.location.search;
+// const urlParameter = new URLSearchParams(query);
+// let styleId = String(window.location.search.slice(1).split("&")[0].split("=")[1])
 
 // identify checkout div and create new empty div to replace with
 const oldDiv = document.getElementById("dropin-container")
@@ -320,7 +323,7 @@ async function onLoad() {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   if (urlParams.has('saveId')) {
-    const saveId = urlParams.get('saveId')
+    let saveId = urlParams.get('saveId')
     const getStyleResponse = await callServer(
       "/loadStyles",
       saveId
@@ -808,11 +811,18 @@ async function unmountContainer() {
  * @param countrySettings - country specific data
  */
 async function handleSubmission(state, dropin, url, countrySettings) {
+  let styleVal = String(window.location.search.slice(1).split("&")[0].split("=")[1])
+  let styleId = {
+    saveId: styleVal
+  }
+  console.log(styleId)
+  console.log(countrySettings)
   try {
     //keeping the country data for the /payments call
     const mergedData = {
       ...state.data,
       ...countrySettings,
+      ...styleId,
     }
     const res = await callServer(url, mergedData)
     let prettyResponse = JSON.stringify(res, null, 2)
