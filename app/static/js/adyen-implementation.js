@@ -301,6 +301,7 @@ const PMnames = [
   { tx: "paymaya_wallet", txname: "PayMaya Wallet" },
   { tx: "paypal", txname: "PayPal" },
   { tx: "paysafecard", txname: "PaySafeCard" },
+  { tx: "paybybank", txname: "Open Banking"},
   { tx: "googlepay", txname: "Google Pay" },
   { tx: "paywithgoogle", txname: "Google Pay" },
   { tx: "samsungpay", txname: "Samsung Pay" },
@@ -1098,12 +1099,39 @@ function activeBorderWidth() {
   updateStyleCode()
 }
 /**
+ * @function collapsedBorderWidth - Changes collapsed payment method border width
+ */
+function collapsedBorderWidth() {
+  let collapsedBorderWidth = document.getElementById("collapsedBorderSize").value
+  let collapsedBorderPixelVal = collapsedBorderWidth + "px"
+  r.style.setProperty("--collapsedBorder-width", collapsedBorderPixelVal)
+  updateStyleCode()
+}
+/**
  * @function inputBorderWidth - Changes input field border width
  */
 function inputBorderWidth() {
   let inputBorderWidth = document.getElementById("inputBorderSize").value
   let borderPixelVal = `0 0 0 ${inputBorderWidth}px`
   r.style.setProperty("--inputBorder-width", borderPixelVal)
+  updateStyleCode()
+}
+/**
+ * @function logoSize - Changes input field border width
+ */
+function logoSize() {
+  let logoSize = document.getElementById("logoSize").value
+  let logoSizeVal = logoSize + "px"
+  r.style.setProperty("--logo-width", logoSizeVal)
+  updateStyleCode()
+}
+/**
+ * @function logoSize - Changes input field border width
+ */
+function logoVerticalPosition() {
+  let logoVerPosition = document.getElementById("logoVerticalPosition").value
+  let logoVerPosVal = logoVerPosition + "px"
+  r.style.setProperty("--logo-verPosition", logoVerPosVal)
   updateStyleCode()
 }
 // change Drop-in's edges (straight to round)
@@ -1131,6 +1159,19 @@ document
       updateStyleCode()
     }
   })
+
+  // Function to remove borders
+document
+.getElementById("bannerBorder")
+.parentNode.addEventListener("click", function (event) {
+  if (this.querySelector("input").checked) {
+    r.style.setProperty("--banner-border", "2px solid rgba(45, 45, 45, 0.1)")
+    updateStyleCode()
+  } else {
+    r.style.setProperty("--banner-border", null)
+    updateStyleCode()
+  }
+})
 
 // change dropin container width
 function dropinWidth() {
@@ -1282,8 +1323,13 @@ function resetDynamicCSS() {
     r.style.setProperty("--inputBorder-color", null)
     r.style.setProperty("--inputBorder-width", null)
     r.style.setProperty("--inputBorder-radius", null)
+    r.style.setProperty("--logo-width", null)
+    r.style.setProperty("--collapsedBorder-width", null)
+    r.style.setProperty("--logo-verPosition", null)
+    r.style.setProperty("--banner-border", null)
     document.getElementById("banner").style.display = "none"
-    document.getElementById("merchantLogoUrl").value = null
+    document.getElementById("merchantLogoUrl").value = ''
+    document.querySelector('.logo').src = ''
     updateColorPickers()
   }
 
@@ -1418,6 +1464,11 @@ async function saveStyle() {
   "--inputBorder-color": getComputedStyle(r).getPropertyValue("--inputBorder-color"),
   "--inputBorder-width": getComputedStyle(r).getPropertyValue("--inputBorder-width"),
   "--inputBorder-radius": getComputedStyle(r).getPropertyValue("--inputBorder-radius"),
+  "--logo-width":getComputedStyle(r).getPropertyValue("--logo-width"),
+  "--logo-verPosition":getComputedStyle(r).getPropertyValue("--logo-verPosition"),
+  "--collapsedBorder-width":getComputedStyle(r).getPropertyValue("--collapsedBorder-width"),
+  "--collapsedBorder-color":getComputedStyle(r).getPropertyValue("--collapsedBorder-color"),
+  "--banner-border":getComputedStyle(r).getPropertyValue("--banner-border"),
   "merchantUrl": document.querySelector("#merchantLogoUrl").value
   }
   configData = {

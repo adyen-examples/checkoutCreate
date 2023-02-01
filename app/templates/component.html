@@ -1092,6 +1092,30 @@
                     <div class="col-6"></div>
                     <!-- title -->
                     <div class="col-3">
+                      <p class="textFonts text-left ml-3">
+                        Collapsed payment methods border width
+                      </p>
+                    </div>
+                    <!-- toggle -->
+                    <div class="col-3 text-center">
+                      <div class="form-group">
+                        <input
+                          type="range"
+                          class="form-control-range"
+                          id="collapsedBorderSize"
+                          onchange="collapsedBorderWidth(this.value);"
+                          min="0"
+                          max="10"
+                          value="1"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row container mb-2 p-0">
+                    <!-- text -->
+                    <div class="col-6"></div>
+                    <!-- title -->
+                    <div class="col-3">
                       <p class="textFonts text-left ml-3">Pay button</p>
                     </div>
                     <!-- toggle -->
@@ -1419,6 +1443,29 @@
                     <div class="col-6"></div>
                     <!-- title -->
                     <div class="col-3">
+                      <p class="textFonts text-left ml-3">Banner border</p>
+                    </div>
+                    <!-- toggle -->
+                    <div class="col-3 text-center">
+                      <div class="custom-control custom-switch">
+                        <input
+                          type="checkbox"
+                          class="custom-control-input"
+                          id="bannerBorder"
+                          data-toggle="toggle"
+                        />
+                        <label
+                          class="custom-control-label"
+                          for="bannerBorder"
+                        ></label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row container mb-2 p-0">
+                    <!-- text -->
+                    <div class="col-6"></div>
+                    <!-- title -->
+                    <div class="col-3">
                       <p class="textFonts text-left ml-3">
                         Merchant logo URL
                       </p>
@@ -1428,6 +1475,56 @@
                       <div class="input-group mb-3">
                       <input type="text" class="form-control" id="merchantLogoUrl" aria-describedby="basic-addon3" onchange="loadMerchantLogo(this.value)">
                     </div>
+                    </div>
+                  </div>
+                  <div class="row container mb-2 p-0">
+                    <!-- text -->
+                    <div class="col-6"></div>
+                    <!-- title -->
+                    <div class="col-3">
+                      <p class="textFonts text-left ml-3">
+                        Logo size 
+                      </p>
+                    </div>
+                    <!-- toggle -->
+                    <div class="col-3 text-right">
+                      <div class="form-group">
+                        <input
+                          type="range"
+                          class="form-control-range"
+                          id="logoSize"
+                          min="50"
+                          max="240"
+                          value="80"
+                          onchange="logoSize(this.value)"
+                        />
+                      </div>
+                      <!-- toggle -->
+                    </div>
+                  </div>
+                  <div class="row container mb-2 p-0">
+                    <!-- text -->
+                    <div class="col-6"></div>
+                    <!-- title -->
+                    <div class="col-3">
+                      <p class="textFonts text-left ml-3">
+                        Logo vertical position 
+                      </p>
+                    </div>
+                    <!-- toggle -->
+                    <div class="col-3 text-right">
+                      <div class="form-group">
+                        <input
+                          type="range"
+                          class="form-control-range"
+                          id="logoVerticalPosition"
+                          min="0"
+                          max="50"
+                          value="0"
+                          onchange="logoVerticalPosition(this.value)"
+                        />
+                      </div>
+                      <!-- toggle -->
                     </div>
                   </div>
                 </div>

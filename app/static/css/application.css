@@ -981,6 +981,7 @@ a:hover {
   --bottomedges-right: 12px;
   --selectedBorder-color: #e6e9eb;
   --collapsedBorder-color: #e6e9eb;
+  --collapsedBorder-width: 1px;
   --text-color: #00112c;
   --payText-color: #ffffff;
   --selectedBorder-width: 1px;
@@ -988,6 +989,9 @@ a:hover {
   --inputBorder-color: #b9c4c9;
   --inputBorder-width: 0 0 0 1px;
   --inputBorder-radius: 6px;
+  --logo-height: inherit;
+  --logo-width: 80px;
+  --logo-verPosition: 0px;
 }
 
 .card-visited .card__back {
@@ -1043,6 +1047,7 @@ a:hover {
   font-weight: var(--text-bold) !important;
   margin: var(--payments-spacing) !important;
   border-color: var(--collapsedBorder-color) !important;
+  border-width: var(--collapsedBorder-width) !important;
 }
 
 .adyen-checkout__payment-method--selected + .adyen-checkout__payment-method,
@@ -1401,6 +1406,7 @@ button:focus {
   height: 64px;
   display: none;
   background-color: var(--banner-color);
+  border-bottom: var(--banner-border);
 }
 
 .undoHidden {
@@ -1410,11 +1416,13 @@ button:focus {
 
 .logo {
   position: absolute;
+  top: var(--logo-verPosition);
   left: 20px;
-  width: inherit;
-  height: inherit;
+  width: var(--logo-width);
+  height: var(--logo-height);
   margin: auto;
   background-color: transparent;
+  padding: 1rem;
 }
 
 /* preview basket */
