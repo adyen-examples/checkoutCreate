@@ -81,7 +81,7 @@ def get_config(saveId):
 
 # function to delete old data after a set amount of time
 def delete_old_data():
-    sql_delete_vars = """DELETE FROM styles WHERE (age <= datetime('now', '14 days') AND saveId != '1398c98a-9e6c-4895-9b1d-89dce8107076')"""
+    sql_delete_vars = """DELETE FROM styles WHERE (age <= datetime('now', '14 days') AND saveId != 'ae9c4318-b982-496b-9d2d-ada4f2ae0576')"""
     sql_get_remaining = "SELECT * FROM styles"
     try:
         conn = sqlite3.connect(_path_to_db_file)
