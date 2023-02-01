@@ -1301,7 +1301,6 @@ function resetDynamicCSS() {
     r.style.setProperty("--inputBorder-width", null)
     r.style.setProperty("--inputBorder-radius", null)
     r.style.setProperty("--logo-width", null)
-
     r.style.setProperty("--collapsedBorder-width", null)
     r.style.setProperty("--logo-verPosition", null)
     document.getElementById("banner").style.display = "none"
