@@ -1292,9 +1292,10 @@ function resetDynamicCSS() {
     r.style.setProperty("--inputBorder-width", null)
     r.style.setProperty("--inputBorder-radius", null)
     r.style.setProperty("--logo-width", null)
-    r.style.setProperty(--logo-verPosition, null)
+    r.style.setProperty("--logo-verPosition", null)
     document.getElementById("banner").style.display = "none"
-    document.getElementById("merchantLogoUrl").value = null
+    document.getElementById("merchantLogoUrl").value = ''
+    document.querySelector('.logo').src = ''
     updateColorPickers()
   }
 
