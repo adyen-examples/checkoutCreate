@@ -981,6 +981,7 @@ a:hover {
   --bottomedges-right: 12px;
   --selectedBorder-color: #e6e9eb;
   --collapsedBorder-color: #e6e9eb;
+  --collapsedBorder-width: 1px;
   --text-color: #00112c;
   --payText-color: #ffffff;
   --selectedBorder-width: 1px;
@@ -1046,6 +1047,7 @@ a:hover {
   font-weight: var(--text-bold) !important;
   margin: var(--payments-spacing) !important;
   border-color: var(--collapsedBorder-color) !important;
+  border-width: var(--collapsedBorder-width) !important;
 }
 
 .adyen-checkout__payment-method--selected + .adyen-checkout__payment-method,
