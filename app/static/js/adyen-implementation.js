@@ -298,6 +298,7 @@ const PMnames = [
   { tx: "paymaya_wallet", txname: "PayMaya Wallet" },
   { tx: "paypal", txname: "PayPal" },
   { tx: "paysafecard", txname: "PaySafeCard" },
+  { tx: "paybybank", txname: "Open Banking"},
   { tx: "googlepay", txname: "Google Pay" },
   { tx: "paywithgoogle", txname: "Google Pay" },
   { tx: "samsungpay", txname: "Samsung Pay" },
@@ -308,7 +309,6 @@ const PMnames = [
   { tx: "wechatpayQR", txname: "WeChatPay QR" },
   { tx: "wechatpayWeb", txname: "WeChatPay Web" },
   { tx: "zip", txname: "Zip" },
-  { tx: "paybybank", txname: "Open Banking"},
 ]
 
 //Paypal style variables
