@@ -1089,7 +1089,7 @@ function activeBorderWidth() {
   updateStyleCode()
 }
 /**
- * @function collaposedBorderWidth - Changes collapsed payment method border width
+ * @function collapsedBorderWidth - Changes collapsed payment method border width
  */
 function collapsedBorderWidth() {
   let collapsedBorderWidth = document.getElementById("collapsedBorderSize").value
@@ -1443,6 +1443,7 @@ async function saveStyle() {
   "--logo-width":getComputedStyle(r).getPropertyValue("--logo-width"),
   "--logo-verPosition":getComputedStyle(r).getPropertyValue("--logo-verPosition"),
   "--collapsedBorder-width":getComputedStyle(r).getPropertyValue("--collapsedBorder-width"),
+  "--collapsedBorder-color":getComputedStyle(r).getPropertyValue("--collapsedBorder-color"),
   "merchantUrl": document.querySelector("#merchantLogoUrl").value
   }
   configData = {
