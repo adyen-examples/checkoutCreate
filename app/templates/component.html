@@ -228,7 +228,7 @@
 
         <!-- config UI -->
         <!-- Preview basket page -->
-        <div class="container preview-basket p-3 col-5">
+        <!-- <div class="container preview-basket p-3 col-5">
           <div class="container p-4">
             <div class="row">
               <div class="col">
@@ -292,7 +292,7 @@
             </div>
           </div>
 
-        </div>
+        </div> -->
 
         <div class="col-5 config-UI p-0">
           <div class="container p-5">
@@ -337,7 +337,7 @@
                     >Save your creation</a
                   >
                 </li>
-                 <li class="nav-item text-right">
+                 <!-- <li class="nav-item text-right">
                   <a
                     class="nav-link"
                     id="save-tab"
@@ -349,7 +349,7 @@
                     onclick="toggleConfig()"
                     >Preview Basket</a
                   >
-                </li>
+                </li> -->
               </ul>
               <!------- First tab content --------->
               <div class="tab-content" id="myTabContent">
@@ -1428,6 +1428,56 @@
                       <div class="input-group mb-3">
                       <input type="text" class="form-control" id="merchantLogoUrl" aria-describedby="basic-addon3" onchange="loadMerchantLogo(this.value)">
                     </div>
+                    </div>
+                  </div>
+                  <div class="row container mb-2 p-0">
+                    <!-- text -->
+                    <div class="col-6"></div>
+                    <!-- title -->
+                    <div class="col-3">
+                      <p class="textFonts text-left ml-3">
+                        Logo size 
+                      </p>
+                    </div>
+                    <!-- toggle -->
+                    <div class="col-3 text-right">
+                      <div class="form-group">
+                        <input
+                          type="range"
+                          class="form-control-range"
+                          id="logoSize"
+                          min="50"
+                          max="240"
+                          value="80"
+                          onchange="logoSize(this.value)"
+                        />
+                      </div>
+                      <!-- toggle -->
+                    </div>
+                  </div>
+                  <div class="row container mb-2 p-0">
+                    <!-- text -->
+                    <div class="col-6"></div>
+                    <!-- title -->
+                    <div class="col-3">
+                      <p class="textFonts text-left ml-3">
+                        Logo vertical position 
+                      </p>
+                    </div>
+                    <!-- toggle -->
+                    <div class="col-3 text-right">
+                      <div class="form-group">
+                        <input
+                          type="range"
+                          class="form-control-range"
+                          id="logoVerticalPosition"
+                          min="0"
+                          max="50"
+                          value="0"
+                          onchange="logoVerticalPosition(this.value)"
+                        />
+                      </div>
+                      <!-- toggle -->
                     </div>
                   </div>
                 </div>
