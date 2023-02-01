@@ -1089,6 +1089,15 @@ function activeBorderWidth() {
   updateStyleCode()
 }
 /**
+ * @function collaposedBorderWidth - Changes collapsed payment method border width
+ */
+function collapsedBorderWidth() {
+  let collapsedBorderWidth = document.getElementById("collapsedBorderSize").value
+  let collapsedBorderPixelVal = collapsedBorderWidth + "px"
+  r.style.setProperty("--collapsedBorder-width", collapsedBorderPixelVal)
+  updateStyleCode()
+}
+/**
  * @function inputBorderWidth - Changes input field border width
  */
 function inputBorderWidth() {
@@ -1292,6 +1301,7 @@ function resetDynamicCSS() {
     r.style.setProperty("--inputBorder-width", null)
     r.style.setProperty("--inputBorder-radius", null)
     r.style.setProperty("--logo-width", null)
+    r.style.setProperty("--collapsedBorder-width", null)
     r.style.setProperty("--logo-verPosition", null)
     document.getElementById("banner").style.display = "none"
     document.getElementById("merchantLogoUrl").value = ''
@@ -1432,6 +1442,7 @@ async function saveStyle() {
   "--inputBorder-radius": getComputedStyle(r).getPropertyValue("--inputBorder-radius"),
   "--logo-width":getComputedStyle(r).getPropertyValue("--logo-width"),
   "--logo-verPosition":getComputedStyle(r).getPropertyValue("--logo-verPosition"),
+  "--collapsedBorder-width":getComputedStyle(r).getPropertyValue("--collapsedBorder-width"),
   "merchantUrl": document.querySelector("#merchantLogoUrl").value
   }
   configData = {
