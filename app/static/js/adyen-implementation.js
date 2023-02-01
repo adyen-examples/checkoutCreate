@@ -1150,6 +1150,19 @@ document
     }
   })
 
+  // Function to remove borders
+document
+.getElementById("bannerBorder")
+.parentNode.addEventListener("click", function (event) {
+  if (this.querySelector("input").checked) {
+    r.style.setProperty("--banner-border", "2px solid rgba(45, 45, 45, 0.1)")
+    updateStyleCode()
+  } else {
+    r.style.setProperty("--banner-border", null)
+    updateStyleCode()
+  }
+})
+
 // change dropin container width
 function dropinWidth() {
   let widthValue = document.getElementById("changeWidth").value
@@ -1303,6 +1316,7 @@ function resetDynamicCSS() {
     r.style.setProperty("--logo-width", null)
     r.style.setProperty("--collapsedBorder-width", null)
     r.style.setProperty("--logo-verPosition", null)
+    r.style.setProperty("--banner-border", null)
     document.getElementById("banner").style.display = "none"
     document.getElementById("merchantLogoUrl").value = ''
     document.querySelector('.logo').src = ''
@@ -1444,6 +1458,7 @@ async function saveStyle() {
   "--logo-verPosition":getComputedStyle(r).getPropertyValue("--logo-verPosition"),
   "--collapsedBorder-width":getComputedStyle(r).getPropertyValue("--collapsedBorder-width"),
   "--collapsedBorder-color":getComputedStyle(r).getPropertyValue("--collapsedBorder-color"),
+  "--banner-border":getComputedStyle(r).getPropertyValue("--banner-border"),
   "merchantUrl": document.querySelector("#merchantLogoUrl").value
   }
   configData = {
