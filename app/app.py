@@ -134,9 +134,9 @@ def create_app():
         if redirect_response["resultCode"] == 'Authorised':
             return redirect(url_for('checkout_success', saveId=saveId))
         elif redirect_response["resultCode"] == 'Received' or redirect_response["resultCode"] == 'Pending':
-            return redirect(url_for('checkout_pending'))
+            return redirect(url_for('checkout_pending', saveId=saveId))
         else:
-            return redirect(url_for('checkout_failure'))
+            return redirect(url_for('checkout_failure', saveId=saveId))
 
 
     @app.route('/result/success', methods=['GET'])
