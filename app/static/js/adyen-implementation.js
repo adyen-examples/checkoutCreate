@@ -78,6 +78,7 @@ function loadMerchantLogo(merchantURL) {
     console.log("first input")
   } 
   else {
+    document.getElementById("banner").style.display = "block"
     const merchantLogo = document.querySelector(".logo")
     merchantLogo.src = `${merchantURL}`
     console.log("second input")
@@ -1272,6 +1273,7 @@ function resetDynamicCSS() {
     r.style.setProperty("--inputBorder-width", null)
     r.style.setProperty("--inputBorder-radius", null)
     document.getElementById("banner").style.display = "none"
+    document.getElementById("merchantLogoUrl").value = null
     updateColorPickers()
   }
 
