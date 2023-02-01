@@ -1402,7 +1402,7 @@ button:focus {
 
 /* Banner */
 .banner {
-  height: 64px;
+  height: 80px;
   display: none;
   background-color: var(--banner-color);
   border-bottom: 2px solid rgba(45, 45, 45, 0.1);
