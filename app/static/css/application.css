@@ -990,6 +990,7 @@ a:hover {
   --inputBorder-radius: 6px;
   --logo-height: inherit;
   --logo-width: 80px;
+  --logo-verPosition: 0px;
 }
 
 .card-visited .card__back {
@@ -1411,6 +1412,7 @@ button:focus {
 
 .logo {
   position: absolute;
+  top: var(--logo-verPosition);
   left: 20px;
   width: var(--logo-width);
   height: var(--logo-height);
