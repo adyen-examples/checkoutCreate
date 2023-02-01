@@ -308,6 +308,7 @@ const PMnames = [
   { tx: "wechatpayQR", txname: "WeChatPay QR" },
   { tx: "wechatpayWeb", txname: "WeChatPay Web" },
   { tx: "zip", txname: "Zip" },
+  { tx: "paybybank", txname: "Open Banking"},
 ]
 
 //Paypal style variables
