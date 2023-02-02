@@ -56,7 +56,7 @@ def create_app():
 
     @app.route('/tempCreateTable', methods=['POST', 'GET'])
     def temp_create():
-        database.create_tables()()
+        database.create_tables()
         return 'done'
 
     @app.route('/load', methods=['GET'])

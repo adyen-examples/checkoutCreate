@@ -1329,7 +1329,7 @@ function resetDynamicCSS() {
     r.style.setProperty("--logo-verPosition", null)
     r.style.setProperty("--banner-border", null)
     document.getElementById("banner").style.display = "none"
-    document.getElementById("merchantLogoUrl").value = ''
+    document.getElementById("merchantLogoUrl").value = null
     document.querySelector('.logo').src = ''
     updateColorPickers()
   }
@@ -1348,7 +1348,7 @@ function loadStyle(styleData) {
 
 // Load config based on the data from db
 function loadConfig(configData) {
-  filteredData = Object.fromEntries(Object.entries(configData).filter(([key]) => !key.match('showPayMethod') && !key.match('placeHolderData')))
+  filteredData = Object.fromEntries(Object.entries(configData).filter(([key]) => !key.match('showPayMethod') && !key.match('placeHolderData') && !key.match('payArray') && !key.match('payMethods')))
   for (const [key, value] of Object.entries(filteredData)) {
     console.log(key, value)
     if (value == true){
@@ -1382,10 +1382,13 @@ function loadConfig(configData) {
     document.getElementById("instantPay").checked = true
   }
   payMethods = configData.payMethods
+  console.log(payMethods)
   payArray = configData.payArray
+  console.log(payArray)
   payArray.forEach((tx) => {
     console.log(tx)
-    // document.getElementById(`show${tx}`).checked = false
+    offToggle = document.getElementById(`show${tx}`)
+    console.log(offToggle)
   })
   countrySettings = configData.countrySettings
   savedCountry = countrySettings.countryCode
