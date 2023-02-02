@@ -38,6 +38,7 @@ let countrySettings = {
   houseNumberOrName: "6 - 50"
 };
 let saveId = ""
+let blockedPM = { blockedPaymentMethods: payArray }
 // const query = window.location.search;
 // const urlParameter = new URLSearchParams(query);
 // let styleId = String(window.location.search.slice(1).split("&")[0].split("=")[1])
@@ -320,7 +321,25 @@ let palShape = "rect"
 let palLabel = "paypal"
 
 async function onLoad() {
-  getToggles();
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  if (urlParams.has('saveId')) {
+    let saveId = urlParams.get('saveId')
+    const getConfigResponse = await callServer(
+      "/loadConfig",
+      saveId
+    )
+    if (getConfigResponse != '{"error": "no user"}'){
+      console.log(getConfigResponse)
+      countrySettings = getConfigResponse.countrySettings
+    }
+  }
+  await getToggles();
+  await fromDatabase();
+  initCheckout()
+}
+
+async function fromDatabase(){
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   if (urlParams.has('saveId')) {
@@ -341,7 +360,6 @@ async function onLoad() {
       loadConfig(getConfigResponse)
     }
   }
-  initCheckout()
 }
 
 // Function to add mutiple attributes to a div
@@ -351,53 +369,6 @@ function setAttributes(el, options) {
   })
 }
 
-// Load config based on the data from db
-function loadConfig(configData) {
-  filteredData = Object.fromEntries(Object.entries(configData).filter(([key]) => !key.match('showPayMethod') && !key.match('placeHolderData')))
-  for (const [key, value] of Object.entries(filteredData)) {
-    console.log(key, value)
-    if (value == true){
-      document.getElementById(key).checked = true
-    }
-  }
-  openFirst = configData.openFirst
-  billAdd = configData.billAdd
-  onlyStored = configData.onlyStored
-  holderName = configData.holderName 
-  showPayMethod = configData.showPayMethod
-  if (showPayMethod == true){
-    document.getElementById("showPayMethod").checked = false
-  }
-  else{
-    document.getElementById("showPayMethod").checked = true
-  }
-  hideCVC = configData.hideCVC
-  placeholderData = configData.placeholderData
-  if (placeholderData == false){
-    document.getElementById("placeholderData").checked = false
-  }
-  else {
-    document.getElementById("placeholderData").checked = true
-  }
-  instantArray = configData.instantArray
-  if (instantArray == []){
-    document.getElementById("instantPay").checked = false
-  }
-  else{
-    document.getElementById("instantPay").checked = true
-  }
-  payMethods = configData.payMethods
-  payArray = configData.payArray
-  countrySettings = configData.countrySettings
-  savedCountry = countrySettings.countryCode
-  let loadCountry = {
-      value: savedCountry
-  }
-  let countryDropdown = document.getElementById("country_select")
-  countryDropdown.value = savedCountry
-  document.getElementById("flag_img").src = flagUrlMap[savedCountry].src
-  changeSelect(loadCountry)
-}
 
 // Load saved style based on the data from db
 function loadStyle(styleData) {
@@ -521,11 +492,16 @@ async function getToggles() {
  * @param {*} el
  */
 async function changeSelect(el) {
-  console.log(el)
-  console.log(Object.values)
-  console.log(document.getElementById("flag_img").src)
+  // console.log(blockedPM)
+  payArray = []
+  blockedPM = { blockedPaymentMethods: payArray }
+  // console.log(blockedPM)
+  // console.log(el.value)
+  // console.log(Object.values)
+  // console.log(document.getElementById("flag_img").src)
   document.getElementById("flag_img").src = flagUrlMap[el.value].src
   const country = el.value
+  // console.log(country)
   countrySettings = getCountryData(country)
   if (
     document.getElementById("dropin-container") &&
@@ -704,7 +680,7 @@ function getCountryData(countrySettings) {
 /**
  * setting the array of blockedPaymentMethods
  */
-let blockedPM = { blockedPaymentMethods: payArray }
+
 
 async function getCountryPM() {
   let noBlock = { blockedPaymentMethods: [] }
@@ -717,6 +693,7 @@ async function getCountryPM() {
     mergeData
   )
   let payMethodArray = unblockedResponse.paymentMethods
+  console.log(payMethodArray)
   let txvariants = payMethodArray.map(({ type }) => type)
   return await txvariants
 }
@@ -1391,7 +1368,7 @@ function resetDynamicCSS() {
     r.style.setProperty("--logo-verPosition", null)
     r.style.setProperty("--banner-border", null)
     document.getElementById("banner").style.display = "none"
-    document.getElementById("merchantLogoUrl").value = ''
+    document.getElementById("merchantLogoUrl").value = null
     document.querySelector('.logo').src = ''
     updateColorPickers()
   }
@@ -1410,7 +1387,7 @@ function loadStyle(styleData) {
 
 // Load config based on the data from db
 function loadConfig(configData) {
-  filteredData = Object.fromEntries(Object.entries(configData).filter(([key]) => !key.match('showPayMethod') && !key.match('placeHolderData')))
+  filteredData = Object.fromEntries(Object.entries(configData).filter(([key]) => !key.match('showPayMethod') && !key.match('placeHolderData') && !key.match('payArray') && !key.match('payMethods')))
   for (const [key, value] of Object.entries(filteredData)) {
     console.log(key, value)
     if (value == true){
@@ -1437,23 +1414,34 @@ function loadConfig(configData) {
     document.getElementById("placeholderData").checked = true
   }
   instantArray = configData.instantArray
-  if (instantArray == []){
+  if (instantArray.length < 1){
     document.getElementById("instantPay").checked = false
   }
-  else{
+  else {
     document.getElementById("instantPay").checked = true
   }
   payMethods = configData.payMethods
+  console.log(payMethods)
   payArray = configData.payArray
+  console.log(payArray)
+  blockedPM = { blockedPaymentMethods: payArray }
   payArray.forEach((tx) => {
     console.log(tx)
-    // document.getElementById(`show${tx}`).checked = false
+    document.getElementById(`show${tx}`).checked = false
+    // console.log(offToggle)
+    // const parentPM = document.getElementById("parentPM")
+    // const children = Array.from(parentPM.children)
+    // // get IDs of children divs
+    // const ids = children.map((element) => {
+    //   console.log(element.id)
+    // })
   })
   countrySettings = configData.countrySettings
   savedCountry = countrySettings.countryCode
   let countryDropdown = document.getElementById("country_select")
   countryDropdown.value = savedCountry
   document.getElementById("flag_img").src = flagUrlMap[savedCountry].src
+  // initCheckout()
 }
 
 
