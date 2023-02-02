@@ -454,7 +454,7 @@ async function createToggles(tx, PMname) {
     class: "custom-control-input",
     type: "checkbox",
     "data-toggle": "toggle",
-    id: `show${PMname[0].txname}`,
+    id: `show${PMname[0].tx}`,
     onchange: "blockPM(this)",
     checked: true,
   })
@@ -462,7 +462,7 @@ async function createToggles(tx, PMname) {
   let toggleLabel = document.createElement("label")
   setAttributes(toggleLabel, {
     class: "custom-control-label",
-    for: `show${PMname[0].txname}`,
+    for: `show${PMname[0].tx}`,
   })
   // put switch <div> inside the toggle <div>
   toggleDiv.appendChild(toggleSwitch)
@@ -1396,6 +1396,66 @@ function resetDynamicCSS() {
     updateColorPickers()
   }
 
+// Load saved style based on the data from db
+function loadStyle(styleData) {
+  for (const [key, value] of Object.entries(styleData)) {
+    r.style.setProperty(key, value);
+  }
+  if (styleData.merchantUrl){
+    let merchantURL = styleData.merchantUrl
+    loadMerchantLogo(merchantURL)
+  }
+    updateColorPickers()
+  }
+
+// Load config based on the data from db
+function loadConfig(configData) {
+  filteredData = Object.fromEntries(Object.entries(configData).filter(([key]) => !key.match('showPayMethod') && !key.match('placeHolderData')))
+  for (const [key, value] of Object.entries(filteredData)) {
+    console.log(key, value)
+    if (value == true){
+      document.getElementById(key).checked = true
+    }
+  }
+  openFirst = configData.openFirst
+  billAdd = configData.billAdd
+  onlyStored = configData.onlyStored
+  holderName = configData.holderName 
+  showPayMethod = configData.showPayMethod
+  if (showPayMethod == true){
+    document.getElementById("showPayMethod").checked = false
+  }
+  else{
+    document.getElementById("showPayMethod").checked = true
+  }
+  hideCVC = configData.hideCVC
+  placeholderData = configData.placeholderData
+  if (placeholderData == false){
+    document.getElementById("placeholderData").checked = false
+  }
+  else {
+    document.getElementById("placeholderData").checked = true
+  }
+  instantArray = configData.instantArray
+  if (instantArray == []){
+    document.getElementById("instantPay").checked = false
+  }
+  else{
+    document.getElementById("instantPay").checked = true
+  }
+  payMethods = configData.payMethods
+  payArray = configData.payArray
+  payArray.forEach((tx) => {
+    console.log(tx)
+    // document.getElementById(`show${tx}`).checked = false
+  })
+  countrySettings = configData.countrySettings
+  savedCountry = countrySettings.countryCode
+  let countryDropdown = document.getElementById("country_select")
+  countryDropdown.value = savedCountry
+  document.getElementById("flag_img").src = flagUrlMap[savedCountry].src
+}
+
 
 // logging configuration object to UI
 function logConfig(cloneConfig) {
@@ -1612,4 +1672,3 @@ updateColorPickers()
 
 onLoad()
 
-// initCheckout()
