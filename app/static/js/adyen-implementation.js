@@ -351,6 +351,67 @@ function setAttributes(el, options) {
   })
 }
 
+// Load config based on the data from db
+function loadConfig(configData) {
+  filteredData = Object.fromEntries(Object.entries(configData).filter(([key]) => !key.match('showPayMethod') && !key.match('placeHolderData')))
+  for (const [key, value] of Object.entries(filteredData)) {
+    console.log(key, value)
+    if (value == true){
+      document.getElementById(key).checked = true
+    }
+  }
+  openFirst = configData.openFirst
+  billAdd = configData.billAdd
+  onlyStored = configData.onlyStored
+  holderName = configData.holderName 
+  showPayMethod = configData.showPayMethod
+  if (showPayMethod == true){
+    document.getElementById("showPayMethod").checked = false
+  }
+  else{
+    document.getElementById("showPayMethod").checked = true
+  }
+  hideCVC = configData.hideCVC
+  placeholderData = configData.placeholderData
+  if (placeholderData == false){
+    document.getElementById("placeholderData").checked = false
+  }
+  else {
+    document.getElementById("placeholderData").checked = true
+  }
+  instantArray = configData.instantArray
+  if (instantArray == []){
+    document.getElementById("instantPay").checked = false
+  }
+  else{
+    document.getElementById("instantPay").checked = true
+  }
+  payMethods = configData.payMethods
+  payArray = configData.payArray
+  countrySettings = configData.countrySettings
+  savedCountry = countrySettings.countryCode
+  let loadCountry = {
+      value: savedCountry
+  }
+  let countryDropdown = document.getElementById("country_select")
+  countryDropdown.value = savedCountry
+  document.getElementById("flag_img").src = flagUrlMap[savedCountry].src
+  changeSelect(loadCountry)
+}
+
+// Load saved style based on the data from db
+function loadStyle(styleData) {
+  for (const [key, value] of Object.entries(styleData)) {
+    r.style.setProperty(key, value);
+  }
+  if (styleData.merchantUrl){
+    let merchantURL = styleData.merchantUrl
+    loadMerchantLogo(merchantURL)
+  }
+    updateColorPickers()
+  }
+
+
 /**
  * @function createToggles - creates toggles to enable/disable payment methods according to /paymentMethods response
  * @param {string} tx - txvariant
@@ -462,6 +523,7 @@ async function getToggles() {
 async function changeSelect(el) {
   console.log(el)
   console.log(Object.values)
+  console.log(document.getElementById("flag_img").src)
   document.getElementById("flag_img").src = flagUrlMap[el.value].src
   const country = el.value
   countrySettings = getCountryData(country)
@@ -679,8 +741,8 @@ async function getConfiguration() {
   let configuration = {
     paymentMethodsResponse: paymentMethodsResponse,
     clientKey,
-    locale: countrySettings.locale || "en_NL",
-    countryCode: countrySettings.countryCode || "NL",
+    locale: countrySettings.locale,
+    countryCode: countrySettings.countryCode,
     environment: "test",
     showPayButton: true,
     paymentMethodsConfiguration: {
@@ -1396,6 +1458,7 @@ function loadConfig(configData) {
   countryDropdown.value = savedCountry
   document.getElementById("flag_img").src = flagUrlMap[savedCountry].src
 }
+
 
 // logging configuration object to UI
 function logConfig(cloneConfig) {
