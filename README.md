@@ -64,6 +64,12 @@ Remember to include `http://localhost:8080` in the list of Allowed Origins
     ADYEN_HMAC_KEY="your_hmac_key_here"
 ```
 
+4. In order to save and load configuration, the application makes use of an sqlite database. By default, the sqlite database will be created in the root of the application folder, but this can be changed (for example to make it persistent). You can change the default location by adding a `DATABASE_LOCATION` value in the `.env` file.
+
+```
+   DATABASE_LOCATION="/data"
+```
+
 ## Usage
 1. Run `./start.sh` to:
    - Initialize the required environment variables. This step is necessary every time you re-activate your venv
