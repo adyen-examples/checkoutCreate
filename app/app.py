@@ -186,7 +186,7 @@ def create_app():
         return send_from_directory(os.path.join(app.root_path, 'static'),
                                    'img/favicon.ico')
                                 
-    initialise_db("/data")
+    initialise_db(get_database_location())
 
     return app
 
