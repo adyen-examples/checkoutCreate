@@ -18,6 +18,7 @@ jobs:
       steps:
         - uses: actions/checkout@v3
         - uses: superfly/flyctl-actions/setup-flyctl@master
+        # - run: fly volumes create adyencheckout_data --region ams (run only once)
         - run: flyctl secrets set ADYEN_API_KEY="$ADYEN_API_KEY"
         - run: flyctl secrets set ADYEN_CLIENT_KEY="$ADYEN_CLIENT_KEY"
         - run: flyctl secrets set ADYEN_HMAC_KEY="$ADYEN_HMAC_KEY"
