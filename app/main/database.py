@@ -126,6 +126,6 @@ def temp_delete_table():
             conn.close()
             print("The SQLite connection is closed")
 
-# Test line for db state
+# Test line for db state 2
 
 
