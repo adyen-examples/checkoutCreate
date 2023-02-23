@@ -13,6 +13,8 @@ def set_path_to_db_file(path_to_db_file):
 # function to execute an SQL statement
 def _execute_sql(sql, read):
     with sqlite3.connect(_path_to_db_file) as conn:
+        print("From database, path to db is : ")
+        print(_path_to_db_file)
         cursor = conn.cursor()
         cursor.execute(sql)
         if read == 'true':

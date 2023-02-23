@@ -198,11 +198,16 @@ def initialise_db(directory_path):
     """Function to connect to SQLite DB, including DB creation and config if required"""
 
     # create path to DB file and store in config
+    print("###")
+    print("Initializing DB in " + directory_path)
+    print("###")
+
     path_to_db_file = os.path.join(directory_path, 'app.sqlite')
     database.set_path_to_db_file(path_to_db_file)
 
     # check if DB file already exists - if not, execute DDL to create table
     if not exists(path_to_db_file):
+        print("Creating DB in " + path_to_db_file)
         database.create_tables()
 
 def delete_old():
