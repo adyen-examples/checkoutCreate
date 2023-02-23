@@ -6,6 +6,7 @@ kill_timeout = 5
 processes = []
 
 [env]
+  DATABASE_LOCATION = "/data"
 
 [mounts]
   source="adyencheckout_data"
