@@ -198,9 +198,9 @@ def initialise_db(directory_path):
     """Function to connect to SQLite DB, including DB creation and config if required"""
 
     # create path to DB file and store in config
-    print("###")
-    print("Initializing DB in " + directory_path)
-    print("###")
+    # print("###")
+    # print("Initializing DB in " + directory_path)
+    # print("###")
 
     path_to_db_file = os.path.join(directory_path, 'app.sqlite')
     database.set_path_to_db_file(path_to_db_file)
