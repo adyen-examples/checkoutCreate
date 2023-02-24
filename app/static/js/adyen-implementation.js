@@ -51,7 +51,7 @@ const newDiv = document.createElement("div")
 function bannerColor() {
   document.getElementById("banner").style.display = "block"
   let bannerInput = document.getElementById("bannerColorPick").value
-  console.log(bannerInput, "colour input")
+  // console.log(bannerInput, "colour input")
   r.style.setProperty("--banner-color", bannerInput)
 }
 
@@ -79,13 +79,13 @@ function loadMerchantLogo(merchantURL) {
     merchantLogo.src = `${merchantURL.trim()}`
     merchantLogo.classList.add("logo")
     bannerEl.appendChild(merchantLogo)
-    console.log("first input")
+    // console.log("first input")
   } 
   else {
     document.getElementById("banner").style.display = "block"
     const merchantLogo = document.querySelector(".logo")
     merchantLogo.src = `${merchantURL}`
-    console.log("second input")
+    // console.log("second input")
   }
 }
 
@@ -329,9 +329,11 @@ async function onLoad() {
       "/loadConfig",
       saveId
     )
-    if (getConfigResponse != '{"error": "no user"}'){
-      console.log(getConfigResponse)
+    if (getConfigResponse.error != "no user"){
       countrySettings = getConfigResponse.countrySettings
+    }
+    else {
+      countrySettings = countrySettings
     }
   }
   await getToggles();
@@ -348,15 +350,15 @@ async function fromDatabase(){
       "/loadStyles",
       saveId
     );
-    console.log(getStyleResponse);
-    if (getStyleResponse != '{"error": "no user"}'){
+    // console.log(getStyleResponse);
+    if (getStyleResponse.error != 'no user'){
       loadStyle(getStyleResponse)
     }
     const getConfigResponse = await callServer(
       "/loadConfig",
       saveId
     )
-    if (getConfigResponse != '{"error": "no user"}'){
+    if (getConfigResponse.error != 'no user'){
       loadConfig(getConfigResponse)
     }
   }
@@ -693,7 +695,7 @@ async function getCountryPM() {
     mergeData
   )
   let payMethodArray = unblockedResponse.paymentMethods
-  console.log(payMethodArray)
+  // console.log(payMethodArray)
   let txvariants = payMethodArray.map(({ type }) => type)
   return await txvariants
 }
@@ -777,7 +779,7 @@ async function getConfiguration() {
       handleSubmission(state, dropin, "/api/submitAdditionalDetails")
     },
   }
-  console.log(configuration)
+  // console.log(configuration)
   let cloneConfig = Object.assign({}, configuration)
   logConfig(cloneConfig)
   return await configuration
@@ -856,8 +858,8 @@ async function handleSubmission(state, dropin, url, countrySettings) {
   let styleId = {
     saveId: styleVal
   }
-  console.log(styleId)
-  console.log(countrySettings)
+  // console.log(styleId)
+  // console.log(countrySettings)
   try {
     //keeping the country data for the /payments call
     const mergedData = {
@@ -1389,7 +1391,7 @@ function loadStyle(styleData) {
 function loadConfig(configData) {
   filteredData = Object.fromEntries(Object.entries(configData).filter(([key]) => !key.match('showPayMethod') && !key.match('placeHolderData') && !key.match('payArray') && !key.match('payMethods')))
   for (const [key, value] of Object.entries(filteredData)) {
-    console.log(key, value)
+    // console.log(key, value)
     if (value == true){
       document.getElementById(key).checked = true
     }
@@ -1421,12 +1423,12 @@ function loadConfig(configData) {
     document.getElementById("instantPay").checked = true
   }
   payMethods = configData.payMethods
-  console.log(payMethods)
+  // console.log(payMethods)
   payArray = configData.payArray
-  console.log(payArray)
+  // console.log(payArray)
   blockedPM = { blockedPaymentMethods: payArray }
   payArray.forEach((tx) => {
-    console.log(tx)
+    // console.log(tx)
     document.getElementById(`show${tx}`).checked = false
     // console.log(offToggle)
     // const parentPM = document.getElementById("parentPM")
@@ -1540,7 +1542,7 @@ async function saveStyle() {
     "payArray": payArray,
     "countrySettings": countrySettings,
   }
-  console.log(configData)
+  // console.log(configData)
 
   const saveStyleResponse = await callServer(
     "/saveStyle",
