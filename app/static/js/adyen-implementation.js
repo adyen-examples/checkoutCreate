@@ -763,6 +763,13 @@ async function getConfiguration() {
         showPayButton: true,
         merchantId: "AD74FQNVXQY5E",
       },
+      applepay: {
+        amount: {
+          currency: countrySettings.currency || "EUR",
+          value: 4000,
+        },
+        countryCode: countrySettings.countryCode || "NL",
+      },
     },
     onSubmit: (state, dropin) => {
       if (state.isValid) {
