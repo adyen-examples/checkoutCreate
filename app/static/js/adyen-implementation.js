@@ -279,6 +279,7 @@ const PMnames = [
   { tx: "afterpaytouch", txname: "Afterpay" },
   { tx: "alipay", txname: "Alipay" },
   { tx: "amazonpay", txname: "Amazon Pay" },
+  { tx: "applepay", txname: "Apple Pay" },
   { tx: "blik", txname: "Blik" },
   { tx: "boleto", txname: "Boleto" },
   { tx: "clearpay", txname: "Clearpay" },
