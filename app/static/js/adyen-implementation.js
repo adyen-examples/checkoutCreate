@@ -829,7 +829,7 @@ function showInstantPay() {
   const oldDiv = document.getElementById("dropin-container")
   const newDiv = document.createElement("div")
   if (instantPayState == true) {
-    instantArray = ["paywithgoogle"]
+    instantArray = ["paywithgoogle", "applepay"]
   } else {
     instantArray = []
   }
