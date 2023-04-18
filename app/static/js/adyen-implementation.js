@@ -135,6 +135,9 @@ const flagUrlMap = {
   PT: {
     src: "https://ca-test.adyen.com/ca/adl/img/flags/pt.svg",
   },
+  AE: {
+    src: "https://ca-test.adyen.com/ca/adl/img/flags/ae.svg",
+  },
 }
 
 /**
@@ -267,6 +270,15 @@ const countryVariables = [
     postalCode: "1200-479",
     street: "Av. 24 de Julho",
     houseNumberOrName: "49",
+  },
+  {
+    countryCode: "AE",
+    currency: "AED",
+    locale: "en_AE",
+    city: "Dubai",
+    postalCode: "00000",
+    street: "Central Park Towers, DIFC, ",
+    houseNumberOrName: "Unit 37-30A, level 37",
   },
 ]
 
