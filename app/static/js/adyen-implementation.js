@@ -754,7 +754,7 @@ async function getConfiguration() {
         enableStoreDetails: true,
         billingAddressRequired: billAdd,
         amount: {
-          value: 4000,
+          value: 1000,
           currency: countrySettings.currency || "EUR",
         },
       },
@@ -764,7 +764,7 @@ async function getConfiguration() {
       paypal: {
         amount: {
           currency: countrySettings.currency || "EUR",
-          value: 4000,
+          value: 1000,
         },
         style: {
           label: palLabel,
@@ -779,7 +779,7 @@ async function getConfiguration() {
       applepay: {
         amount: {
           currency: countrySettings.currency || "EUR",
-          value: 4000,
+          value: 1000,
         },
         countryCode: countrySettings.countryCode || "NL",
       },
