@@ -21,7 +21,7 @@ def adyen_payments(frontend_request, locale_data, host_url):
 
     payments_request = {}
 
-    payments_request['amount'] = {"value": "4000", "currency": locale_data['currency']} # choose_currency(txvariant)}
+    payments_request['amount'] = {"value": "1000", "currency": locale_data['currency']} # choose_currency(txvariant)}
     payments_request['channel'] = "Web"
     payments_request['reference'] = f"Reference {uuid.uuid4()}" 
     payments_request['shopperReference'] = "UniqueReference"
