@@ -295,7 +295,6 @@ const PMnames = [
   { tx: "blik", txname: "Blik" },
   { tx: "boleto", txname: "Boleto" },
   { tx: "cashapp", txname: "Cash App Pay" },
-  { tx: "clearpay", txname: "Clearpay" },
   { tx: "directdebit_GB", txname: "Bacs Direct Debit" },
   { tx: "directEbanking", txname: "Sofort" },
   { tx: "facilypay", txname: "3x4xOney" },
